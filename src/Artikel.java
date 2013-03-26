@@ -20,6 +20,11 @@ public class Artikel {
     private int nummer;
     private int bestand;
 
+    public Artikel(String name, int nummer ) {
+        this.name = name;
+        this.nummer = nummer;
+        this.bestand = 0;
+    }
 
 
 }
