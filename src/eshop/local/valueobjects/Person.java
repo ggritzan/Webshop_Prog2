@@ -11,6 +11,10 @@ package eshop.local.valueobjects;
 public class Person{
     String name;
 
+    public Person(String name ) {
+        this.name = name;
+    }
+
 
     // Getter
     public String getName() {

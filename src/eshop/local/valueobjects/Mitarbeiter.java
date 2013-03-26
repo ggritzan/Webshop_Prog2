@@ -8,4 +8,11 @@
 package eshop.local.valueobjects;
 
 public class Mitarbeiter extends Person {
+
+    public Mitarbeiter (int age, int leaf, int zweige, double height, double waterReserve, double stammUmfang, String name) {
+        super(age, leaf, height, waterReserve);
+        this.zweige = zweige;
+        this.stammUmfang = stammUmfang;
+        this.name = name;
+    }
 }
