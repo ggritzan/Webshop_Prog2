@@ -5,7 +5,21 @@
  * Time: 16:52
  * To change this template use File | Settings | File Templates.
  */
+// package bib.local.valueobjects;
+
+
+/**
+ * Klasse zur Repräsentation einzelnen Artiekl.
+ *
+ * @author Gritzan
+ */
 public class Artikel {
 
-    int a = 0;
+    // Attribute zur Beschreibung eines Artikels:
+    private String name;
+    private int nummer;
+    private int bestand;
+
+
+
 }
