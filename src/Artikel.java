@@ -9,7 +9,7 @@
 
 
 /**
- * Klasse zur Repräsentation einzelnen Artiekl.
+ * Klasse zur Repräsentation einzelner Artikel.
  *
  * @author Gritzan
  */
