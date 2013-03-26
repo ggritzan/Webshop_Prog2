@@ -5,14 +5,9 @@
  * Time: 16:52
  * To change this template use File | Settings | File Templates.
  */
-// package bib.local.valueobjects;
 
+package eshop.local.valueobjects;
 
-/**
- * Klasse zur Repräsentation einzelner Artikel.
- *
- * @author Giacomo
- */
 public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels:
