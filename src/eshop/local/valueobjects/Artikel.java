@@ -11,7 +11,7 @@
 /**
  * Klasse zur Repräsentation einzelner Artikel.
  *
- * @author Gritzan
+ * @author Giacomo
  */
 public class Artikel {
 
@@ -53,5 +53,5 @@ public class Artikel {
 
 
 
- }
+}
 
