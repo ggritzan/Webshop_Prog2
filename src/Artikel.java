@@ -25,7 +25,7 @@ public class Artikel {
         this.nummer = nummer;
         this.bestand = 0;
     }
-          //
+
 
  }
 
