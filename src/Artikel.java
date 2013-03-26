@@ -18,13 +18,14 @@ public class Artikel {
     // Attribute zur Beschreibung eines Artikels:
     private String name;
     private int nummer;
+    private int preis;
     private int bestand;
 
-    public Artikel(String name, int nummer ) {
+    public Artikel(String name, int nummer, int preis ) {
         this.name = name;
         this.nummer = nummer;
+        this.preis = preis;
         this.bestand = 0;
     }
-          //
 
 }
