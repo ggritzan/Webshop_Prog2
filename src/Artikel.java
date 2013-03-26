@@ -16,15 +16,41 @@
 public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels:
-    private String name;
+    private String bezeichnung;
     private int nummer;
     private int bestand;
 
-    public Artikel(String name, int nummer ) {
-        this.name = name;
+    public Artikel(String bezeichnung, int nummer ) {
+        this.bezeichnung = bezeichnung;
         this.nummer = nummer;
         this.bestand = 0;
     }
+
+    public boolean equals(Object andererArtikel) {
+        if (andererArtikel instanceof Artikel)
+            return ((this.nummer == ((Artikel) andererArtikel).nummer)
+                    && (this.bezeichnung.equals(((Artikel) andererArtikel).bezeichnung)));
+        else
+            return false;
+    }
+
+    // Setter
+
+
+    // Getter
+    public int getNummer() {
+        return nummer;
+    }
+
+    public String getBezeichnung() {
+        return bezeichnung;
+    }
+
+    public int getBestand() {
+        return bestand;
+    }
+
+
 
 
  }
