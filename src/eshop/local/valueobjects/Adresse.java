@@ -33,7 +33,15 @@ public class Adresse {
 
 
     // Methoden der Klasse Adresse
-
+    public void printAdresse() {
+        System.out.print("Vorname: " + this.vorname);
+        System.out.print("Nachname: " + this.nachname);
+        System.out.print("Straße: " + this.straße);
+        System.out.print("PLZ: " + this.plz);
+        System.out.print("Ort: " + this.ort);
+        System.out.print("Telefon: " + this.telefon);
+        System.out.print("Email: " + this.email);
+    }
 
 
     // Setter
