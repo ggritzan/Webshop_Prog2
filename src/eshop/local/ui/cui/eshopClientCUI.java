@@ -21,7 +21,7 @@ import eshop.local.valueobjects.Artikel;
 
 
 
-public class EshopClientCUI {
+public class eshopClientCUI {
 
         public static void main (String[] args)   {
             Artikel art1 = new Artikel("Maus",1);

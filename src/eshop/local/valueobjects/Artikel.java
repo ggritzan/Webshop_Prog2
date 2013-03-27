@@ -13,13 +13,15 @@ public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels
     private String bezeichnung;
-    private int aNummer;
+    private int nummer;
     private int bestand;
+    private double preis;
 
     // Konstruktor
-    public Artikel(String bezeichnung, int nummer ) {
+    public Artikel(String bezeichnung, int nummer, double preis ) {
         this.bezeichnung = bezeichnung;
-        this.aNummer = nummer;
+        this.nummer = nummer;
+        this.preis = preis;
         this.bestand = 0;
     }
 
@@ -31,7 +33,7 @@ public class Artikel {
 
     // Getter
     public int getNummer() {
-        return aNummer;
+        return nummer;
     }
 
     public String getBezeichnung() {
@@ -40,6 +42,10 @@ public class Artikel {
 
     public int getBestand() {
         return bestand;
+    }
+
+    public double getPreis() {
+        return preis;
     }
 
 
