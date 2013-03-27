@@ -30,11 +30,18 @@ public class Artikel {
 
     // Setter
 
-    public bestandAendern(char 'aktion', int wert) {
-          switch ('aktion') {
-              case '-' : this.bestand = this.bestand - wert;
-              case '+' : this.bestand = this.bestand + wert;
-          }
+    public int bestandErhoehen(int wert) {
+        this.bestand = this.bestand + wert;
+        return this.bestand;
+    }
+
+    public int bestandVerringern(int wert) {
+        this.bestand = this.bestand - wert;
+        return this.bestand;
+    }
+
+    public void neuerPreis(double wert) {
+        this.preis = wert;
     }
 
     // Getter
