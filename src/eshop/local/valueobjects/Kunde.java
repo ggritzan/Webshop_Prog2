@@ -16,7 +16,6 @@ public class Kunde extends Person {
     public Kunde (String name, int kNr, Adresse adresse, ) {
         super(name);
         this.kNr = kNr;
-
     }
 
 

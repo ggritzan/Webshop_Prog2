@@ -16,7 +16,6 @@ public class Mitarbeiter extends Person {
     public Mitarbeiter (String name, int mNr) {
         super(name);
         this.mNr = mNr;
-
     }
 
     // Methoden der Klasse Mitarbeiter
