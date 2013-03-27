@@ -15,17 +15,20 @@ import java.util.Vector;
 
 // valueobjects
 
+
 import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Adresse;
+
+import javax.net.ssl.SSLEngineResult;
 
 
-
-
-
-public class eshopClientCUI {
+public class EshopClientCUI {
 
         public static void main (String[] args)   {
             Artikel art1 = new Artikel("Maus",1);
             System.out.print("Test" + art1.getBezeichnung());
+
+            Adresse ar1 = new Adresse(2345, "Hans", "Rumsdibums", "Komikerweg", "27356", "Albernhausen", "0414183479", "HansRumsdibums@yahoo.de");
 
         }
 
