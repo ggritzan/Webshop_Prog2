@@ -26,6 +26,7 @@ public class EshopClientCUI {
         public static void main (String[] args)   {
             Artikel art1 = new Artikel("Maus",1);
             System.out.print("Test" + art1.getBezeichnung());
+
         }
 
 
