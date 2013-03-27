@@ -25,10 +25,13 @@ import javax.net.ssl.SSLEngineResult;
 public class EshopClientCUI {
 
         public static void main (String[] args)   {
+            // Anlegen eines neuen Artiekls
             Artikel art1 = new Artikel("Maus",1);
-            System.out.print("Test" + art1.getBezeichnung());
+            System.out.println("Testausgabe: " + art1.getBezeichnung());
 
+            // Anlegen einer Adresse
             Adresse ar1 = new Adresse(2345, "Hans", "Rumsdibums", "Komikerweg", "27356", "Albernhausen", "0414183479", "HansRumsdibums@yahoo.de");
+            ar1.printAdresse();
 
         }
 
