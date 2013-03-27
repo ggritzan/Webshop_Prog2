@@ -30,10 +30,7 @@ public class Adresse {
 
 
     // Methoden der Klasse Adresse
-    public adresseAnlegen() {
 
-
-    }
 
 
     // Setter
