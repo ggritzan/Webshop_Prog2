@@ -20,6 +20,13 @@ public class Mitarbeiter extends Person {
 
     // Methoden der Klasse Mitarbeiter
 
+    public void bestandErhoehen(Artikel a, int wert)   {
+        a.bestandErhoehen(wert);
+    }
+
+    public void preisAendern(Artikel a, double wert) {
+        a.neuerPreis(wert);
+    }
 
     // Setter
 
