@@ -10,22 +10,25 @@ package eshop.local.valueobjects;
 public class Adresse {
 
     // Attribute zur Beschreibung einer Adresse
-    int kNr;
-    String name;
-    String straße;
-    String plz;
-    String ort;
-    String telefon;
-    String eMail;
+    private int kNr;
+    private String vorname;
+    private String nachname;
+    private String straße;
+    private String plz;
+    private String ort;
+    private String telefon;
+    private String email;
 
     // Konstruktor
-    public Adresse (int kNr, String straße, String plz, String ort, String telefon, String eMail) {
+    public Adresse (int kNr, String vorname, String nachname, String straße, String plz, String ort, String telefon, String eMail) {
         this.kNr = kNr;
+        this.vorname = vorname;
+        this.nachname = nachname;
         this.straße = straße;
         this.plz = plz;
         this.ort = ort;
         this.telefon = telefon;
-        this.eMail = eMail;
+        this.email = email;
     }
 
 
@@ -37,4 +40,31 @@ public class Adresse {
 
 
     // Getter
+    public String getVorname() {
+        return this.vorname;
+    }
+
+    public String getNachname() {
+        return this.nachname;
+    }
+
+    public String getStraße() {
+        return this.straße;
+    }
+
+    public String getPlz() {
+        return this.plz;
+    }
+
+    public String getOrt() {
+        return this.ort;
+    }
+
+    public String getTelefon() {
+        return this.telefon;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
 }
