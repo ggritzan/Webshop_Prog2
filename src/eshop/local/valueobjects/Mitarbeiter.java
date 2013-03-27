@@ -9,10 +9,21 @@ package eshop.local.valueobjects;
 
 public class Mitarbeiter extends Person {
 
-    public Mitarbeiter (int age, int leaf, int zweige, double height, double waterReserve, double stammUmfang, String name) {
-        super(age, leaf, height, waterReserve);
-        this.zweige = zweige;
-        this.stammUmfang = stammUmfang;
-        this.name = name;
+    // Attribute zur Beschreibung eines Mitarbeiters
+    int mNr;
+
+    // Konstruktor
+    public Mitarbeiter (String name, int mNr) {
+        super(name);
+        this.mNr = mNr;
+
     }
+
+    // Methoden der Klasse Mitarbeiter
+
+
+    // Setter
+
+
+    // Getter
 }

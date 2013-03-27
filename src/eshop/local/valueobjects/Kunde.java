@@ -8,4 +8,23 @@
 package eshop.local.valueobjects;
 
 public class Kunde extends Person {
+
+    // Attribute zur Beschreibung eines Kunden
+    int kNr;
+
+    // Konstruktor
+    public Kunde (String name, int kNr, Adresse adresse, ) {
+        super(name);
+        this.kNr = kNr;
+
+    }
+
+
+    // Methoden der Klasse Kunde
+
+
+    // Setter
+
+
+    // Getter
 }

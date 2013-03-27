@@ -10,17 +10,19 @@ package eshop.local.valueobjects;
 
 public class Artikel {
 
-    // Attribute zur Beschreibung eines Artikels:
+    // Attribute zur Beschreibung eines Artikels
     private String bezeichnung;
     private int nummer;
     private int bestand;
 
+    // Konstruktor
     public Artikel(String bezeichnung, int nummer ) {
         this.bezeichnung = bezeichnung;
         this.nummer = nummer;
         this.bestand = 0;
     }
 
+    // Methoden der Klasse Artikel
     public boolean equals(Object andererArtikel) {
         if (andererArtikel instanceof Artikel)
             return ((this.nummer == ((Artikel) andererArtikel).nummer)
