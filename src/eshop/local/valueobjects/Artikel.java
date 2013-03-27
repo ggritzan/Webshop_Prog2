@@ -30,6 +30,12 @@ public class Artikel {
 
     // Setter
 
+    public bestandAendern(char 'aktion', int wert) {
+          switch ('aktion') {
+              case '-' : this.bestand = this.bestand - wert;
+              case '+' : this.bestand = this.bestand + wert;
+          }
+    }
 
     // Getter
     public int getNummer() {
