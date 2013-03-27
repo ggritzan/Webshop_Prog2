@@ -13,7 +13,7 @@ public class Kunde extends Person {
     int kNr;
 
     // Konstruktor
-    public Kunde (String name, int kNr, Adresse adresse, ) {
+    public Kunde (String name, int kNr) {
         super(name);
         this.kNr = kNr;
     }

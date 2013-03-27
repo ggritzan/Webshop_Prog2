@@ -20,7 +20,7 @@ import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.valueobjects.Mitarbeiter;
 
-import javax.net.ssl.SSLEngineResult;
+
 
 
 public class eshopClientCUI {
