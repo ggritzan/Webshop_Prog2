@@ -10,6 +10,7 @@ package eshop.local.ui.cui.eshop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Iterator;
 import java.util.Vector;
 

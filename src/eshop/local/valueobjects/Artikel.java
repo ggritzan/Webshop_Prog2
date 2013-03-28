@@ -25,6 +25,13 @@ public class Artikel {
         this.bestand = 0;
     }
 
+    public Artikel(String bezeichnung, int nummer, double preis, int bestand) {
+        this.bezeichnung = bezeichnung;
+        this.nummer = nummer;
+        this.preis = preis;
+        this.bestand = bestand;
+    }
+
     // Methoden der Klasse Artikel
 
 
