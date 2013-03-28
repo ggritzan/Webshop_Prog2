@@ -28,6 +28,10 @@ public class Mitarbeiter extends Person {
         a.neuerPreis(wert);
     }
 
+    public Artikel neuerArtikel(String bezeichnung, int nummer, double preis, int bestand) {
+        Artikel  x = new Artikel(bezeichnung,nummer,preis,bestand);
+        return x;
+    }
     // Setter
 
 

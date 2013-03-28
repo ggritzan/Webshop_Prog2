@@ -30,17 +30,20 @@ public class eshopClientCUI {
     // Main
     public static void main (String[] args)   {
             Artikel art1 = new Artikel("Maus",1,2.50);
-            System.out.print("Test " + art1.getBezeichnung());
+            System.out.print("Artiekl 1:  " + art1.getBezeichnung());
 
             Adresse ar1 = new Adresse(2345, "Hans", "Rumsdibums", "Komikerweg", "27356", "Albernhausen", "0414183479", "HansRumsdibums@yahoo.de");
 
             System.out.println("Bestand " + art1.getBestand());
-            Mitarbeiter M1 = new Mitarbeiter("Hans", 1);
-            M1.bestandErhoehen(art1, 5);
+            Mitarbeiter m1 = new Mitarbeiter("Hans", 1);
+            m1.bestandErhoehen(art1, 5);
             System.out.println("Neuer Bestand " + art1.getBestand());
             System.out.println("Preis "+ art1.getPreis());
-            M1.preisAendern(art1, 7.55);
+            m1.preisAendern(art1, 7.55);
             System.out.println("Neuer Preis " + art1.getPreis());
+            Artikel art2 = m1.neuerArtikel("Tastertur",2,10.99,6);
+            System.out.println("Artikel 2: " + art2.getBezeichnung());
+            art2.printArtikel();
         }
 
 

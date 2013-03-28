@@ -33,6 +33,13 @@ public class Artikel {
     }
 
     // Methoden der Klasse Artikel
+    public void printArtikel() {
+        System.out.println("Bezeichnung: " + this.bezeichnung);
+        System.out.println("Nummer: " + this.nummer);
+        System.out.println("Bestand: " + this.bestand);
+        System.out.println("Preis: " + this.preis);
+
+    }
 
 
     // Setter
