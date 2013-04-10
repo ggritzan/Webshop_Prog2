@@ -2,8 +2,6 @@ package eshop.local.domain;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Vector;
 import eshop.local.valueobjects.Artikel;
 
 /**
@@ -21,23 +19,24 @@ public class ArtikelVerwaltung {
 
 
     // Konstruktor
-    public ArtikelVerwaltung( ) {
+    public ArtikelVerwaltung() {
         artikelBestand = new HashMap<Integer, Artikel>();
-
     }
 
     // Setter
 
         // Artikel hinzufügen
-        public ArtikelHinzufuegen(Artikel();) {
-            artikelBestand.put(key,artikelobject);
+        public boolean ArtikelHinzufuegen(String bezeichnung, double preis) {
+            Artikel artikel = new Artikel(bezeichnung, preis);
+            artikelBestand.put(artikel.getNummer(), artikel);
+            return true;
         }
 
 
     // Getter
 
         // Artikel Ausgabe anhand der Artikelnummer
-        artikelBestand.get()
+        // artikelBestand.get()
 
 
 

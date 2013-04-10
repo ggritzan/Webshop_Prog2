@@ -8,27 +8,84 @@
 
 package eshop.local.ui.cui;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import eshop.local.domain.ArtikelVerwaltung;
+import eshop.local.valueobjects.Artikel;
+
 
 public class eshopClientCUI_GG {
 
+    private ArtikelVerwaltung eShop;
+    private BufferedReader in;
+
+
+    public eshopClientCUI_GG() {
+
+        // erzeug eine neue Artikelvberwaltung für den eShop
+        eShop = new ArtikelVerwaltung();
+
+        // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
+        in = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    private void gibMenueAus() {
+        System.out.print("Befehle: \n  Artikel hinzufuegen: 'h'");
+        System.out.print("         \n  Artikel ausgeben:  'a'");
+        System.out.print("         \n  Artikel suchen:  'f'");
+        System.out.print("         \n  Daten sichern:  's'");
+        System.out.println("         \n  Beenden:        'q'");
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
+    private String liesEingabe()  {
+        // einlesen von Konsole
+        return in.readLine();
+    }
+
+    private void verarbeiteEingabe(String line)  {
+
+        // Eingabe bearbeiten:
+        if (line.equals("h")) {
+            // lese die notwendigen Parameter, einzeln pro Zeile
+            System.out.print("Artikel Bezeichnung > ");
+            String aBez = liesEingabe();
+            System.out.print("Artikel Preis  > ");
+            double aPreis = liesEingabe();
+            boolean ok = eShop.ArtikelHinzufuegen(aBez,aPreis);
+
+            if (ok)
+                System.out.println("Einfügen ok");
+            else
+                System.out.println("Fehler beim Einfügen");
+        }
+        /*
+        else if (line.equals("a")) {
+            Vector liste = bib.gibAlleBuecher();
+            gibBuecherlisteAus(liste);
+        }
+        else if (line.equals("f")) {
+            System.out.print("Buchtitel  > ");
+            String titel = liesEingabe();
+            Vector liste = bib.sucheNachTitel(titel);
+            gibBuecherlisteAus(liste);
+        }
+        else if (line.equals("s")) {
+            bib.schreibeBuecher();
+        }
+
+        */
+    }
+
+
+
     // Main
     public static void main (String[] args)   {
-            /* Artikel art1 = new Artikel("Maus",1,2.50);
-            System.out.print("Artiekl 1:  " + art1.getBezeichnung());
 
-            Adresse ar1 = new Adresse(2345, "Hans", "Rumsdibums", "Komikerweg", "27356", "Albernhausen", "0414183479", "HansRumsdibums@yahoo.de");
 
-            System.out.println("Bestand " + art1.getBestand());
-            Mitarbeiter m1 = new Mitarbeiter("Hans", 1);
-            m1.bestandErhoehen(art1, 5);
-            System.out.println("Neuer Bestand " + art1.getBestand());
-            System.out.println("Preis "+ art1.getPreis());
-            m1.preisAendern(art1, 7.55);
-            System.out.println("Neuer Preis " + art1.getPreis());
-            Artikel art2 = m1.neuerArtikel("Tastertur",2,10.99,6);
-            System.out.println("Artikel 2: " + art2.getBezeichnung());
-            art2.printArtikel();
-            */
 
         }
 
