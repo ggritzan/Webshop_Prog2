@@ -12,7 +12,7 @@ import eshop.local.valueobjects.Artikel;
 public class ArtikelExestiertBereitsException extends Exception {
 
 
-    public BuchExistiertBereitsException(Buch buch, String zusatzMsg) {
+    public BuchExistiertBereitsException(Artikel artikel) {
         super("Buch mit Titel " + buch.getTitel() + " und Nummer " + buch.getNummer()
                 + " existiert bereits" + zusatzMsg);
     }
