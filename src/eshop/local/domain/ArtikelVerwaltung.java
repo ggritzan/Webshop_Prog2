@@ -15,24 +15,28 @@ import eshop.local.valueobjects.Artikel;
 
 public class ArtikelVerwaltung {
 
-    private HashMap<String, Artikel> artikelBestand;
+    private HashMap<Integer, Artikel> artikelBestandNr;
+    private HashMap<String, Integer> artikelBestandBez;
 
 
     // Konstruktor
     public ArtikelVerwaltung() {
-        artikelBestand = new HashMap<String, Artikel>();
+        artikelBestandNr = new HashMap<Integer, Artikel>();
+        artikelBestandBez = new HashMap<String, Integer>();
     }
 
     // Setter
 
         // Artikel hinzufügen
         public boolean artikelHinzufuegen(String bezeichnung, double preis) {
-            if (artikelBestand.containsKey(bezeichnung)) {
+            if (artikelBestandBez.containsKey(bezeichnung)) {
                 return false;
 
             } else {
+
                 Artikel artikel = new Artikel(bezeichnung, preis);
-                artikelBestand.put(bezeichnung, artikel);
+                artikelBestandNr.put(artikel.getNummer(), artikel);
+                artikelBestandBez.put(bezeichnung, artikel.getNummer());
                 return true;
             }
 
