@@ -7,7 +7,7 @@
  */
 package eshop.local.valueobjects;
 
-public class Person{
+public abstract class Person{
 
     // Attribute zur Beschreibung einer Person
     String name;
