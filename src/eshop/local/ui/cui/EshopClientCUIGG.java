@@ -95,7 +95,7 @@ public class EshopClientCUIGG {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        } while (!input.equals("q"));
+         } while (!input.equals("q"));
     }
 
 
@@ -104,15 +104,18 @@ public class EshopClientCUIGG {
     public static void main (String[] args)   {
 
         EshopClientCUIGG cui;
-        try {
-            cui = new EshopClientCUIGG();
-            cui.run();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            try {
+                cui = new EshopClientCUIGG();
+                 cui.run();
+                } catch (IOException e) {
+                     e.printStackTrace();
+            }
+
+     }
 
 
-    }
 
-}
+
+ }
+
+
