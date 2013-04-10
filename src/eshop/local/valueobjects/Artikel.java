@@ -13,46 +13,51 @@ public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels
     private String bezeichnung;
-    private static int nummer = 0;
+    private static int nummer = 1000;
     private double preis;
 
     // Konstruktor
-    public Artikel(String bezeichnung, int nummer, double preis ) {
+    public Artikel(String bezeichnung, double preis ) {
         this.bezeichnung = bezeichnung;
-        this.nummer = nummer;
         this.preis = preis;
-
+        zaehlerNummer();
      }
 
 
+    // Methoden
 
-    // Methoden der Klasse Artikel
-    public void printArtikel() {
-        System.out.println("Bezeichnung: " + this.bezeichnung);
-        System.out.println("Nummer: " + this.nummer);
-        System.out.println("Preis: " + this.preis);
-
-    }
-
+        // wird im Konstruktor aufgerufen und erhöht die Artikelnummer um 1 bei der Artikelerstellung
+        private void zaehlerNummer() {
+            this.nummer  ++;
+        }
 
     // Setter
 
-    public void neuerPreis(double wert) {
-        this.preis = wert;
-    }
+        public void neueBezeichnung(String bezeichnung) {
+            this.bezeichnung = bezeichnung;
+        }
+
+        public void neuerPreis(double preis) {
+            this.preis = preis;
+        }
+
 
     // Getter
-    public int getNummer() {
-        return nummer;
-    }
 
-    public String getBezeichnung() {
-        return bezeichnung;
-    }
+        // gibt die Artikelnummer zurück
+        public int getNummer() {
+            return nummer;
+        }
 
-    public double getPreis() {
-        return preis;
-    }
+        // gibt die Bezeichnung des Artikels zurück
+        public String getBezeichnung() {
+            return bezeichnung;
+        }
+
+         // gibt den Preis des Artikels zurück
+        public double getPreis() {
+            return preis;
+        }
 
 
 }

@@ -21,10 +21,26 @@ public class ArtikelVerwaltung {
 
 
     // Konstruktor
-
     public ArtikelVerwaltung( ) {
+        artikelBestand = new HashMap<Integer, Artikel>();
 
     }
+
+    // Setter
+
+        // Artikel hinzufügen
+        public ArtikelHinzufuegen(Artikel();) {
+            artikelBestand.put(key,artikelobject);
+        }
+
+
+    // Getter
+
+        // Artikel Ausgabe anhand der Artikelnummer
+        artikelBestand.get()
+
+
+
 
    /* private int bestand;
 
