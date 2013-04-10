@@ -47,6 +47,15 @@ public class ArtikelVerwaltung {
         }
 
 
+       /*
+        // alle Artikel des Shops ausgeben
+        public void alleArtikelAusgeben(){
+            for ( Integer Artikel : artikelBestandNr.keySet() )
+                System.out.println( Artikel );
+
+
+        }
+
     // Getter
 
         // Artikel Ausgabe anhand der Artikelnummer
@@ -55,7 +64,7 @@ public class ArtikelVerwaltung {
 
 
 
-   /* private int bestand;
+    private int bestand;
 
 
 

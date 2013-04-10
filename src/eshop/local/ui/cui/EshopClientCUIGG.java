@@ -63,11 +63,13 @@ public class EshopClientCUIGG {
             else
                 System.out.println("Fehler beim Einfügen");
         }
+
         /*
         else if (line.equals("a")) {
-            Vector liste = bib.gibAlleBuecher();
-            gibBuecherlisteAus(liste);
+            System.out.print();
         }
+
+
         else if (line.equals("f")) {
             System.out.print("Buchtitel  > ");
             String titel = liesEingabe();
