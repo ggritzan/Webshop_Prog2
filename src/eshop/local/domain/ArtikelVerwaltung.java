@@ -26,10 +26,16 @@ public class ArtikelVerwaltung {
     // Setter
 
         // Artikel hinzufügen
-        public boolean ArtikelHinzufuegen(String bezeichnung, double preis) {
-            Artikel artikel = new Artikel(bezeichnung, preis);
-            artikelBestand.put(artikel.getNummer(), artikel);
-            return true;
+        public boolean artikelHinzufuegen(String bezeichnung, double preis) {
+            if (artikelBestand.containsValue(bezeichnung)) {
+                return false;
+
+            } else {
+                Artikel artikel = new Artikel(bezeichnung, preis);
+                artikelBestand.put(artikel.getNummer(), artikel);
+                return true;
+            }
+
         }
 
 

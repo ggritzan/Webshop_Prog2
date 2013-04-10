@@ -56,7 +56,7 @@ public class EshopClientCUIGG {
             System.out.print("Artikel Preis  > ");
             String aPreisEingabe = liesEingabe();
             float aPreis = Float.parseFloat(aPreisEingabe);
-            boolean ok = eShop.ArtikelHinzufuegen(aBez, aPreis);
+            boolean ok = eShop.artikelHinzufuegen(aBez, aPreis);
 
             if (ok)
                 System.out.println("Einfügen ok");

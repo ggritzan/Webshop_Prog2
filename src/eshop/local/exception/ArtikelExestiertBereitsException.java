@@ -13,9 +13,7 @@ public class ArtikelExestiertBereitsException extends Exception {
 
 
     public BuchExistiertBereitsException(Artikel artikel) {
-        super("Buch mit Titel " + buch.getTitel() + " und Nummer " + buch.getNummer()
-                + " existiert bereits" + zusatzMsg);
-    }
+
 
  }
 
