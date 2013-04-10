@@ -16,15 +16,15 @@ import eshop.local.domain.ArtikelVerwaltung;
 import eshop.local.valueobjects.Artikel;
 
 
-public class eshopClientCUI_GG {
+public class EshopClientCUIGG {
 
     private ArtikelVerwaltung eShop;
     private BufferedReader in;
 
 
-    public eshopClientCUI_GG() {
+    public EshopClientCUIGG() throws IOException {
 
-        // erzeug eine neue Artikelvberwaltung für den eShop
+        // erzeug eine neue Artikelverwaltung für den eShop
         eShop = new ArtikelVerwaltung();
 
         // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
@@ -41,12 +41,12 @@ public class eshopClientCUI_GG {
         System.out.flush(); // ohne NL ausgeben
     }
 
-    private String liesEingabe()  {
+    private String liesEingabe() throws IOException {
         // einlesen von Konsole
         return in.readLine();
     }
 
-    private void verarbeiteEingabe(String line)  {
+    private void verarbeiteEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
         if (line.equals("h")) {
@@ -54,8 +54,9 @@ public class eshopClientCUI_GG {
             System.out.print("Artikel Bezeichnung > ");
             String aBez = liesEingabe();
             System.out.print("Artikel Preis  > ");
-            double aPreis = liesEingabe();
-            boolean ok = eShop.ArtikelHinzufuegen(aBez,aPreis);
+            String aPreisEingabe = liesEingabe();
+            float aPreis = Float.parseFloat(aPreisEingabe);
+            boolean ok = eShop.ArtikelHinzufuegen(aBez, aPreis);
 
             if (ok)
                 System.out.println("Einfügen ok");
@@ -80,14 +81,39 @@ public class eshopClientCUI_GG {
         */
     }
 
+    public void run() {
+        // Variable für Eingaben von der Konsole
+        String input = "";
+
+        // Hauptschleife der Benutzungsschnittstelle
+        do {
+            gibMenueAus();
+            try {
+                input = liesEingabe();
+                verarbeiteEingabe(input);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } while (!input.equals("q"));
+    }
+
 
 
     // Main
     public static void main (String[] args)   {
 
-
-
+        EshopClientCUIGG cui;
+        try {
+            cui = new EshopClientCUIGG();
+            cui.run();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+
+
+    }
 
 
 
