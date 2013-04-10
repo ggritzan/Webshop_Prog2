@@ -21,7 +21,11 @@ public class ArtikelVerwaltung {
 
     // Konstruktor
     public ArtikelVerwaltung() {
+
+        // verknüpft die Artikelnummern mit den Artikel Objekten
         artikelBestandNr = new HashMap<Integer, Artikel>();
+
+
         artikelBestandBez = new HashMap<String, Integer>();
     }
 
@@ -53,19 +57,7 @@ public class ArtikelVerwaltung {
 
    /* private int bestand;
 
-    public int bestandErhoehen(int wert) {
-        this.bestand = this.bestand + wert;
-        return this.bestand;
-    }
 
-    public int bestandVerringern(int wert) {
-        this.bestand = this.bestand - wert;
-        return this.bestand;
-    }
-
-    public int getBestand() {
-        return bestand;
-    }
 
     */
 }

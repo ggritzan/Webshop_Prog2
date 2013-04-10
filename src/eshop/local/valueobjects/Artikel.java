@@ -15,12 +15,14 @@ public class Artikel {
     private String bezeichnung;
     private static int nummer = 1000;
     private double preis;
+    private int bestand = 0;
 
     // Konstruktor
     public Artikel(String bezeichnung, double preis ) {
         this.bezeichnung = bezeichnung;
         this.preis = preis;
         this.nummer  ++;
+        this.bestand = 0;
      }
 
 
@@ -39,6 +41,12 @@ public class Artikel {
         }
 
 
+        public void setBestand(int wert) {
+            this.bestand = wert;
+        }
+
+
+
     // Getter
 
         // gibt die Artikelnummer zurück
@@ -54,6 +62,11 @@ public class Artikel {
          // gibt den Preis des Artikels zurück
         public double getPreis() {
             return preis;
+        }
+
+
+        public int getBestand() {
+            return bestand;
         }
 
 
