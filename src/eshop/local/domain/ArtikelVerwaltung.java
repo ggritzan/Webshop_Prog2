@@ -32,7 +32,7 @@ public class ArtikelVerwaltung {
 
             } else {
                 Artikel artikel = new Artikel(bezeichnung, preis);
-                artikelBestand.put(artikel.getBezeichnung(), artikel);
+                artikelBestand.put(bezeichnung, artikel);
                 return true;
             }
 

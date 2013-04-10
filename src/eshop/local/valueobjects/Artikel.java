@@ -20,16 +20,13 @@ public class Artikel {
     public Artikel(String bezeichnung, double preis ) {
         this.bezeichnung = bezeichnung;
         this.preis = preis;
-        zaehlerNummer();
+        this.nummer  ++;
      }
 
 
     // Methoden
 
-        // wird im Konstruktor aufgerufen und erhöht die Artikelnummer um 1 bei der Artikelerstellung
-        private void zaehlerNummer() {
-            this.nummer  ++;
-        }
+
 
     // Setter
 
