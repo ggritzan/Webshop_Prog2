@@ -15,19 +15,22 @@ import java.util.HashMap;
 
 import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import eshop.local.domain.ArtikelVerwaltung;
+import eshop.local.domain.EShopVerwaltung;
 import eshop.local.valueobjects.Artikel;
 
 
 public class EshopClientCUIGG {
 
     private ArtikelVerwaltung eShop;
+    private EShopVerwaltung eShopVerwaltung;
     private BufferedReader in;
 
 
-    public EshopClientCUIGG() throws IOException {
+    public EshopClientCUIGG(String datei) throws IOException {
 
         // erzeug eine neue Artikelverwaltung für den eShop
         eShop = new ArtikelVerwaltung();
+        eShopVerwaltung = new EShopVerwaltung(datei);
 
         // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
         in = new BufferedReader(new InputStreamReader(System.in));
@@ -82,7 +85,7 @@ public class EshopClientCUIGG {
 
 
         else if (line.equals("s")) {
-            eShop.schreibeArtikel();
+            eShopVerwaltung.schreibeArtikel();
         }
 
 
@@ -112,7 +115,7 @@ public class EshopClientCUIGG {
 
         EshopClientCUIGG cui;
             try {
-                cui = new EshopClientCUIGG();
+                cui = new EshopClientCUIGG("EShop");
                  cui.run();
                 } catch (IOException e) {
                      e.printStackTrace();

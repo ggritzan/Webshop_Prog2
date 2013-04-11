@@ -50,7 +50,7 @@ public class FilePersistenceManager implements PersistenceManager {
         /**
          * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
          *
-         * @return Artikel-Objekt, wenn Einlesen erfolgreich, false null
+         *
          */
         public Artikel ladeArtikel() throws IOException {
 

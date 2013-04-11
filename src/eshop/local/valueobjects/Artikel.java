@@ -8,6 +8,8 @@
 
 package eshop.local.valueobjects;
 
+import java.io.IOException;
+
 public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels
@@ -18,34 +20,39 @@ public class Artikel {
     private double preis;
     private int bestand = 0;
 
-    // Konstruktor für neue Artikel
-    public Artikel(String name, String beschreibung, double preis ) {
-        this.name = name;
-        this.beschreibung = beschreibung;
-        this.preis = preis;
-        this.nummer = this.zaehler;
-        this.zaehler  ++;
-        this.bestand = 0;
-     }
+    // Konstruktor
+        // Konstruktor für neue Artikel
+        public Artikel(String name, String beschreibung, double preis ) {
+            this.name = name;
+            this.beschreibung = beschreibung;
+            this.preis = preis;
+            this.nummer = this.zaehler;
+            this.zaehler  ++;
+            this.bestand = 0;
+         }
 
-    // Konstruktor für das Artikeleinlesen
-    public Artikel(String name, String beschreibung, int nummer, double preis, int bestand ) {
-        this.name = name;
-        this.beschreibung = beschreibung;
-        this.preis = preis;
-        this.nummer = nummer;
-        this.zaehler ++;
-        this.bestand = 0;
-    }
-
+        // Konstruktor für das Artikeleinlesen
+        public Artikel(String name, String beschreibung, int nummer, double preis, int bestand ) {
+            this.name = name;
+            this.beschreibung = beschreibung;
+            this.preis = preis;
+            this.nummer = nummer;
+            this.zaehler ++;
+            this.bestand = 0;
+        }
 
     // Methoden
-    // überschreibt die Standart to String Methode
-    public String toString() {
-        String string = new String();
-        string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() + "\t Bestand: " + getBestand() + "\n" ;
-        return string;
-    }
+
+
+
+
+
+        // überschreibt die Standart to String Methode
+        public String toString() {
+            String string = new String();
+            string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() + "\t Bestand: " + getBestand() + "\n" ;
+            return string;
+        }
 
 
     // Setter
