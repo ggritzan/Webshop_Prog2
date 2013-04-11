@@ -19,6 +19,5 @@ public class EshopClientCUINC {
         String o = "o";
         Lieferadresse l = new Lieferadresse(v,n,s,p,o);
         l.anderesLieferdatum(12,04,31);
-
     }
 }
