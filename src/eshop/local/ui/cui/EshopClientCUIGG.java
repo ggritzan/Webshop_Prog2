@@ -70,7 +70,7 @@ public class EshopClientCUIGG {
 
 
         else if (line.equals("a")) {
-           System.out.println(eShop.alleArtikelZurueckgeben();
+           System.out.println(eShop.alleArtikelZurueckgeben());
         }
 
         /*

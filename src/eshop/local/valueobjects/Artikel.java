@@ -30,7 +30,12 @@ public class Artikel {
 
 
     // Methoden
-
+    // überschreibt die Standart to String Methode
+    public String toString() {
+        String string = new String();
+        string = "Nummer: " + getNummer()  + "  Name:  " + getName() + "  Beschreibung: " + getBeschreibung() + "  Preis: " + getPreis() + "  Bestand: " + getBestand();
+        return string;
+    }
 
 
     // Setter
