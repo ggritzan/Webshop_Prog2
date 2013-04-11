@@ -1,7 +1,9 @@
 package eshop.local.valueobjects;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,10 +14,18 @@ import java.text.DateFormat;
  */
 public class Lieferadresse extends Adresse{
 
-    String lieferdatum;
 
-    public Lieferadresse(String vorname, String nachname, String straße, String plz, String ort, String lieferdatum) {
+    public void anderesLieferdatum(int yy, int MM, int dd){
+        SimpleDateFormat ft = new SimpleDateFormat("E dd.MM.yy");
+        Date d = new Date();
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.set(2000 + yy, MM, dd);
+        d = cal.getTime();
+        System.out.println(ft.format(d));
+    }
+
+
+    public Lieferadresse(String vorname, String nachname, String straße, String plz, String ort) {
         super(vorname, nachname, straße, plz, ort);
-        this.lieferdatum = lieferdatum;
     }
 }
