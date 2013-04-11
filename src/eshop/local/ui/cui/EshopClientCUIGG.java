@@ -73,13 +73,14 @@ public class EshopClientCUIGG {
            System.out.println(eShop.alleArtikelZurueckgeben());
         }
 
-        /*
+
         else if (line.equals("f")) {
-            System.out.print("Buchtitel  > ");
+            System.out.print("Artikelname  > ");
             String titel = liesEingabe();
-            Vector liste = bib.sucheNachTitel(titel);
-            gibBuecherlisteAus(liste);
+            System.out.println(eShop.sucheArtikel(titel));
         }
+
+        /*
         else if (line.equals("s")) {
             bib.schreibeBuecher();
         }

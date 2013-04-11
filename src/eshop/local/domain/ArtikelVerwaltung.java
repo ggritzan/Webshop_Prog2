@@ -63,20 +63,20 @@ public class ArtikelVerwaltung {
             return ergebnis;
 
         }
+
+
+        public Vector sucheArtikel(String name) {
+            int nummer = 0;
+            Vector ergebnis = new Vector();
+            if (artikelBestandName.containsKey(name))
+                nummer = artikelBestandName.get(name);
+                ergebnis.add(artikelBestandNr.get(nummer));
+
+            return ergebnis;
+
+	    }
+
     /*
-    public Vector sucheBuecher(String titel) {
-		Vector ergebnis = new Vector();
-
-		Iterator iter = buchBestand.iterator();
-		while (iter.hasNext()) {
-			Buch buch = (Buch) iter.next();
-			if ( buch.getTitel().equals(titel)) {
-				ergebnis.add(buch);
-			}
-		}
-
-		return ergebnis;
-	}
     // Getter
 
         // Artikel Ausgabe anhand der Artikelnummer

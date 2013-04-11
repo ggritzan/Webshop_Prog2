@@ -33,7 +33,7 @@ public class Artikel {
     // überschreibt die Standart to String Methode
     public String toString() {
         String string = new String();
-        string = "Nummer: " + getNummer()  + "  Name:  " + getName() + "  Beschreibung: " + getBeschreibung() + "  Preis: " + getPreis() + "  Bestand: " + getBestand();
+        string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() + "\t Bestand: " + getBestand() + "\n" ;
         return string;
     }
 
