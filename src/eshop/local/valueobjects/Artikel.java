@@ -8,7 +8,6 @@
 
 package eshop.local.valueobjects;
 
-
 public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels

@@ -10,11 +10,11 @@ package eshop.local.valueobjects;
 public class Kunde extends Person {
 
     // Attribute zur Beschreibung eines Kunden
-    int kNr;
+    private int kNr;
 
     // Konstruktor
-    public Kunde (String name, int kNr) {
-        super(name);
+    public Kunde (String vorname, String nachname, int kNr) {
+        super(vorname, nachname);
         this.kNr = kNr;
     }
 
@@ -26,4 +26,8 @@ public class Kunde extends Person {
 
 
     // Getter
+
+    public int getkNr() {
+        return kNr;
+    }
 }

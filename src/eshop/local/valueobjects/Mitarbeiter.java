@@ -13,8 +13,8 @@ public class Mitarbeiter extends Person {
     int mNr;
 
     // Konstruktor
-    public Mitarbeiter (String name, int mNr) {
-        super(name);
+    public Mitarbeiter (String vorname, String nachname, int mNr) {
+        super(vorname, nachname);
         this.mNr = mNr;
     }
 

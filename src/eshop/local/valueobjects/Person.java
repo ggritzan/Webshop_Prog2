@@ -10,11 +10,13 @@ package eshop.local.valueobjects;
 public abstract class Person{
 
     // Attribute zur Beschreibung einer Person
-    String name;
+    String vorname;
+    String nachname;
 
     // Konstruktor
-    public Person(String name ) {
-        this.name = name;
+    public Person(String vorname, String nachname) {
+        this.vorname = vorname;
+        this.nachname = nachname;
     }
 
     // Methoden der Klasse Person
@@ -22,8 +24,12 @@ public abstract class Person{
     // Setter
 
     // Getter
-    public String getName() {
-        return name;
+    public String getVorname() {
+        return vorname;
+    }
+
+    public String getNachname(){
+        return nachname;
     }
 
 }
