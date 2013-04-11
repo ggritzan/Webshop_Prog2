@@ -62,14 +62,20 @@ public class ArtikelVerwaltung {
         // PersistenzManager für Schreibvorgänge öffnen
         pm.openForWriting(datei);
         Vector<Artikel> ergebnis = new Vector<Artikel>();
-        for ( Artikel elem : artikelBestandNr.values() )
+
+    // TODO es werden keine Datensätze in die Datein geschrieben (Hashmap im zusammenspiel mit der Persistenz
+
+        for ( Artikel elem : artikelBestandNr.values() ) {
             ergebnis.add(elem);
-        if (!ergebnis.isEmpty()) {
-            Iterator iter = ergebnis.iterator();
-            while (iter.hasNext()) {
-                Artikel a = (Artikel) iter.next();
-                pm.speichereArtikel(a);
+
+            if (!ergebnis.isEmpty()) {
+                Iterator iter = ergebnis.iterator();
+                while (iter.hasNext()) {
+                    Artikel a = (Artikel) iter.next();
+                    pm.speichereArtikel(a);
+                }
             }
+
         }
 
         // Persistenz-Schnittstelle wieder schließen
