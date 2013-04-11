@@ -12,14 +12,16 @@ package eshop.local.valueobjects;
 public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels
-    private String bezeichnung;
+    private String name;
+    private String beschreibung;
     private static int nummer = 1000;
     private double preis;
     private int bestand = 0;
 
     // Konstruktor
-    public Artikel(String bezeichnung, double preis ) {
-        this.bezeichnung = bezeichnung;
+    public Artikel(String name, String beschreibung, double preis ) {
+        this.name = name;
+        this.beschreibung = beschreibung;
         this.preis = preis;
         this.nummer  ++;
         this.bestand = 0;
@@ -32,11 +34,15 @@ public class Artikel {
 
     // Setter
 
-        public void neueBezeichnung(String bezeichnung) {
-            this.bezeichnung = bezeichnung;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public void neuerPreis(double preis) {
+        public void setBeschreibung(String beschreibung) {
+            this.beschreibung = beschreibung;
+        }
+
+        public void setPreis(double preis) {
             this.preis = preis;
         }
 
@@ -49,24 +55,29 @@ public class Artikel {
 
     // Getter
 
-        // gibt die Artikelnummer zurück
-        public int getNummer() {
-            return nummer;
+        // gibt den Name des Artikels zurück
+        public String getName() {
+            return this.name;
         }
 
-        // gibt die Bezeichnung des Artikels zurück
-        public String getBezeichnung() {
-            return bezeichnung;
+        // gibt die Beschreibung des Artikels zurück
+        public String getBeschreibung() {
+            return this.beschreibung;
         }
 
          // gibt den Preis des Artikels zurück
         public double getPreis() {
-            return preis;
+            return this.preis;
         }
 
+        // gibt die Artikelnummer zurück
+        public int getNummer() {
+            return this.nummer;
+        }
 
+        // gibt den Bestand des Artikels zurück
         public int getBestand() {
-            return bestand;
+            return this.bestand;
         }
 
 

@@ -51,12 +51,14 @@ public class EshopClientCUIGG {
         // Eingabe bearbeiten:
         if (line.equals("h")) {
             // lese die notwendigen Parameter, einzeln pro Zeile
-            System.out.print("Artikel Bezeichnung > ");
-            String aBez = liesEingabe();
+            System.out.print("Artikel Name > ");
+            String aName = liesEingabe();
+            System.out.print("Artikel Beschreibung > ");
+            String aBeschreibung = liesEingabe();
             System.out.print("Artikel Preis  > ");
             String aPreisEingabe = liesEingabe();
             float aPreis = Float.parseFloat(aPreisEingabe);
-            boolean ok = eShop.artikelHinzufuegen(aBez, aPreis);
+            boolean ok = eShop.artikelHinzufuegen(aName, aBeschreibung, aPreis);
 
             if (ok)
                 System.out.println("Einfügen ok");
@@ -64,12 +66,12 @@ public class EshopClientCUIGG {
                 System.out.println("Fehler beim Einfügen");
         }
 
-        /*
+
         else if (line.equals("a")) {
-            System.out.print();
+            eShop.alleArtikelAusgeben();
         }
 
-
+        /*
         else if (line.equals("f")) {
             System.out.print("Buchtitel  > ");
             String titel = liesEingabe();

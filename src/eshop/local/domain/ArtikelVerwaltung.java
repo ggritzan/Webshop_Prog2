@@ -16,7 +16,7 @@ import eshop.local.valueobjects.Artikel;
 public class ArtikelVerwaltung {
 
     private HashMap<Integer, Artikel> artikelBestandNr;
-    private HashMap<String, Integer> artikelBestandBez;
+    private HashMap<String, Integer> artikelBestandName;
 
 
     // Konstruktor
@@ -25,36 +25,41 @@ public class ArtikelVerwaltung {
         // verknüpft die Artikelnummern mit den Artikel Objekten
         artikelBestandNr = new HashMap<Integer, Artikel>();
 
-
-        artikelBestandBez = new HashMap<String, Integer>();
+        // verknüpft die Artikelnamen mit den Artikelnummern
+        artikelBestandName = new HashMap<String, Integer>();
     }
 
-    // Setter
+    // Methoden
 
         // Artikel hinzufügen
-        public boolean artikelHinzufuegen(String bezeichnung, double preis) {
-            if (artikelBestandBez.containsKey(bezeichnung)) {
+        public boolean artikelHinzufuegen(String name, String beschreibung, double preis) {
+
+            // Wenn der Name des Artikels bereits vorhanden ist wird false zurück gegeben
+            if (artikelBestandName.containsKey(name)) {
                 return false;
 
+            // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden
+            // HasMaps gespeicher
             } else {
 
-                Artikel artikel = new Artikel(bezeichnung, preis);
+                Artikel artikel = new Artikel(name, beschreibung, preis);
                 artikelBestandNr.put(artikel.getNummer(), artikel);
-                artikelBestandBez.put(bezeichnung, artikel.getNummer());
+                artikelBestandName.put(name, artikel.getNummer());
                 return true;
             }
 
         }
 
 
-       /*
+
         // alle Artikel des Shops ausgeben
         public void alleArtikelAusgeben(){
             for ( Integer Artikel : artikelBestandNr.keySet() )
-                System.out.println( Artikel );
+                System.out.println(artikelBestandNr.get(Artikel));
 
 
         }
+    /*
 
     // Getter
 
