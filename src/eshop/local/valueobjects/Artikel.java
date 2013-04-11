@@ -11,68 +11,76 @@ package eshop.local.valueobjects;
 public class Artikel {
 
     // Attribute zur Beschreibung eines Artikels
-    private String bezeichnung;
+    private String name;
+    private String beschreibung;
+    private static int zaehler = 1000;
     private int nummer;
-    private int bestand;
     private double preis;
+    private int bestand = 0;
 
     // Konstruktor
-    public Artikel(String bezeichnung, int nummer, double preis ) {
-        this.bezeichnung = bezeichnung;
-        this.nummer = nummer;
+    public Artikel(String name, String beschreibung, double preis ) {
+        this.name = name;
+        this.beschreibung = beschreibung;
         this.preis = preis;
+        this.nummer = this.zaehler;
+        this.zaehler  ++;
         this.bestand = 0;
-    }
+     }
 
-    public Artikel(String bezeichnung, int nummer, double preis, int bestand) {
-        this.bezeichnung = bezeichnung;
-        this.nummer = nummer;
-        this.preis = preis;
-        this.bestand = bestand;
-    }
 
-    // Methoden der Klasse Artikel
-    public void printArtikel() {
-        System.out.println("Bezeichnung: " + this.bezeichnung);
-        System.out.println("Nummer: " + this.nummer);
-        System.out.println("Bestand: " + this.bestand);
-        System.out.println("Preis: " + this.preis);
+    // Methoden
 
-    }
 
 
     // Setter
 
-    public int bestandErhoehen(int wert) {
-        this.bestand = this.bestand + wert;
-        return this.bestand;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public int bestandVerringern(int wert) {
-        this.bestand = this.bestand - wert;
-        return this.bestand;
-    }
+        public void setBeschreibung(String beschreibung) {
+            this.beschreibung = beschreibung;
+        }
 
-    public void neuerPreis(double wert) {
-        this.preis = wert;
-    }
+        public void setPreis(double preis) {
+            this.preis = preis;
+        }
+
+
+        public void setBestand(int wert) {
+            this.bestand = wert;
+        }
+
+
 
     // Getter
-    public int getNummer() {
-        return nummer;
-    }
 
-    public String getBezeichnung() {
-        return bezeichnung;
-    }
+        // gibt den Name des Artikels zurück
+        public String getName() {
+            return this.name;
+        }
 
-    public int getBestand() {
-        return bestand;
-    }
+        // gibt die Beschreibung des Artikels zurück
+        public String getBeschreibung() {
+            return this.beschreibung;
+        }
 
-    public double getPreis() {
-        return preis;
-    }
+         // gibt den Preis des Artikels zurück
+        public double getPreis() {
+            return this.preis;
+        }
+
+        // gibt die Artikelnummer zurück
+        public int getNummer() {
+            return this.nummer;
+        }
+
+        // gibt den Bestand des Artikels zurück
+        public int getBestand() {
+            return this.bestand;
+        }
+
 
 
 }

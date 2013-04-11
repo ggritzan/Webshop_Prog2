@@ -44,6 +44,8 @@ public class eshopClientCUI {
             Artikel art2 = m1.neuerArtikel("Tastertur",2,10.99,6);
             System.out.println("Artikel 2: " + art2.getBezeichnung());
             art2.printArtikel();
+
+
         }
 
 
