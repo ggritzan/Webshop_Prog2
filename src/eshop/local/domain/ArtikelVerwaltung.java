@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
+
 import eshop.local.valueobjects.Artikel;
+import eshop.local.persistence.FilePersistenceManager;
+import eshop.local.persistence.PersistenceManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +22,59 @@ public class ArtikelVerwaltung {
 
     private HashMap<Integer, Artikel> artikelBestandNr;
     private HashMap<String, Integer> artikelBestandName;
+
+    // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
+    private PersistenceManager pm = new FilePersistenceManager();
+
+    /**
+     * Methode zum Einlesen von Artikeldaten aus einer Datei.
+     *
+     * @param datei Datei, die einzulesenden Bücherbestand enthält
+     * @throws IOException
+     */
+    public void liesDaten(String datei) throws IOException {
+        // PersistenzManager für Lesevorgänge öffnen
+        pm.openForReading(datei);
+
+        Artikel einArtikel;
+        do {
+            // Artikel-Objekt einlesen
+            einArtikel = pm.ladeArtikel();
+            if (einArtikel != null) {
+                // Buch in Liste einfügen
+
+                artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
+            }
+
+        } while (einArtikel != null);
+
+        // Persistenz-Schnittstelle wieder schließen
+        pm.close();
+    }
+
+    /**
+     * Methode zum Schreiben der Artikeldaten in eine Datei.
+     *
+     * @param datei Datei, in die der Artikelbestand geschrieben werden soll
+     * @throws IOException
+     */
+    public void schreibeDaten(String datei) throws IOException  {
+        // PersistenzManager für Schreibvorgänge öffnen
+        pm.openForWriting(datei);
+        Vector<Artikel> ergebnis = new Vector<Artikel>();
+        for ( Artikel elem : artikelBestandNr.values() )
+            ergebnis.add(elem);
+        if (!ergebnis.isEmpty()) {
+            Iterator iter = ergebnis.iterator();
+            while (iter.hasNext()) {
+                Artikel a = (Artikel) iter.next();
+                pm.speichereArtikel(a);
+            }
+        }
+
+        // Persistenz-Schnittstelle wieder schließen
+        pm.close();
+    }
 
 
     // Konstruktor
@@ -52,11 +108,21 @@ public class ArtikelVerwaltung {
 
         }
 
+        // Artikel hinzufügen
+        public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
+
+            Artikel artikel = new Artikel (name, beschreibung, nummer, preis, bestand);
+            artikelBestandNr.put(artikel.getNummer(), artikel);
+            artikelBestandName.put(name, artikel.getNummer());
+
+
+        }
+
 
 
         // alle Artikel des Shops zurueckgeben
         public  Vector alleArtikelZurueckgeben(){
-            Vector<Artikel> ergebnis = new Vector();
+            Vector<Artikel> ergebnis = new Vector<Artikel>();
             for ( Artikel elem : artikelBestandNr.values() )
                  ergebnis.add(elem);
 
@@ -67,8 +133,8 @@ public class ArtikelVerwaltung {
         // durchsucht die Artikel nach dem übergebenden Artikelnamen und gibt den Artikel wenn vorhanden zurück
         public Vector sucheArtikel(String name) {
             int nummer = 0;
-            Vector<Artikel> ergebnis = new Vector();
-            Vector<String> error = new Vector();
+            Vector<Artikel> ergebnis = new Vector<Artikel>();
+
             if (artikelBestandName.containsKey(name)) {
                 nummer = artikelBestandName.get(name);
                 ergebnis.add(artikelBestandNr.get(nummer));
@@ -76,6 +142,7 @@ public class ArtikelVerwaltung {
                 return ergebnis;
 
             } else {
+                Vector<String> error = new Vector<String>();
                 error.add("Der Artikel ist nicht vorhanden !");
                 return   error;
             }

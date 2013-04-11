@@ -18,7 +18,7 @@ public class Artikel {
     private double preis;
     private int bestand = 0;
 
-    // Konstruktor
+    // Konstruktor für neue Artikel
     public Artikel(String name, String beschreibung, double preis ) {
         this.name = name;
         this.beschreibung = beschreibung;
@@ -27,6 +27,16 @@ public class Artikel {
         this.zaehler  ++;
         this.bestand = 0;
      }
+
+    // Konstruktor für das Artikeleinlesen
+    public Artikel(String name, String beschreibung, int nummer, double preis, int bestand ) {
+        this.name = name;
+        this.beschreibung = beschreibung;
+        this.preis = preis;
+        this.nummer = nummer;
+        this.zaehler ++;
+        this.bestand = 0;
+    }
 
 
     // Methoden
@@ -71,15 +81,16 @@ public class Artikel {
             return this.beschreibung;
         }
 
-         // gibt den Preis des Artikels zurück
-        public double getPreis() {
-            return this.preis;
-        }
-
         // gibt die Artikelnummer zurück
         public int getNummer() {
             return this.nummer;
         }
+
+        // gibt den Preis des Artikels zurück
+        public double getPreis() {
+            return this.preis;
+        }
+
 
         // gibt den Bestand des Artikels zurück
         public int getBestand() {

@@ -80,12 +80,12 @@ public class EshopClientCUIGG {
             System.out.println(eShop.sucheArtikel(titel));
         }
 
-        /*
+
         else if (line.equals("s")) {
-            bib.schreibeBuecher();
+            eShop.schreibeArtikel();
         }
 
-        */
+
     }
 
     public void run() {
