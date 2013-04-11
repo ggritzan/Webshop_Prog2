@@ -56,7 +56,7 @@ public class ArtikelVerwaltung {
 
         // alle Artikel des Shops zurueckgeben
         public  Vector alleArtikelZurueckgeben(){
-            Vector ergebnis = new Vector();
+            Vector<Artikel> ergebnis = new Vector();
             for ( Artikel elem : artikelBestandNr.values() )
                  ergebnis.add(elem);
 
@@ -64,30 +64,27 @@ public class ArtikelVerwaltung {
 
         }
 
-
+        // durchsucht die Artikel nach dem übergebenden Artikelnamen und gibt den Artikel wenn vorhanden zurück
         public Vector sucheArtikel(String name) {
             int nummer = 0;
-            Vector ergebnis = new Vector();
-            if (artikelBestandName.containsKey(name))
+            Vector<Artikel> ergebnis = new Vector();
+            Vector<String> error = new Vector();
+            if (artikelBestandName.containsKey(name)) {
                 nummer = artikelBestandName.get(name);
                 ergebnis.add(artikelBestandNr.get(nummer));
 
-            return ergebnis;
+                return ergebnis;
+
+            } else {
+                error.add("Der Artikel ist nicht vorhanden !");
+                return   error;
+            }
 
 	    }
 
-    /*
-    // Getter
 
+        // public Artikel
         // Artikel Ausgabe anhand der Artikelnummer
         // artikelBestand.get()
 
-
-
-
-    private int bestand;
-
-
-
-    */
 }
