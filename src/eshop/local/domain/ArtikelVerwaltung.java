@@ -2,6 +2,8 @@ package eshop.local.domain;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Vector;
 import eshop.local.valueobjects.Artikel;
 
 /**
@@ -52,15 +54,29 @@ public class ArtikelVerwaltung {
 
 
 
-        // alle Artikel des Shops ausgeben
-        public void alleArtikelAusgeben(){
-            for ( Integer Artikel : artikelBestandNr.keySet() )
-                System.out.println(artikelBestandNr.get(Artikel));
+        // alle Artikel des Shops zurueckgeben
+        public  Vector alleArtikelZurueckgeben(){
+            Vector ergebnis = new Vector();
+            for ( Artikel elem : artikelBestandNr.values() )
+                 ergebnis.add(elem);
 
+            return ergebnis;
 
         }
     /*
+    public Vector sucheBuecher(String titel) {
+		Vector ergebnis = new Vector();
 
+		Iterator iter = buchBestand.iterator();
+		while (iter.hasNext()) {
+			Buch buch = (Buch) iter.next();
+			if ( buch.getTitel().equals(titel)) {
+				ergebnis.add(buch);
+			}
+		}
+
+		return ergebnis;
+	}
     // Getter
 
         // Artikel Ausgabe anhand der Artikelnummer

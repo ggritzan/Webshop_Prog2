@@ -14,7 +14,8 @@ public class Artikel {
     // Attribute zur Beschreibung eines Artikels
     private String name;
     private String beschreibung;
-    private static int nummer = 1000;
+    private static int zaehler = 1000;
+    private int nummer;
     private double preis;
     private int bestand = 0;
 
@@ -23,7 +24,8 @@ public class Artikel {
         this.name = name;
         this.beschreibung = beschreibung;
         this.preis = preis;
-        this.nummer  ++;
+        this.nummer = this.zaehler;
+        this.zaehler  ++;
         this.bestand = 0;
      }
 
@@ -79,6 +81,7 @@ public class Artikel {
         public int getBestand() {
             return this.bestand;
         }
+
 
 
 }

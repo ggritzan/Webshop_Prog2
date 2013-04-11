@@ -12,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+
+import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import eshop.local.domain.ArtikelVerwaltung;
 import eshop.local.valueobjects.Artikel;
 
@@ -68,7 +70,7 @@ public class EshopClientCUIGG {
 
 
         else if (line.equals("a")) {
-            eShop.alleArtikelAusgeben();
+           System.out.println(eShop.alleArtikelZurueckgeben();
         }
 
         /*
