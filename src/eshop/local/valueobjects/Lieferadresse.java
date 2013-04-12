@@ -26,16 +26,16 @@ public class Lieferadresse extends Adresse{
         Date heute = new Date();
         if(MM < 1 || MM > 12) {
             throw new MonatExistiertNichtException(MM);
-        } else if((MM == 1 || MM == 3 || MM == 5 || MM == 7 || MM == 8 || MM == 10|| MM == 12) && (dd < 1 || dd > 31)){
-            throw new DatumExistiertNichtException(dd, MM, yyyy);
         } else if((MM == 4 || MM == 6 || MM == 9 || MM == 11) && (dd < 1 || dd > 30)) {
             throw new DatumExistiertNichtException(dd, MM, yyyy);
-        } else if(MM == 2 && (yyyy % 4 == 0 && (dd < 1 || dd > 29)) || (dd < 1 || dd > 28)){
+        } else if(MM == 2 && yyyy % 4 == 0 && (dd < 1 || dd > 29) || MM == 2 && yyyy % 4 != 0 && (dd < 1 || dd > 28)){
+            throw new DatumExistiertNichtException(dd, MM, yyyy);
+        } else if(dd < 1 || dd > 31) {
             throw new DatumExistiertNichtException(dd, MM, yyyy);
         } else if(d.before(heute)){
             throw new DatumInVergangenheitException(ft.format(d));
         } else {
-            System.out.println(ft.format(d));
+            System.out.println("Neues Lieferdatum: " + ft.format(d));
         }
     }
 
