@@ -13,14 +13,9 @@ import eshop.local.valueobjects.Lieferadresse;
 public class EshopClientCUINC {
 
     public static void main(String[] args) {
-        String v = "v";
-        String n = "n";
-        String s = "s";
-        String p = "p";
-        String o = "o";
-        Lieferadresse l = new Lieferadresse(v,n,s,p,o);
+        Lieferadresse l = new Lieferadresse("v","n","s","p","o");
         try {
-            l.anderesLieferdatum(13,4,11);
+            l.anderesLieferdatum(2014,4,12);
         } catch (Exception e){
             System.out.println("Fehler:");
             System.out.println(e.getMessage());
