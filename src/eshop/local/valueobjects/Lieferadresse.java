@@ -20,7 +20,8 @@ public class Lieferadresse extends Adresse{
         Calendar cal = GregorianCalendar.getInstance();
         cal.set(2000 + yy, MM-1, dd);
         Date d = cal.getTime();
-        System.out.println(ft.format(d));
+        Date heute = new Date();
+        System.out.println(ft.format(heute));
     }
 
 

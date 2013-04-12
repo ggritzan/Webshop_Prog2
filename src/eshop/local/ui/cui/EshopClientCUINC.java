@@ -18,6 +18,6 @@ public class EshopClientCUINC {
         String p = "p";
         String o = "o";
         Lieferadresse l = new Lieferadresse(v,n,s,p,o);
-        l.anderesLieferdatum(13,4,12);
+        l.anderesLieferdatum(13,8,11);
     }
 }
