@@ -11,6 +11,7 @@ public class Kunde extends Person {
 
     // Attribute zur Beschreibung eines Kunden
     private int kNr;
+    private String email;
 
     // Konstruktor
     public Kunde (String vorname, String nachname, int kNr) {
@@ -29,5 +30,9 @@ public class Kunde extends Person {
 
     public int getkNr() {
         return kNr;
+    }
+
+    public String getEmail(){
+        return email;
     }
 }
