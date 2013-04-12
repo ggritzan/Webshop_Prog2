@@ -22,6 +22,9 @@ public class Kunde extends Person {
 
     // Methoden der Klasse Kunde
 
+    public void kaufen(Artikel a, int wert)   {
+        a.kaufen(wert);
+    }
 
     // Setter
 
