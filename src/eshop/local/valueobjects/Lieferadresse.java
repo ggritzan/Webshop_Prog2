@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import eshop.local.exception.MonatExistiertNichtException;
 import eshop.local.exception.DatumExistiertNichtException;
 import eshop.local.exception.DatumInVergangenheitException;
+import eshop.local.exception.UnterEinerWocheException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +19,8 @@ import eshop.local.exception.DatumInVergangenheitException;
 public class Lieferadresse extends Adresse{
 
 
-    public void anderesLieferdatum(int yyyy, int MM, int dd)throws MonatExistiertNichtException, DatumExistiertNichtException, DatumInVergangenheitException{
+    public void anderesLieferdatum(int yyyy, int MM, int dd)throws MonatExistiertNichtException,
+    DatumExistiertNichtException, DatumInVergangenheitException, UnterEinerWocheException{
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
         Calendar cal = GregorianCalendar.getInstance();
         cal.set(yyyy, MM-1, dd);
@@ -34,6 +36,8 @@ public class Lieferadresse extends Adresse{
             throw new DatumExistiertNichtException(dd, MM, yyyy);
         } else if(d.before(heute)){
             throw new DatumInVergangenheitException(ft.format(d));
+        } else if (d.getTime() - heute.getTime() < 604875149){
+            throw new UnterEinerWocheException();
         } else {
             System.out.println("Neues Lieferdatum: " + ft.format(d));
         }
