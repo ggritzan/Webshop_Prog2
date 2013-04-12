@@ -17,10 +17,9 @@ public class Lieferadresse extends Adresse{
 
     public void anderesLieferdatum(int yy, int MM, int dd){
         SimpleDateFormat ft = new SimpleDateFormat("E dd.MM.yy");
-        Date d = new Date();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.set(2000 + yy, MM, dd);
-        d = cal.getTime();
+        cal.set(2000 + yy, MM-1, dd);
+        Date d = cal.getTime();
         System.out.println(ft.format(d));
     }
 
