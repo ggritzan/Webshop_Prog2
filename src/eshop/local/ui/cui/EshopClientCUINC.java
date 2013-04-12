@@ -1,5 +1,6 @@
 package eshop.local.ui.cui.eshop;
 
+import eshop.local.exception.MonatExistiertNichtException;
 import eshop.local.valueobjects.Lieferadresse;
 
 /**
@@ -11,13 +12,18 @@ import eshop.local.valueobjects.Lieferadresse;
  */
 public class EshopClientCUINC {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String v = "v";
         String n = "n";
         String s = "s";
         String p = "p";
         String o = "o";
         Lieferadresse l = new Lieferadresse(v,n,s,p,o);
-        l.anderesLieferdatum(13,8,11);
+        try {
+            l.anderesLieferdatum(13,13,11);
+        } catch (Exception e){
+            System.out.println("Fehler:");
+            System.out.println(e.getMessage());
+        }
     }
 }

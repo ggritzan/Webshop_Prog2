@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import eshop.local.exception.MonatExistiertNichtException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,13 +16,16 @@ import java.util.GregorianCalendar;
 public class Lieferadresse extends Adresse{
 
 
-    public void anderesLieferdatum(int yy, int MM, int dd){
+    public void anderesLieferdatum(int yy, int MM, int dd)throws MonatExistiertNichtException{
+        if(MM < 1 || MM > 12) {
+            throw new MonatExistiertNichtException(MM);
+        }
         SimpleDateFormat ft = new SimpleDateFormat("E dd.MM.yy");
         Calendar cal = GregorianCalendar.getInstance();
         cal.set(2000 + yy, MM-1, dd);
         Date d = cal.getTime();
         Date heute = new Date();
-        System.out.println(ft.format(heute));
+        System.out.println(ft.format(d));
     }
 
 
