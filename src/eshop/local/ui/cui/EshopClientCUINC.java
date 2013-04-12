@@ -20,7 +20,7 @@ public class EshopClientCUINC {
         String o = "o";
         Lieferadresse l = new Lieferadresse(v,n,s,p,o);
         try {
-            l.anderesLieferdatum(13,13,11);
+            l.anderesLieferdatum(13,4,11);
         } catch (Exception e){
             System.out.println("Fehler:");
             System.out.println(e.getMessage());
