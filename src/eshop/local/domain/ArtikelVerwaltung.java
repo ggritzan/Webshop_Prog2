@@ -41,7 +41,7 @@ public class ArtikelVerwaltung {
             // Artikel-Objekt einlesen
             einArtikel = pm.ladeArtikel();
             if (einArtikel != null) {
-                // Buch in Liste einfügen
+                // Artikel in Liste einfügen
 
                 artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
             }
@@ -90,6 +90,8 @@ public class ArtikelVerwaltung {
 
 
     // Methoden
+
+
 
         // Artikel hinzufügen
         public boolean artikelHinzufuegen(String name, String beschreibung, double preis) {
@@ -152,8 +154,15 @@ public class ArtikelVerwaltung {
 	    }
 
 
-        // public Artikel
-        // Artikel Ausgabe anhand der Artikelnummer
-        // artikelBestand.get()
-
+        // setzen des Artikel Bestands
+        public boolean setBestand(int artNr,int wert) {
+            if (wert >= 0  & artikelBestandNr.containsKey(artNr) /*& (artNr || wert != )*/ ) {
+            Artikel a = artikelBestandNr.get(artNr);
+            a.setBestand(wert);
+            artikelBestandNr.put(artNr,a);
+            return true;
+            } else {
+                return false;
+            }
+        }
 }

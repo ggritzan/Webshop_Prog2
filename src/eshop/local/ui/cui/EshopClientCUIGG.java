@@ -38,6 +38,7 @@ public class EshopClientCUIGG {
 
     private void gibMenueAus() {
         System.out.print("Befehle: \n  Artikel hinzufuegen: 'h'");
+        System.out.print("         \n  Bestand ändern: 'b'");
         System.out.print("         \n  Artikel ausgeben:  'a'");
         System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
@@ -71,6 +72,22 @@ public class EshopClientCUIGG {
                 System.out.println("Artikel ist bereits vorhanden !");
         }
 
+        else if (line.equals("b")) {
+            System.out.println(eShopVerwaltung.gibAlleArtikel());
+            System.out.print("Artikelnummer: > ");
+            String aNr = liesEingabe();
+            int aNrInt = Integer.parseInt(aNr);
+            System.out.print("Bestand > ");
+            String aBestand = liesEingabe();
+            int aBestandInt = Integer.parseInt(aBestand);
+            boolean ok = eShopVerwaltung.setBestand(aNrInt,aBestandInt);
+
+
+            if (ok)
+                System.out.println("Bestand wurde geändert !");
+            else
+                System.out.println("Bestand konnte nicht geändert werden !");
+        }
 
         else if (line.equals("a")) {
            System.out.println(eShopVerwaltung.gibAlleArtikel());

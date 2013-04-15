@@ -68,6 +68,15 @@ public class EShopVerwaltung {
         return meineArtikel.sucheArtikel(name);
     }
 
+    /**
+     * Methode zum ändern des Artikel Bestands
+     *
+     * @param artNr,wert Artikelnummer, wert Wert für Bestand
+     * @return Boolean
+     */
+    public boolean setBestand(int artNr,int wert) {
+        return meineArtikel.setBestand(artNr,wert);
+    }
 
     /**
      * Methode zum Einfügen eines neuen Artikels in den Bestand.
