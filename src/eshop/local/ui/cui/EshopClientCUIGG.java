@@ -68,7 +68,7 @@ public class EshopClientCUIGG {
             if (ok)
                 System.out.println("Einfügen ok");
             else
-                System.out.println("Fehler beim Einfügen");
+                System.out.println("Artikel ist bereits vorhanden !");
         }
 
 
@@ -80,7 +80,7 @@ public class EshopClientCUIGG {
         else if (line.equals("f")) {
             System.out.print("Artikelname  > ");
             String titel = liesEingabe();
-            System.out.println(eShop.sucheArtikel(titel));
+            System.out.println(eShopVerwaltung.sucheNachName(titel));
         }
 
 

@@ -61,20 +61,15 @@ public class ArtikelVerwaltung {
     public void schreibeDaten(String datei) throws IOException  {
 
         // PersistenzManager für Schreibvorgänge öffnen
-
-
         pm.openForWriting(datei);
 
-
-
-
-        if (!artikelBestandNr.isEmpty()) {
-            Iterator iter = artikelBestandNr.values().iterator();
-            while (iter.hasNext()) {
-                Artikel a = (Artikel) iter.next();
-                pm.speichereArtikel(a);
+            if (!artikelBestandNr.isEmpty()) {
+                Iterator iter = artikelBestandNr.values().iterator();
+                while (iter.hasNext()) {
+                    Artikel a = (Artikel) iter.next();
+                    pm.speichereArtikel(a);
+                }
             }
-        }
 
 
         // Persistenz-Schnittstelle wieder schließen

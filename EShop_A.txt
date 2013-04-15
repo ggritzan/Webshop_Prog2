@@ -1,5 +1,20 @@
 Hose
 blau
-1000
+1001
 10.0
+0
+Hut
+grün
+1003
+10.0
+0
+Rock
+grün
+1002
+20.0
+0
+Stock
+ganz toll
+1006
+4.0
 0
