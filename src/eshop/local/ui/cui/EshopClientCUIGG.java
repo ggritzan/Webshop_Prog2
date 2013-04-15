@@ -63,7 +63,7 @@ public class EshopClientCUIGG {
             System.out.print("Artikel Preis  > ");
             String aPreisEingabe = liesEingabe();
             float aPreis = Float.parseFloat(aPreisEingabe);
-            boolean ok = eShop.artikelHinzufuegen(aName, aBeschreibung, aPreis);
+            boolean ok = eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
 
             if (ok)
                 System.out.println("Einfügen ok");
@@ -73,7 +73,7 @@ public class EshopClientCUIGG {
 
 
         else if (line.equals("a")) {
-           System.out.println(eShop.alleArtikelZurueckgeben());
+           System.out.println(eShopVerwaltung.gibAlleArtikel());
         }
 
 

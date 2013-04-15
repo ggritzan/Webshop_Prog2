@@ -3,6 +3,7 @@ package eshop.local.domain;
 import java.io.IOException;
 import java.util.Vector;
 
+import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
 import eshop.local.valueobjects.Artikel;
 
 /**
@@ -63,7 +64,7 @@ public class EShopVerwaltung {
      * @return Rückgabe des gefundenen Artikels
      */
     public Vector sucheNachName(String name) {
-        // einfach delegieren an meineBuecher
+
         return meineArtikel.sucheArtikel(name);
     }
 
@@ -91,6 +92,8 @@ public class EShopVerwaltung {
 
         meineArtikel.schreibeDaten(datei+"_A.txt");
     }
+
+
 
 
 

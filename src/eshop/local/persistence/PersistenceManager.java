@@ -20,14 +20,14 @@ public interface PersistenceManager {
         /**
          * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
          *
-         * @return Atikel-Objekt, wenn Einlesen erfolgreich, false null
+         * @return Artikel-Objekt, wenn Einlesen erfolgreich, false null
          */
         public Artikel ladeArtikel() throws IOException;
 
         /**
-         * Methode zum Schreiben der Buchdaten in eine externe Datenquelle.
+         * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
          *
-         * @param a Buch-Objekt, das gespeichert werden soll
+         * @param a Artikel-Objekt, das gespeichert werden soll
          * @return true, wenn Schreibvorgang erfolgreich, false sonst
          */
         public boolean speichereArtikel(Artikel a) throws IOException;

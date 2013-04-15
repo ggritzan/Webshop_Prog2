@@ -29,7 +29,7 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum Einlesen von Artikeldaten aus einer Datei.
      *
-     * @param datei Datei, die einzulesenden Bücherbestand enthält
+     * @param datei Datei, die einzulesenden Artikelbestand enthält
      * @throws IOException
      */
     public void liesDaten(String datei) throws IOException {
@@ -59,37 +59,17 @@ public class ArtikelVerwaltung {
      * @throws IOException
      */
     public void schreibeDaten(String datei) throws IOException  {
+
         // PersistenzManager für Schreibvorgänge öffnen
-// TODO es werden keine Datensätze in die Datein geschrieben (Hashmap im zusammenspiel mit der Persistenz
+
+
         pm.openForWriting(datei);
-        Vector<Artikel> ergebnis = new Vector<Artikel>();
-
-        /*
-        for( Iterator<Artikel> elem = artikelBestandNr.values().iterator(); elem.hasNext(); )
-        {
-            while (elem.hasNext()) {
-                Artikel a = (Artikel) elem.next();
-                pm.speichereArtikel(a);
-            }
-        }
 
 
-        for ( Artikel elem : artikelBestandNr.values() ) {
-            ergebnis.add(elem);
 
 
-        }
-        */
-
-        for (Iterator<Integer> itr = artikelBestandNr.keySet().iterator(); itr.hasNext();)
-        {
-
-            System.out.println( artikelBestandNr.get(itr) + "Bla");
-        }
-
-
-        if (!ergebnis.isEmpty()) {
-            Iterator iter = ergebnis.iterator();
+        if (!artikelBestandNr.isEmpty()) {
+            Iterator iter = artikelBestandNr.values().iterator();
             while (iter.hasNext()) {
                 Artikel a = (Artikel) iter.next();
                 pm.speichereArtikel(a);
@@ -112,6 +92,8 @@ public class ArtikelVerwaltung {
         artikelBestandName = new HashMap<String, Integer>();
     }
 
+
+
     // Methoden
 
         // Artikel hinzufügen
@@ -122,7 +104,7 @@ public class ArtikelVerwaltung {
                 return false;
 
             // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden
-            // HasMaps gespeicher
+            // HasMaps gespeichert
             } else {
 
                 Artikel artikel = new Artikel(name, beschreibung, preis);

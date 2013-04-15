@@ -99,6 +99,10 @@ public class FilePersistenceManager implements PersistenceManager {
             return new Artikel(name, beschreibung, nummer, preis, bestand);
         }
 
+
+
+
+
         /**
          * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
          *
