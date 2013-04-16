@@ -31,6 +31,7 @@ public class ArtikelVerwaltung {
 
 
 // Konstruktor
+
     public ArtikelVerwaltung() {
 
         // verknüpft die Artikelnummern mit den Artikel Objekten
@@ -41,13 +42,12 @@ public class ArtikelVerwaltung {
     }
 
 
-
 // Methoden
 
     /**
      * Methode zum Einlesen der Artikeldaten aus einer Datei.
      *
-     * @param datei Datei, die den einzulesenden Artikelbestand enthält
+     * @param datei Datei, die den einzulesenden Artikelbestand enthaelt
      * @throws IOException
      */
     public void liesDaten(String datei) throws IOException {
@@ -96,7 +96,6 @@ public class ArtikelVerwaltung {
         pm.close();
     }
 
-
     /**
      * Methode zum hinzufuegen von Artikeln durch die CUI
      *
@@ -133,10 +132,8 @@ public class ArtikelVerwaltung {
 
     }
 
-
-
     /**
-     * Methode gibt einen Vector zurueck der alle vorhandenen Artikeln enthält
+     * Methode gibt einen Vector zurueck der alle vorhandenen Artikeln enthaelt
      *
      *
      */
@@ -152,7 +149,7 @@ public class ArtikelVerwaltung {
     }
 
     /**
-     * Methode durchsucht alle Artikel nach dem Parameter name und gibt den entsprechenden Artikel in einem Vektor zurück
+     * Methode durchsucht alle Artikel nach dem Parameter name und gibt den entsprechenden Artikel in einem Vektor zurueck
      *
      * @param name
      */
@@ -175,9 +172,8 @@ public class ArtikelVerwaltung {
 
 	 }
 
-
     /**
-     * Methode ändert den Bestand des gewünschten Artikels wenn er exestiert
+     * Methode aendert den Bestand des gewuenschten Artikels wenn er exestiert
      *
      * @param  artNr,wert
      */
