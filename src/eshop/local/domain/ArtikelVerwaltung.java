@@ -77,7 +77,7 @@ public class ArtikelVerwaltung {
      * @param datei Datei, in die der Artikelbestand geschrieben werden soll
      * @throws IOException
      */
-    public void schreibeDaten(String datei) throws IOException  {
+    public void schreibeDaten(String datei) throws IOException {
 
         // PersistenzManager für Schreibvorgänge öffnen
         pm.openForWriting(datei);
@@ -109,12 +109,12 @@ public class ArtikelVerwaltung {
 
 
         } else {
-           // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
-           Artikel artikel = new Artikel(name, beschreibung, preis);
-           artikelBestandNr.put(artikel.getNummer(), artikel);
-           artikelBestandName.put(name, artikel.getNummer());
-           return true;
-           }
+            // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
+            Artikel artikel = new Artikel(name, beschreibung, preis);
+            artikelBestandNr.put(artikel.getNummer(), artikel);
+            artikelBestandName.put(name, artikel.getNummer());
+            return true;
+        }
 
     }
 
@@ -122,11 +122,12 @@ public class ArtikelVerwaltung {
      * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
      *
      * @param name,beschreibung,nummer,preis,bestand
+     *
      */
     public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
 
         // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
-        Artikel artikel = new Artikel (name, beschreibung, nummer, preis, bestand);
+        Artikel artikel = new Artikel(name, beschreibung, nummer, preis, bestand);
         artikelBestandNr.put(artikel.getNummer(), artikel);
         artikelBestandName.put(name, artikel.getNummer());
 
@@ -134,15 +135,13 @@ public class ArtikelVerwaltung {
 
     /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Artikeln enthaelt
-     *
-     *
      */
-    public  Vector alleArtikelZurueckgeben(){
+    public Vector alleArtikelZurueckgeben() {
 
         Vector<Artikel> ergebnis = new Vector<Artikel>();
 
-            for ( Artikel elem : artikelBestandNr.values() )
-                 ergebnis.add(elem);
+        for (Artikel elem : artikelBestandNr.values())
+            ergebnis.add(elem);
 
         return ergebnis;
 
@@ -153,45 +152,45 @@ public class ArtikelVerwaltung {
      *
      * @param name
      */
-     public Vector sucheArtikel(String name) {
+    public Vector sucheArtikel(String name) {
         int nummer = 0;
         Vector<Artikel> ergebnis = new Vector<Artikel>();
 
-            if (artikelBestandName.containsKey(name)) {
-                nummer = artikelBestandName.get(name);
-                ergebnis.add(artikelBestandNr.get(nummer));
+        if (artikelBestandName.containsKey(name)) {
+            nummer = artikelBestandName.get(name);
+            ergebnis.add(artikelBestandNr.get(nummer));
 
-                return ergebnis;
+            return ergebnis;
 
-            } else {
-                Vector<String> error = new Vector<String>();
-                error.add("Der Artikel ist nicht vorhanden !");
+        } else {
+            Vector<String> error = new Vector<String>();
+            error.add("Der Artikel ist nicht vorhanden !");
 
-                return   error;
-            }
+            return error;
+        }
 
-	 }
+    }
 
     /**
      * Methode aendert den Bestand des gewuenschten Artikels wenn er exestiert
      *
-     * @param  artNr,wert
+     * @param artNr,wert
      */
-     public boolean setBestand(int artNr,int wert) {
+    public boolean setBestand(int artNr, int wert) {
 
         // Wenn die Eingabe des Nutzer >= 0 und die Artikelnummer exestiert wird der Bestand angepasst
-        if (wert >= 0  & artikelBestandNr.containsKey(artNr)  ) {
+        if (wert >= 0 & artikelBestandNr.containsKey(artNr)) {
 
             Artikel a = artikelBestandNr.get(artNr);
             a.setBestand(wert);
-            artikelBestandNr.put(artNr,a);
+            artikelBestandNr.put(artNr, a);
 
             return true;
 
         } else {
 
             return false;
-            }
-     }
+        }
+    }
 
 }
