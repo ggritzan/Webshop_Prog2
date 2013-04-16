@@ -14,31 +14,29 @@ public class Kunde extends Person {
     // Attribute zur Beschreibung eines Kunden
     private int kNr;
     private String passwort;
-    private String email;
-    private String telefon;
-    private Adresse adresse;
 
 
 
     // Konstruktor
-    public Kunde (String vorname, String nachname, int kNr, String email, Adresse adresse, String telefon) {
-        super(vorname, nachname);
+    public Kunde (String vorname, String nachname, int kNr, String email, Adresse adresse, String telefon, String passwort) {
+        super(vorname, nachname, email, telefon, adresse);
         this.kNr = kNr;
-        this.email = email;
-        this.adresse = adresse;
-        this.telefon = telefon;
+        this.passwort = passwort;
     }
 
 
     // Methoden der Klasse Kunde
 
-    public void inWarenkorb(Artikel a)   {
-
-
-    }
 
     // Setter
 
+    public void setkNr(int kNr){
+        this.kNr = kNr;
+    }
+
+    public void setPasswort(String passwort){
+        this.passwort = passwort;
+    }
 
     // Getter
 
@@ -46,15 +44,7 @@ public class Kunde extends Person {
         return this.kNr;
     }
 
-    public String getEmail(){
-        return this.email;
-    }
-
-    public String getTelefon(){
-        return this.telefon;
-    }
-
-    public Adresse getAdresse(){
-        return this.adresse;
+    public String getPasswort(){
+        return this.passwort;
     }
 }

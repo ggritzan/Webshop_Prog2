@@ -13,8 +13,8 @@ public class Mitarbeiter extends Person {
     int mNr;
 
     // Konstruktor
-    public Mitarbeiter (String vorname, String nachname, int mNr) {
-        super(vorname, nachname);
+    public Mitarbeiter (String vorname, String nachname, String email, String telefon, Adresse adresse, int mNr) {
+        super(vorname, nachname, email, telefon, adresse);
         this.mNr = mNr;
     }
 
@@ -39,6 +39,14 @@ public class Mitarbeiter extends Person {
 
     // Setter
 
+    public void setmNr(int mNr){
+        this.mNr = mNr;
+    }
+
 
     // Getter
+
+    public int getmNr(){
+        return this.mNr;
+    }
 }
