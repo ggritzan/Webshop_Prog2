@@ -20,16 +20,34 @@ import eshop.local.persistence.PersistenceManager;
 
 public class ArtikelVerwaltung {
 
+    // Hashmap zum speichern des Artikelbestands als Key dienen die Artikelnummern
     private HashMap<Integer, Artikel> artikelBestandNr;
+
+    // Hashmap zum verknüpfen des Artikelnamens mit der Artikelnummer
     private HashMap<String, Integer> artikelBestandName;
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
     private PersistenceManager pm = new FilePersistenceManager();
 
+
+// Konstruktor
+    public ArtikelVerwaltung() {
+
+        // verknüpft die Artikelnummern mit den Artikel Objekten
+        artikelBestandNr = new HashMap<Integer, Artikel>();
+
+        // verknüpft die Artikelnamen mit den Artikelnummern
+        artikelBestandName = new HashMap<String, Integer>();
+    }
+
+
+
+// Methoden
+
     /**
-     * Methode zum Einlesen von Artikeldaten aus einer Datei.
+     * Methode zum Einlesen der Artikeldaten aus einer Datei.
      *
-     * @param datei Datei, die einzulesenden Artikelbestand enthält
+     * @param datei Datei, die den einzulesenden Artikelbestand enthält
      * @throws IOException
      */
     public void liesDaten(String datei) throws IOException {
@@ -37,12 +55,13 @@ public class ArtikelVerwaltung {
         pm.openForReading(datei);
 
         Artikel einArtikel;
+
         do {
             // Artikel-Objekt einlesen
             einArtikel = pm.ladeArtikel();
             if (einArtikel != null) {
-                // Artikel in Liste einfügen
 
+                // Artikel einfügen
                 artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
             }
 
@@ -63,13 +82,14 @@ public class ArtikelVerwaltung {
         // PersistenzManager für Schreibvorgänge öffnen
         pm.openForWriting(datei);
 
-            if (!artikelBestandNr.isEmpty()) {
-                Iterator iter = artikelBestandNr.values().iterator();
-                while (iter.hasNext()) {
-                    Artikel a = (Artikel) iter.next();
-                    pm.speichereArtikel(a);
-                }
+        // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Textdatei schreiben
+        if (!artikelBestandNr.isEmpty()) {
+            Iterator iter = artikelBestandNr.values().iterator();
+            while (iter.hasNext()) {
+                Artikel a = (Artikel) iter.next();
+                pm.speichereArtikel(a);
             }
+        }
 
 
         // Persistenz-Schnittstelle wieder schließen
@@ -77,67 +97,68 @@ public class ArtikelVerwaltung {
     }
 
 
-    // Konstruktor
-    public ArtikelVerwaltung() {
+    /**
+     * Methode zum hinzufuegen von Artikeln durch die CUI
+     *
+     * @param name,beschreibung,preis
+     */
+    public boolean artikelHinzufuegen(String name, String beschreibung, double preis) {
 
-        // verknüpft die Artikelnummern mit den Artikel Objekten
-        artikelBestandNr = new HashMap<Integer, Artikel>();
+        // Wenn der Name eines Artikels bereits vorhanden ist wird false zurück gegeben und kein neuer Artikel angelegt
+        if (artikelBestandName.containsKey(name)) {
+            return false;
 
-        // verknüpft die Artikelnamen mit den Artikelnummern
-        artikelBestandName = new HashMap<String, Integer>();
+
+        } else {
+           // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
+           Artikel artikel = new Artikel(name, beschreibung, preis);
+           artikelBestandNr.put(artikel.getNummer(), artikel);
+           artikelBestandName.put(name, artikel.getNummer());
+           return true;
+           }
+
+    }
+
+    /**
+     * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
+     *
+     * @param name,beschreibung,nummer,preis,bestand
+     */
+    public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
+
+        // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
+        Artikel artikel = new Artikel (name, beschreibung, nummer, preis, bestand);
+        artikelBestandNr.put(artikel.getNummer(), artikel);
+        artikelBestandName.put(name, artikel.getNummer());
+
     }
 
 
 
-    // Methoden
+    /**
+     * Methode gibt einen Vector zurueck der alle vorhandenen Artikeln enthält
+     *
+     *
+     */
+    public  Vector alleArtikelZurueckgeben(){
 
+        Vector<Artikel> ergebnis = new Vector<Artikel>();
 
-
-        // Artikel hinzufügen
-        public boolean artikelHinzufuegen(String name, String beschreibung, double preis) {
-
-            // Wenn der Name des Artikels bereits vorhanden ist wird false zurück gegeben
-            if (artikelBestandName.containsKey(name)) {
-                return false;
-
-            // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden
-            // HasMaps gespeichert
-            } else {
-
-                Artikel artikel = new Artikel(name, beschreibung, preis);
-                artikelBestandNr.put(artikel.getNummer(), artikel);
-                artikelBestandName.put(name, artikel.getNummer());
-                return true;
-            }
-
-        }
-
-        // Artikel hinzufügen
-        public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
-
-            Artikel artikel = new Artikel (name, beschreibung, nummer, preis, bestand);
-            artikelBestandNr.put(artikel.getNummer(), artikel);
-            artikelBestandName.put(name, artikel.getNummer());
-
-
-        }
-
-
-
-        // alle Artikel des Shops zurueckgeben
-        public  Vector alleArtikelZurueckgeben(){
-            Vector<Artikel> ergebnis = new Vector<Artikel>();
             for ( Artikel elem : artikelBestandNr.values() )
                  ergebnis.add(elem);
 
-            return ergebnis;
+        return ergebnis;
 
-        }
+    }
 
-        // durchsucht die Artikel nach dem übergebenden Artikelnamen und gibt den Artikel wenn vorhanden zurück
-        public Vector sucheArtikel(String name) {
-            int nummer = 0;
-            Vector<Artikel> ergebnis = new Vector<Artikel>();
+    /**
+     * Methode durchsucht alle Artikel nach dem Parameter name und gibt den entsprechenden Artikel in einem Vektor zurück
+     *
+     * @param name
+     */
+     public Vector sucheArtikel(String name) {
+        int nummer = 0;
+        Vector<Artikel> ergebnis = new Vector<Artikel>();
 
             if (artikelBestandName.containsKey(name)) {
                 nummer = artikelBestandName.get(name);
@@ -148,21 +169,33 @@ public class ArtikelVerwaltung {
             } else {
                 Vector<String> error = new Vector<String>();
                 error.add("Der Artikel ist nicht vorhanden !");
+
                 return   error;
             }
 
-	    }
+	 }
 
 
-        // setzen des Artikel Bestands
-        public boolean setBestand(int artNr,int wert) {
-            if (wert >= 0  & artikelBestandNr.containsKey(artNr) /*& (artNr || wert != )*/ ) {
+    /**
+     * Methode ändert den Bestand des gewünschten Artikels wenn er exestiert
+     *
+     * @param  artNr,wert
+     */
+     public boolean setBestand(int artNr,int wert) {
+
+        // Wenn die Eingabe des Nutzer >= 0 und die Artikelnummer exestiert wird der Bestand angepasst
+        if (wert >= 0  & artikelBestandNr.containsKey(artNr)  ) {
+
             Artikel a = artikelBestandNr.get(artNr);
             a.setBestand(wert);
             artikelBestandNr.put(artNr,a);
+
             return true;
-            } else {
-                return false;
+
+        } else {
+
+            return false;
             }
-        }
+     }
+
 }
