@@ -9,8 +9,6 @@ package eshop.local.valueobjects;
 
 import java.util.Vector;
 
-// KLASSE NOCH NICHT FERTIG!
-
 public class Warenkorb {
     // Attribute zur Beschreibung eines Warenkorbs
     Vector warenkorb = new Vector();
@@ -22,7 +20,7 @@ public class Warenkorb {
     }
 
     public void remArtikel(Artikel a){
-
+        warenkorb.remove(a);
     }
     // Setter
     // Getter

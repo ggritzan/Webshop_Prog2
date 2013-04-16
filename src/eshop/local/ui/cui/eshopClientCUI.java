@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-package eshop.local.ui.cui.eshop;
+package eshop.local.ui.cui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
