@@ -7,11 +7,12 @@
  */
 package eshop.local.valueobjects;
 
+import java.util.Vector;
+
 public class Kunde extends Person {
 
     // Attribute zur Beschreibung eines Kunden
     private int kNr;
-    private String email;
     private String passwort;
     private String email;
     private String telefon;
@@ -20,15 +21,19 @@ public class Kunde extends Person {
 
 
     // Konstruktor
-    public Kunde (String vorname, String nachname, int kNr) {
+    public Kunde (String vorname, String nachname, int kNr, String email, Adresse adresse, String telefon) {
         super(vorname, nachname);
         this.kNr = kNr;
+        this.email = email;
+        this.adresse = adresse;
+        this.telefon = telefon;
     }
 
 
     // Methoden der Klasse Kunde
 
-    public void kaufen(Artikel a, int wert)   {
+    public void inWarenkorb(Artikel a)   {
+
 
     }
 
@@ -38,14 +43,18 @@ public class Kunde extends Person {
     // Getter
 
     public int getkNr() {
-        return kNr;
+        return this.kNr;
     }
 
     public String getEmail(){
-        return email;
+        return this.email;
     }
 
     public String getTelefon(){
         return this.telefon;
+    }
+
+    public Adresse getAdresse(){
+        return this.adresse;
     }
 }
