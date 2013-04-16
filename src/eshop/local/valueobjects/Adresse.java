@@ -31,6 +31,26 @@ public class Adresse {
 
     // Setter
 
+    public void setVorname(String vorname){
+        this.vorname = vorname;
+    }
+
+    public void setNachname(String nachname){
+        this.nachname = nachname;
+    }
+
+    public void setStraße(String straße){
+        this.straße = straße;
+    }
+
+    public void setPlz(String plz){
+        this.plz = plz;
+    }
+
+    public void setOrt(String ort){
+        this.ort = ort;
+    }
+
     // Getter
 
     public String getVorname() {
