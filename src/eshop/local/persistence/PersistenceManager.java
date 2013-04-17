@@ -15,7 +15,7 @@ public interface PersistenceManager {
 
         public void openForReading(String datenquelle) throws IOException;
 
-        //public void openForWriting(String datenquelle) throws IOException;
+        public void openForWriting(String datenquelle) throws IOException;
 
         public boolean close();
 
@@ -24,7 +24,7 @@ public interface PersistenceManager {
          *
          * @return Artikel-Objekt, wenn Einlesen erfolgreich, false null
          */
-        public Artikel ladeArtikel(String datei) throws IOException, ClassNotFoundException;
+        public Artikel ladeArtikel() throws IOException, ClassNotFoundException;
 
         /**
          * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
@@ -32,7 +32,7 @@ public interface PersistenceManager {
          * @param a Artikel-Objekt, das gespeichert werden soll
          * @return true, wenn Schreibvorgang erfolgreich, false sonst
          */
-        public boolean speichereArtikel(Artikel a, String datei) throws IOException;
+        public boolean speichereArtikel(Artikel a) throws IOException;
 
 	/*
 	 *  Wenn später mal eine Kundenverwaltung ergänzt wird:

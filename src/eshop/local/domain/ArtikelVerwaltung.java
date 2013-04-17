@@ -73,21 +73,27 @@ public class ArtikelVerwaltung {
         */
 
         Artikel einArtikel;
+        try {
+
 
         pm.openForReading(datei);
 
         do {
             // Artikel-Objekt einlesen
-            einArtikel = pm.ladeArtikel(datei);
+            einArtikel = pm.ladeArtikel();
             if (einArtikel != null) {
 
                 // Artikel einfügen
                 artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
+
             }
 
         } while (einArtikel != null);
 
         pm.close();
+        } catch (IOException e) {
+            System.out.println("Der Datenbestand ist leer");
+        }
     }
 
 
@@ -100,20 +106,20 @@ public class ArtikelVerwaltung {
     public void schreibeDaten(String datei) throws IOException {
 
         // PersistenzManager für Schreibvorgänge öffnen
-        //pm.openForWriting(datei);
+        pm.openForWriting(datei);
 
         // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Textdatei schreiben
         if (!artikelBestandNr.isEmpty()) {
             Iterator iter = artikelBestandNr.values().iterator();
             while (iter.hasNext()) {
                 Artikel a = (Artikel) iter.next();
-                pm.speichereArtikel(a, datei);
+                pm.speichereArtikel(a);
             }
         }
 
 
-        // Persistenz-Schnittstelle wieder schließen
-        //pm.close();
+        //Persistenz-Schnittstelle wieder schließen
+        pm.close();
     }
 
     /**

@@ -18,24 +18,41 @@ public class FilePersistenceManager implements PersistenceManager {
     //private BufferedReader reader = null;
     private PrintWriter writer = null;
 
+    private ObjectOutputStream oos = null;
     private ObjectInputStream ois = null;
 
 
     public void openForReading(String datei) throws IOException {
         // reader = new BufferedReader(new FileReader(datei));
 
-        ois = new ObjectInputStream(new FileInputStream("EShop_Artikel.ser"));
+           ois = new ObjectInputStream(new FileInputStream(datei));
+
+
 
     }
 
-    /*
+
     public void openForWriting(String datei) throws IOException {
-        writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
+        // writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
+
+        oos = new ObjectOutputStream(new FileOutputStream(datei));
+
     }
-    */
+
     public boolean close() {
         if (writer != null)
             writer.close();
+
+        if (oos != null) {
+            try {
+                oos.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+
+                return false;
+            }
+        }
 
         if (ois != null) {
             try {
@@ -55,7 +72,7 @@ public class FilePersistenceManager implements PersistenceManager {
     /**
      * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
      */
-    public Artikel ladeArtikel(String datei) throws IOException, ClassNotFoundException {
+    public Artikel ladeArtikel() throws IOException, ClassNotFoundException {
 
             /*
             // Name einlesen
@@ -119,7 +136,7 @@ public class FilePersistenceManager implements PersistenceManager {
      * @param a Artikel-Objekt, das gespeichert werden soll
      * @return true, wenn Schreibvorgang erfolgreich, false sonst
      */
-    public boolean speichereArtikel(Artikel a, String datei) throws IOException {
+    public boolean speichereArtikel(Artikel a) throws IOException {
         // Titel, Nummer und Verfügbarkeit schreiben
 
             /*
@@ -131,13 +148,14 @@ public class FilePersistenceManager implements PersistenceManager {
             */
 
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("EShop_Artikel.ser"));
+
             oos.writeObject(a);
-            oos.close();
+            return true;
         } catch (IOException e) {
+            return false;
         }
 
-        return true;
+
     }
 
 	/*
