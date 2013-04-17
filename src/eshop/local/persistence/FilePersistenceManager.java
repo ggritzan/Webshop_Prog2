@@ -21,37 +21,35 @@ public class FilePersistenceManager implements PersistenceManager {
     private ObjectInputStream ois = null;
 
 
+    public void openForReading(String datei) throws IOException {
+        // reader = new BufferedReader(new FileReader(datei));
 
+        ois = new ObjectInputStream(new FileInputStream("EShop_Artikel.ser"));
 
-        public void openForReading(String datei) throws IOException {
-            // reader = new BufferedReader(new FileReader(datei));
+    }
 
-            ois = new ObjectInputStream(new FileInputStream("EShop_Artikel.ser"));
+    /*
+    public void openForWriting(String datei) throws IOException {
+        writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
+    }
+    */
+    public boolean close() {
+        if (writer != null)
+            writer.close();
 
-        }
+        if (ois != null) {
+            try {
+                ois.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
 
-        /*
-        public void openForWriting(String datei) throws IOException {
-            writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
-        }
-        */
-        public boolean close() {
-            if (writer != null)
-                writer.close();
-
-            if (ois != null) {
-                try {
-                    ois.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-
-                    return false;
-                }
+                return false;
             }
-
-            return true;
         }
+
+        return true;
+    }
 
 
     /**
@@ -109,16 +107,10 @@ public class FilePersistenceManager implements PersistenceManager {
             */
 
 
-
         Artikel artikel = liesObjekt(ois);
 
-        return  artikel;
+        return artikel;
     }
-
-
-
-
-
 
 
     /**
@@ -168,16 +160,18 @@ public class FilePersistenceManager implements PersistenceManager {
 	 */
 
     private Artikel liesObjekt(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        if (ois != null)
-            Artikel a = new Artikel((Artikel) ois.readObject()) ;
+        try {
+
+            Artikel a = new Artikel((Artikel) ois.readObject());
 
 
             return a;
-        else
+        } catch (EOFException exc) {
             return null;
+        }
+
+
     }
 
 
 }
-
-
