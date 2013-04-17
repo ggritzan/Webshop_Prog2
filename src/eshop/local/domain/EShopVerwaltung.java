@@ -34,12 +34,12 @@ public class EShopVerwaltung {
      * @param datei
      * @throws IOException, z.B. wenn eine der Dateien nicht existiert.
      */
-    public EShopVerwaltung(String datei) throws IOException {
+    public EShopVerwaltung(String datei) throws IOException, ClassNotFoundException {
 
         this.datei = datei;
         // Artikelbestand aus Datei einlesen
         meineArtikel = new ArtikelVerwaltung();
-        meineArtikel.liesDaten(datei + "_A.txt");
+        meineArtikel.liesDaten(datei + "_Artikel.ser");
         // Kundenkartei aus Datei einlesen
         // meineKunden = new KundenVerwaltung();
         // meineKunden.liesDaten(datei+"_K.txt");

@@ -9,9 +9,11 @@
 package eshop.local.valueobjects;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Artikel {
+public class Artikel implements Serializable {
 
+    private static final long serialVersionUID = 2109392536657810497L;
     // Attribute zur Beschreibung eines Artikels
     private String name;
     private String beschreibung;
@@ -38,7 +40,17 @@ public class Artikel {
             this.preis = preis;
             this.nummer = nummer;
             this.zaehler ++;
-            this.bestand = 0;
+            this.bestand = bestand;
+        }
+
+        // Konstruktor für das serial einlesen von Artikeln
+        public Artikel(Artikel artikel) {
+            this.name = artikel.getName();
+            this.beschreibung = artikel.getBeschreibung();
+            this.preis = artikel.getPreis();
+            this.nummer = artikel.getNummer();
+            this.zaehler ++;
+            this.bestand = artikel.getBestand();
         }
 
     // Methoden

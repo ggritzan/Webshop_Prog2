@@ -1,11 +1,8 @@
 package eshop.local.persistence;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.io.*;
+
+import java.util.Vector;
 
 import eshop.local.valueobjects.Artikel;
 
@@ -18,24 +15,33 @@ import eshop.local.valueobjects.Artikel;
  */
 public class FilePersistenceManager implements PersistenceManager {
 
-        private BufferedReader reader = null;
-        private PrintWriter writer = null;
+    //private BufferedReader reader = null;
+    private PrintWriter writer = null;
 
-        public void openForReading(String datei) throws FileNotFoundException {
-            reader = new BufferedReader(new FileReader(datei));
+    private ObjectInputStream ois = null;
+
+
+
+
+        public void openForReading(String datei) throws IOException {
+            // reader = new BufferedReader(new FileReader(datei));
+
+            ois = new ObjectInputStream(new FileInputStream("EShop_Artikel.ser"));
+
         }
 
+        /*
         public void openForWriting(String datei) throws IOException {
             writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
         }
-
+        */
         public boolean close() {
             if (writer != null)
                 writer.close();
 
-            if (reader != null) {
+            if (ois != null) {
                 try {
-                    reader.close();
+                    ois.close();
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -47,13 +53,13 @@ public class FilePersistenceManager implements PersistenceManager {
             return true;
         }
 
-        /**
-         * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
-         *
-         *
-         */
-        public Artikel ladeArtikel() throws IOException {
 
+    /**
+     * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
+     */
+    public Artikel ladeArtikel(String datei) throws IOException, ClassNotFoundException {
+
+            /*
             // Name einlesen
             String name = liesZeile();
             if (name == null) {
@@ -95,33 +101,55 @@ public class FilePersistenceManager implements PersistenceManager {
             }
 
 
+
+
+
             // neues Buch-Objekt anlegen und zurückgeben
             return new Artikel(name, beschreibung, nummer, preis, bestand);
-        }
+            */
+
+
+
+        Artikel artikel = liesObjekt(ois);
+
+        return  artikel;
+    }
 
 
 
 
 
-        /**
-         * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
-         *
-         * @param a Artikel-Objekt, das gespeichert werden soll
-         * @return true, wenn Schreibvorgang erfolgreich, false sonst
-         */
-        public boolean speichereArtikel(Artikel a) throws IOException {
-            // Titel, Nummer und Verfügbarkeit schreiben
+
+
+    /**
+     * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
+     *
+     * @param a Artikel-Objekt, das gespeichert werden soll
+     * @return true, wenn Schreibvorgang erfolgreich, false sonst
+     */
+    public boolean speichereArtikel(Artikel a, String datei) throws IOException {
+        // Titel, Nummer und Verfügbarkeit schreiben
+
+            /*
             schreibeZeile(a.getName());
             schreibeZeile(a.getBeschreibung());
             schreibeZeile(Integer.valueOf(a.getNummer()).toString());
             schreibeZeile(Double.valueOf(a.getPreis()).toString());
             schreibeZeile(Integer.valueOf(a.getBestand()).toString());
+            */
 
-            return true;
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("EShop_Artikel.ser"));
+            oos.writeObject(a);
+            oos.close();
+        } catch (IOException e) {
         }
 
+        return true;
+    }
+
 	/*
-	 *  Wenn später mal eine Kundenverwaltung ergänzt wird:
+     *  Wenn später mal eine Kundenverwaltung ergänzt wird:
 
 	public Kunde ladeKunde() throws IOException {
 		// TODO: Implementieren
@@ -136,20 +164,20 @@ public class FilePersistenceManager implements PersistenceManager {
 	*/
 
 	/*
-	 * Private Hilfsmethoden
+     * Private Hilfsmethoden
 	 */
 
-        private String liesZeile() throws IOException {
-            if (reader != null)
-                return reader.readLine();
-            else
-                return "";
-        }
+    private Artikel liesObjekt(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        if (ois != null)
+            Artikel a = new Artikel((Artikel) ois.readObject()) ;
 
-        private void schreibeZeile(String daten) {
-            if (writer != null)
-                writer.println(daten);
-        }
+
+            return a;
+        else
+            return null;
     }
+
+
+}
 
 

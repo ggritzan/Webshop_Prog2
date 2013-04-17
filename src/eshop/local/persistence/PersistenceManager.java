@@ -1,5 +1,7 @@
 package eshop.local.persistence;
 import java.io.IOException;
+import java.util.Iterator;
+
 import eshop.local.valueobjects.Artikel;
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +15,7 @@ public interface PersistenceManager {
 
         public void openForReading(String datenquelle) throws IOException;
 
-        public void openForWriting(String datenquelle) throws IOException;
+        //public void openForWriting(String datenquelle) throws IOException;
 
         public boolean close();
 
@@ -22,7 +24,7 @@ public interface PersistenceManager {
          *
          * @return Artikel-Objekt, wenn Einlesen erfolgreich, false null
          */
-        public Artikel ladeArtikel() throws IOException;
+        public Artikel ladeArtikel(String datei) throws IOException, ClassNotFoundException;
 
         /**
          * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
@@ -30,7 +32,7 @@ public interface PersistenceManager {
          * @param a Artikel-Objekt, das gespeichert werden soll
          * @return true, wenn Schreibvorgang erfolgreich, false sonst
          */
-        public boolean speichereArtikel(Artikel a) throws IOException;
+        public boolean speichereArtikel(Artikel a, String datei) throws IOException;
 
 	/*
 	 *  Wenn später mal eine Kundenverwaltung ergänzt wird:

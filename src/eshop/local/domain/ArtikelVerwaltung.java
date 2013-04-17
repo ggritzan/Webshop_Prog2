@@ -50,7 +50,8 @@ public class ArtikelVerwaltung {
      * @param datei Datei, die den einzulesenden Artikelbestand enthaelt
      * @throws IOException
      */
-    public void liesDaten(String datei) throws IOException {
+    public void liesDaten(String datei) throws IOException, ClassNotFoundException {
+        /*
         // PersistenzManager für Lesevorgänge öffnen
         pm.openForReading(datei);
 
@@ -69,7 +70,26 @@ public class ArtikelVerwaltung {
 
         // Persistenz-Schnittstelle wieder schließen
         pm.close();
+        */
+
+        Artikel einArtikel;
+
+        pm.openForReading(datei);
+
+        do {
+            // Artikel-Objekt einlesen
+            einArtikel = pm.ladeArtikel(datei);
+            if (einArtikel != null) {
+
+                // Artikel einfügen
+                artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
+            }
+
+        } while (einArtikel != null);
+
+        pm.close();
     }
+
 
     /**
      * Methode zum Schreiben der Artikeldaten in eine Datei.
@@ -80,20 +100,20 @@ public class ArtikelVerwaltung {
     public void schreibeDaten(String datei) throws IOException {
 
         // PersistenzManager für Schreibvorgänge öffnen
-        pm.openForWriting(datei);
+        //pm.openForWriting(datei);
 
         // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Textdatei schreiben
         if (!artikelBestandNr.isEmpty()) {
             Iterator iter = artikelBestandNr.values().iterator();
             while (iter.hasNext()) {
                 Artikel a = (Artikel) iter.next();
-                pm.speichereArtikel(a);
+                pm.speichereArtikel(a, datei);
             }
         }
 
 
         // Persistenz-Schnittstelle wieder schließen
-        pm.close();
+        //pm.close();
     }
 
     /**

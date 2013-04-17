@@ -26,7 +26,7 @@ public class EshopClientCUIGG {
     private BufferedReader in;
 
 
-    public EshopClientCUIGG(String datei) throws IOException {
+    public EshopClientCUIGG(String datei) throws IOException, ClassNotFoundException {
 
         // erzeug eine neue Artikelverwaltung für den eShop
         eShop = new ArtikelVerwaltung();
@@ -128,7 +128,7 @@ public class EshopClientCUIGG {
 
 
     // Main
-    public static void main (String[] args)   {
+    public static void main (String[] args) throws ClassNotFoundException {
 
         EshopClientCUIGG cui;
             try {
