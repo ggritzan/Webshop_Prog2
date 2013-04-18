@@ -1,7 +1,6 @@
 package eshop.local.persistence;
 
 import java.io.*;
-
 import java.util.Vector;
 
 import eshop.local.valueobjects.Artikel;
@@ -15,31 +14,42 @@ import eshop.local.valueobjects.Artikel;
  */
 public class FilePersistenceManager implements PersistenceManager {
 
-    //private BufferedReader reader = null;
-    private PrintWriter writer = null;
 
+    private PrintWriter writer = null;
     private ObjectOutputStream oos = null;
     private ObjectInputStream ois = null;
 
+// Methoden
 
+    /**
+     * Methode oeffnet einen FileInputStream.
+     *
+     * @param datei Datei, welche die eizulesenden Daten enthält.
+     * @throws IOException
+     */
     public void openForReading(String datei) throws IOException {
-        // reader = new BufferedReader(new FileReader(datei));
 
-           ois = new ObjectInputStream(new FileInputStream(datei));
-
-
+        ois = new ObjectInputStream(new FileInputStream(datei));
 
     }
 
-
+    /**
+     * Methode oeffnet einen FileOutputStream.
+     *
+     * @param datei Datei, in welche die Daten geschrieben werden sollen.
+     * @throws IOException
+     */
     public void openForWriting(String datei) throws IOException {
-        // writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
 
         oos = new ObjectOutputStream(new FileOutputStream(datei));
 
     }
 
+    /**
+     * Methode schliest einen FileInputStream oder einen FileoutputStream.
+     */
     public boolean close() {
+
         if (writer != null)
             writer.close();
 
@@ -71,58 +81,12 @@ public class FilePersistenceManager implements PersistenceManager {
 
     /**
      * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
+     *
+     * @return Artikel
+     * @throws IOException,ClassNotFoundException
+     *
      */
     public Artikel ladeArtikel() throws IOException, ClassNotFoundException {
-
-            /*
-            // Name einlesen
-            String name = liesZeile();
-            if (name == null) {
-                // keine Daten mehr vorhanden
-                return null;
-            }
-            // Beschreibung einlesen
-            String beschreibung  = liesZeile();
-            if (beschreibung == null) {
-                // keine Daten mehr vorhanden
-                return null;
-            }
-
-            // Nummer einlesen
-            String nummerString = liesZeile();
-            // String in int konvertieren
-            int nummer = Integer.parseInt(nummerString);
-            if (nummerString == null) {
-                // keine Daten mehr vorhanden
-                return null;
-            }
-
-            // Preis einlesen
-            String preisString  = liesZeile();
-            // String in double konvertieren
-            double preis = Double.parseDouble(preisString);
-            if (preisString == null) {
-                // keine Daten mehr vorhanden
-                return null;
-            }
-
-            // Bestand einlesen
-            String bestandString  = liesZeile();
-            // String in int konvertieren
-            int bestand = Integer.parseInt(bestandString);
-            if (bestandString == null) {
-                // keine Daten mehr vorhanden
-                return null;
-            }
-
-
-
-
-
-            // neues Buch-Objekt anlegen und zurückgeben
-            return new Artikel(name, beschreibung, nummer, preis, bestand);
-            */
-
 
         Artikel artikel = liesObjekt(ois);
 
@@ -131,60 +95,46 @@ public class FilePersistenceManager implements PersistenceManager {
 
 
     /**
-     * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
+     * Methode zum Speichern der Artikeldaten in eine externe Datenquelle.
      *
      * @param a Artikel-Objekt, das gespeichert werden soll
-     * @return true, wenn Schreibvorgang erfolgreich, false sonst
+     * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException
      */
     public boolean speichereArtikel(Artikel a) throws IOException {
-        // Titel, Nummer und Verfügbarkeit schreiben
-
-            /*
-            schreibeZeile(a.getName());
-            schreibeZeile(a.getBeschreibung());
-            schreibeZeile(Integer.valueOf(a.getNummer()).toString());
-            schreibeZeile(Double.valueOf(a.getPreis()).toString());
-            schreibeZeile(Integer.valueOf(a.getBestand()).toString());
-            */
 
         try {
 
             oos.writeObject(a);
+
             return true;
+
         } catch (IOException e) {
+
             return false;
         }
 
 
     }
 
-	/*
-     *  Wenn später mal eine Kundenverwaltung ergänzt wird:
-
-	public Kunde ladeKunde() throws IOException {
-		// TODO: Implementieren
-		return null;
-	}
-
-	public boolean speichereKunde(Kunde k) throws IOException {
-		// TODO: Implementieren
-		return false;
-	}
-
-	*/
-
-	/*
-     * Private Hilfsmethoden
-	 */
-
+    /**
+     * Methode zum auslesen von Artikel Objekten aus einem uebergebenden ObjectInputStream.
+     *
+     * @param ois ObjectInputStream, das gespeichert werden soll
+     * @return Artikel, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException,ClassNotFoundException
+     */
     private Artikel liesObjekt(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+
         try {
 
             Artikel a = new Artikel((Artikel) ois.readObject());
 
 
             return a;
+
         } catch (EOFException exc) {
+
             return null;
         }
 

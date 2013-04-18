@@ -28,11 +28,12 @@ public class EShopVerwaltung {
 
     /**
      * Namensmuster für Dateien:
-     * datei+"_A.txt" ist die Datei der Artikel
-     * datei+"_K.txt" ist die Datei der Kunden
+     * datei+"_Artikel.ser" ist die Datei der Artikel
+     * datei+"_Kunden.ser" ist die Datei der Kunden
      *
      * @param datei
-     * @throws IOException, z.B. wenn eine der Dateien nicht existiert.
+     * @throws IOException,ClassNotFoundException z.B. wenn eine der Dateien nicht existiert.
+     * @return Vector
      */
     public EShopVerwaltung(String datei) throws IOException, ClassNotFoundException {
 
@@ -42,8 +43,8 @@ public class EShopVerwaltung {
         meineArtikel.liesDaten(datei + "_Artikel.ser");
         // Kundenkartei aus Datei einlesen
         // meineKunden = new KundenVerwaltung();
-        // meineKunden.liesDaten(datei+"_K.txt");
-        // meineKunden.schreibeDaten(datei+"_K.txt");
+        // meineKunden.liesDaten(datei+"_Kunden.ser");
+
     }
 
 // Methoden
@@ -51,7 +52,7 @@ public class EShopVerwaltung {
     /**
      * Methode, die eine Liste aller im Bestand befindlichen Artikel zurückgibt Aufgabe wird an die Artikelverwaltung delegiert
      *
-     * @return Liste aller Artikel im Bestand des EShops
+     * @return Vector Liste aller Artikel im Bestand des EShops als Vector
      */
     public Vector gibAlleArtikel() {
         // delegiert an die Artikelverwaltung
@@ -62,7 +63,7 @@ public class EShopVerwaltung {
      * Methode zum Suchen von Artikel anhand des Namens
      *
      * @param name Name des gesuchten Artikels
-     * @return Rückgabe eines Vectors mit dem gefundenen Artikel
+     * @return Vector Rückgabe eines Vectors mit dem gefundenen Artikel
      */
     public Vector sucheNachName(String name) {
 
@@ -73,7 +74,7 @@ public class EShopVerwaltung {
      * Methode zum ändern des Bestands eines Artikels
      *
      * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
-     * @return Boolean
+     * @return boolean
      */
     public boolean setBestand(int artNr, int wert) {
         return meineArtikel.setBestand(artNr, wert);
@@ -84,7 +85,7 @@ public class EShopVerwaltung {
      *
      * @param name,beschreibung,preis         Name des Artikels, Beschreibung des Artikels, Preis des Artikels
      *
-     * @return true, wenn Einfügen erfolgreich, false (wenn Artikel schon vorhanden ist)
+     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
     public boolean fuegeArtikelEin(String name, String beschreibung, double preis) {
         return meineArtikel.artikelHinzufuegen(name, beschreibung, preis);
@@ -98,7 +99,7 @@ public class EShopVerwaltung {
      */
     public void schreibeArtikel() throws IOException {
 
-        meineArtikel.schreibeDaten(datei + "_A.txt");
+        meineArtikel.schreibeDaten(datei + "_Artikel.ser");
     }
 
 }

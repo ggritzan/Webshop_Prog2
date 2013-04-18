@@ -33,6 +33,8 @@ public class Artikel implements Serializable {
             this.bestand = 0;
          }
 
+
+        /*
         // Konstruktor für das Artikeleinlesen
         public Artikel(String name, String beschreibung, int nummer, double preis, int bestand ) {
             this.name = name;
@@ -42,6 +44,7 @@ public class Artikel implements Serializable {
             this.zaehler ++;
             this.bestand = bestand;
         }
+        */
 
         // Konstruktor für das serial einlesen von Artikeln
         public Artikel(Artikel artikel) {

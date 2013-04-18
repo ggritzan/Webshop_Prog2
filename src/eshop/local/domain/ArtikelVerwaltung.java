@@ -48,54 +48,37 @@ public class ArtikelVerwaltung {
      * Methode zum Einlesen der Artikeldaten aus einer Datei.
      *
      * @param datei Datei, die den einzulesenden Artikelbestand enthaelt
-     * @throws IOException
+     * @throws IOException,ClassNotFoundException
+     *
      */
     public void liesDaten(String datei) throws IOException, ClassNotFoundException {
-        /*
-        // PersistenzManager für Lesevorgänge öffnen
-        pm.openForReading(datei);
 
+        // Erstellung eines Artikel Objekts
         Artikel einArtikel;
 
-        do {
-            // Artikel-Objekt einlesen
-            einArtikel = pm.ladeArtikel();
-            if (einArtikel != null) {
-
-                // Artikel einfügen
-                artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
-            }
-
-        } while (einArtikel != null);
-
-        // Persistenz-Schnittstelle wieder schließen
-        pm.close();
-        */
-
-        Artikel einArtikel;
         try {
 
+            // PersistenzManager für Lesevorgänge wird geöffnet
+            pm.openForReading(datei);
 
-        pm.openForReading(datei);
+            do {
+                // Artikel-Objekt einlesen
+                einArtikel = pm.ladeArtikel();
+                if (einArtikel != null) {
 
-        do {
-            // Artikel-Objekt einlesen
-            einArtikel = pm.ladeArtikel();
-            if (einArtikel != null) {
+                    // Artikel einfügen
+                    artikelHinzufuegen(einArtikel);
 
-                // Artikel einfügen
-                artikelHinzufuegen(einArtikel.getName(), einArtikel.getBeschreibung(), einArtikel.getNummer(), einArtikel.getPreis(), einArtikel.getBestand());
+                }
 
-            }
+            } while (einArtikel != null);
 
-        } while (einArtikel != null);
-
-        pm.close();
+            // PersistenzManager für Lesevorgänge wird wieder geschlossen
+            pm.close();
         } catch (IOException e) {
             System.out.println("Der Datenbestand ist leer");
         }
     }
-
 
     /**
      * Methode zum Schreiben der Artikeldaten in eine Datei.
@@ -117,13 +100,12 @@ public class ArtikelVerwaltung {
             }
         }
 
-
         //Persistenz-Schnittstelle wieder schließen
         pm.close();
     }
 
     /**
-     * Methode zum hinzufuegen von Artikeln durch die CUI
+     * Methode zum hinzufuegen von Artikeln
      *
      * @param name,beschreibung,preis
      */
@@ -148,7 +130,6 @@ public class ArtikelVerwaltung {
      * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
      *
      * @param name,beschreibung,nummer,preis,bestand
-     *
      */
     public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
 
@@ -156,6 +137,20 @@ public class ArtikelVerwaltung {
         Artikel artikel = new Artikel(name, beschreibung, nummer, preis, bestand);
         artikelBestandNr.put(artikel.getNummer(), artikel);
         artikelBestandName.put(name, artikel.getNummer());
+
+    }
+
+    /**
+     * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
+     *
+     * @param artikel
+     */
+    public void artikelHinzufuegen(Artikel artikel) {
+
+        // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
+        Artikel a = new Artikel(artikel);
+        artikelBestandNr.put(a.getNummer(), a);
+        artikelBestandName.put(artikel.getName(), a.getNummer());
 
     }
 
