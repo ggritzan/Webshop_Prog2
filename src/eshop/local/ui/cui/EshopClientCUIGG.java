@@ -81,7 +81,7 @@ public class EshopClientCUIGG {
             if (ok)
                 System.out.println("Einfügen ok");
             else
-                System.out.println("Artikel ist bereits vorhanden !");
+                System.out.println("Der Artikel konnte leider nicht angelegt werden !");
 
 
         } else if (line.equals("b")) {
@@ -105,17 +105,17 @@ public class EshopClientCUIGG {
             if (ok)
                 System.out.println("Bestand wurde geändert !");
             else
-                System.out.println("Bestand konnte nicht geändert werden !");
+                System.out.println("Der Bestand konnte nicht geändert werden da ein Fehler aufgetreten ist !");
 
         } else if (line.equals("l")) {
 
             boolean ok = false;
             try {
-            System.out.println(eShopVerwaltung.gibAlleArtikel());
-            System.out.print("Artikelnummer: > ");
-            String aNr = liesEingabe();
-            int aNrInt = Integer.parseInt(aNr);
-            ok = eShopVerwaltung.loescheArtikel(aNrInt);
+                System.out.println(eShopVerwaltung.gibAlleArtikel());
+                System.out.print("Artikelnummer: > ");
+                String aNr = liesEingabe();
+                int aNrInt = Integer.parseInt(aNr);
+                ok = eShopVerwaltung.loescheArtikel(aNrInt);
             } catch (NumberFormatException e) {
 
             }
@@ -128,10 +128,14 @@ public class EshopClientCUIGG {
 
         } else if (line.equals("a")) {
             System.out.println(eShopVerwaltung.gibAlleArtikel());
+
         } else if (line.equals("f")) {
-            System.out.print("Artikelname  > ");
+
+            System.out.print("Artikelname:  > ");
             String titel = liesEingabe();
             System.out.println(eShopVerwaltung.sucheNachName(titel));
+
+
         } else if (line.equals("s")) {
             eShopVerwaltung.schreibeArtikel();
         }

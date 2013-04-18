@@ -131,26 +131,6 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
      *
-     * @param name
-     * @param beschreibung
-     * @param nummer
-     * @param preis
-     * @param bestand
-     */
-    public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
-
-        // rundet den Preis auf zwei Nachkommastellen
-
-        // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
-        Artikel artikel = new Artikel(name, beschreibung, nummer, preis, bestand);
-        artikelBestandNr.put(artikel.getNummer(), artikel);
-        artikelBestandName.put(name, artikel.getNummer());
-
-    }
-
-    /**
-     * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
-     *
      * @param artikel
      */
     public void artikelHinzufuegen(Artikel artikel) {
@@ -195,6 +175,7 @@ public class ArtikelVerwaltung {
 
         for (Artikel elem : artikelBestandNr.values())
             ergebnis.add(elem);
+
 
         return ergebnis;
 
