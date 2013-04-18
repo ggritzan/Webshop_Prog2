@@ -93,6 +93,18 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum loeschen eines  Artikels aus dem  Bestand.
+     *
+     * @param artNr         Nummer des Artikels des Artikel der geloescht werden soll.
+     *
+     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Artikel nicht gelöscht werden konnte)
+     */
+    public boolean loescheArtikel(int artNr) {
+        return meineArtikel.artikelLoeschen(artNr);
+
+    }
+
+    /**
      * Methode zum Speichern des Artikelbestands in einer Datei.
      *
      * @throws IOException

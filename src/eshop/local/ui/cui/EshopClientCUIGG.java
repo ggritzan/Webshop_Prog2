@@ -17,6 +17,7 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import eshop.local.domain.ArtikelVerwaltung;
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.valueobjects.Artikel;
+import sun.org.mozilla.javascript.internal.ast.IfStatement;
 
 
 public class EshopClientCUIGG {
@@ -39,6 +40,7 @@ public class EshopClientCUIGG {
     private void gibMenueAus() {
         System.out.print("Befehle: \n  Artikel hinzufuegen: 'h'");
         System.out.print("         \n  Bestand ändern: 'b'");
+        System.out.print("         \n  Artikel löschen: 'l");
         System.out.print("         \n  Artikel ausgeben:  'a'");
         System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
@@ -70,9 +72,7 @@ public class EshopClientCUIGG {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Artikel ist bereits vorhanden !");
-        }
-
-        else if (line.equals("b")) {
+        } else if (line.equals("b")) {
             System.out.println(eShopVerwaltung.gibAlleArtikel());
             System.out.print("Artikelnummer: > ");
             String aNr = liesEingabe();
@@ -80,28 +80,39 @@ public class EshopClientCUIGG {
             System.out.print("Bestand > ");
             String aBestand = liesEingabe();
             int aBestandInt = Integer.parseInt(aBestand);
-            boolean ok = eShopVerwaltung.setBestand(aNrInt,aBestandInt);
+            boolean ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
 
 
             if (ok)
                 System.out.println("Bestand wurde geändert !");
             else
                 System.out.println("Bestand konnte nicht geändert werden !");
-        }
 
-        else if (line.equals("a")) {
-           System.out.println(eShopVerwaltung.gibAlleArtikel());
-        }
+        } else if (line.equals("l")) {
+
+            boolean ok = false;
+            System.out.println(eShopVerwaltung.gibAlleArtikel());
+            System.out.print("Artikelnummer: > ");
+            String aNr = liesEingabe();
+            int aNrInt = Integer.parseInt(aNr);
 
 
-        else if (line.equals("f")) {
+            ok = eShopVerwaltung.loescheArtikel(aNrInt);
+
+
+            if (ok)
+                System.out.println("Artikel wurde geloescht !");
+            else
+                System.out.println("Beim löschen des Artikels ist ein Fehler aufgetreten !");
+
+
+        } else if (line.equals("a")) {
+            System.out.println(eShopVerwaltung.gibAlleArtikel());
+        } else if (line.equals("f")) {
             System.out.print("Artikelname  > ");
             String titel = liesEingabe();
             System.out.println(eShopVerwaltung.sucheNachName(titel));
-        }
-
-
-        else if (line.equals("s")) {
+        } else if (line.equals("s")) {
             eShopVerwaltung.schreibeArtikel();
         }
 
@@ -122,27 +133,24 @@ public class EshopClientCUIGG {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-         } while (!input.equals("q"));
+        } while (!input.equals("q"));
     }
 
 
-
     // Main
-    public static void main (String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         EshopClientCUIGG cui;
-            try {
-                cui = new EshopClientCUIGG("EShop");
-                 cui.run();
-                } catch (IOException e) {
-                     e.printStackTrace();
-            }
+        try {
+            cui = new EshopClientCUIGG("EShop");
+            cui.run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-     }
-
-
+    }
 
 
- }
+}
 
 

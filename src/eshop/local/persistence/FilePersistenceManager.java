@@ -120,8 +120,8 @@ public class FilePersistenceManager implements PersistenceManager {
     /**
      * Methode zum auslesen von Artikel Objekten aus einem uebergebenden ObjectInputStream.
      *
-     * @param ois ObjectInputStream, das gespeichert werden soll
-     * @return Artikel, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @param ois ObjectInputStream, aus dem das Objekt ausgelesen wird.
+     * @return Artikel, wenn sich noch ein Artikel Objekt im ObjectInputstream befindet.
      * @throws IOException,ClassNotFoundException
      */
     private Artikel liesObjekt(ObjectInputStream ois) throws IOException, ClassNotFoundException {

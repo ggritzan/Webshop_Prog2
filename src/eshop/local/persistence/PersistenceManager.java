@@ -13,9 +13,9 @@ import eshop.local.valueobjects.Artikel;
 public interface PersistenceManager {
 
 
-        public void openForReading(String datenquelle) throws IOException;
+        public void openForReading(String datei) throws IOException;
 
-        public void openForWriting(String datenquelle) throws IOException;
+        public void openForWriting(String datei) throws IOException;
 
         public boolean close();
 
@@ -34,13 +34,13 @@ public interface PersistenceManager {
          */
         public boolean speichereArtikel(Artikel a) throws IOException;
 
-	/*
-	 *  Wenn später mal eine Kundenverwaltung ergänzt wird:
+        /*
+         *  Wenn später mal eine Kundenverwaltung ergänzt wird:
 
-	public Kunde ladeKunde() throws IOException;
+        public Kunde ladeKunde() throws IOException;
 
-	public boolean speichereKunde(Kunde k) throws IOException;
+        public boolean speichereKunde(Kunde k) throws IOException;
 
-	*/
+        */
 }
 

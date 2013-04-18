@@ -13,7 +13,9 @@ import java.io.Serializable;
 
 public class Artikel implements Serializable {
 
+    // serialVersionUID um ein Artikel Objekt auch nach einer Änderung des Artikel Objekts wieder einlesen zu können
     private static final long serialVersionUID = 2109392536657810497L;
+
     // Attribute zur Beschreibung eines Artikels
     private String name;
     private String beschreibung;
@@ -22,7 +24,8 @@ public class Artikel implements Serializable {
     private double preis;
     private int bestand = 0;
 
-    // Konstruktor
+// Konstruktor
+
         // Konstruktor für neue Artikel
         public Artikel(String name, String beschreibung, double preis ) {
             this.name = name;
@@ -33,44 +36,33 @@ public class Artikel implements Serializable {
             this.bestand = 0;
          }
 
-
-        /*
-        // Konstruktor für das Artikeleinlesen
-        public Artikel(String name, String beschreibung, int nummer, double preis, int bestand ) {
-            this.name = name;
-            this.beschreibung = beschreibung;
-            this.preis = preis;
-            this.nummer = nummer;
-            this.zaehler ++;
-            this.bestand = bestand;
-        }
-        */
-
-        // Konstruktor für das serial einlesen von Artikeln
+        // Konstruktor für das einlesen von Artikeln
         public Artikel(Artikel artikel) {
             this.name = artikel.getName();
             this.beschreibung = artikel.getBeschreibung();
             this.preis = artikel.getPreis();
             this.nummer = artikel.getNummer();
-            this.zaehler ++;
             this.bestand = artikel.getBestand();
+            this.zaehler ++;
+
         }
 
-    // Methoden
+// Methoden
 
-
-
-
-
-        // überschreibt die Standart to String Methode
+        /**
+         * Standard-Methode von Object überschrieben.
+         * Methode wird immer automatisch aufgerufen, wenn ein Artikel-Objekt als String
+         * benutzt wird (z.B. in println(buch);)
+         *
+         * @see java.lang.Object#toString()
+         */
         public String toString() {
             String string = new String();
             string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() + "\t Bestand: " + getBestand() + "\n" ;
             return string;
         }
 
-
-    // Setter
+// Setter
 
         public void setName(String name) {
             this.name = name;
@@ -90,35 +82,33 @@ public class Artikel implements Serializable {
         }
 
 
+// Getter
 
-    // Getter
-
-        // gibt den Name des Artikels zurück
+        // gibt den Name des Artikels zurueck
         public String getName() {
             return this.name;
         }
 
-        // gibt die Beschreibung des Artikels zurück
+        // gibt die Beschreibung des Artikels zurueck
         public String getBeschreibung() {
             return this.beschreibung;
         }
 
-        // gibt die Artikelnummer zurück
+        // gibt die Artikelnummer zurueck
         public int getNummer() {
             return this.nummer;
         }
 
-        // gibt den Preis des Artikels zurück
+        // gibt den Preis des Artikels zurueck
         public double getPreis() {
             return this.preis;
         }
 
 
-        // gibt den Bestand des Artikels zurück
+        // gibt den Bestand des Artikels zurueck
         public int getBestand() {
             return this.bestand;
         }
-
 
 
 }

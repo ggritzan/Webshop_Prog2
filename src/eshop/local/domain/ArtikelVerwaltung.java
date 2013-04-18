@@ -155,6 +155,30 @@ public class ArtikelVerwaltung {
     }
 
     /**
+     * Methode zum löschen von Artikel
+     *
+     * @param ArtNr
+     * @return boolean
+     */
+    public boolean artikelLoeschen(int artNr) {
+
+        if (artikelBestandNr.containsKey(artNr)) {
+
+            Artikel a = artikelBestandNr.get(artNr);
+            artikelBestandNr.remove(artNr);
+            artikelBestandName.remove(a.getName());
+
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
+    /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Artikeln enthaelt
      */
     public Vector alleArtikelZurueckgeben() {
