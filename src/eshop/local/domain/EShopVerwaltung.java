@@ -3,7 +3,7 @@ package eshop.local.domain;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
+//import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
 
 import eshop.local.valueobjects.Artikel;
 

@@ -107,7 +107,9 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum hinzufuegen von Artikeln
      *
-     * @param name,beschreibung,preis
+     * @param name
+     * @param beschreibung
+     * @param preis
      */
     public boolean artikelHinzufuegen(String name, String beschreibung, double preis) {
 
@@ -129,9 +131,15 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
      *
-     * @param name,beschreibung,nummer,preis,bestand
+     * @param name
+     * @param beschreibung
+     * @param nummer
+     * @param preis
+     * @param bestand
      */
     public void artikelHinzufuegen(String name, String beschreibung, int nummer, double preis, int bestand) {
+
+        // rundet den Preis auf zwei Nachkommastellen
 
         // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
         Artikel artikel = new Artikel(name, beschreibung, nummer, preis, bestand);

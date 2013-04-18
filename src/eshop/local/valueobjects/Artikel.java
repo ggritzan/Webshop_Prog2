@@ -43,9 +43,13 @@ public class Artikel implements Serializable {
             this.preis = artikel.getPreis();
             this.nummer = artikel.getNummer();
             this.bestand = artikel.getBestand();
-            this.zaehler ++;
+            if(artikel.getNummer() >= zaehler){
+            this.zaehler = (artikel.getNummer() +1);
+            }
 
         }
+
+
 
 // Methoden
 

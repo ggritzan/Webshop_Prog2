@@ -50,37 +50,56 @@ public class EshopClientCUIGG {
     }
 
     private String liesEingabe() throws IOException {
-        // einlesen von Konsole
+        // einlesen von der Konsole
         return in.readLine();
     }
+
 
     private void verarbeiteEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
         if (line.equals("h")) {
             // lese die notwendigen Parameter, einzeln pro Zeile
-            System.out.print("Artikel Name > ");
-            String aName = liesEingabe();
-            System.out.print("Artikel Beschreibung > ");
-            String aBeschreibung = liesEingabe();
-            System.out.print("Artikel Preis  > ");
-            String aPreisEingabe = liesEingabe();
-            float aPreis = Float.parseFloat(aPreisEingabe);
-            boolean ok = eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
+            boolean ok = false;
+            try {
+                System.out.print("Artikel Name > ");
+                String aName = liesEingabe();
+                System.out.print("Artikel Beschreibung > ");
+                String aBeschreibung = liesEingabe();
+                System.out.print("Artikel Preis  > ");
+                String aPreisEingabe = liesEingabe();
+                double aPreis = Double.parseDouble(aPreisEingabe);
+
+
+                ok = eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
+
+            } catch (NumberFormatException e) {
+
+            }
+
 
             if (ok)
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Artikel ist bereits vorhanden !");
+
+
         } else if (line.equals("b")) {
-            System.out.println(eShopVerwaltung.gibAlleArtikel());
-            System.out.print("Artikelnummer: > ");
-            String aNr = liesEingabe();
-            int aNrInt = Integer.parseInt(aNr);
-            System.out.print("Bestand > ");
-            String aBestand = liesEingabe();
-            int aBestandInt = Integer.parseInt(aBestand);
-            boolean ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
+
+            boolean ok = false;
+            try {
+                System.out.println(eShopVerwaltung.gibAlleArtikel());
+                System.out.print("Artikelnummer: > ");
+                String aNr = liesEingabe();
+                int aNrInt = Integer.parseInt(aNr);
+                System.out.print("Bestand > ");
+                String aBestand = liesEingabe();
+                int aBestandInt = Integer.parseInt(aBestand);
+                ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
+
+            } catch (NumberFormatException e) {
+
+            }
 
 
             if (ok)
@@ -91,14 +110,15 @@ public class EshopClientCUIGG {
         } else if (line.equals("l")) {
 
             boolean ok = false;
+            try {
             System.out.println(eShopVerwaltung.gibAlleArtikel());
             System.out.print("Artikelnummer: > ");
             String aNr = liesEingabe();
             int aNrInt = Integer.parseInt(aNr);
-
-
             ok = eShopVerwaltung.loescheArtikel(aNrInt);
+            } catch (NumberFormatException e) {
 
+            }
 
             if (ok)
                 System.out.println("Artikel wurde geloescht !");
