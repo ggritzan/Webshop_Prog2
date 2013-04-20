@@ -15,10 +15,12 @@ public class Warenkorb {
     // Konstruktor
     // Methoden der Klasse Warenkorb
 
+    //Fügt einen Artikel an den Vektor an
     public void addArtikel(Artikel a){
         warenkorb.add(a);
     }
 
+    //Nimmt einen Artikel aus dem Vektor heraus
     public void remArtikel(Artikel a){
         warenkorb.remove(a);
     }

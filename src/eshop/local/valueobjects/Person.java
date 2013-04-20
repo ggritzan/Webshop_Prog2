@@ -12,20 +12,25 @@ public abstract class Person{
     // Attribute zur Beschreibung einer Person
     String vorname;
     String nachname;
+    String benutzername;
+    String passwort;
     String email;
     String telefon;
     Adresse adresse;
 
     // Konstruktor
-    public Person(String vorname, String nachname, String email, String telefon, Adresse adresse) {
+    public Person(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
         this.vorname = vorname;
         this.nachname = nachname;
+        this.benutzername = benutzername;
+        this.passwort = passwort;
         this.email = email;
         this.telefon = telefon;
         this.adresse = adresse;
     }
 
     // Methoden der Klasse Person
+
 
     // Setter
 
@@ -35,6 +40,14 @@ public abstract class Person{
 
     public void setNachname(String nachname){
         this.nachname = nachname;
+    }
+
+    public void setBenutzername(String benutzername){
+        this.benutzername = benutzername;
+    }
+
+    public void setPasswort(String passwort){
+        this.passwort = passwort;
     }
 
     public void setEmail(String email){
@@ -56,6 +69,14 @@ public abstract class Person{
 
     public String getNachname(){
         return nachname;
+    }
+
+    public String getBenutzername(){
+        return benutzername;
+    }
+
+    public String getPasswort(){
+        return passwort;
     }
 
     public String getEmail(){

@@ -16,39 +16,25 @@ import java.util.Iterator;
 import java.util.Vector;
 
 
-
-
-import eshop.local.valueobjects.Artikel;
-import eshop.local.valueobjects.Adresse;
-import eshop.local.valueobjects.Mitarbeiter;
-
-
+import eshop.local.valueobjects.*;
 
 
 public class eshopClientCUI {
 
     // Main
     public static void main (String[] args)   {
-            Artikel art1 = new Artikel("Maus",1,2.50);
-            System.out.print("Artiekl 1:  " + art1.getBezeichnung());
-
-            Adresse ar1 = new Adresse(2345, "Hans", "Rumsdibums", "Komikerweg", "27356", "Albernhausen", "0414183479", "HansRumsdibums@yahoo.de");
-
+            Artikel art1 = new Artikel("Maus","Eine ganz normale Maus",2.50);
+            System.out.print("Artikel 1:  " + art1.getBeschreibung());
             System.out.println("Bestand " + art1.getBestand());
-            Mitarbeiter m1 = new Mitarbeiter("Hans", 1);
+            Adresse ad1 = new Adresse("a","b","Straße","0315","Ort");
+            Mitarbeiter m1 = new Mitarbeiter("a","b","Test","test","abmail","0011223",ad1,1);
+            Warenkorb wk1 = new Warenkorb();
+            Kunde k1 = new Kunde("Peter","Nana","PNa","test",1,"mail","99999",ad1, wk1);
             m1.bestandErhoehen(art1, 5);
             System.out.println("Neuer Bestand " + art1.getBestand());
             System.out.println("Preis "+ art1.getPreis());
             m1.preisAendern(art1, 7.55);
-            System.out.println("Neuer Preis " + art1.getPreis());
-            Artikel art2 = m1.neuerArtikel("Tastertur",2,10.99,6);
-            System.out.println("Artikel 2: " + art2.getBezeichnung());
-            art2.printArtikel();
-
-
-        }
-
-
+    }
 
 
 }

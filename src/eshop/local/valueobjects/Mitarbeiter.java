@@ -13,14 +13,12 @@ public class Mitarbeiter extends Person {
     int mNr;
 
     // Konstruktor
-    public Mitarbeiter (String vorname, String nachname, String email, String telefon, Adresse adresse, int mNr) {
-        super(vorname, nachname, email, telefon, adresse);
+    public Mitarbeiter (String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, int mNr) {
+        super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.mNr = mNr;
     }
 
-    // Methoden der Klasse Mitarbeiter
-
-    //Erhoeht den Bestand des Artikels um den gewünschten Wert
+    //Setzt den Bestand des Artikels auf den gewünschten Wert
     public void bestandErhoehen(Artikel a, int wert)   {
         a.setBestand(wert);
     }
@@ -29,6 +27,8 @@ public class Mitarbeiter extends Person {
     public void preisAendern(Artikel a, double wert) {
         a.setPreis(wert);
     }
+
+    // Methoden der Klasse Mitarbeiter
 
     /* Nicht mehr funktionierende/benötigte Funkion?)
     public Artikel neuerArtikel(String bezeichnung, int nummer, double preis, int bestand) {
@@ -42,7 +42,6 @@ public class Mitarbeiter extends Person {
     public void setmNr(int mNr){
         this.mNr = mNr;
     }
-
 
     // Getter
 
