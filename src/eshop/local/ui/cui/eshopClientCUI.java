@@ -24,7 +24,7 @@ public class eshopClientCUI {
             Adresse ad1 = new Adresse("a","b","Straße","0315","Ort");
             Mitarbeiter m1 = new Mitarbeiter("a","b","Test","test","abmail","0011223",ad1);
             Warenkorb wk1 = new Warenkorb();
-            Kunde k1 = new Kunde("Peter","Nana","PNa","test","mail","99999",ad1, wk1);
+            Kunde k1 = new Kunde("Peter","Nana","PNa","test","mail","99989",ad1, wk1);
             m1.bestandErhoehen(art1, 5);
             System.out.println("Neuer Bestand " + art1.getBestand());
             System.out.println("Preis "+ art1.getPreis());
