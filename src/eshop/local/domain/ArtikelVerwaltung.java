@@ -145,7 +145,7 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum löschen von Artikel
      *
-     * @param ArtNr
+     * @param artNr
      * @return boolean
      */
     public boolean artikelLoeschen(int artNr) {
