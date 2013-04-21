@@ -7,7 +7,11 @@
  */
 package eshop.local.valueobjects;
 
-public class Mitarbeiter extends Person {
+import java.io.Serializable;
+
+public class Mitarbeiter extends Person implements Serializable {
+
+    private static final long serialVersionUID = 1169397538857810497L;
 
     // Attribute zur Beschreibung eines Mitarbeiters
     private int mNr;
@@ -18,6 +22,14 @@ public class Mitarbeiter extends Person {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.mNr = this.zaehler;
         this.zaehler ++;
+    }
+
+    // Konstruktor für das einlesen von Mitarbeitern
+    public Mitarbeiter(Mitarbeiter mitarbeiter) {
+        super(mitarbeiter);
+        if(mitarbeiter.getmNr() >= zaehler){
+            this.zaehler = (mitarbeiter.getmNr() +1);
+        }
     }
 
     //Setzt den Bestand des Artikels auf den gewünschten Wert

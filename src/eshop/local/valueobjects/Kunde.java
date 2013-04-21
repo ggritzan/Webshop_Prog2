@@ -14,9 +14,6 @@ public class Kunde extends Person implements Serializable {
     // serialVersionUID um ein Kunden Objekt auch nach einer Änderung des Kunden Objekts wieder einlesen zu können
     private static final long serialVersionUID = 360633788222335463L;
 
-
-
-
     // Attribute zur Beschreibung eines Kunden
     private int nummer;
     private Warenkorb wk;
@@ -30,15 +27,15 @@ public class Kunde extends Person implements Serializable {
         this.wk = wk;
     }
 
-    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon) {
-        super(vorname, nachname, benutzername, passwort, email, telefon);
+    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+        super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.nummer = this.zaehler;
         this.zaehler++;
 
     }
 
     public Kunde(Kunde kunde) {
-        super(kunde.getVorname(), kunde.getNachname(), kunde.getBenutzername(), kunde.getPasswort(), kunde.getEmail(), kunde.getTelefon());
+        super(kunde.getVorname(), kunde.getNachname(), kunde.getBenutzername(), kunde.getPasswort(), kunde.getEmail(), kunde.getTelefon(), kunde.getAdresse());
         this.nummer = kunde.getNummer();
         this.zaehler = (kunde.getNummer() +1);
 

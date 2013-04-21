@@ -7,11 +7,7 @@
  */
 package eshop.local.valueobjects;
 
-import java.io.Serializable;
-
-public abstract class Person implements Serializable {
-
-
+public abstract class Person{
 
     // Attribute zur Beschreibung einer Person
     private String vorname;
@@ -34,24 +30,14 @@ public abstract class Person implements Serializable {
         this.adresse = adresse;
     }
 
-    public Person(String vorname, String nachname, String benutzername, String passwort, String email, String telefon){
-        this.vorname = vorname;
-        this.nachname = nachname;
-        this.benutzername = benutzername;
-        this.passwort = passwort;
-        this.email = email;
-        this.telefon = telefon;
-
-    }
-
-    public Person(Person person){
-        this.vorname = person.getVorname();
-        this.nachname = person.getNachname();
-        this.benutzername = person.getBenutzername();
-        this.passwort = person.getPasswort();
-        this.email = person.getEmail();
-        this.telefon = person.getTelefon();
-
+    public Person(Person p) {
+        this.vorname = p.getVorname();
+        this.nachname = p.getNachname();
+        this.benutzername = p.getBenutzername();
+        this.passwort = p.getPasswort();
+        this.email = p.getEmail();
+        this.telefon = p.getTelefon();
+        this.adresse = p.getAdresse();
     }
 
     // Methoden der Klasse Person

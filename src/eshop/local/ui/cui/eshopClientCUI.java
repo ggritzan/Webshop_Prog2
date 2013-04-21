@@ -8,12 +8,7 @@
 
 package eshop.local.ui.cui;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.Iterator;
-import java.util.Vector;
+
 
 
 import eshop.local.valueobjects.*;
@@ -35,7 +30,7 @@ public class eshopClientCUI {
             System.out.println("Preis "+ art1.getPreis());
             m1.preisAendern(art1, 7.55);
             k1.inWarenkorbLegen(art1);
-            System.out.println(k1.getkNr());
+            System.out.println(k1.getNummer());
             System.out.println(m1.getmNr());
     }
 
