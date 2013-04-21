@@ -10,12 +10,14 @@ package eshop.local.valueobjects;
 public class Mitarbeiter extends Person {
 
     // Attribute zur Beschreibung eines Mitarbeiters
-    int mNr;
+    private int mNr;
+    private static int zaehler = 1000;
 
     // Konstruktor
-    public Mitarbeiter (String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, int mNr) {
+    public Mitarbeiter (String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
-        this.mNr = mNr;
+        this.mNr = this.zaehler;
+        this.zaehler ++;
     }
 
     //Setzt den Bestand des Artikels auf den gewünschten Wert

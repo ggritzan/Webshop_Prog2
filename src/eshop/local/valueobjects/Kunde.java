@@ -14,11 +14,13 @@ public class Kunde extends Person {
     // Attribute zur Beschreibung eines Kunden
     private int kNr;
     private Warenkorb wk;
+    private static int zaehler = 1000;
 
     // Konstruktor
-    public Kunde (String vorname, String nachname, String benutzername, String passwort, int kNr, String email, String telefon, Adresse adresse, Warenkorb wk) {
+    public Kunde (String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, Warenkorb wk) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
-        this.kNr = kNr;
+        this.kNr = this.zaehler;
+        this.zaehler  ++;
         this.wk = wk;
     }
 

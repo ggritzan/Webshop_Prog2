@@ -10,13 +10,14 @@ package eshop.local.valueobjects;
 public abstract class Person{
 
     // Attribute zur Beschreibung einer Person
-    String vorname;
-    String nachname;
-    String benutzername;
-    String passwort;
-    String email;
-    String telefon;
-    Adresse adresse;
+    private String vorname;
+    private String nachname;
+    private String benutzername;
+    private String passwort;
+    private String email;
+    private String telefon;
+    private Adresse adresse;
+
 
     // Konstruktor
     public Person(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
