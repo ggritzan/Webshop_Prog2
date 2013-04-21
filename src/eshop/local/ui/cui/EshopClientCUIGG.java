@@ -42,14 +42,34 @@ public class EshopClientCUIGG {
         in = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    private void gibMenueAus() {
+    private void gibmainMenue() {
+        System.out.print("Befehle: \n  Artikelmenue: 'a'");
+        System.out.print("         \n  Kundenmenue: 'k'");
+        System.out.println("         \n  Beenden:        'q'");
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
+    private void gibArtikelMenueAus() {
         System.out.print("Befehle: \n  Artikel hinzufuegen: 'h'");
         System.out.print("         \n  Bestand ändern: 'b'");
         System.out.print("         \n  Artikel löschen: 'l");
         System.out.print("         \n  Artikel ausgeben:  'a'");
         System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
-        System.out.println("         \n  Beenden:        'q'");
+        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
+
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
+    private void gibKundenMenueAus() {
+        System.out.print("Befehle: \n  Kunde hinzufuegen: 'h'");
+        System.out.print("         \n  Kunde löschen: 'l");
+        System.out.print("         \n  Kunden ausgeben:  'a'");
+        // System.out.print("         \n  Artikel suchen:  'f'");
+        System.out.print("         \n  Daten sichern:  's'");
+        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
     }
@@ -59,8 +79,27 @@ public class EshopClientCUIGG {
         return in.readLine();
     }
 
+    private char verarbeiteMainEingabe(String line) throws IOException {
 
-    private void verarbeiteEingabe(String line) throws IOException {
+        // Eingabe bearbeiten:
+        if (line.equals("a")) {
+
+            return 'a';
+
+        } else if (line.equals("k")) {
+
+            return 'k';
+
+        } else if (line.equals("s")) {
+            eShopVerwaltung.schreibeArtikel();
+            eShopVerwaltung.schreibeKunden();
+        }
+
+        return 'm';
+
+    }
+
+    private void verarbeiteArtikelEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
         if (line.equals("h")) {
@@ -154,19 +193,40 @@ public class EshopClientCUIGG {
 
         // Hauptschleife der Benutzungsschnittstelle
         do {
-            gibMenueAus();
+
             try {
+                gibmainMenue();
                 input = liesEingabe();
-                verarbeiteEingabe(input);
+                char var = verarbeiteMainEingabe(input);
+                if (var == 'a') {
+                    do {
+
+                        try {
+                            gibArtikelMenueAus();
+                            input = liesEingabe();
+                            verarbeiteArtikelEingabe(input);
+
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+
+
+                        }
+                    } while (!input.equals("m"));
+
+                }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+
+
             }
         } while (!input.equals("q"));
     }
 
 
-    // Main
+// Main
+
     public static void main(String[] args) throws ClassNotFoundException {
 
         EshopClientCUIGG cui;
