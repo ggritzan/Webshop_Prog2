@@ -76,6 +76,7 @@ public class KundenVerwaltung {
             pm.close();
         } catch (IOException e) {
             System.out.println("Fehler beim einlesen der Kundendaten !");
+            e.printStackTrace();
         }
     }
 
