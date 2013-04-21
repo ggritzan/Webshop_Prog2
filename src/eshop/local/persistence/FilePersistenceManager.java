@@ -107,7 +107,6 @@ public class FilePersistenceManager implements PersistenceManager {
         return kunde;
     }
 
-
     /**
      * Methode zum Speichern der Artikeldaten in eine externe Datenquelle.
      *

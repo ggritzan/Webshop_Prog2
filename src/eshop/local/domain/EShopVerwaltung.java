@@ -43,7 +43,7 @@ public class EShopVerwaltung {
         meineArtikel.liesDaten(datei + "_Artikel.ser");
         // Kundenkartei aus Datei einlesen
         meineKunden = new KundenVerwaltung();
-        meineKunden.liesDaten(datei+"_Kunden.ser");
+        meineKunden.liesDaten(datei + "_Kunden.ser");
 
     }
 
@@ -160,7 +160,7 @@ public class EShopVerwaltung {
      */
     public void schreibeKunden() throws IOException {
 
-        meineArtikel.schreibeDaten(datei + "_Kunden.ser");
+        meineKunden.schreibeDaten(datei + "_Kunden.ser");
     }
 
 }

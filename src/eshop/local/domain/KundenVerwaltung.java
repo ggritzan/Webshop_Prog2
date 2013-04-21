@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import eshop.local.valueobjects.Adresse;
-import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
 import eshop.local.valueobjects.Kunde;
@@ -23,9 +22,6 @@ public class KundenVerwaltung {
 
     // Hashmap zum speichern des Kundenbestands als Key dienen die Kundennummern
     private HashMap<Integer, Kunde> kundenBestandNr;
-
-    // Hashmap zum verknüpfen des Kundennamens mit der Kundennummer
-    private HashMap<String, Integer> kundenBestandName;
 
     // Hashmap zum verknüpfen des Benutzernamens mit der Kundennummer
     private HashMap<String, Integer> kundenBestandBenutzername;
@@ -79,7 +75,7 @@ public class KundenVerwaltung {
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
         } catch (IOException e) {
-            System.out.println("Der Datenbestand ist leer");
+            System.out.println("Fehler beim einlesen der Kundendaten !");
         }
     }
 
@@ -128,7 +124,7 @@ public class KundenVerwaltung {
             // Ist der Benutzername noch nicht vergeben wird er neu angelegt und in den beiden HasMaps gespeichert (kundenBestandNr, kundenBestandBenutzername)
             Kunde kunde = new Kunde(vorname, nachname, benutzername, passwort, email, telefon);
             kundenBestandNr.put(kunde.getNummer(), kunde);
-            kundenBestandBenutzername.put(benutzername,kunde.getNummer());
+            kundenBestandBenutzername.put(benutzername, kunde.getNummer());
             return true;
         }
 
@@ -145,7 +141,9 @@ public class KundenVerwaltung {
         // Erzeugt einen Kunden mit seiner bisherigen Kundennummer
         Kunde k = new Kunde(kunde);
         kundenBestandNr.put(k.getNummer(), k);
-        kundenBestandBenutzername.put(kunde.getBenutzername(),kunde.getNummer());
+        kundenBestandBenutzername.put(kunde.getBenutzername(), k.getNummer());
+
+
     }
 
     /**
@@ -196,5 +194,5 @@ public class KundenVerwaltung {
 
 
     }
-    */
+     */
 }

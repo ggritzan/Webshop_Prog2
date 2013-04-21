@@ -54,9 +54,9 @@ public class Artikel implements Serializable {
 // Methoden
 
         /**
-         * Standard-Methode von Object überschrieben.
+         * Standard-Methode vom Object überschrieben.
          * Methode wird immer automatisch aufgerufen, wenn ein Artikel-Objekt als String
-         * benutzt wird (z.B. in println(buch);)
+         * benutzt wird (z.B. in println(Artikel);)
          *
          * @see java.lang.Object#toString()
          */

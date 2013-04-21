@@ -76,7 +76,7 @@ public class ArtikelVerwaltung {
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
         } catch (IOException e) {
-            System.out.println("Der Datenbestand ist leer");
+            System.out.println("Fehler beim einlesen der Artikeldaten !");
         }
     }
 

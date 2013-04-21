@@ -90,9 +90,6 @@ public class EshopClientCUIGG {
 
             return 'k';
 
-        } else if (line.equals("s")) {
-            eShopVerwaltung.schreibeArtikel();
-            eShopVerwaltung.schreibeKunden();
         }
 
         return 'm';
@@ -187,6 +184,70 @@ public class EshopClientCUIGG {
 
     }
 
+    private void verarbeiteKundenEingabe(String line) throws IOException {
+
+        if (line.equals("h")) {
+            // lese die notwendigen Parameter, einzeln pro Zeile
+            boolean ok = false;
+            try {
+                System.out.print("Vorname > ");
+                String vorname = liesEingabe();
+                System.out.print("Nachname > ");
+                String nachname = liesEingabe();
+                System.out.print("Benutzername > ");
+                String benutzername = liesEingabe();
+                System.out.print("Passwort  > ");
+                String passwort = liesEingabe();
+                System.out.print("E-mail > ");
+                String email = liesEingabe();
+                System.out.print("Telefon > ");
+                String telefon = liesEingabe();
+
+
+                ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon);
+
+            } catch (NumberFormatException e) {
+
+            }
+            if (ok)
+                System.out.println("Einfügen ok");
+            else
+                System.out.println("Der Kunde konnte leider nicht angelegt werden !");
+        }
+
+        else if (line.equals("l")) {
+
+            boolean ok = false;
+            try {
+                System.out.println(eShopVerwaltung.gibAlleKunden());
+                System.out.print("Kundennummer: > ");
+                String kNr = liesEingabe();
+                int kNrInt = Integer.parseInt(kNr);
+                ok = eShopVerwaltung.loescheKunde(kNrInt);
+            } catch (NumberFormatException e) {
+
+            }
+
+            if (ok)
+                System.out.println("Kunde wurde geloescht !");
+            else
+                System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
+
+
+        }
+
+        else if (line.equals("a")) {
+            System.out.println(eShopVerwaltung.gibAlleKunden());
+
+        }
+
+        else if (line.equals("s")) {
+            eShopVerwaltung.schreibeKunden();
+        }
+
+
+    }
+
     public void run() {
         // Variable für Eingaben von der Konsole
         String input = "";
@@ -205,6 +266,24 @@ public class EshopClientCUIGG {
                             gibArtikelMenueAus();
                             input = liesEingabe();
                             verarbeiteArtikelEingabe(input);
+
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+
+
+                        }
+                    } while (!input.equals("m"));
+
+                }
+
+                if (var == 'k') {
+                    do {
+
+                        try {
+                            gibKundenMenueAus();
+                            input = liesEingabe();
+                            verarbeiteKundenEingabe(input);
 
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
