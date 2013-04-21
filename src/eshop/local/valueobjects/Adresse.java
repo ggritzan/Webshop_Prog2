@@ -7,7 +7,9 @@
  */
 package eshop.local.valueobjects;
 
-public class Adresse {
+import java.io.Serializable;
+
+public class Adresse implements Serializable {
 
     // Attribute zur Beschreibung einer Adresse
     private String vorname;
@@ -16,7 +18,9 @@ public class Adresse {
     private String plz;
     private String ort;
 
-    // Konstruktor
+    // @TODO eventuell müsste noch eine Hausnummer implementiert werden
+
+// Konstruktor
     public Adresse(String vorname, String nachname, String straße, String plz, String ort) {
         this.vorname = vorname;
         this.nachname = nachname;
@@ -26,10 +30,22 @@ public class Adresse {
     }
 
 
-    // Methoden der Klasse Adresse
+// Methoden
 
+    /**
+     * Standard-Methode vom Object überschrieben.
+     * Methode wird immer automatisch aufgerufen, wenn ein Kunden-Objekt als String
+     * benutzt wird (z.B. in println(Kunde);)
+     *
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        String string = new String();
+        string = "\n" +	"Anschrift: " + "\n" + "\t" + getVorname() + "\n" + "\t" + getNachname() + "\n" + "\t" + getStraße() + "\n" + "\t" + getPlz() + "\n" + "\t" + getOrt() + "\n";
+        return string;
+    }
 
-    // Setter
+// Setter
 
     public void setVorname(String vorname){
         this.vorname = vorname;
@@ -51,7 +67,7 @@ public class Adresse {
         this.ort = ort;
     }
 
-    // Getter
+// Getter
 
     public String getVorname() {
         return this.vorname;

@@ -18,6 +18,7 @@ import eshop.local.domain.ArtikelVerwaltung;
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.domain.KundenVerwaltung;
 import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Adresse;
 import sun.org.mozilla.javascript.internal.ast.IfStatement;
 
 
@@ -202,9 +203,15 @@ public class EshopClientCUIGG {
                 String email = liesEingabe();
                 System.out.print("Telefon > ");
                 String telefon = liesEingabe();
+                System.out.print("Straße > ");
+                String straße = liesEingabe();
+                System.out.print("PLZ > ");
+                String plz = liesEingabe();
+                System.out.print("Ort > ");
+                String ort = liesEingabe();
+                Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
 
-
-                ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon);
+                ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
 
             } catch (NumberFormatException e) {
 
@@ -213,7 +220,9 @@ public class EshopClientCUIGG {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        } else if (line.equals("l")) {
+        }
+
+        else if (line.equals("l")) {
 
             boolean ok = false;
             try {

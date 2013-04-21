@@ -114,7 +114,7 @@ public class KundenVerwaltung {
      * @param email
      * @param telefon
      */
-    public boolean kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon) {
+    public boolean kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
 
         // Wenn der Benutzername eines Kunden bereits vorhanden ist wird false zurück gegeben und kein neuer Kunde angelegt
         if (kundenBestandBenutzername.containsKey(benutzername)) {
@@ -123,7 +123,7 @@ public class KundenVerwaltung {
 
         } else {
             // Ist der Benutzername noch nicht vergeben wird er neu angelegt und in den beiden HasMaps gespeichert (kundenBestandNr, kundenBestandBenutzername)
-            Kunde kunde = new Kunde(vorname, nachname, benutzername, passwort, email, telefon);
+            Kunde kunde = new Kunde(vorname, nachname, benutzername, passwort, email, telefon, adresse);
             kundenBestandNr.put(kunde.getNummer(), kunde);
             kundenBestandBenutzername.put(benutzername, kunde.getNummer());
             return true;
