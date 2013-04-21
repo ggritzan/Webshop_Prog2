@@ -30,6 +30,26 @@ public abstract class Person{
         this.adresse = adresse;
     }
 
+    public Person(String vorname, String nachname, String benutzername, String passwort, String email, String telefon){
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.benutzername = benutzername;
+        this.passwort = passwort;
+        this.email = email;
+        this.telefon = telefon;
+
+    }
+
+    public Person(Person person){
+        this.vorname = person.getVorname();
+        this.nachname = person.getNachname();
+        this.benutzername = person.getBenutzername();
+        this.passwort = person.getPasswort();
+        this.email = person.getEmail();
+        this.telefon = person.getTelefon();
+
+    }
+
     // Methoden der Klasse Person
 
 

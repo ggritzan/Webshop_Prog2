@@ -16,13 +16,15 @@ import java.util.HashMap;
 import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import eshop.local.domain.ArtikelVerwaltung;
 import eshop.local.domain.EShopVerwaltung;
+import eshop.local.domain.KundenVerwaltung;
 import eshop.local.valueobjects.Artikel;
 import sun.org.mozilla.javascript.internal.ast.IfStatement;
 
 
 public class EshopClientCUIGG {
 
-    private ArtikelVerwaltung eShop;
+    private ArtikelVerwaltung artVer;
+    private KundenVerwaltung kunVer;
     private EShopVerwaltung eShopVerwaltung;
     private BufferedReader in;
 
@@ -30,7 +32,10 @@ public class EshopClientCUIGG {
     public EshopClientCUIGG(String datei) throws IOException, ClassNotFoundException {
 
         // erzeug eine neue Artikelverwaltung für den eShop
-        eShop = new ArtikelVerwaltung();
+        artVer = new ArtikelVerwaltung();
+        // erzeugt eine neue Kundenverwaltung für den eShop
+        kunVer = new KundenVerwaltung();
+
         eShopVerwaltung = new EShopVerwaltung(datei);
 
         // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen

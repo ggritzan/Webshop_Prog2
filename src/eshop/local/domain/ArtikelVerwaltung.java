@@ -91,7 +91,7 @@ public class ArtikelVerwaltung {
         // PersistenzManager für Schreibvorgänge öffnen
         pm.openForWriting(datei);
 
-        // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Textdatei schreiben
+        // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Datei schreiben
         if (!artikelBestandNr.isEmpty()) {
             Iterator iter = artikelBestandNr.values().iterator();
             while (iter.hasNext()) {

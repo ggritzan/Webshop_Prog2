@@ -12,41 +12,56 @@ import java.util.Vector;
 public class Kunde extends Person {
 
     // Attribute zur Beschreibung eines Kunden
-    private int kNr;
+    private int nummer;
     private Warenkorb wk;
     private static int zaehler = 1000;
 
-    // Konstruktor
-    public Kunde (String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, Warenkorb wk) {
+// Konstruktor
+    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, Warenkorb wk) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
-        this.kNr = this.zaehler;
-        this.zaehler  ++;
+        this.nummer = this.zaehler;
+        this.zaehler++;
         this.wk = wk;
     }
 
+    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon) {
+        super(vorname, nachname, benutzername, passwort, email, telefon);
+        this.nummer = this.zaehler;
+        this.zaehler++;
 
-    // Methoden der Klasse Kunde
+    }
 
-    //Fügt einen Artikel dem Warenkorb hinzu
-    public void inWarenkorbLegen(Artikel a){
+    public Kunde(Kunde kunde) {
+        super(kunde.getVorname(), kunde.getNachname(), kunde.getBenutzername(), kunde.getPasswort(), kunde.getPasswort(), kunde.getTelefon());
+    }
+
+
+// Methoden
+
+    //fügt einen Artikel dem Warenkorb hinzu
+    public void inWarenkorbLegen(Artikel a) {
         wk.addArtikel(a);
     }
 
     //Entfernt einen Artikel aus dem Warenkorb
-    public void ausWarenkorbEntfernen(Artikel a){
+    public void ausWarenkorbEntfernen(Artikel a) {
         wk.remArtikel(a);
     }
 
-    // Setter
+// Setter
 
-    public void setkNr(int kNr){
-        this.kNr = kNr;
+    public void setkNummer(int nummer) {
+        this.nummer = nummer;
     }
 
-    // Getter
+// Getter
 
-    public int getkNr() {
-        return this.kNr;
+    public int getNummer() {
+        return this.nummer;
+    }
+
+    public Warenkorb getWarenkorb() {
+        return this.wk;
     }
 
 }

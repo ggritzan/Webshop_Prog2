@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Kunde;
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
@@ -27,6 +28,13 @@ public interface PersistenceManager {
         public Artikel ladeArtikel() throws IOException, ClassNotFoundException;
 
         /**
+         * Methode zum Einlesen der Kundendaten aus einer externen Datenquelle.
+         *
+         * @return Kunden-Objekt, wenn Einlesen erfolgreich, false null
+         */
+        public Kunde ladeKunde() throws IOException, ClassNotFoundException;
+
+        /**
          * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
          *
          * @param a Artikel-Objekt, das gespeichert werden soll
@@ -34,13 +42,14 @@ public interface PersistenceManager {
          */
         public boolean speichereArtikel(Artikel a) throws IOException;
 
-        /*
-         *  Wenn später mal eine Kundenverwaltung ergänzt wird:
+    /**
+     * Methode zum Schreiben der Kundendaten in eine externe Datenquelle.
+     *
+     * @param k Kunden-Objekt, das gespeichert werden soll
+     * @return true, wenn Schreibvorgang erfolgreich, false sonst
+     */
+    public boolean speichereKunde(Kunde k) throws IOException;
 
-        public Kunde ladeKunde() throws IOException;
 
-        public boolean speichereKunde(Kunde k) throws IOException;
-
-        */
 }
 

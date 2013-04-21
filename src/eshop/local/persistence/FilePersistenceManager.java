@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Vector;
 
 import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Kunde;
 
 /**
  * Created with IntelliJ IDEA.
@@ -78,7 +79,6 @@ public class FilePersistenceManager implements PersistenceManager {
         return true;
     }
 
-
     /**
      * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
      *
@@ -88,9 +88,23 @@ public class FilePersistenceManager implements PersistenceManager {
      */
     public Artikel ladeArtikel() throws IOException, ClassNotFoundException {
 
-        Artikel artikel = liesObjekt(ois);
+        Artikel artikel = liesArtikel(ois);
 
         return artikel;
+    }
+
+    /**
+     * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
+     *
+     * @return Kunde
+     * @throws IOException,ClassNotFoundException
+     *
+     */
+    public Kunde ladeKunde() throws IOException, ClassNotFoundException {
+
+        Kunde kunde = liesKunde(ois);
+
+        return kunde;
     }
 
 
@@ -118,13 +132,36 @@ public class FilePersistenceManager implements PersistenceManager {
     }
 
     /**
+     * Methode zum Speichern der Kundendaten in eine externe Datenquelle.
+     *
+     * @param k Kunden-Objekt, das gespeichert werden soll
+     * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException
+     */
+    public boolean speichereKunde(Kunde k) throws IOException {
+
+        try {
+
+            oos.writeObject(k);
+
+            return true;
+
+        } catch (IOException e) {
+
+            return false;
+        }
+
+
+    }
+
+    /**
      * Methode zum auslesen von Artikel Objekten aus einem uebergebenden ObjectInputStream.
      *
      * @param ois ObjectInputStream, aus dem das Objekt ausgelesen wird.
      * @return Artikel, wenn sich noch ein Artikel Objekt im ObjectInputstream befindet.
      * @throws IOException,ClassNotFoundException
      */
-    private Artikel liesObjekt(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+    private Artikel liesArtikel(ObjectInputStream ois) throws IOException, ClassNotFoundException {
 
         try {
 
@@ -141,5 +178,28 @@ public class FilePersistenceManager implements PersistenceManager {
 
     }
 
+    /**
+     * Methode zum auslesen von Kunden Objekten aus einem uebergebenden ObjectInputStream.
+     *
+     * @param ois ObjectInputStream, aus dem das Objekt ausgelesen wird.
+     * @return Kunde, wenn sich noch ein Kunde Objekt im ObjectInputstream befindet.
+     * @throws IOException,ClassNotFoundException
+     */
+    private Kunde liesKunde(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+
+        try {
+
+            Kunde k = new Kunde((Kunde) ois.readObject());
+
+
+            return k;
+
+        } catch (EOFException exc) {
+
+            return null;
+        }
+
+
+    }
 
 }

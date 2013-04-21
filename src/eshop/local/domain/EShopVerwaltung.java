@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
-
+import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Artikel;
 
 /**
@@ -22,7 +22,7 @@ public class EShopVerwaltung {
     // Erzeugt eine Artikelverwaltung
     private ArtikelVerwaltung meineArtikel;
     // Erzeugt eine Kundenverwaltung
-    //private KundenVerwaltung meineKunden;
+    private KundenVerwaltung meineKunden;
 
 // Konstruktor
 
@@ -42,8 +42,8 @@ public class EShopVerwaltung {
         meineArtikel = new ArtikelVerwaltung();
         meineArtikel.liesDaten(datei + "_Artikel.ser");
         // Kundenkartei aus Datei einlesen
-        // meineKunden = new KundenVerwaltung();
-        // meineKunden.liesDaten(datei+"_Kunden.ser");
+        meineKunden = new KundenVerwaltung();
+        meineKunden.liesDaten(datei+"_Kunden.ser");
 
     }
 
@@ -57,6 +57,16 @@ public class EShopVerwaltung {
     public Vector gibAlleArtikel() {
         // delegiert an die Artikelverwaltung
         return meineArtikel.alleArtikelZurueckgeben();
+    }
+
+    /**
+     * Methode, die eine Liste aller im Bestand befindlichen Kunden zurückgibt Aufgabe wird an die Kundenverwaltung delegiert
+     *
+     * @return Vector Liste aller Kunden im Bestand des EShops als Vector
+     */
+    public Vector gibAlleKunden() {
+        // delegiert an die Kundenverwaltung
+        return meineKunden.alleKundenZurueckgeben();
     }
 
     /**
@@ -93,6 +103,23 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum Einfügen eines neuen Kunden in den Bestand.
+     *
+     * @param vorname
+     * @param nachname
+     * @param benutzername
+     * @param passwort
+     * @param email
+     * @param telefon
+     *
+     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
+     */
+    public boolean fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon) {
+        return meineKunden.kundeHinzufuegen(vorname, nachname,benutzername, passwort, email, telefon);
+
+    }
+
+    /**
      * Methode zum loeschen eines  Artikels aus dem  Bestand.
      *
      * @param artNr         Nummer des Artikels des Artikel der geloescht werden soll.
@@ -105,6 +132,18 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum loeschen eines  Kunden aus dem  Bestand.
+     *
+     * @param kunNr         Nummer des Kunden der geloescht werden soll.
+     *
+     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
+     */
+    public boolean loescheKunde(int kunNr) {
+        return meineKunden.kundenLoeschen(kunNr);
+
+    }
+
+    /**
      * Methode zum Speichern des Artikelbestands in einer Datei.
      *
      * @throws IOException
@@ -112,6 +151,16 @@ public class EShopVerwaltung {
     public void schreibeArtikel() throws IOException {
 
         meineArtikel.schreibeDaten(datei + "_Artikel.ser");
+    }
+
+    /**
+     * Methode zum Speichern des Kundenbestands in einer Datei.
+     *
+     * @throws IOException
+     */
+    public void schreibeKunden() throws IOException {
+
+        meineArtikel.schreibeDaten(datei + "_Kunden.ser");
     }
 
 }
