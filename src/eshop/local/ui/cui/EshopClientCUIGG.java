@@ -213,9 +213,7 @@ public class EshopClientCUIGG {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        }
-
-        else if (line.equals("l")) {
+        } else if (line.equals("l")) {
 
             boolean ok = false;
             try {
@@ -234,14 +232,10 @@ public class EshopClientCUIGG {
                 System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
 
 
-        }
-
-        else if (line.equals("a")) {
+        } else if (line.equals("a")) {
             System.out.println(eShopVerwaltung.gibAlleKunden());
 
-        }
-
-        else if (line.equals("s")) {
+        } else if (line.equals("s")) {
             eShopVerwaltung.schreibeKunden();
         }
 
