@@ -95,7 +95,7 @@ public class FilePersistenceManager implements PersistenceManager {
     }
 
     /**
-     * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
+     * Methode zum Einlesen der Kundendaten aus einer externen Datenquelle.
      *
      * @return Kunde
      * @throws IOException,ClassNotFoundException
@@ -106,6 +106,18 @@ public class FilePersistenceManager implements PersistenceManager {
         Kunde kunde = liesKunde(ois);
 
         return kunde;
+    }
+
+    /**
+     * Methode zum Einlesen der Mitarbeiterdaten aus einer externen Datenquelle.
+     *
+     * @return Mitarbeiter
+     * @throws IOException,ClassNotFoundException
+     *
+     */
+    public Mitarbeiter ladeMitarbeiter() throws IOException, ClassNotFoundException {
+        Mitarbeiter m = liesMitarbeiter(ois);
+        return m;
     }
 
     /**
@@ -152,6 +164,22 @@ public class FilePersistenceManager implements PersistenceManager {
         }
 
 
+    }
+
+    /**
+     * Methode zum Speichern der Mitarbeiterdaten in eine externe Datenquelle.
+     *
+     * @param m Mitarbeiter-Objekt, das gespeichert werden soll
+     * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException
+     */
+    public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException {
+        try {
+            oos.writeObject(m);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     /**
