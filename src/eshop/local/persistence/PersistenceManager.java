@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Mitarbeiter;
 
 /**
@@ -36,14 +37,10 @@ public interface PersistenceManager {
          */
         public boolean speichereArtikel(Artikel a) throws IOException;
 
-        /*
-         *  Wenn später mal eine Kundenverwaltung ergänzt wird:
-
-        public Kunde ladeKunde() throws IOException;
+        public Kunde ladeKunde() throws IOException, ClassNotFoundException;
 
         public boolean speichereKunde(Kunde k) throws IOException;
 
-        */
         public Mitarbeiter ladeMitarbeiter() throws IOException, ClassNotFoundException;
 
         public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException;

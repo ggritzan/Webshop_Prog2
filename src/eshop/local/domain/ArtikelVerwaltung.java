@@ -77,6 +77,8 @@ public class ArtikelVerwaltung {
             pm.close();
         } catch (IOException e) {
             System.out.println("Fehler beim einlesen der Artikeldaten !");
+        } finally {
+            pm.close();
         }
     }
 

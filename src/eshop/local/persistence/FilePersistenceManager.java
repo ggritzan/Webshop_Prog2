@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
+import eshop.local.valueobjects.Mitarbeiter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -199,6 +200,22 @@ public class FilePersistenceManager implements PersistenceManager {
         }
 
 
+    }
+
+    /**
+     * Methode zum auslesen von Mitarbeiter Objekten aus einem uebergebenden ObjectInputStream.
+     *
+     * @param ois ObjectInputStream, aus dem das Objekt ausgelesen wird.
+     * @return Mitarbeiter, wenn sich noch ein Mitarbeiter Objekt im ObjectInputstream befindet.
+     * @throws IOException,ClassNotFoundException
+     */
+    private Mitarbeiter liesMitarbeiter(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        try {
+            Mitarbeiter m = new Mitarbeiter((Mitarbeiter) ois.readObject());
+            return m;
+        } catch (EOFException exc) {
+            return null;
+        }
     }
 
 }
