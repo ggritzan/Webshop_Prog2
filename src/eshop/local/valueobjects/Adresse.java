@@ -11,6 +11,9 @@ import java.io.Serializable;
 
 public class Adresse implements Serializable {
 
+
+    private static final long serialVersionUID = -4318609442967552645L;
+
     // Attribute zur Beschreibung einer Adresse
     private String vorname;
     private String nachname;

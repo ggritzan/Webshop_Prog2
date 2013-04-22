@@ -7,7 +7,9 @@
  */
 package eshop.local.valueobjects;
 
-public abstract class Person{
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
 
     // Attribute zur Beschreibung einer Person
     private String vorname;
