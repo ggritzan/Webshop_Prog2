@@ -63,3 +63,4 @@ public class Mitarbeiter extends Person implements Serializable {
         return this.mNr;
     }
 }
+

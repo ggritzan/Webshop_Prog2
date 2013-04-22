@@ -24,3 +24,4 @@ public class Rechnungsadresse extends Adresse {
         return this.email;
     }
 }
+

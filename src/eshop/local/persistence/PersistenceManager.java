@@ -49,3 +49,4 @@ public interface PersistenceManager {
         public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException;
 }
 
+
