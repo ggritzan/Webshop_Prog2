@@ -24,6 +24,8 @@ public class EShopVerwaltung {
     private ArtikelVerwaltung meineArtikel;
     // Erzeugt eine Kundenverwaltung
     private KundenVerwaltung meineKunden;
+    // Erzeugt eine Rechnungsverwaltung
+    private RechnungsVerwaltung meineRechnungen;
 
 // Konstruktor
 
@@ -31,6 +33,7 @@ public class EShopVerwaltung {
      * Namensmuster für Dateien:
      * datei+"_Artikel.ser" ist die Datei der Artikel
      * datei+"_Kunden.ser" ist die Datei der Kunden
+     * datei+"_Rechnungen.ser" ist die Datei der Rechnungen
      *
      * @param datei
      * @throws IOException,ClassNotFoundException z.B. wenn eine der Dateien nicht existiert.
@@ -45,6 +48,9 @@ public class EShopVerwaltung {
         // Kundenkartei aus Datei einlesen
         meineKunden = new KundenVerwaltung();
         meineKunden.liesDaten(datei + "_Kunden.ser");
+        // Rechnungsbestand aus Datei einlesen
+        meineRechnungen = new RechnungsVerwaltung();
+        meineRechnungen.liesDaten(datei + "_Rechnungen.ser");
 
     }
 
@@ -71,6 +77,16 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode, die eine Liste aller im Bestand befindlichen Rechnungen zurückgibt Aufgabe wird an die Rechnungsverwaltung delegiert
+     *
+     * @return Vector Liste aller Rechnungen im Bestand des EShops als Vector
+     */
+    public Vector gibAlleRechnungen() {
+        // delegiert an die Rechnungsverwaltung
+        return meineRechnungen.alleRechnungenZurueckgeben();
+    }
+
+    /**
      * Methode zum Suchen von Artikel anhand des Namens
      *
      * @param name Name des gesuchten Artikels
@@ -79,6 +95,17 @@ public class EShopVerwaltung {
     public Vector sucheNachName(String name) {
 
         return meineArtikel.sucheArtikel(name);
+    }
+
+    /**
+     * Methode zum Suchen von Rechnungen anhand des Auftragnamens
+     *
+     * @param auftragsname Auftragsname der gesuchten Rechnung
+     * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
+     */
+    public Vector sucheNachAuftragsname(String auftragsname) {
+
+        return meineRechnungen.sucheRechnungen(auftragsname);
     }
 
     /**
@@ -117,6 +144,18 @@ public class EShopVerwaltung {
      */
     public boolean fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
         return meineKunden.kundeHinzufuegen(vorname, nachname,benutzername, passwort, email, telefon, adresse);
+
+    }
+
+    /**
+     * Methode zum Einfügen eines neuen Kunden in den Bestand.
+     *
+     * @param auftragsname
+     *
+     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
+     */
+    public boolean fuegeRechnungEin(String auftragsname) {
+        return meineRechnungen.rechnungHinzufuegen(auftragsname);
 
     }
 
@@ -162,6 +201,16 @@ public class EShopVerwaltung {
     public void schreibeKunden() throws IOException {
 
         meineKunden.schreibeDaten(datei + "_Kunden.ser");
+    }
+
+    /**
+     * Methode zum Speichern des Rechnungsbestanden in einer Datei.
+     *
+     * @throws IOException
+     */
+    public void schreibeRechung() throws IOException {
+
+        meineRechnungen.schreibeDaten(datei + "_Rechnungen.ser");
     }
 
 }

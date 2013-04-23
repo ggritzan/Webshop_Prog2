@@ -5,6 +5,7 @@ import java.util.Iterator;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Mitarbeiter;
+import eshop.local.valueobjects.Rechnung;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,6 +45,10 @@ public interface PersistenceManager {
         public Mitarbeiter ladeMitarbeiter() throws IOException, ClassNotFoundException;
 
         public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException;
+
+        public Rechnung ladeRechnung() throws IOException, ClassNotFoundException;
+
+        public boolean speichereRechnung(Rechnung m) throws IOException;
 }
 
 

@@ -6,6 +6,7 @@ import java.util.Vector;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Mitarbeiter;
+import eshop.local.valueobjects.Rechnung;
 
 /**
  * Created with IntelliJ IDEA.
@@ -121,6 +122,20 @@ public class FilePersistenceManager implements PersistenceManager {
     }
 
     /**
+     * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
+     *
+     * @return Artikel
+     * @throws IOException,ClassNotFoundException
+     *
+     */
+    public Rechnung ladeRechnung() throws IOException, ClassNotFoundException {
+
+        Rechnung rechnung = liesRechnung(ois);
+
+        return rechnung;
+    }
+
+    /**
      * Methode zum Speichern der Artikeldaten in eine externe Datenquelle.
      *
      * @param a Artikel-Objekt, das gespeichert werden soll
@@ -176,6 +191,22 @@ public class FilePersistenceManager implements PersistenceManager {
     public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException {
         try {
             oos.writeObject(m);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Methode zum Speichern der Rechungsdaten in eine externe Datenquelle.
+     *
+     * @param r Mitarbeiter-Objekt, das gespeichert werden soll
+     * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException
+     */
+    public boolean speichereRechnung(Rechnung r) throws IOException {
+        try {
+            oos.writeObject(r);
             return true;
         } catch (IOException e) {
             return false;
@@ -241,6 +272,22 @@ public class FilePersistenceManager implements PersistenceManager {
         try {
             Mitarbeiter m = new Mitarbeiter((Mitarbeiter) ois.readObject());
             return m;
+        } catch (EOFException exc) {
+            return null;
+        }
+    }
+
+    /**
+     * Methode zum auslesen von Rechnungs Objekten aus einem uebergebenden ObjectInputStream.
+     *
+     * @param ois ObjectInputStream, aus dem das Objekt ausgelesen wird.
+     * @return Rechnung, wenn sich noch ein Rechnungs Objekt im ObjectInputstream befindet.
+     * @throws IOException,ClassNotFoundException
+     */
+    private Rechnung liesRechnung(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        try {
+            Rechnung r = new Rechnung((Rechnung) ois.readObject());
+            return r;
         } catch (EOFException exc) {
             return null;
         }
