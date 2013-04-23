@@ -1,5 +1,6 @@
 package eshop.local.ui.cui;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.valueobjects.Artikel;
@@ -88,7 +89,7 @@ public class EshopClientCUIGG {
             //für Kunden
             return 'k';
 
-        } else if (line.equals("r")){
+        } else if (line.equals("r")) {
             // für Rechnungen
             return 'r';
         }
@@ -224,9 +225,7 @@ public class EshopClientCUIGG {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        }
-
-        else if (line.equals("l")) {
+        } else if (line.equals("l")) {
             //löschen
             boolean ok = false;
             try {
@@ -252,9 +251,10 @@ public class EshopClientCUIGG {
         } else if (line.equals("s")) {
             //sichern
             eShopVerwaltung.schreibeKunden();
-        } else if (line.equals("w")){
+        } else if (line.equals("w")) {
             //artikel in warenkorb packen
             boolean ok = false;
+
             try {
                 System.out.println(eShopVerwaltung.gibAlleKunden());
                 System.out.print("Kundennummer: > ");
@@ -272,12 +272,12 @@ public class EshopClientCUIGG {
 
             }
 
-            if (ok)
+            if (ok) {
                 System.out.println("Artikel wurde in den Warenkorb gelegt !");
-            else
+            } else {
                 System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
+            }
         }
-
 
     }
 
@@ -288,6 +288,7 @@ public class EshopClientCUIGG {
             //hinzufügen
             // lese die notwendigen Parameter, einzeln pro Zeile
             boolean ok = false;
+
             try {
                 System.out.print("Kundennummer > ");
                 String kNr = liesEingabe();
@@ -300,9 +301,10 @@ public class EshopClientCUIGG {
             }
 
             if (ok) {
-                System.out.println("Einfügen ok");
+                 // eShopVerwaltung.resetWarenkorb(kNrInt);
+                System.out.println("Rechnung wurde erstellt !");
             } else {
-                System.out.println("Die Rechnung konnte leider nicht angelegt werden !");
+                System.out.println("Die Rechnung konnte leider nicht erstellt werden !");
             }
 
         } else if (line.equals("a")) {

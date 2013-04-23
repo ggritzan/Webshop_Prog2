@@ -43,6 +43,7 @@ public class Kunde extends Person implements Serializable {
     public Kunde(Kunde kunde) {
         super(kunde.getVorname(), kunde.getNachname(), kunde.getBenutzername(), kunde.getPasswort(), kunde.getEmail(), kunde.getTelefon(), kunde.getAdresse());
         this.nummer = kunde.getNummer();
+        this.wk = kunde.getWarenkorb();
         this.zaehler = (kunde.getNummer() +1);
 
     }
@@ -70,14 +71,21 @@ public class Kunde extends Person implements Serializable {
     }
 
     //Entfernt einen Artikel aus dem Warenkorb
-    public void ausWarenkorbEntfernen(Artikel a) {
+    public boolean ausWarenkorbEntfernen(Artikel a) {
         wk.remove(a);
+        return true;
     }
 
 // Setter
 
     public void setkNummer(int nummer) {
         this.nummer = nummer;
+    }
+
+    // leert den Warenkorb eines Kunden
+    public boolean resetWarenkorb() {
+        this.wk.removeAllElements();
+        return true;
     }
 
 // Getter

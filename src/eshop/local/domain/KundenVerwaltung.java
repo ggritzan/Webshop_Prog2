@@ -199,10 +199,14 @@ public class KundenVerwaltung {
         }
     }
 
-    public boolean inWarenkorbLegen(Artikel a, int kNr, int menge){
+    public boolean inWarenkorbLegen(Artikel a, int kNr, int menge) {
         return kundenBestandNr.get(kNr).inWarenkorbLegen(a);
     }
 
+    public boolean resetWarenkorb(int kNr) {
+        Kunde k = kundenBestandNr.get(kNr);
+        return k.resetWarenkorb();
+    }
     /**
      * Methode durchsucht alle Kunden nach dem Parameter Nachname und gibt die entsprechenden Kunden in einem Vektor zurueck
      *

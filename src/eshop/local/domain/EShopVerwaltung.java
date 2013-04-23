@@ -120,8 +120,19 @@ public class EShopVerwaltung {
         return meineArtikel.getArtikel(aNr);
     }
 
+
     public boolean inWarenkorbLegen(Artikel a, int kNr, int menge){
         return meineKunden.inWarenkorbLegen(a, kNr, menge);
+    }
+
+    /**
+     * Methode zum zuruecksetzen des Warenkorbes eines Kunden
+     *
+     * @param kNr Kundennummer
+     * @return boolean ob der Warenkorb zurück gestzt wurde oder nicht
+     */
+    public boolean resetWarenkorb(int kNr){
+       return meineKunden.resetWarenkorb(kNr);
     }
 
     /**
