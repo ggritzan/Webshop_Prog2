@@ -17,8 +17,10 @@ import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import eshop.local.domain.ArtikelVerwaltung;
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.domain.KundenVerwaltung;
+import eshop.local.domain.RechnungsVerwaltung;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Adresse;
+import eshop.local.valueobjects.Rechnung;
 import sun.org.mozilla.javascript.internal.ast.IfStatement;
 
 
@@ -26,6 +28,7 @@ public class EshopClientCUIGG {
 
     private ArtikelVerwaltung artVer;
     private KundenVerwaltung kunVer;
+    private RechnungsVerwaltung rechVer;
     private EShopVerwaltung eShopVerwaltung;
     private BufferedReader in;
 
@@ -46,6 +49,7 @@ public class EshopClientCUIGG {
     private void gibmainMenue() {
         System.out.print("Befehle: \n  Artikelmenue: 'a'");
         System.out.print("         \n  Kundenmenue: 'k'");
+        System.out.print("         \n  Rechnungsmenue: 'r'");
         System.out.println("         \n  Beenden:        'q'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
@@ -75,6 +79,16 @@ public class EshopClientCUIGG {
         System.out.flush(); // ohne NL ausgeben
     }
 
+    private void gibRechnungsMenueAus() {
+        System.out.print("Befehle: \n  Rechnung hinzufuegen: 'h'");
+        System.out.print("         \n  Rechnungen ausgeben:  'a'");
+        System.out.print("         \n  Rechnung suchen:  'f'");
+        System.out.print("         \n  Daten sichern:  's'");
+        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
     private String liesEingabe() throws IOException {
         // einlesen von der Konsole
         return in.readLine();
@@ -91,6 +105,9 @@ public class EshopClientCUIGG {
 
             return 'k';
 
+        } else if (line.equals("r")) {
+            // für Rechnungen
+            return 'r';
         }
 
         return 'm';
@@ -220,9 +237,7 @@ public class EshopClientCUIGG {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        }
-
-        else if (line.equals("l")) {
+        } else if (line.equals("l")) {
 
             boolean ok = false;
             try {
@@ -251,6 +266,47 @@ public class EshopClientCUIGG {
 
     }
 
+    private void verarbeiteRechnungsEingabe(String line) throws IOException {
+
+        // Eingabe bearbeiten:
+        if (line.equals("h")) {
+            //hinzufügen
+            // lese die notwendigen Parameter, einzeln pro Zeile
+            boolean ok = false;
+            try {
+                System.out.print("Auftragsname > ");
+                String auftragsname = liesEingabe();
+                ok = eShopVerwaltung.fuegeRechnungEin(auftragsname);
+
+            } catch (NumberFormatException e) {
+
+            }
+
+            if (ok) {
+                System.out.println("Einfügen ok");
+            } else {
+                System.out.println("Die Rechnung konnte leider nicht angelegt werden !");
+            }
+
+        } else if (line.equals("a")) {
+            //ale ausgeben
+            System.out.println(eShopVerwaltung.gibAlleRechnungen());
+
+        } else if (line.equals("f")) {
+            //suchen
+            System.out.print("Auftragsname:  > ");
+            String auftragsname = liesEingabe();
+            System.out.println(eShopVerwaltung.sucheNachAuftragsname(auftragsname));
+
+
+        } else if (line.equals("s")) {
+            //sichern
+            eShopVerwaltung.schreibeRechung();
+        }
+
+
+    }
+
     public void run() {
         // Variable für Eingaben von der Konsole
         String input = "";
@@ -263,6 +319,7 @@ public class EshopClientCUIGG {
                 input = liesEingabe();
                 char var = verarbeiteMainEingabe(input);
                 if (var == 'a') {
+                    //Artikelmenue
                     do {
 
                         try {
@@ -281,12 +338,32 @@ public class EshopClientCUIGG {
                 }
 
                 if (var == 'k') {
+                    //Kundenmenue
                     do {
 
                         try {
                             gibKundenMenueAus();
                             input = liesEingabe();
                             verarbeiteKundenEingabe(input);
+
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+
+
+                        }
+                    } while (!input.equals("m"));
+
+                }
+
+                if (var == 'r') {
+                    //Rechnungsmenue
+                    do {
+
+                        try {
+                            gibRechnungsMenueAus();
+                            input = liesEingabe();
+                            verarbeiteRechnungsEingabe(input);
 
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
@@ -305,7 +382,6 @@ public class EshopClientCUIGG {
             }
         } while (!input.equals("q"));
     }
-
 
 // Main
 
