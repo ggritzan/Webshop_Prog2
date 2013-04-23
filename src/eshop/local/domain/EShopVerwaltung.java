@@ -7,6 +7,7 @@ import java.util.Vector;
 import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Adresse;
+import eshop.local.valueobjects.Rechnung;
 
 /**
  * Created with IntelliJ IDEA.
@@ -98,14 +99,29 @@ public class EShopVerwaltung {
     }
 
     /**
-     * Methode zum Suchen von Rechnungen anhand des Auftragnamens
+     * Methode zum Suchen von Rechnungen anhand des Rechnungsnummer
      *
-     * @param auftragsname Auftragsname der gesuchten Rechnung
+     * @param rNr Rechnungsnummer der gesuchten Rechnung
      * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
      */
-    public Vector sucheNachAuftragsname(String auftragsname) {
+    public Rechnung sucheNachRechnungsnummer(int rNr) {
 
-        return meineRechnungen.sucheRechnungen(auftragsname);
+        return meineRechnungen.sucheRechnung(rNr);
+    }
+
+    /**
+     * Methode zum Suchen von Artikeln anhand der Artikelnummer
+     *
+     * @param aNr Artikelnummer des gesuchten Artikels
+     * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
+     */
+    public Artikel getArtikel(int aNr) {
+
+        return meineArtikel.getArtikel(aNr);
+    }
+
+    public boolean inWarenkorbLegen(Artikel a, int kNr, int menge){
+        return meineKunden.inWarenkorbLegen(a, kNr, menge);
     }
 
     /**
@@ -150,12 +166,12 @@ public class EShopVerwaltung {
     /**
      * Methode zum Einfügen eines neuen Kunden in den Bestand.
      *
-     * @param auftragsname
+     * @param kunde
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeRechnungEin(String auftragsname) {
-        return meineRechnungen.rechnungHinzufuegen(auftragsname);
+    public boolean fuegeRechnungEin(Kunde kunde) {
+        return meineRechnungen.rechnungHinzufuegen(kunde);
 
     }
 
@@ -211,6 +227,10 @@ public class EShopVerwaltung {
     public void schreibeRechung() throws IOException {
 
         meineRechnungen.schreibeDaten(datei + "_Rechnungen.ser");
+    }
+
+    public Kunde getKunde(int kNr) {
+        return meineKunden.getKunde(kNr);
     }
 
 }

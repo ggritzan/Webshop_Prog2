@@ -2,6 +2,8 @@ package eshop.local.domain;
 
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
+import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Rechnung;
 
 import java.io.IOException;
@@ -20,8 +22,8 @@ public class RechnungsVerwaltung {
     // Hashmap zum speichern des Rechnungsbestandes als Key dienen die Rechnungsnummern
     private HashMap<Integer, Rechnung> rechnungsBestandNr;
 
-    // Hashmap zum verknüpfen der Auftragsnamen mit der Rechnungsnummer
-    private HashMap<String, Integer> rechnungsBestandName;
+    // Hashmap zum verknüpfen der Kundennummer mit den Rechnungsnummern
+    private HashMap<Integer, Vector<Integer>> rechnungsBestandKundenNr;
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
     private PersistenceManager pm = new FilePersistenceManager();
@@ -34,7 +36,7 @@ public class RechnungsVerwaltung {
         rechnungsBestandNr = new HashMap<Integer, Rechnung>();
 
         // verknüpft die Aufträgsnamen mit den Rechnungsnummern
-        rechnungsBestandName = new HashMap<String, Integer>();
+        rechnungsBestandKundenNr = new HashMap<Integer, Vector<Integer>>();
     }
 
     /**
@@ -98,35 +100,33 @@ public class RechnungsVerwaltung {
         pm.close();
     }
 
-
-    /*
-     *  TODO: eine Methode die, die Auftragsnamen automatisch generiert als Beispiel:
-     *  int zaehler = 1000;
-     *  String warenkorbname;
-     *  String auftragsname = warenkorbname + zaehler;
-     *  auftragsname.toString();
-     *  zaehler++;
-     */
-
     /**
      * Methode zum hinzufuegen von Kunden
      *
-     * @param auftragsname
-     * @param rNr
+     * @param kunde
      */
 
-    public boolean rechnungHinzufuegen(String auftragsname) {
+    public boolean rechnungHinzufuegen(Kunde kunde) {
 
         // Wenn der Name eines Auftrages bereits vorhanden ist wird false zurück gegeben und kein neuer Auftrag angelegt
-        if (rechnungsBestandName.containsKey(auftragsname)) {
-            return false;
-
-        } else {
-            // Ist der Auftragsname noch nicht vorhanden, wird er neu angelegt und in den beiden HashMaps gespeichert (rechnungsBestandNr, rechnungBestandName)
-            Rechnung rechnung = new Rechnung(auftragsname);
+        if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
+            Rechnung rechnung = new Rechnung(kunde.getNummer(), kunde.getWarenkorb());
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
-            rechnungsBestandName.put(auftragsname, rechnung.getrNr());
+            Vector<Integer> vI = rechnungsBestandKundenNr.get(kunde.getNummer());
+            vI.add(rechnung.getrNr());
+            rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
             return true;
+
+        } else if(!rechnungsBestandKundenNr.containsKey(kunde.getNummer())){
+            // Ist der Auftragsname noch nicht vorhanden, wird er neu angelegt und in den beiden HashMaps gespeichert (rechnungsBestandNr, rechnungBestandName)
+            Rechnung rechnung = new Rechnung(kunde.getNummer(), kunde.getWarenkorb());
+            rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
+            Vector<Integer> vI = new Vector<Integer>();
+            vI.add(rechnung.getrNr());
+            rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
+            return true;
+        } else {
+            return false;
         }
 
     }
@@ -138,10 +138,21 @@ public class RechnungsVerwaltung {
      */
     public void rechnungHinzufuegen(Rechnung rechnung) {
 
-        // Erzeugt eine Rechnung mit seiner bisherigen Rechnungsnummer
-        Rechnung r = new Rechnung(rechnung);
-        rechnungsBestandNr.put(r.getrNr(), r);
-        rechnungsBestandName.put(rechnung.getAuftragsname(), r.getrNr());
+        if (rechnungsBestandKundenNr.containsKey(rechnung.getkNr())) {
+            Rechnung r = new Rechnung(rechnung);
+            rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
+            Vector<Integer> vI = rechnungsBestandKundenNr.get(rechnung.getkNr());
+            vI.add(rechnung.getrNr());
+            rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
+
+        } else {
+            // Erzeugt eine Rechnung mit seiner bisherigen Rechnungsnummer
+            Rechnung r = new Rechnung(rechnung);
+            rechnungsBestandNr.put(r.getrNr(), r);
+            Vector<Integer> vI = new Vector<Integer>();
+            vI.add(rechnung.getrNr());
+            rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
+        }
 
     }
 
@@ -160,27 +171,16 @@ public class RechnungsVerwaltung {
     }
 
     /**
-     * Methode durchsucht alle Rechnungen nach dem Parameter auftragsname und gibt die entsprechende Rechnung in einem Vektor zurueck
+     * Methode durchsucht alle Rechnungen nach einer Rechnungsnummer
      *
-     * @param auftragsname
+     * @param rNr
      */
-    public Vector sucheRechnungen(String auftragsname) {
-        int rNr = 0;
-        Vector<Rechnung> ergebnis = new Vector<Rechnung>();
-
-        if (rechnungsBestandName.containsKey(auftragsname)) {
-            rNr = rechnungsBestandName.get(auftragsname);
-            ergebnis.add(rechnungsBestandNr.get(rNr));
-
-            return ergebnis;
-
+    public Rechnung sucheRechnung(int rNr) {
+        if (rechnungsBestandNr.containsKey(rNr)) {
+            return rechnungsBestandNr.get(rNr);
         } else {
-            Vector<String> error = new Vector<String>();
-            error.add("Die Rechnung ist nicht vorhanden !");
-
-            return error;
+            return null;
         }
-
     }
 }
 

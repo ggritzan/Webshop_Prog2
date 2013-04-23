@@ -9,7 +9,6 @@ package eshop.local.valueobjects;
 
 import java.io.Serializable;
 import java.util.Vector;
-import eshop.local.valueobjects.Warenkorb;
 
 public class Kunde extends Person implements Serializable {
 
@@ -19,13 +18,13 @@ public class Kunde extends Person implements Serializable {
 
     // Attribute zur Beschreibung eines Kunden
     private int nummer;
-    private Warenkorb wk;
+    private Vector<Artikel> wk;
     private static int zaehler = 1000;
 
 // Konstruktor
 
     // Konstruktor für neue Kunden
-    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, Warenkorb wk) {
+    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, Vector<Artikel> wk) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.nummer = this.zaehler;
         this.zaehler++;
@@ -65,13 +64,14 @@ public class Kunde extends Person implements Serializable {
     }
 
     //fügt einen Artikel dem Warenkorb hinzu
-    public void inWarenkorbLegen(Artikel a) {
-        wk.addArtikel(a);
+    public boolean inWarenkorbLegen(Artikel a) {
+        wk.add(a);
+        return true;
     }
 
     //Entfernt einen Artikel aus dem Warenkorb
     public void ausWarenkorbEntfernen(Artikel a) {
-        wk.remArtikel(a);
+        wk.remove(a);
     }
 
 // Setter
@@ -88,7 +88,7 @@ public class Kunde extends Person implements Serializable {
     }
 
     // Gibt den Warenkorb des Kunden zurueck
-    public Warenkorb getWarenkorb() {
+    public Vector<Artikel> getWarenkorb() {
         return this.wk;
     }
 

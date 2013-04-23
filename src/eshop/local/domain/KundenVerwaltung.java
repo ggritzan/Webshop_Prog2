@@ -8,8 +8,8 @@ import java.util.Vector;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
+import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
-import eshop.local.valueobjects.Warenkorb;
 
 /**
  * Created with IntelliJ IDEA.
@@ -184,6 +184,23 @@ public class KundenVerwaltung {
 
         return ergebnis;
 
+    }
+
+    /**
+     * Methode durchsucht alle Rechnungen nach einer Rechnungsnummer
+     *
+     * @param kNr
+     */
+    public Kunde getKunde(int kNr) {
+        if (kundenBestandNr.containsKey(kNr)) {
+            return kundenBestandNr.get(kNr);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean inWarenkorbLegen(Artikel a, int kNr, int menge){
+        return kundenBestandNr.get(kNr).inWarenkorbLegen(a);
     }
 
     /**

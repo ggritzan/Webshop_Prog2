@@ -2,6 +2,8 @@ package eshop.local.ui.cui;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.valueobjects.Adresse;
+import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.Kunde;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -249,6 +251,30 @@ public class EshopClientCUINC {
         } else if (line.equals("s")) {
             //sichern
             eShopVerwaltung.schreibeKunden();
+        } else if (line.equals("w")){
+            //artikel in warenkorb packen
+            boolean ok = false;
+            try {
+                System.out.println(eShopVerwaltung.gibAlleKunden());
+                System.out.print("Kundennummer: > ");
+                String kNr = liesEingabe();
+                int kNrInt = Integer.parseInt(kNr);
+                System.out.println(eShopVerwaltung.gibAlleArtikel());
+                System.out.print("Artikelnummer: > ");
+                String aNr = liesEingabe();
+                int aNrInt = Integer.parseInt(aNr);
+                System.out.print("Menge: > ");
+                String menge = liesEingabe();
+                int mengeInt = Integer.parseInt(menge);
+                ok = eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getArtikel(aNrInt), kNrInt, mengeInt);
+            } catch (NumberFormatException e) {
+
+            }
+
+            if (ok)
+                System.out.println("Artikel wurde in den Warenkorb gelegt !");
+            else
+                System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
         }
 
 
@@ -262,9 +288,11 @@ public class EshopClientCUINC {
             // lese die notwendigen Parameter, einzeln pro Zeile
             boolean ok = false;
             try {
-                System.out.print("Auftragsname > ");
-                String auftragsname = liesEingabe();
-                ok = eShopVerwaltung.fuegeRechnungEin(auftragsname);
+                System.out.print("Kundennummer > ");
+                String kNr = liesEingabe();
+                int kNrInt = Integer.parseInt(kNr);
+                Kunde kunde = eShopVerwaltung.getKunde(kNrInt);
+                ok = eShopVerwaltung.fuegeRechnungEin(kunde);
 
             } catch (NumberFormatException e) {
 
@@ -282,9 +310,10 @@ public class EshopClientCUINC {
 
         } else if (line.equals("f")) {
             //suchen
-            System.out.print("Auftragsname:  > ");
-            String auftragsname = liesEingabe();
-            System.out.println(eShopVerwaltung.sucheNachAuftragsname(auftragsname));
+            System.out.print("Rechnungsnummer:  > ");
+            String rNr = liesEingabe();
+            int rNrInt = Integer.parseInt(rNr);
+            System.out.println(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
 
 
         } else if (line.equals("s")) {

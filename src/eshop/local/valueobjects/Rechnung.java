@@ -1,6 +1,7 @@
 package eshop.local.valueobjects;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,21 +18,24 @@ public class Rechnung implements Serializable {
     //Attribute zur Beschreibung eines Rechnungsobjektes
 
     private int rNr;
-    private String auftragsname;
+    private int kNr;
+    private Vector<Artikel> bestellteArtikel;
     private static int zaehler = 1000;
 
     //Konstruktor für neue Rechnungen
 
-    public Rechnung(String auftragsname) {
-        this.auftragsname = auftragsname;
+    public Rechnung(int kNr, Vector<Artikel> bestellteArtikel) {
+        this.kNr = kNr;
+        this.bestellteArtikel = bestellteArtikel;
         this.rNr = this.zaehler;
         this.zaehler++;
     }
 
     // Konstruktor für das einlesen von Rechnungen
     public Rechnung(Rechnung r) {
-        this.auftragsname = r.getAuftragsname();
+        this.kNr = r.getkNr();
         this.rNr = r.getrNr();
+        this.bestellteArtikel = r.getBestellteArtikel();
         if(r.getrNr() >= zaehler){
             this.zaehler = (r.getrNr() +1);
         }
@@ -49,19 +53,11 @@ public class Rechnung implements Serializable {
      */
     public String toString() {
         String string = new String();
-        string = "\tRechnungsnummer: " + getrNr()  + "\tAuftragsname:  " + getAuftragsname() +  "\n" ;
+        string = "\tRechnungsnummer: " + getrNr()  + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() +  "\n" ;
         return string;
     }
 
     //Setter
-
-    public void setrNr(int rNr) {
-        this.rNr = rNr;
-    }
-
-    public void setAuftragsname(String auftragsname){
-        this.auftragsname = auftragsname;
-    }
 
     //Getter
 
@@ -69,7 +65,11 @@ public class Rechnung implements Serializable {
         return this.rNr;
     }
 
-    public String getAuftragsname(){
-        return this.auftragsname;
+    public int getkNr(){
+        return this.kNr;
+    }
+
+    public Vector<Artikel> getBestellteArtikel(){
+        return this.bestellteArtikel;
     }
 }

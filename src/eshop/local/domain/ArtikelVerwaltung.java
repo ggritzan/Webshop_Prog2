@@ -229,5 +229,13 @@ public class ArtikelVerwaltung {
         }
     }
 
+    public Artikel getArtikel(int aNr) {
+        if (artikelBestandNr.containsKey(aNr)) {
+            return artikelBestandNr.get(aNr);
+        } else {
+            return null;
+        }
+    }
+
 }
 
