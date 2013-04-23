@@ -164,7 +164,9 @@ public class RechnungsVerwaltung {
         Vector<Rechnung> ergebnis = new Vector<Rechnung>();
 
         for (Rechnung elem : rechnungsBestandNr.values())
-            ergebnis.add(elem);
+
+                ergebnis.add(elem);
+
 
         return ergebnis;
 

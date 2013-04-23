@@ -18,7 +18,7 @@ public class Kunde extends Person implements Serializable {
 
     // Attribute zur Beschreibung eines Kunden
     private int nummer;
-    private Vector<Artikel> wk;
+    private Vector<Artikel> wk = new Vector<Artikel>();
     private static int zaehler = 1000;
 
 // Konstruktor
@@ -59,7 +59,7 @@ public class Kunde extends Person implements Serializable {
      */
     public String toString() {
         String string = new String();
-        string = 	"Kundennummer: " + getNummer() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t E-mail: " +getTelefon() + "\n" + getAdresse() ;
+        string = 	"Kundennummer: " + getNummer() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t E-mail: " +getTelefon() + "\n" + getAdresse() + "\n" + getWarenkorb() ;
         return string;
     }
 

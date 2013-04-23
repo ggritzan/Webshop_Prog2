@@ -11,6 +11,9 @@ import java.io.Serializable;
 
 public abstract class Person implements Serializable {
 
+
+    private static final long serialVersionUID = 4795760257516199004L;
+
     // Attribute zur Beschreibung einer Person
     private String vorname;
     private String nachname;
