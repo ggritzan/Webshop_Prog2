@@ -55,6 +55,7 @@ public class EshopClientCUINC {
         System.out.print("         \n  Kunde löschen: 'l");
         System.out.print("         \n  Kunden ausgeben:  'a'");
         // System.out.print("         \n  Artikel suchen:  'f'");
+        System.out.print("         \n  Artikel in den Warenkorb legen:  'w'");
         System.out.print("         \n  Daten sichern:  's'");
         System.out.print("         \n  zurück ins Hauptmenue: 'm'");
         System.out.print("> "); // Prompt
