@@ -270,7 +270,7 @@ public class EshopClientCUIGG {
                 int mengeInt = Integer.parseInt(menge);
                 Artikel a = eShopVerwaltung.getArtikel(aNrInt);
                 System.out.print("" + a );
-                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrIntk);
+                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrInt);
             } catch (NumberFormatException e) {
 
             }
