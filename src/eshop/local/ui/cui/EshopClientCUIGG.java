@@ -269,8 +269,8 @@ public class EshopClientCUIGG {
                 String menge = liesEingabe();
                 int mengeInt = Integer.parseInt(menge);
                 Artikel a = eShopVerwaltung.getArtikel(aNrInt);
-                a.setBestellteMenge(mengeInt);
-                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrInt, mengeInt);
+                System.out.print("" + a );
+                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrIntk);
             } catch (NumberFormatException e) {
 
             }

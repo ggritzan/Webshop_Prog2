@@ -7,7 +7,10 @@
  */
 package eshop.local.valueobjects;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Vector;
 
 public class Kunde extends Person implements Serializable {
@@ -18,26 +21,21 @@ public class Kunde extends Person implements Serializable {
 
     // Attribute zur Beschreibung eines Kunden
     private int nummer;
-    private Vector<Artikel> wk = new Vector<Artikel>();
+    private HashMap<Integer, Artikel> wk;
     private static int zaehler = 1000;
 
 // Konstruktor
 
     // Konstruktor für neue Kunden
-    public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse, Vector<Artikel> wk) {
-        super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
-        this.nummer = this.zaehler;
-        this.zaehler++;
-        this.wk = wk;
-    }
-
-    // Konstruktor für neue Kunden ohne Warenkorb
     public Kunde(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.nummer = this.zaehler;
         this.zaehler++;
+        this.wk = new HashMap<Integer, Artikel>();
 
     }
+
+
 
     // Konstruktor für das einlesen von Kunden
     public Kunde(Kunde kunde) {
@@ -45,7 +43,7 @@ public class Kunde extends Person implements Serializable {
         this.nummer = kunde.getNummer();
         this.wk = kunde.getWarenkorb();
         this.zaehler = (kunde.getNummer() +1);
-
+        this.wk = kunde.getWarenkorb();
     }
 
 
@@ -63,16 +61,18 @@ public class Kunde extends Person implements Serializable {
         string = 	"Kundennummer: " + getNummer() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t E-mail: " +getTelefon() + "\n" + getAdresse() + "\n" + getWarenkorb() ;
         return string;
     }
-
+   // Todo das einfügen von Artikeln in den Warenkorb bricht momentan noch mit einer Nullpointer exception ab
     //fügt einen Artikel dem Warenkorb hinzu
     public boolean inWarenkorbLegen(Artikel a) {
-        wk.add(a);
+
+        wk.put(a.getNummer(),a);
+
         return true;
     }
 
     //Entfernt einen Artikel aus dem Warenkorb
     public boolean ausWarenkorbEntfernen(Artikel a) {
-        wk.remove(a);
+        wk.remove(a.getNummer());
         return true;
     }
 
@@ -84,7 +84,7 @@ public class Kunde extends Person implements Serializable {
 
     // leert den Warenkorb eines Kunden
     public boolean resetWarenkorb() {
-        this.wk.removeAllElements();
+        this.wk.clear();
         return true;
     }
 
@@ -96,7 +96,7 @@ public class Kunde extends Person implements Serializable {
     }
 
     // Gibt den Warenkorb des Kunden zurueck
-    public Vector<Artikel> getWarenkorb() {
+    public HashMap<Integer, Artikel> getWarenkorb() {
         return this.wk;
     }
 

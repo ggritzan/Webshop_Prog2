@@ -121,8 +121,8 @@ public class EShopVerwaltung {
     }
 
 
-    public boolean inWarenkorbLegen(Artikel a, int kNr, int menge){
-        return meineKunden.inWarenkorbLegen(a, kNr, menge);
+    public boolean inWarenkorbLegen(Artikel a, int kNr){
+        return meineKunden.inWarenkorbLegen(a, kNr);
     }
 
     /**

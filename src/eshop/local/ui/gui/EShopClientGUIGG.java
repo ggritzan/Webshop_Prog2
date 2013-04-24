@@ -1,27 +1,54 @@
-package eshop.local.ui.cui;
+package eshop.local.ui.gui;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Noshaba
+ * User: Giacomo
  * Date: 11.04.13
  * Time: 10:19
  * To change this template use File | Settings | File Templates.
  */
-public class EshopClientCUINC {
+public class EShopClientGUIGG extends Frame {
     private EShopVerwaltung eShopVerwaltung;
     private BufferedReader in;
 
+private void init() {
+    setLayout(new BorderLayout());
 
-    public EshopClientCUINC(String datei) throws IOException, ClassNotFoundException {
+    Panel nortPanel = new Panel();
+    Panel westPanel = new Panel();
+    Panel centerPanel = new Panel();
+
+    // North
+    nortPanel.setLayout(new GridLayout(1,5));
+    nortPanel.add(new Label("Suche:"),1);
+    TextField searchTextField = new TextField();
+    nortPanel.add(searchTextField,2);
+    Button searchButton = new Button("Suchen");
+    nortPanel.add(searchButton,3);
+
+    // West
+
+
+
+
+
+}
+
+
+
+
+
+    public EShopClientGUIGG(String datei) throws IOException, ClassNotFoundException {
         // erzeugt eine eShopVerwaltung
         eShopVerwaltung = new EShopVerwaltung(datei);
         // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
@@ -64,6 +91,7 @@ public class EshopClientCUINC {
 
     private void gibRechnungsMenueAus() {
         System.out.print("Befehle: \n  Rechnung hinzufuegen: 'h'");
+        System.out.print("         \n  Rechnung löschen: 'l");
         System.out.print("         \n  Rechnungen ausgeben:  'a'");
         System.out.print("         \n  Rechnung suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
@@ -88,7 +116,7 @@ public class EshopClientCUINC {
             //für Kunden
             return 'k';
 
-        } else if (line.equals("r")){
+        } else if (line.equals("r")) {
             // für Rechnungen
             return 'r';
         }
@@ -224,9 +252,7 @@ public class EshopClientCUINC {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        }
-
-        else if (line.equals("l")) {
+        } else if (line.equals("l")) {
             //löschen
             boolean ok = false;
             try {
@@ -252,9 +278,10 @@ public class EshopClientCUINC {
         } else if (line.equals("s")) {
             //sichern
             eShopVerwaltung.schreibeKunden();
-        } else if (line.equals("w")){
+        } else if (line.equals("w")) {
             //artikel in warenkorb packen
             boolean ok = false;
+
             try {
                 System.out.println(eShopVerwaltung.gibAlleKunden());
                 System.out.print("Kundennummer: > ");
@@ -267,17 +294,19 @@ public class EshopClientCUINC {
                 System.out.print("Menge: > ");
                 String menge = liesEingabe();
                 int mengeInt = Integer.parseInt(menge);
-                ok = eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getArtikel(aNrInt), kNrInt);
+                Artikel a = eShopVerwaltung.getArtikel(aNrInt);
+                a.setBestellteMenge(mengeInt);
+                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrInt);
             } catch (NumberFormatException e) {
 
             }
 
-            if (ok)
+            if (ok) {
                 System.out.println("Artikel wurde in den Warenkorb gelegt !");
-            else
+            } else {
                 System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
+            }
         }
-
 
     }
 
@@ -288,22 +317,43 @@ public class EshopClientCUINC {
             //hinzufügen
             // lese die notwendigen Parameter, einzeln pro Zeile
             boolean ok = false;
+            int kNrInt = 0;
             try {
                 System.out.print("Kundennummer > ");
                 String kNr = liesEingabe();
-                int kNrInt = Integer.parseInt(kNr);
+                kNrInt = Integer.parseInt(kNr);
                 Kunde kunde = eShopVerwaltung.getKunde(kNrInt);
                 ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+
 
             } catch (NumberFormatException e) {
 
             }
 
-            if (ok) {
-                System.out.println("Einfügen ok");
+            if (ok & kNrInt != 0) {
+                eShopVerwaltung.resetWarenkorb(kNrInt);
+                System.out.println("Rechnung wurde erstellt !");
             } else {
-                System.out.println("Die Rechnung konnte leider nicht angelegt werden !");
+                System.out.println("Die Rechnung konnte leider nicht erstellt werden !");
             }
+
+        } else if (line.equals("l")) {
+            //löschen Rechnung
+            boolean ok = false;
+            try {
+                System.out.println(eShopVerwaltung.gibAlleRechnungen());
+                System.out.print("Rechnungsnummer: > ");
+                String rNr = liesEingabe();
+                int rNrInt = Integer.parseInt(rNr);
+                ok = eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
+            } catch (NumberFormatException e) {
+
+            }
+
+            if (ok)
+                System.out.println("Kunde wurde geloescht !");
+            else
+                System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
 
         } else if (line.equals("a")) {
             //ale ausgeben
@@ -406,9 +456,9 @@ public class EshopClientCUINC {
 
     public static void main(String[] args) throws ClassNotFoundException {
 
-        EshopClientCUINC cui;
+        EShopClientGUIGG cui;
         try {
-            cui = new EshopClientCUINC("EShop");
+            cui = new EShopClientGUIGG("EShop");
             cui.run();
         } catch (IOException e) {
             e.printStackTrace();

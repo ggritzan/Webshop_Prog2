@@ -199,8 +199,10 @@ public class KundenVerwaltung {
         }
     }
 
-    public boolean inWarenkorbLegen(Artikel a, int kNr, int menge) {
-        return kundenBestandNr.get(kNr).inWarenkorbLegen(a);
+    public boolean inWarenkorbLegen(Artikel a, int kNr) {
+         Kunde k = kundenBestandNr.get(kNr);
+        boolean ok =  k.inWarenkorbLegen(a);
+        return ok ;
     }
 
     public boolean resetWarenkorb(int kNr) {

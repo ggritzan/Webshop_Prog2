@@ -110,7 +110,12 @@ public class RechnungsVerwaltung {
 
         // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
-            Rechnung rechnung = new Rechnung(kunde.getNummer(), kunde.getWarenkorb());
+            Vector<Artikel> wkV = new Vector<Artikel>();
+
+            for (Artikel elem : kunde.getWarenkorb().values())
+                wkV.add(elem);
+
+            Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV);
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
             Vector<Integer> vI = rechnungsBestandKundenNr.get(kunde.getNummer());
             vI.add(rechnung.getrNr());
@@ -118,8 +123,11 @@ public class RechnungsVerwaltung {
             return true;
 
         } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
-            // sollte noch keine Rechnung für den Kunden exestieren
-            Rechnung rechnung = new Rechnung(kunde.getNummer(), kunde.getWarenkorb());
+            Vector<Artikel> wkV = new Vector<Artikel>();
+
+            for (Artikel elem : kunde.getWarenkorb().values())
+                wkV.add(elem);
+            Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV);
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
             Vector<Integer> vI = new Vector<Integer>();
             vI.add(rechnung.getrNr());

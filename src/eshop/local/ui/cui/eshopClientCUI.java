@@ -29,7 +29,7 @@ public class eshopClientCUI {
             System.out.println("Neuer Bestand " + art1.getBestand());
             System.out.println("Preis "+ art1.getPreis());
             m1.preisAendern(art1, 7.55);
-            k1.inWarenkorbLegen(art1);
+            //k1.inWarenkorbLegen(art1,menge);
             System.out.println(k1.getNummer());
             System.out.println(m1.getmNr());
     }
