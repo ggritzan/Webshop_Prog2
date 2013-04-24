@@ -288,20 +288,21 @@ public class EshopClientCUIGG {
             //hinzufügen
             // lese die notwendigen Parameter, einzeln pro Zeile
             boolean ok = false;
-
+            int kNrInt = 0;
             try {
                 System.out.print("Kundennummer > ");
                 String kNr = liesEingabe();
-                int kNrInt = Integer.parseInt(kNr);
+                kNrInt = Integer.parseInt(kNr);
                 Kunde kunde = eShopVerwaltung.getKunde(kNrInt);
                 ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+
 
             } catch (NumberFormatException e) {
 
             }
 
-            if (ok) {
-                 // eShopVerwaltung.resetWarenkorb(kNrInt);
+            if (ok & kNrInt != 0) {
+                eShopVerwaltung.resetWarenkorb(kNrInt);
                 System.out.println("Rechnung wurde erstellt !");
             } else {
                 System.out.println("Die Rechnung konnte leider nicht erstellt werden !");

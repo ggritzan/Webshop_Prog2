@@ -171,7 +171,7 @@ public class KundenVerwaltung {
 
     }
 
-    /**
+   /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Kunden enthaelt
      */
     public Vector alleKundenZurueckgeben() {
@@ -204,8 +204,14 @@ public class KundenVerwaltung {
     }
 
     public boolean resetWarenkorb(int kNr) {
+
+        if(kundenBestandNr.containsKey(kNr)){
         Kunde k = kundenBestandNr.get(kNr);
-        return k.resetWarenkorb();
+        k.resetWarenkorb();
+        kundenBestandNr.put(kNr,k);
+        return true;
+        }
+        return false;
     }
     /**
      * Methode durchsucht alle Kunden nach dem Parameter Nachname und gibt die entsprechenden Kunden in einem Vektor zurueck

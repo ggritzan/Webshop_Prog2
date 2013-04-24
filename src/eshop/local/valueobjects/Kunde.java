@@ -100,6 +100,8 @@ public class Kunde extends Person implements Serializable {
         return this.wk;
     }
 
+
+
 }
 
 
