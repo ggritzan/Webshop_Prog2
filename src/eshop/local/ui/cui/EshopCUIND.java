@@ -367,26 +367,64 @@ public class EshopCUIND {
             boolean ok = false;
             System.out.print("Vorname > ");
             String vorname = liesEingabe();
+            if(vorname.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("Nachname > ");
             String nachname = liesEingabe();
+            if(nachname.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("Benutzername > ");
             String benutzername = liesEingabe();
+            if(benutzername.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("Passwort  > ");
             String passwort = liesEingabe();
+            if(passwort.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("E-mail > ");
             String email = liesEingabe();
+            if(email.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("Telefon > ");
             String telefon = liesEingabe();
+            if(telefon.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("Straße > ");
             String straße = liesEingabe();
+            if(straße.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("PLZ > ");
             String plz = liesEingabe();
+            if(plz.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             System.out.print("Ort > ");
             String ort = liesEingabe();
+            if(ort.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
             Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
             ok = eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
             if(ok){
                 System.out.println("Der Mitarbeiter wurde erfolgreich eingefuegt.");
+            }  else {
+                System.out.println("Beim anlegen des Mitarbeiters ist ein Fehler aufgetreten.");
             }
         } else if(line.equals("l")){
             System.out.println("Bitte geben Sie die Nummer des Mitarbeiters an, der gelöscht werden soll.");
