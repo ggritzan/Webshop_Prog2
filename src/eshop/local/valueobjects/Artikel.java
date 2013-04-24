@@ -23,6 +23,7 @@ public class Artikel implements Serializable {
     private int nummer;
     private double preis;
     private int bestand = 0;
+    private int bestellteMenge = 0;
 
 // Konstruktor
 
@@ -33,7 +34,7 @@ public class Artikel implements Serializable {
             this.preis = preis;
             this.nummer = this.zaehler;
             this.zaehler  ++;
-            this.bestand = 0;
+
          }
 
         // Konstruktor für das einlesen von Artikeln
@@ -43,6 +44,7 @@ public class Artikel implements Serializable {
             this.preis = artikel.getPreis();
             this.nummer = artikel.getNummer();
             this.bestand = artikel.getBestand();
+            this.bestellteMenge = artikel.getBestellteMenge();
             if(artikel.getNummer() >= zaehler){
             this.zaehler = (artikel.getNummer() +1);
             }
@@ -81,8 +83,12 @@ public class Artikel implements Serializable {
         }
 
 
-        public void setBestand(int wert) {
-            this.bestand = wert;
+        public void setBestand(int bestand) {
+            this.bestand = bestand;
+        }
+
+        public void setBestellteMenge(int menge){
+            this.bestellteMenge = menge;
         }
 
 
@@ -111,6 +117,11 @@ public class Artikel implements Serializable {
 
         // gibt den Bestand des Artikels zurueck
         public int getBestand() {
+            return this.bestand;
+        }
+
+        // gibt die bestellte Menge eines Artikels zurück
+        public int getBestellteMenge() {
             return this.bestand;
         }
 

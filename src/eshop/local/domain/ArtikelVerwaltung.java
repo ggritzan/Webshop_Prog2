@@ -229,6 +229,20 @@ public class ArtikelVerwaltung {
         }
     }
 
+    /**
+     * Methode setzt den Wert wieviel Artikel bestellt werden sollen
+     *
+     * @param menge Integer
+     */
+    public boolean setBestellteMenge(int menge) {
+        if (menge >= 0) {
+            setBestellteMenge(menge);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Artikel getArtikel(int aNr) {
         if (artikelBestandNr.containsKey(aNr)) {
             return artikelBestandNr.get(aNr);

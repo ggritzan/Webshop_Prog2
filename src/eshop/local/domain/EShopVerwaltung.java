@@ -146,6 +146,16 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum ändern der Bestellmenge
+     *
+     * @param menge    Menge die vom Artikel bestellt werden soll
+     * @return boolean
+     */
+    public boolean setBestellteMenge(int menge) {
+        return meineArtikel.setBestellteMenge(menge);
+    }
+
+    /**
      * Methode zum Einfügen eines neuen Artikels in den Bestand.
      *
      * @param name,beschreibung,preis         Name des Artikels, Beschreibung des Artikels, Preis des Artikels
