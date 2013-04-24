@@ -31,6 +31,13 @@ public class Mitarbeiter extends Person implements Serializable {
             this.zaehler = (mitarbeiter.getmNr() +1);
         }
     }
+    //Methoden
+
+    public String toString() {
+        String string = new String();
+        string = 	"Mitarbeiternummer: " + getmNr() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t E-mail: " +getTelefon() + "\n" + getAdresse();
+        return string;
+    }
 
     //Setzt den Bestand des Artikels auf den gewünschten Wert
     public void bestandErhoehen(Artikel a, int wert)   {
