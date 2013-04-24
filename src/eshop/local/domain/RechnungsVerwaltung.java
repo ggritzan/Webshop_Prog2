@@ -29,18 +29,17 @@ public class RechnungsVerwaltung {
     private PersistenceManager pm = new FilePersistenceManager();
 
     // Konstruktor
-
     public RechnungsVerwaltung() {
 
         // verknüpft die Rechungsnummern mit den Rechnungsobjekten
         rechnungsBestandNr = new HashMap<Integer, Rechnung>();
 
-        // verknüpft die Aufträgsnamen mit den Rechnungsnummern
+        // verknüpft die Kundennummer mit einem Vector von Rechnungsnummern
         rechnungsBestandKundenNr = new HashMap<Integer, Vector<Integer>>();
     }
 
     /**
-     * Methode zum Einlesen der Rechnungsdaten aus einer Datei.
+     * Methode zum Einlesen der Rechnungen aus einer Datei.
      *
      * @param datei
      * @throws IOException,ClassNotFoundException
@@ -70,6 +69,7 @@ public class RechnungsVerwaltung {
 
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
+
         } catch (IOException e) {
             System.out.println("Fehler beim einlesen der Rechnungsdaten !");
             e.printStackTrace();
@@ -108,7 +108,7 @@ public class RechnungsVerwaltung {
 
     public boolean rechnungHinzufuegen(Kunde kunde) {
 
-        // Wenn der Name eines Auftrages bereits vorhanden ist wird false zurück gegeben und kein neuer Auftrag angelegt
+        // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
             Rechnung rechnung = new Rechnung(kunde.getNummer(), kunde.getWarenkorb());
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
@@ -117,8 +117,8 @@ public class RechnungsVerwaltung {
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
             return true;
 
-        } else if(!rechnungsBestandKundenNr.containsKey(kunde.getNummer())){
-            // Ist der Auftragsname noch nicht vorhanden, wird er neu angelegt und in den beiden HashMaps gespeichert (rechnungsBestandNr, rechnungBestandName)
+        } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
+            // sollte noch keine Rechnung für den Kunden exestieren
             Rechnung rechnung = new Rechnung(kunde.getNummer(), kunde.getWarenkorb());
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
             Vector<Integer> vI = new Vector<Integer>();
@@ -157,6 +157,29 @@ public class RechnungsVerwaltung {
     }
 
     /**
+     * Methode zum loeschen von Kunden durch den PersistenceManager
+     *
+     * @param rechnung
+     */
+    public boolean rechnungLoeschen(Rechnung rechnung) {
+
+        Rechnung r = rechnung;
+        Vector<Integer> vI = rechnungsBestandKundenNr.get(r.getkNr());
+        //
+        if (rechnungsBestandNr.containsKey(r.getrNr()) & vI.contains(r.getrNr())) {
+            rechnungsBestandNr.remove(r.getrNr());
+
+            vI.removeElement(r.getrNr());
+            rechnungsBestandKundenNr.put(r.getkNr(), vI);
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+
+    /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Rechnungen enthaelt
      */
     public Vector alleRechnungenZurueckgeben() {
@@ -165,7 +188,7 @@ public class RechnungsVerwaltung {
 
         for (Rechnung elem : rechnungsBestandNr.values())
 
-                ergebnis.add(elem);
+            ergebnis.add(elem);
 
 
         return ergebnis;

@@ -65,6 +65,7 @@ public class EshopClientCUIGG {
 
     private void gibRechnungsMenueAus() {
         System.out.print("Befehle: \n  Rechnung hinzufuegen: 'h'");
+        System.out.print("         \n  Rechnung löschen: 'l");
         System.out.print("         \n  Rechnungen ausgeben:  'a'");
         System.out.print("         \n  Rechnung suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
@@ -307,6 +308,24 @@ public class EshopClientCUIGG {
             } else {
                 System.out.println("Die Rechnung konnte leider nicht erstellt werden !");
             }
+
+        } else if (line.equals("l")) {
+            //löschen Rechnung
+            boolean ok = false;
+            try {
+                System.out.println(eShopVerwaltung.gibAlleRechnungen());
+                System.out.print("Rechnungsnummer: > ");
+                String rNr = liesEingabe();
+                int rNrInt = Integer.parseInt(rNr);
+                ok = eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
+            } catch (NumberFormatException e) {
+
+            }
+
+            if (ok)
+                System.out.println("Kunde wurde geloescht !");
+            else
+                System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
 
         } else if (line.equals("a")) {
             //ale ausgeben

@@ -211,6 +211,18 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum loeschen einer  Rechnung aus dem  Bestand.
+     *
+     * @param rechnung         Nummer des Kunden der geloescht werden soll.
+     *
+     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
+     */
+    public boolean loescheRechnung(Rechnung rechnung) {
+        return meineRechnungen.rechnungLoeschen(rechnung);
+
+    }
+
+    /**
      * Methode zum Speichern des Artikelbestands in einer Datei.
      *
      * @throws IOException
