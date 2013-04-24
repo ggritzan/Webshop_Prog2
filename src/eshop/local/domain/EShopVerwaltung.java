@@ -56,7 +56,7 @@ public class EShopVerwaltung {
         meineRechnungen.liesDaten(datei + "_Rechnungen.ser");
         //Mitarbeiter
         meineMitarbeiter = new MitarbeiterVerwaltung();
-        meineMitarbeiter.liesDaten(datei + " Mitarbeiter.ser");
+        meineMitarbeiter.liesDaten(datei + "_Mitarbeiter.ser");
     }
 
 // Methoden
