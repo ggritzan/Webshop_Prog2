@@ -32,6 +32,7 @@ public class eshopClientCUI {
             //k1.inWarenkorbLegen(art1,menge);
             System.out.println(k1.getNummer());
             System.out.println(m1.getmNr());
+            System.out.println(k1.getWarenkorb());
     }
 
 

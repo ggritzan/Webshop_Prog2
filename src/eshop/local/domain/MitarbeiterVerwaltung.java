@@ -65,11 +65,9 @@ public class MitarbeiterVerwaltung {
 
             }
             while (einMitarbeiter != null);
-            pm.close();
         } catch (IOException e) {
             System.out.println("Der Datenbestand ist leer");
         } finally {
-            //schließt im Fall einer IO Exception bei geöffneter Datei diese wieder
             pm.close();
         }
     }
@@ -85,8 +83,8 @@ public class MitarbeiterVerwaltung {
         if (!mitarbeiterBestandNr.isEmpty()) {
             Iterator iter = mitarbeiterBestandNr.values().iterator();
             while (iter.hasNext()) {
-                Artikel a = (Artikel) iter.next();
-                pm.speichereArtikel(a);
+                Mitarbeiter m = (Mitarbeiter) iter.next();
+                pm.speichereMitarbeiter(m);
             }
         }
         //Persistenz-Schnittstelle wieder schließen

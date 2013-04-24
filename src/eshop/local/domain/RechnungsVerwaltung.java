@@ -51,28 +51,22 @@ public class RechnungsVerwaltung {
         Rechnung rechnung;
 
         try {
-
             // PersistenzManager für Lesevorgänge wird geöffnet
             pm.openForReading(datei);
-
             do {
                 // Rechnungs-Objekt einlesen
                 rechnung = pm.ladeRechnung();
                 if (rechnung != null) {
-
                     // Rechnung einfügen
                     rechnungHinzufuegen(rechnung);
-
                 }
-
             } while (rechnung != null);
-
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
-            pm.close();
-
         } catch (IOException e) {
             System.out.println("Fehler beim einlesen der Rechnungsdaten !");
             e.printStackTrace();
+        }    finally{
+            pm.close();
         }
     }
 
@@ -195,9 +189,7 @@ public class RechnungsVerwaltung {
         Vector<Rechnung> ergebnis = new Vector<Rechnung>();
 
         for (Rechnung elem : rechnungsBestandNr.values())
-
             ergebnis.add(elem);
-
 
         return ergebnis;
 

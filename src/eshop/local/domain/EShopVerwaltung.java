@@ -28,6 +28,8 @@ public class EShopVerwaltung {
     // Erzeugt eine Rechnungsverwaltung
     private RechnungsVerwaltung meineRechnungen;
 
+    private MitarbeiterVerwaltung meineMitarbeiter;
+
 // Konstruktor
 
     /**
@@ -52,7 +54,9 @@ public class EShopVerwaltung {
         // Rechnungsbestand aus Datei einlesen
         meineRechnungen = new RechnungsVerwaltung();
         meineRechnungen.liesDaten(datei + "_Rechnungen.ser");
-
+        //Mitarbeiter
+        meineMitarbeiter = new MitarbeiterVerwaltung();
+        meineMitarbeiter.liesDaten(datei + " Mitarbeiter.ser");
     }
 
 // Methoden
@@ -85,6 +89,16 @@ public class EShopVerwaltung {
     public Vector gibAlleRechnungen() {
         // delegiert an die Rechnungsverwaltung
         return meineRechnungen.alleRechnungenZurueckgeben();
+    }
+
+    /**
+     * Methode, die eine Liste aller im Bestand befindlichen Mitarbeiter zurückgibt Aufgabe wird an die Mitarbeiterverwaltung delegiert
+     *
+     * @return Vector Liste aller Mitarbeiter im Bestand des EShops als Vector
+     */
+    public Vector gibAlleMitarbeiter() {
+        // delegiert an die Mitarbeiterverwaltung
+        return meineMitarbeiter.alleMitarbeiterZurueckgeben();
     }
 
     /**
@@ -185,6 +199,22 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum Einfügen eines neuen Mitarbeiters in den Bestand.
+     *
+     * @param vorname
+     * @param nachname
+     * @param benutzername
+     * @param passwort
+     * @param email
+     * @param telefon
+     *
+     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
+     */
+    public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+        return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname,benutzername, passwort, email, telefon, adresse);
+    }
+
+    /**
      * Methode zum Einfügen eines neuen Kunden in den Bestand.
      *
      * @param kunde
@@ -217,6 +247,18 @@ public class EShopVerwaltung {
      */
     public boolean loescheKunde(int kunNr) {
         return meineKunden.kundenLoeschen(kunNr);
+
+    }
+
+    /**
+     * Methode zum loeschen eines Mitarbeiters aus dem  Bestand.
+     *
+     * @param mNr Nummer des Mitarbeiters der geloescht werden soll.
+     *
+     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
+     */
+    public boolean loescheMitarbeiter(int mNr) {
+        return meineMitarbeiter.mitarbeiterLoeschen(mNr);
 
     }
 
@@ -260,6 +302,16 @@ public class EShopVerwaltung {
     public void schreibeRechung() throws IOException {
 
         meineRechnungen.schreibeDaten(datei + "_Rechnungen.ser");
+    }
+
+    /**
+     * Methode zum Speichern des Mitarbeiterbestands in einer Datei.
+     *
+     * @throws IOException
+     */
+    public void schreibeMitarbeiter() throws IOException {
+
+        meineMitarbeiter.schreibeDaten(datei + "_Mitarbeiter.ser");
     }
 
     public Kunde getKunde(int kNr) {
