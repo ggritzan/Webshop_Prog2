@@ -182,5 +182,23 @@ public class MitarbeiterVerwaltung {
 
     }
 
+    public boolean findeMitarbeiter(String benutzername, String passwort) {
+        if (mitarbeiterBestandName.containsKey(benutzername)) {
+            Mitarbeiter m = mitarbeiterBestandNr.get(benutzername);
+            System.out.println(m.getPasswort());
+            String p = m.getPasswort();
+            if (p.equals(passwort)) {
+                System.out.println("Ihr Login war erfolgreich");
+                return true;
+            }else{
+                System.out.println("Login fehlgeschlagen");
+            return false;
+            }
+        } else {
+            System.out.println("Login fehlgeschlagen!");
+            return false;
+        }
+    }
+
 }
 

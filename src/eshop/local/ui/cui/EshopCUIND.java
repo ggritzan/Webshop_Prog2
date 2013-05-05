@@ -28,6 +28,17 @@ public class EshopCUIND {
         in = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    private void gibLoginMenue() throws IOException {
+        System.out.println("Willkommen im E-Shop, bitte geben sie Benutzername und Passwort ein.");
+        System.out.println("Benutzername:");
+        String bName = liesEingabe();
+        System.out.println("Passwort:");
+        String bPasswort = liesEingabe();
+        if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
+            gibMitarbeiterMenueAus();
+        }
+    }
+
     private void gibmainMenue() {
         System.out.print("Befehle: \n  Artikelmenue: 'a'");
         System.out.print("         \n  Kundenmenue: 'k'");
@@ -452,6 +463,7 @@ public class EshopCUIND {
         do {
 
             try {
+                gibLoginMenue();
                 gibmainMenue();
                 input = liesEingabe();
                 verarbeiteMitarbeiterEingabe(input);

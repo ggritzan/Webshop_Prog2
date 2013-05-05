@@ -102,6 +102,16 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum Suchen von Mitarbeitern anhand des Benutzernamens
+     *
+     * @param bName Benutzername des gesuchten Mitarbeiters
+     * @return Vector Rückgabe eines Vectors mit dem gefundenen Mitarbeiter
+     */
+    public boolean findeMitarbeiter(String bName, String bPasswort) {
+         return meineMitarbeiter.findeMitarbeiter(bName, bPasswort);
+    }
+
+    /**
      * Methode zum Suchen von Artikel anhand des Namens
      *
      * @param name Name des gesuchten Artikels
