@@ -186,7 +186,6 @@ public class MitarbeiterVerwaltung {
         if (mitarbeiterBestandName.containsKey(benutzername)) {
             int mnr = mitarbeiterBestandName.get(benutzername);
             Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
-            System.out.println(m.getPasswort());
             String p = m.getPasswort();
             if (p.equals(passwort)) {
                 System.out.println("Ihr Login war erfolgreich");

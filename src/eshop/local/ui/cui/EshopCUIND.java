@@ -29,14 +29,24 @@ public class EshopCUIND {
         in = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    private void gibStartMenue() throws IOException {
+        System.out.println("Willkommen im E-Shop!");
+        System.out.print("Befehle: \n  Fortfahren zum Login: 'l'");
+        System.out.print("         \n  Neue Kundenregistrierung: 'k'");
+        System.out.println("       \n  Programm beenden 'q'");
+    }
+
     private void gibLoginMenue() throws IOException {
-        System.out.println("Willkommen im E-Shop, bitte geben sie Benutzername und Passwort ein.");
         System.out.println("Benutzername:");
         String bName = liesEingabe();
         System.out.println("Passwort:");
         String bPasswort = liesEingabe();
         if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
+            System.out.println("Willkommen Mitarbeiter");
             gibMitarbeiterMenueAus();
+        }else if(eShopVerwaltung.findeKunden(bName, bPasswort)) {
+            System.out.println("Willkommen Kunde");
+            gibKundenMenueAus();
         }
     }
 
@@ -104,24 +114,17 @@ public class EshopCUIND {
     private char verarbeiteMainEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
-        if (line.equals("a")) {
-            //für Artikel
-            return 'a';
-
+        if (line.equals("l")) {
+            //zum Login
+            return 'l';
         } else if (line.equals("k")) {
-            //für Kunden
+            //zum anlegen neuer Kunden, Neuanmeldung
             return 'k';
-
-        } else if (line.equals("r")) {
-            // für Rechnungen
-            return 'r';
-        } else if (line.equals("b")){
-            // für Mitarbeiter
-            return'b';
-        }
-
+        } else if (line.equals("q")) {
+        //zum anlegen neuer Kunden, Neuanmeldung
+        return 'q';
+    }
         return 'm';
-
     }
 
     private void verarbeiteArtikelEingabe(String line) throws IOException {
@@ -213,6 +216,40 @@ public class EshopCUIND {
         }
 
 
+    }
+
+    private void neuenKundenAnlegen() throws IOException {
+        boolean ok = false;
+        System.out.println("Willkommen bei der Kundenregistrierung.");
+        System.out.println("Bitte geben sie ihre Daten ein.");
+        try {
+            System.out.print("Vorname > ");
+            String vorname = liesEingabe();
+            System.out.print("Nachname > ");
+            String nachname = liesEingabe();
+            System.out.print("Benutzername > ");
+            String benutzername = liesEingabe();
+            System.out.print("Passwort  > ");
+            String passwort = liesEingabe();
+            System.out.print("E-mail > ");
+            String email = liesEingabe();
+            System.out.print("Telefon > ");
+            String telefon = liesEingabe();
+            System.out.print("Straße > ");
+            String straße = liesEingabe();
+            System.out.print("PLZ > ");
+            String plz = liesEingabe();
+            System.out.print("Ort > ");
+            String ort = liesEingabe();
+            Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
+            ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+         }catch (NumberFormatException e) {
+            System.out.println(e);
+         }
+        if (ok)
+            System.out.println("Einfügen ok");
+        else
+            System.out.println("Der Kunde konnte leider nicht angelegt werden !");
     }
 
     private void verarbeiteKundenEingabe(String line) throws IOException {
@@ -464,89 +501,24 @@ public class EshopCUIND {
         do {
 
             try {
-                gibLoginMenue();
-                gibmainMenue();
+                gibStartMenue();
                 input = liesEingabe();
-                verarbeiteMitarbeiterEingabe(input);
                 char var = verarbeiteMainEingabe(input);
-                if (var == 'a') {
-                    //Artikelmenue
-                    do {
-
-                        try {
-                            gibArtikelMenueAus();
-                            input = liesEingabe();
-                            verarbeiteArtikelEingabe(input);
-
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-
-
-                        }
-                    } while (!input.equals("m"));
-
-                }
-
-                if (var == 'k') {
-                    //Kundenmenue
-                    do {
-
-                        try {
-                            gibKundenMenueAus();
-                            input = liesEingabe();
-                            verarbeiteKundenEingabe(input);
-
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-
-
-                        }
-                    } while (!input.equals("m"));
-
-                }
-
-                if (var == 'r') {
-                    //Rechnungsmenue
-                    do {
-
-                        try {
-                            gibRechnungsMenueAus();
-                            input = liesEingabe();
-                            verarbeiteRechnungsEingabe(input);
-
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-
-
-                        }
-                    } while (!input.equals("m"));
-
-                }
-                if (var == 'b') {
-                    //Mitarbeitermenue
-                    do {
-
-                        try {
-                            gibMitarbeiterMenueAus();
-                            input = liesEingabe();
-                            verarbeiteMitarbeiterEingabe(input);
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-
-
-                        }
-                    } while (!input.equals("m"));
-
+                System.out.println(var);
+                switch(var) {
+                    case 'l': gibLoginMenue();
+                        break;
+                    case 'k': neuenKundenAnlegen();
+                              eShopVerwaltung.schreibeKunden();
+                        break;
+                    case 'q': System.out.println("Vielen Dank für die Verwendung des E-Shops.");
+                        break;
+                    default : System.out.println("Unbekannte Eingabe!");
+                        break;
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-
-
             }
         } while (!input.equals("q"));
     }
