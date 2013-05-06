@@ -1,39 +1,110 @@
+/*
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
  * Date: 27.03.13
  * Time: 07:17
  * To change this template use File | Settings | File Templates.
- */
+
 
 package eshop.local.ui.cui;
 
 
-
-
+import eshop.local.domain.EShopVerwaltung;
 import eshop.local.valueobjects.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class eshopClientCUI {
+
+public class EshopClientCUI {
+
+    private EShopVerwaltung eShopVerwaltung;
+    private BufferedReader in;
+    boolean istMitarbeiter = false;
+    boolean istKunde = false;
+
+
+    // Konstruktor
+    public EshopClientCUI(String datei) throws IOException, ClassNotFoundException {
+        // erzeugt eine eShopVerwaltung
+        eShopVerwaltung = new EShopVerwaltung(datei);
+        // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
+        in = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+// Methoden
+
+    private String liesEingabe() throws IOException {
+        // einlesen von der Konsole
+        return in.readLine();
+    }
+
+    private void loginAusgabe() {
+        System.out.print("Befehle: \n  Artikelmenue: 'a'");
+        System.out.println("         \n  Beenden:        'q'");
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
+    private char login() throws IOException {
+
+
+        String loginName = liesEingabe();
+        String login
+        // Eingabe bearbeiten:
+        if (loginName.equals("a")) {
+            //für Artikel
+            return '';
+
+        } else if (line.equals("k")) {
+            //für Kunden
+            return 'k';
+
+        } else if (line.equals("r")) {
+            // für Rechnungen
+            return 'r';
+        }
+
+        return 'm';
+    }
+
+
+    private void run() {
+
+        // Variable für Eingaben von der Konsole
+        String input = "";
+
+        //Hauptschleife
+        do {
+
+            do {
+                login();
+            } while (istKunde != true | istMitarbeiter != true);
+
+
+        } while (!input.equals("q"))
+    }
+
 
     // Main
-    public static void main (String[] args)   {
-            Artikel art1 = new Artikel("Maus","Eine ganz normale Maus",2.50);
-            System.out.print("Artikel 1:  " + art1.getBeschreibung());
-            System.out.println("Bestand " + art1.getBestand());
-            Adresse ad1 = new Adresse("a","b","Straße","0315","Ort");
-            Mitarbeiter m1 = new Mitarbeiter("a","b","Test","test","abmail","0011223",ad1);
+    public static void main(String[] args) {
 
-            Kunde k1 = new Kunde("Peter","Nana","PNa","test","mail","99989",ad1);
-            m1.bestandErhoehen(art1, 5);
-            System.out.println("Neuer Bestand " + art1.getBestand());
-            System.out.println("Preis "+ art1.getPreis());
-            m1.preisAendern(art1, 7.55);
-            //k1.inWarenkorbLegen(art1,menge);
-            System.out.println(k1.getNummer());
-            System.out.println(m1.getmNr());
-            System.out.println(k1.getWarenkorb());
+        public static void main (String[]args)throws ClassNotFoundException {
+
+            EshopClientCUI cui;
+            try {
+                cui = new EshopClientCUI("EShop");
+                cui.run();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
 
 }
+
+*/

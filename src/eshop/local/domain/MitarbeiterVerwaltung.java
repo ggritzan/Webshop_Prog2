@@ -184,7 +184,8 @@ public class MitarbeiterVerwaltung {
 
     public boolean findeMitarbeiter(String benutzername, String passwort) {
         if (mitarbeiterBestandName.containsKey(benutzername)) {
-            Mitarbeiter m = mitarbeiterBestandNr.get(benutzername);
+            int mnr = mitarbeiterBestandName.get(benutzername);
+            Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
             System.out.println(m.getPasswort());
             String p = m.getPasswort();
             if (p.equals(passwort)) {

@@ -61,7 +61,7 @@ public class Kunde extends Person implements Serializable {
         string = 	"Kundennummer: " + getNummer() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t E-mail: " +getTelefon() + "\n" + getAdresse() + "\n" + getWarenkorb() ;
         return string;
     }
-   // Todo das einfügen von Artikeln in den Warenkorb bricht momentan noch mit einer Nullpointer exception ab
+
     //fügt einen Artikel dem Warenkorb hinzu
     public boolean inWarenkorbLegen(Artikel a) {
 
