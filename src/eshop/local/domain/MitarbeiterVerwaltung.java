@@ -188,14 +188,11 @@ public class MitarbeiterVerwaltung {
             Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
             String p = m.getPasswort();
             if (p.equals(passwort)) {
-                System.out.println("Ihr Login war erfolgreich");
                 return true;
             }else{
-                System.out.println("Login fehlgeschlagen");
-            return false;
+                return false;
             }
         } else {
-            System.out.println("Login fehlgeschlagen!");
             return false;
         }
     }

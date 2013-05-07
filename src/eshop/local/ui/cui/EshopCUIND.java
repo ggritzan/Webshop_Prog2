@@ -42,11 +42,15 @@ public class EshopCUIND {
         System.out.println("Passwort:");
         String bPasswort = liesEingabe();
         if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
+            System.out.println("Ihr Login war erfolgreich.");
             System.out.println("Willkommen Mitarbeiter");
             gibMitarbeiterMenueAus();
         }else if(eShopVerwaltung.findeKunden(bName, bPasswort)) {
+            System.out.println("Ihr Login war erfolgreich.");
             System.out.println("Willkommen Kunde");
             gibKundenMenueAus();
+        }else{
+            System.out.println("Ihr Login war leider nicht erfolgreich.");
         }
     }
 
@@ -504,7 +508,6 @@ public class EshopCUIND {
                 gibStartMenue();
                 input = liesEingabe();
                 char var = verarbeiteMainEingabe(input);
-                System.out.println(var);
                 switch(var) {
                     case 'l': gibLoginMenue();
                         break;

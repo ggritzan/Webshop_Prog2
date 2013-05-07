@@ -234,14 +234,11 @@ public class KundenVerwaltung {
             Kunde k = kundenBestandNr.get(knr);
             String p = k.getPasswort();
             if (p.equals(passwort)) {
-                System.out.println("Ihr Login war erfolgreich");
                 return true;
             }else{
-                System.out.println("Login fehlgeschlagen");
                 return false;
             }
         } else {
-            System.out.println("Login fehlgeschlagen!");
             return false;
         }
     }
