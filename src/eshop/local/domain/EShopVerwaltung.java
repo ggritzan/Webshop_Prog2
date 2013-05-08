@@ -338,6 +338,14 @@ public class EShopVerwaltung {
         return meineKunden.getKunde(kNr);
     }
 
+    public int getKnr(String bName) {
+        return meineKunden.getKnr(bName);
+    }
+
+    public int getMnr(String bName) {
+        return meineMitarbeiter.getMnr(bName);
+    }
+
 }
 
 

@@ -22,7 +22,7 @@ public class MitarbeiterVerwaltung {
     // Hashmap zum speichern des Mitarbeiterbestands als Key dienen die Mitarbeiternummern
     private HashMap<Integer, Mitarbeiter> mitarbeiterBestandNr;
 
-    // Hashmap zum verknüpfen des Mitarbeiternamens mit der Mitarbeiternummer
+    // Hashmap zum verknüpfen des Mitarbeiterbenutzernamens mit der Mitarbeiternummer
     private HashMap<String, Integer> mitarbeiterBestandName;
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
@@ -196,6 +196,20 @@ public class MitarbeiterVerwaltung {
             return false;
         }
     }
+
+    /**
+     * Methode durchsucht alle Mitarbeiter nach dem Benutzernamen und gibt die Mitarbeiternummer zurück
+     *
+     * @param bName
+     */
+    public int getMnr(String bName) {
+        if (mitarbeiterBestandName.containsKey(bName)) {
+            return mitarbeiterBestandName.get(bName);
+        } else {
+            return 0;
+        }
+    }
+
 
 }
 

@@ -199,6 +199,19 @@ public class KundenVerwaltung {
         }
     }
 
+    /**
+     * Methode durchsucht alle Kunden nach dem Benutzername und gibt die Kundennummer zurück
+     *
+     * @param bName
+     */
+    public int getKnr(String bName) {
+        if (kundenBestandBenutzername.containsKey(bName)) {
+            return kundenBestandBenutzername.get(bName);
+        } else {
+            return 0;
+        }
+    }
+
     public boolean inWarenkorbLegen(Artikel a, int kNr) {
          Kunde k = kundenBestandNr.get(kNr);
         boolean ok =  k.inWarenkorbLegen(a);
