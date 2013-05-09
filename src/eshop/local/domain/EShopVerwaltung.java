@@ -159,6 +159,10 @@ public class EShopVerwaltung {
         return meineKunden.inWarenkorbLegen(a, kNr);
     }
 
+    public boolean ausWarenkorbEntfernen(Artikel a, int kNr){
+        return meineKunden.ausWarenkorbEtfernen(a, kNr);
+    }
+
     /**
      * Methode zum zuruecksetzen des Warenkorbes eines Kunden
      *

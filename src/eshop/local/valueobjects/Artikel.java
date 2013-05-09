@@ -11,6 +11,7 @@ package eshop.local.valueobjects;
 import java.io.IOException;
 import java.io.Serializable;
 
+
 public class Artikel implements Serializable {
 
     // serialVersionUID um ein Artikel Objekt auch nach einer Änderung des Artikel Objekts wieder einlesen zu können
@@ -122,7 +123,7 @@ public class Artikel implements Serializable {
 
         // gibt die bestellte Menge eines Artikels zurück
         public int getBestellteMenge() {
-            return this.bestand;
+            return this.bestellteMenge;
         }
 
 

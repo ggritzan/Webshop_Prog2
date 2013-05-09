@@ -114,6 +114,7 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = rechnungsBestandKundenNr.get(kunde.getNummer());
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
+
             return true;
 
         } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {

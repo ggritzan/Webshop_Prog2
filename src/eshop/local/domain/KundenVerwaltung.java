@@ -218,6 +218,12 @@ public class KundenVerwaltung {
         return ok ;
     }
 
+    public boolean ausWarenkorbEtfernen(Artikel a, int kNr){
+        Kunde k = kundenBestandNr.get(kNr);
+        boolean ok = k.ausWarenkorbEntfernen(a);
+        return ok;
+    }
+
     public boolean resetWarenkorb(int kNr) {
 
         if(kundenBestandNr.containsKey(kNr)){

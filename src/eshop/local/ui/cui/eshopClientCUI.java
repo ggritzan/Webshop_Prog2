@@ -15,17 +15,19 @@ import eshop.local.valueobjects.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Vector;
 
 
 public class EshopClientCUI {
 
     private EShopVerwaltung eShopVerwaltung;
     private BufferedReader in;
-    boolean istMitarbeiter = false;
-    boolean istKunde = false;
 
 
-    // Konstruktor
+// Konstruktor
+
     public EshopClientCUI(String datei) throws IOException, ClassNotFoundException {
         // erzeugt eine eShopVerwaltung
         eShopVerwaltung = new EShopVerwaltung(datei);
@@ -35,12 +37,18 @@ public class EshopClientCUI {
 
 // Methoden
 
+    /**
+     * Methode öffnet eine readline und speichert diese in einem String
+     *
+     * @throws IOException
+     */
     private String liesEingabe() throws IOException {
         // einlesen von der Konsole
         return in.readLine();
     }
 
-    // Menues
+// Menues
+
     private void gibMainMenue() throws IOException {
         System.out.println("Willkommen im E-Shop!");
         System.out.print("Befehle: \n  Fortfahren zum Login: 'l'");
@@ -62,16 +70,18 @@ public class EshopClientCUI {
     }
 
     private void gibKundenMenueAus() {
+        System.out.print("         \n  Liste aller Artikel anzeigen:  'l'");
         System.out.print("         \n  Artikel in den Warenkorb legen:  'w'");
-        System.out.print("         \n  Artikel aus dem Warenkorb löschen:  'l'");
+        System.out.print("         \n  Artikel aus dem Warenkorb löschen:  'e'");
         System.out.print("         \n  Warenkorb anzeigen lassen:  'a'");
-        System.out.print("         \n  Artikel aus dem Warenkorb bestellen:  'b'");
+        System.out.print("         \n  Artikel aus dem Warenkorb bestellen & Rechnung erstellen :  'b'");
         System.out.print("         \n  zurück ins Hauptmenue: 'o'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
     }
 
-    // Methoden
+// Methoden
+
     private char verarbeiteMainEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
@@ -106,7 +116,6 @@ public class EshopClientCUI {
             KundenEingabe(eShopVerwaltung.getKnr(bName));
 
 
-
         } else {
             System.out.println("Ihr Login war leider nicht erfolgreich.");
 
@@ -116,13 +125,17 @@ public class EshopClientCUI {
 
     private char verarbeiteKundenEingabe(String line) throws IOException {
         // Eingabe bearbeiten:
-        if (line.equals("w")) {
+        if (line.equals("l")) {
+            //Für die Liste aller Artikel
+            return 'l';
+
+        } else if (line.equals("w")) {
             //Artikel in den Warenkorb packen
             return 'w';
 
-        } else if (line.equals("l")) {
+        } else if (line.equals("e")) {
             //Artikel aus dem Warenkorb löschen
-            return 'l';
+            return 'e';
 
         } else if (line.equals("a")) {
             //Artikel aus dem Warenkorb anzeigen lassen
@@ -151,7 +164,36 @@ public class EshopClientCUI {
                 input = liesEingabe();
                 char var = verarbeiteKundenEingabe(input);
 
-                if (var == 'w') {
+                // Liste der Artikel ausgeben
+                if (var == 'l') {
+                    boolean ok = false;
+
+                    try {
+
+                        System.out.print("Wie soll die Ausgabe sortiert werden ?: > ");
+                        System.out.print("1) nach Bezeichnung sortiert  > ");
+                        System.out.print("2) nach Artikelnummer sortiert  > ");
+                        String sort = liesEingabe();
+                        int sortInt = Integer.parseInt(sort);
+                        // nach Artikelnummer sortiert
+                        if (sortInt == 1) {
+
+                            System.out.print(eShopVerwaltung.gibAlleArtikel());
+
+
+                        } else if (sortInt == 2) {
+
+                            System.out.print(eShopVerwaltung.gibAlleArtikel());
+
+                        }
+
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    // Artikel in den Warenkorb legen
+                } else if (var == 'w') {
                     boolean ok = false;
 
                     try {
@@ -164,7 +206,8 @@ public class EshopClientCUI {
                         String menge = liesEingabe();
                         int mengeInt = Integer.parseInt(menge);
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
-                        System.out.print("" + a );
+                        a.setBestellteMenge(mengeInt);
+                        System.out.print("" + a);
                         ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
                     } catch (NumberFormatException e) {
 
@@ -176,9 +219,62 @@ public class EshopClientCUI {
                         System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
                     }
 
+                    // Artikel aus dem Warenkorb löschen
+                } else if (var == 'e') {
+                    boolean ok = false;
+
+                    try {
+
+                        System.out.println(eShopVerwaltung.getKunde(kNr).getWarenkorb().values());
+                        System.out.print("Artikelnummer: > ");
+                        String aNr = liesEingabe();
+                        int aNrInt = Integer.parseInt(aNr);
+                        Artikel a = eShopVerwaltung.getArtikel(aNrInt);
+                        ok = eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    if (ok) {
+                        System.out.println("Artikel wurde aus den Warenkorb gelöscht !");
+                    } else {
+                        System.out.println("Beim löschen des Artikels aus dem Warenkorb ist ein Fehler aufgetreten !");
+                    }
+
+                    // Zeigt den Warenkorb eines eingeloggten Kunden an
+                } else if (var == 'a') {
+                    boolean ok = false;
+
+                    try {
+
+                        System.out.println(eShopVerwaltung.getKunde(kNr).getWarenkorb().values());
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    // Erstellt für den aktuellen Warenkorb eines Nutzers eine Rechnung
+                } else if (var == 'b') {
+                    boolean ok = false;
+
+                    try {
+
+
+                        Kunde kunde = eShopVerwaltung.getKunde(kNr);
+                        ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    if (ok) {
+                        System.out.println("Ihre Artikel wurden erfolgreich bestellt und eine Rechnung wurde erstellt !");
+                    } else {
+                        System.out.println("Bei der Bestellung und der Rechnungserstellung ist ein Fehler aufgetreten !!");
+                    }
 
                 }
-
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -186,7 +282,6 @@ public class EshopClientCUI {
             }
 
         } while (!input.equals("o"));
-
 
 
     }
@@ -203,18 +298,12 @@ public class EshopClientCUI {
                 char var = verarbeiteKundenEingabe(input);
 
 
-
-
-
-
-
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
         } while (!input.equals("o"));
-
 
 
     }
