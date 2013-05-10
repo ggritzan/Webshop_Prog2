@@ -63,7 +63,7 @@ public class EshopClientCUINC {
     }
 
     private void gibRechnungsMenueAus() {
-        System.out.print("Befehle: \n  Rechnung hinzufuegen: 'h'");
+        System.out.print("         \n  Rechnung löschen: 'l");
         System.out.print("         \n  Rechnungen ausgeben:  'a'");
         System.out.print("         \n  Rechnung suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
@@ -88,7 +88,7 @@ public class EshopClientCUINC {
             //für Kunden
             return 'k';
 
-        } else if (line.equals("r")){
+        } else if (line.equals("r")) {
             // für Rechnungen
             return 'r';
         }
@@ -224,9 +224,7 @@ public class EshopClientCUINC {
                 System.out.println("Einfügen ok");
             else
                 System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        }
-
-        else if (line.equals("l")) {
+        } else if (line.equals("l")) {
             //löschen
             boolean ok = false;
             try {
@@ -252,9 +250,10 @@ public class EshopClientCUINC {
         } else if (line.equals("s")) {
             //sichern
             eShopVerwaltung.schreibeKunden();
-        } else if (line.equals("w")){
+        } else if (line.equals("w")) {
             //artikel in warenkorb packen
             boolean ok = false;
+
             try {
                 System.out.println(eShopVerwaltung.gibAlleKunden());
                 System.out.print("Kundennummer: > ");
@@ -267,43 +266,42 @@ public class EshopClientCUINC {
                 System.out.print("Menge: > ");
                 String menge = liesEingabe();
                 int mengeInt = Integer.parseInt(menge);
-                ok = eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getArtikel(aNrInt), kNrInt);
+                Artikel a = eShopVerwaltung.getArtikel(aNrInt);
+                System.out.print("" + a );
+                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrInt);
+                Kunde kunde = eShopVerwaltung.getKunde(kNrInt);
+                ok = eShopVerwaltung.fuegeRechnungEin(kunde);
             } catch (NumberFormatException e) {
 
             }
 
-            if (ok)
-                System.out.println("Artikel wurde in den Warenkorb gelegt !");
-            else
+            if (ok) {
+                System.out.println("Artikel wurde in den Warenkorb gelegt und eine Rechnung wurde hinzugefügt!");
+            } else {
                 System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
+            }
         }
-
 
     }
 
     private void verarbeiteRechnungsEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
-        if (line.equals("h")) {
-            //hinzufügen
-            // lese die notwendigen Parameter, einzeln pro Zeile
+        if (line.equals("l")) {
+            //löschen Rechnung
             boolean ok = false;
             try {
-                System.out.print("Kundennummer > ");
-                String kNr = liesEingabe();
-                int kNrInt = Integer.parseInt(kNr);
-                Kunde kunde = eShopVerwaltung.getKunde(kNrInt);
-                ok = eShopVerwaltung.fuegeRechnungEin(kunde);
-
+                System.out.println(eShopVerwaltung.gibAlleRechnungen());
+                System.out.print("Rechnungsnummer: > ");
+                String rNr = liesEingabe();
+                int rNrInt = Integer.parseInt(rNr);
+                ok = eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
             } catch (NumberFormatException e) {
-
+                if(!ok){
+                    System.out.println("Beim Löschen der Rechnung ist ein Fehler aufgetreten !");
+                }
             }
 
-            if (ok) {
-                System.out.println("Einfügen ok");
-            } else {
-                System.out.println("Die Rechnung konnte leider nicht angelegt werden !");
-            }
 
         } else if (line.equals("a")) {
             //ale ausgeben
