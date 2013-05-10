@@ -53,6 +53,7 @@ public class eshopClientCUI {
         System.out.println("Willkommen im E-Shop!");
         System.out.print("Befehle: \n  Fortfahren zum Login: 'l'");
         System.out.print("         \n  Neue Kundenregistrierung: 'k'");
+        System.out.print("         \n  Daten sichern:  's'");
         System.out.println("       \n  Programm beenden 'q'");
     }
 
@@ -93,6 +94,9 @@ public class eshopClientCUI {
             //für Kundenregistrierung
             return 'k';
 
+        } else if (line.equals("s")) {
+            // für das Sichern der Änderungen
+            return 's';
         }
 
         return 'q';
@@ -208,7 +212,14 @@ public class eshopClientCUI {
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
                         a.setBestellteMenge(mengeInt);
                         System.out.print("" + a);
-                        ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
+
+
+                        if (a.getBestand() >= mengeInt) {
+
+                            ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
+                        } else {
+                            ok = false;
+                        }
                     } catch (NumberFormatException e) {
 
                     }
@@ -248,7 +259,16 @@ public class eshopClientCUI {
 
                     try {
 
-                        System.out.println(eShopVerwaltung.getKunde(kNr).getWarenkorb().values());
+                        Kunde kunde = eShopVerwaltung.getKunde(kNr);
+
+                        if (kunde.getWarenkorb().size() > 0) {
+
+                            System.out.println(eShopVerwaltung.getKunde(kNr).getWarenkorb().values());
+
+                        } else {
+                            System.out.println("Ihr Warenkorb ist leer !");
+                        }
+
 
                     } catch (NumberFormatException e) {
 
@@ -262,7 +282,13 @@ public class eshopClientCUI {
 
 
                         Kunde kunde = eShopVerwaltung.getKunde(kNr);
-                        ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+
+                        if (kunde.getWarenkorb().size() > 0) {
+
+                            ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+                            kunde.resetWarenkorb();
+
+                        }
 
                     } catch (NumberFormatException e) {
 
@@ -308,6 +334,40 @@ public class eshopClientCUI {
 
     }
 
+    private void neuenKundenAnlegen() throws IOException {
+        boolean ok = false;
+        System.out.println("Willkommen bei der Kundenregistrierung.");
+        System.out.println("Bitte geben sie ihre Daten ein.");
+        try {
+            System.out.print("Vorname > ");
+            String vorname = liesEingabe();
+            System.out.print("Nachname > ");
+            String nachname = liesEingabe();
+            System.out.print("Benutzername > ");
+            String benutzername = liesEingabe();
+            System.out.print("Passwort  > ");
+            String passwort = liesEingabe();
+            System.out.print("E-mail > ");
+            String email = liesEingabe();
+            System.out.print("Telefon > ");
+            String telefon = liesEingabe();
+            System.out.print("Straße > ");
+            String straße = liesEingabe();
+            System.out.print("PLZ > ");
+            String plz = liesEingabe();
+            System.out.print("Ort > ");
+            String ort = liesEingabe();
+            Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
+            ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+        if (ok)
+            System.out.println("Einfügen ok");
+        else
+            System.out.println("Der Kunde konnte leider nicht angelegt werden !");
+    }
+
     private void run() {
 
         // Variable für Eingaben von der Konsole
@@ -336,8 +396,33 @@ public class eshopClientCUI {
                     }
 
 
-                }
+                } else if (var == 'k') {
+                    // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
+                    try {
 
+                        neuenKundenAnlegen();
+
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+
+
+                    }
+                } else if (var == 's') {
+                    // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
+                    try {
+                        eShopVerwaltung.schreibeKunden();
+                        eShopVerwaltung.schreibeArtikel();
+                        eShopVerwaltung.schreibeMitarbeiter();
+                        eShopVerwaltung.schreibeRechung();
+
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+
+
+                    }
+                }
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
