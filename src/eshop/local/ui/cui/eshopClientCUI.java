@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.Vector;
 
 
-public class EshopClientCUI {
+public class eshopClientCUI {
 
     private EShopVerwaltung eShopVerwaltung;
     private BufferedReader in;
@@ -28,7 +28,7 @@ public class EshopClientCUI {
 
 // Konstruktor
 
-    public EshopClientCUI(String datei) throws IOException, ClassNotFoundException {
+    public eshopClientCUI(String datei) throws IOException, ClassNotFoundException {
         // erzeugt eine eShopVerwaltung
         eShopVerwaltung = new EShopVerwaltung(datei);
         // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
@@ -354,9 +354,9 @@ public class EshopClientCUI {
 
     public static void main(String[] args) throws ClassNotFoundException {
 
-        EshopClientCUI cui;
+        eshopClientCUI cui;
         try {
-            cui = new EshopClientCUI("EShop");
+            cui = new eshopClientCUI("EShop");
             cui.run();
         } catch (IOException e) {
             e.printStackTrace();
