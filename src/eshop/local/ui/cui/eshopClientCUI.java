@@ -53,19 +53,28 @@ public class eshopClientCUI {
         System.out.println("Willkommen im E-Shop!");
         System.out.print("Befehle: \n  Fortfahren zum Login: 'l'");
         System.out.print("         \n  Neue Kundenregistrierung: 'k'");
+        System.out.print("         \n  Neue Mitarbeiterregistrierung: 'm'");
         System.out.print("         \n  Daten sichern:  's'");
         System.out.println("       \n  Programm beenden 'q'");
     }
 
     private void gibMitarbeiterMenueAus() {
-        System.out.print("Befehle: \n  Mitarbeiter hinzufuegen: 'h'");
-        System.out.print("         \n  Mitarbeiter löschen: 'l");
-        System.out.print("         \n  Mitarbeiter ausgeben:  'a'");
-        System.out.print("Befehle: \n  Kunde hinzufuegen: 'p'");
-        System.out.print("         \n  Kunde löschen: 'e");
-        System.out.print("         \n  Kunden ausgeben:  'u'");
-        System.out.print("         \n  Daten sichern:  's'");
-        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
+        System.out.print("Mitarbeiter: \n     hinzufuegen: 'mh'");
+        System.out.print("               \n     löschen: 'ml");
+        System.out.println("               \n     ausgeben:  'ma'");
+
+        System.out.print("Kunden:     \n     hinzufuegen: 'kh'");
+        System.out.print("              \n     Kunde löschen: 'kl");
+        System.out.println("              \n     Kunden ausgeben:  'ka'");
+
+        System.out.print("Artikel:    \n  hinzufuegen: 'ah'");
+        System.out.print("              \n  Bestand ändern: 'ab'");
+        System.out.print("              \n  löschen: 'al");
+        System.out.print("              \n  ausgeben:  'aa'");
+        System.out.println("              \n  suchen:  'af'");
+
+
+        System.out.print("         \n  zurück ins Hauptmenue: 'o'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
     }
@@ -93,6 +102,10 @@ public class eshopClientCUI {
         } else if (line.equals("k")) {
             //für Kundenregistrierung
             return 'k';
+
+        } else if (line.equals("m")) {
+            //für Mitarbeiterregistrierung
+            return 'm';
 
         } else if (line.equals("s")) {
             // für das Sichern der Änderungen
@@ -321,8 +334,86 @@ public class eshopClientCUI {
 
                 gibMitarbeiterMenueAus();
                 input = liesEingabe();
-                char var = verarbeiteKundenEingabe(input);
 
+
+
+                // Liste der Artikel ausgeben
+                if (input.equals("mh") ) {
+                    boolean ok = false;
+
+                    try {
+
+
+                        System.out.print("Vorname > ");
+                        String vorname = liesEingabe();
+                        if (vorname.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("Nachname > ");
+                        String nachname = liesEingabe();
+                        if (nachname.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("Benutzername > ");
+                        String benutzername = liesEingabe();
+                        if (benutzername.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("Passwort  > ");
+                        String passwort = liesEingabe();
+                        if (passwort.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("E-mail > ");
+                        String email = liesEingabe();
+                        if (email.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("Telefon > ");
+                        String telefon = liesEingabe();
+                        if (telefon.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("Straße > ");
+                        String straße = liesEingabe();
+                        if (straße.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("PLZ > ");
+                        String plz = liesEingabe();
+                        if (plz.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        System.out.print("Ort > ");
+                        String ort = liesEingabe();
+                        if (ort.isEmpty()) {
+                            System.out.println("Ungueltige Eingabe");
+                            return;
+                        }
+                        Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
+                        ok = eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+                        if (ok) {
+                            System.out.println("Der Mitarbeiter wurde erfolgreich eingefuegt.");
+                        } else {
+                            System.out.println("Beim anlegen des Mitarbeiters ist ein Fehler aufgetreten.");
+                        }
+
+
+
+
+
+                    } catch (NumberFormatException e) {
+
+                    }
+                }
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -341,22 +432,67 @@ public class eshopClientCUI {
         try {
             System.out.print("Vorname > ");
             String vorname = liesEingabe();
+            if (vorname.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("Nachname > ");
             String nachname = liesEingabe();
+            if (nachname.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("Benutzername > ");
             String benutzername = liesEingabe();
+            if (benutzername.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("Passwort  > ");
             String passwort = liesEingabe();
+            if (passwort.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("E-mail > ");
             String email = liesEingabe();
+            if (email.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("Telefon > ");
             String telefon = liesEingabe();
+            if (telefon.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("Straße > ");
             String straße = liesEingabe();
+            if (straße.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("PLZ > ");
             String plz = liesEingabe();
+            if (plz.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             System.out.print("Ort > ");
             String ort = liesEingabe();
+            if (ort.isEmpty()) {
+                System.out.println("Ungueltige Eingabe");
+                return;
+            }
+
             Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
             ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         } catch (NumberFormatException e) {
@@ -366,6 +502,73 @@ public class eshopClientCUI {
             System.out.println("Einfügen ok");
         else
             System.out.println("Der Kunde konnte leider nicht angelegt werden !");
+    }
+
+    private void neuenMitarbeiterAnlegen() throws IOException {
+
+        boolean ok = false;
+        System.out.print("Vorname > ");
+        String vorname = liesEingabe();
+        if (vorname.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("Nachname > ");
+        String nachname = liesEingabe();
+        if (nachname.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("Benutzername > ");
+        String benutzername = liesEingabe();
+        if (benutzername.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("Passwort  > ");
+        String passwort = liesEingabe();
+        if (passwort.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("E-mail > ");
+        String email = liesEingabe();
+        if (email.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("Telefon > ");
+        String telefon = liesEingabe();
+        if (telefon.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("Straße > ");
+        String straße = liesEingabe();
+        if (straße.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("PLZ > ");
+        String plz = liesEingabe();
+        if (plz.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        System.out.print("Ort > ");
+        String ort = liesEingabe();
+        if (ort.isEmpty()) {
+            System.out.println("Ungueltige Eingabe");
+            return;
+        }
+        Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
+        ok = eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+        if (ok) {
+            System.out.println("Der Mitarbeiter wurde erfolgreich eingefuegt.");
+        } else {
+            System.out.println("Beim anlegen des Mitarbeiters ist ein Fehler aufgetreten.");
+        }
+
     }
 
     private void run() {
@@ -401,6 +604,18 @@ public class eshopClientCUI {
                     try {
 
                         neuenKundenAnlegen();
+
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+
+
+                    }
+                } else if (var == 'm') {
+                    // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
+                    try {
+
+                        neuenMitarbeiterAnlegen();
 
                     } catch (IOException e) {
                         // TODO Auto-generated catch block

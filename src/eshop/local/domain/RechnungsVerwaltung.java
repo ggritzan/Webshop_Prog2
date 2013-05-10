@@ -107,6 +107,7 @@ public class RechnungsVerwaltung {
             Vector<Artikel> wkV = new Vector<Artikel>();
 
             for (Artikel elem : kunde.getWarenkorb().values())
+
                 wkV.add(elem);
 
             Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV);
