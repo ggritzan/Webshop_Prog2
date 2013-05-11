@@ -10,7 +10,7 @@ import java.util.Date;
  * Time: 13:20
  * To change this template use File | Settings | File Templates.
  */
-public class Log {
+public abstract class Log {
 
     //Attribute zur Beschreibung eines Log-Objektes
 

@@ -17,14 +17,16 @@ public class ArtikelLog extends Log{
     private int aNr;
     private String name;
     private int bestand;
+    private int menge;
 
     //Konstruktoren
 
-    public ArtikelLog(Date dNow, SimpleDateFormat ft, int aNr, String name, int bestand){
+    public ArtikelLog(Date dNow, SimpleDateFormat ft, int aNr, String name, int bestand, int menge){
         super(dNow, ft);
         this.aNr = aNr;
         this.name = name;
         this.bestand = bestand;
+        this.menge = menge;
     }
 
     public ArtikelLog(ArtikelLog al) {
@@ -32,6 +34,7 @@ public class ArtikelLog extends Log{
         this.aNr = al.getaNr();
         this.name = al.getName();
         this.bestand = al.getBestand();
+        this.menge = al.getMenge();
     }
 
 
@@ -47,5 +50,22 @@ public class ArtikelLog extends Log{
 
     public int getBestand(){
         return bestand;
+    }
+
+    public int getMenge(){
+        return menge;
+    }
+    // Methoden
+
+    /**
+     * Standard-Methode vom Object überschrieben.
+     * Methode wird immer automatisch aufgerufen, wenn ein ArtikelLog-Objekt als String
+     * benutzt wird (z.B. in println(ArtikelLog);)
+     *
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        String string = "Zeit und Datum der Veränderung: "+ getFt().format(getdNow())+"\nDer Bestand des Artikels " + getName()  + " mit der Artikelnummer " + getaNr() + " wurde um die Menge " + getMenge() + " verändert.\nDer jetzige Bestand ist " + getBestand()+ ".";
+        return string;
     }
 }
