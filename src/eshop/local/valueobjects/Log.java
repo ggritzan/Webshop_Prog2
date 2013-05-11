@@ -1,5 +1,6 @@
 package eshop.local.valueobjects;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,7 +11,9 @@ import java.util.Date;
  * Time: 13:20
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Log {
+public abstract class Log implements Serializable {
+
+    private static final long serialVersionUID = -8336812990053287916L;
 
     //Attribute zur Beschreibung eines Log-Objektes
 
@@ -25,8 +28,8 @@ public abstract class Log {
     }
 
     public Log(Log l){
-        this.dNow = l.dNow;
-        this.ft = l.ft;
+        this.dNow = l.getdNow();
+        this.ft = l.getFt();
     }
 
     //Getter

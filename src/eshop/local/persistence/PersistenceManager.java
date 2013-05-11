@@ -2,10 +2,7 @@ package eshop.local.persistence;
 import java.io.IOException;
 import java.util.Iterator;
 
-import eshop.local.valueobjects.Artikel;
-import eshop.local.valueobjects.Kunde;
-import eshop.local.valueobjects.Mitarbeiter;
-import eshop.local.valueobjects.Rechnung;
+import eshop.local.valueobjects.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,7 +45,11 @@ public interface PersistenceManager {
 
         public Rechnung ladeRechnung() throws IOException, ClassNotFoundException;
 
-        public boolean speichereRechnung(Rechnung m) throws IOException;
+        public boolean speichereRechnung(Rechnung r) throws IOException;
+
+        public ArtikelLog ladeArtikelLog() throws IOException, ClassNotFoundException;
+
+        public boolean speichereArtikelLog(ArtikelLog al) throws IOException;
 }
 
 

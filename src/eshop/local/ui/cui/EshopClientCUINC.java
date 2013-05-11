@@ -32,6 +32,7 @@ public class EshopClientCUINC {
         System.out.print("Befehle: \n  Artikelmenue: 'a'");
         System.out.print("         \n  Kundenmenue: 'k'");
         System.out.print("         \n  Rechnungsmenue: 'r'");
+        System.out.print("         \n  Logmenue: 'l'");
         System.out.println("         \n  Beenden:        'q'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
@@ -63,9 +64,17 @@ public class EshopClientCUINC {
     }
 
     private void gibRechnungsMenueAus() {
-        System.out.print("         \n  Rechnung löschen: 'l");
+        System.out.print("Befehle: \n  Rechnung löschen: 'l'");
         System.out.print("         \n  Rechnungen ausgeben:  'a'");
         System.out.print("         \n  Rechnung suchen:  'f'");
+        System.out.print("         \n  Daten sichern:  's'");
+        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
+    private void gibLogMenueAus(){
+        System.out.print("Befehle: \n  ArtikelLog ausgeben: 'a'");
         System.out.print("         \n  Daten sichern:  's'");
         System.out.print("         \n  zurück ins Hauptmenue: 'm'");
         System.out.print("> "); // Prompt
@@ -91,6 +100,9 @@ public class EshopClientCUINC {
         } else if (line.equals("r")) {
             // für Rechnungen
             return 'r';
+        } else if (line.equals("l")){
+            // für Logs
+            return 'l';
         }
 
         return 'm';
@@ -135,7 +147,7 @@ public class EshopClientCUINC {
                 System.out.print("Artikelnummer: > ");
                 String aNr = liesEingabe();
                 int aNrInt = Integer.parseInt(aNr);
-                System.out.print("Bestand > ");
+                System.out.print("Wert > ");
                 String aBestand = liesEingabe();
                 int aBestandInt = Integer.parseInt(aBestand);
                 ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
@@ -183,6 +195,7 @@ public class EshopClientCUINC {
         } else if (line.equals("s")) {
             //sichern
             eShopVerwaltung.schreibeArtikel();
+            eShopVerwaltung.schreibeArtikelLogs();
         }
 
 
@@ -304,7 +317,7 @@ public class EshopClientCUINC {
 
 
         } else if (line.equals("a")) {
-            //ale ausgeben
+            //alle ausgeben
             System.out.println(eShopVerwaltung.gibAlleRechnungen());
 
         } else if (line.equals("f")) {
@@ -323,6 +336,21 @@ public class EshopClientCUINC {
 
     }
 
+    private void verarbeiteLogEingabe(String line) throws IOException {
+
+        // Eingabe bearbeiten:
+        if (line.equals("a")) {
+            //alle ausgeben
+            System.out.println(eShopVerwaltung.gibAlleArtikelLogs());
+
+        } else if (line.equals("s")) {
+            //sichern
+            eShopVerwaltung.schreibeArtikelLogs();
+        }
+
+
+    }
+
     public void run() {
         // Variable für Eingaben von der Konsole
         String input = "";
@@ -334,6 +362,24 @@ public class EshopClientCUINC {
                 gibmainMenue();
                 input = liesEingabe();
                 char var = verarbeiteMainEingabe(input);
+                if (var == 'l') {
+                    //Logmenue
+                    do {
+
+                        try {
+                            gibLogMenueAus();
+                            input = liesEingabe();
+                            verarbeiteLogEingabe(input);
+
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+
+
+                        }
+                    } while (!input.equals("m"));
+
+                }
                 if (var == 'a') {
                     //Artikelmenue
                     do {

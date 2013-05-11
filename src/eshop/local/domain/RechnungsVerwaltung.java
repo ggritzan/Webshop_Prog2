@@ -95,7 +95,7 @@ public class RechnungsVerwaltung {
     }
 
     /**
-     * Methode zum hinzufuegen von Kunden
+     * Methode zum Hinzufuegen von Rechnungen
      *
      * @param kunde
      */
@@ -136,7 +136,7 @@ public class RechnungsVerwaltung {
     }
 
     /**
-     * Methode zum hinzufuegen von Kunden durch den PersistenceManager
+     * Methode zum Hinzufuegen von Rechnungen durch den PersistenceManager
      *
      * @param rechnung
      */

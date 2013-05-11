@@ -1,5 +1,6 @@
 package eshop.local.valueobjects;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,7 +11,9 @@ import java.util.Date;
  * Time: 13:12
  * To change this template use File | Settings | File Templates.
  */
-public class ArtikelLog extends Log{
+public class ArtikelLog extends Log implements Serializable {
+
+    private static final long serialVersionUID = 359892351678943357L;
 
     //Attribute zur Beschreibung eines ArtikelLog-Objektes
 
@@ -30,7 +33,7 @@ public class ArtikelLog extends Log{
     }
 
     public ArtikelLog(ArtikelLog al) {
-        super(al.getdNow(),al.getFt());
+        super(al);
         this.aNr = al.getaNr();
         this.name = al.getName();
         this.bestand = al.getBestand();
@@ -65,7 +68,8 @@ public class ArtikelLog extends Log{
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        String string = "Zeit und Datum der Veränderung: "+ getFt().format(getdNow())+"\nDer Bestand des Artikels " + getName()  + " mit der Artikelnummer " + getaNr() + " wurde um die Menge " + getMenge() + " verändert.\nDer jetzige Bestand ist " + getBestand()+ ".";
+        String string = new String();
+        string = "Zeit und Datum der Veränderung: "+ getFt().format(getdNow())+"\nDer Bestand des Artikels " + getName()  + " mit der Artikelnummer " + getaNr() + " wurde um die Menge " + getMenge() + " verändert.\nDer jetzige Bestand ist " + getBestand()+ ".";
         return string;
     }
 }

@@ -7,6 +7,7 @@ import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Mitarbeiter;
 import eshop.local.valueobjects.Rechnung;
+import eshop.local.valueobjects.ArtikelLog;
 
 /**
  * Created with IntelliJ IDEA.
@@ -122,9 +123,9 @@ public class FilePersistenceManager implements PersistenceManager {
     }
 
     /**
-     * Methode zum Einlesen der Artikeldaten aus einer externen Datenquelle.
+     * Methode zum Einlesen der Rechnungsdatei aus einer externen Datenquelle.
      *
-     * @return Artikel
+     * @return Rechnung
      * @throws IOException,ClassNotFoundException
      *
      */
@@ -133,6 +134,20 @@ public class FilePersistenceManager implements PersistenceManager {
         Rechnung rechnung = liesRechnung(ois);
 
         return rechnung;
+    }
+
+    /**
+     * Methode zum Einlesen der ArtikelLog aus einer externen Datenquelle.
+     *
+     * @return ArtikelLog
+     * @throws IOException,ClassNotFoundException
+     *
+     */
+    public ArtikelLog ladeArtikelLog() throws IOException, ClassNotFoundException {
+
+        ArtikelLog al = liesArtikelLog(ois);
+
+        return al;
     }
 
     /**
@@ -200,7 +215,7 @@ public class FilePersistenceManager implements PersistenceManager {
     /**
      * Methode zum Speichern der Rechungsdaten in eine externe Datenquelle.
      *
-     * @param r Mitarbeiter-Objekt, das gespeichert werden soll
+     * @param r Rechnungs-Objekt, das gespeichert werden soll
      * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
      * @throws IOException
      */
@@ -211,6 +226,29 @@ public class FilePersistenceManager implements PersistenceManager {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    /**
+     * Methode zum Speichern der ArtikelLog Daten in eine externe Datenquelle.
+     *
+     * @param al ArtikelLog-Objekt, das gespeichert werden soll
+     * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException
+     */
+    public boolean speichereArtikelLog(ArtikelLog al) throws IOException {
+
+        try {
+
+            oos.writeObject(al);
+
+            return true;
+
+        } catch (IOException e) {
+
+            return false;
+        }
+
+
     }
 
     /**
@@ -291,6 +329,25 @@ public class FilePersistenceManager implements PersistenceManager {
         } catch (EOFException exc) {
             return null;
         }
+    }
+
+    /**
+     * Methode zum Auslesen von ArtikelLog Objekten aus einem uebergebenden ObjectInputStream.
+     *
+     * @param ois ObjectInputStream, aus dem das Objekt ausgelesen wird.
+     * @return ArtikelLog, wenn sich noch ein ArtikelLog Objekt im ObjectInputstream befindet.
+     * @throws IOException,ClassNotFoundException
+     */
+    private ArtikelLog liesArtikelLog(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+
+        try {
+            ArtikelLog al = new ArtikelLog((ArtikelLog) ois.readObject());
+            return al;
+        } catch (EOFException exc) {
+            return null;
+        }
+
+
     }
 
 }

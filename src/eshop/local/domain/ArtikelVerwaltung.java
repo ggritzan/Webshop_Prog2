@@ -214,15 +214,22 @@ public class ArtikelVerwaltung {
      */
     public boolean setBestand(int artNr, int wert) {
 
-        // Wenn die Eingabe des Nutzer >= 0 und die Artikelnummer exestiert wird der Bestand angepasst
-        if (wert >= 0 & artikelBestandNr.containsKey(artNr)) {
+        // Wenn die Artikelnummer exestiert wird der Bestand angepasst
+        if (artikelBestandNr.containsKey(artNr)) {
 
             Artikel a = artikelBestandNr.get(artNr);
-            a.setBestand(wert);
-            artikelBestandNr.put(artNr, a);
+            int neuerBestand = a.getBestand() + wert;
 
-            return true;
+            //Wenn der neue Bestand nicht ins negative geht.
+            if(neuerBestand >= 0){
+                a.setBestand(neuerBestand);
+                artikelBestandNr.put(artNr, a);
+                ArtikelLogVerwaltung al = new ArtikelLogVerwaltung();
+                al.artikelLogHinzufuegen(artNr,a.getName(),neuerBestand,wert);
 
+                return true;
+            }
+            return false;
         } else {
 
             return false;

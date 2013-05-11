@@ -27,8 +27,10 @@ public class EShopVerwaltung {
     private KundenVerwaltung meineKunden;
     // Erzeugt eine Rechnungsverwaltung
     private RechnungsVerwaltung meineRechnungen;
-
+    // Erzeugt eine Mitarbeuterverwaltung
     private MitarbeiterVerwaltung meineMitarbeiter;
+    // Erzeugt eine ArtikelLogVerwaltung
+    private ArtikelLogVerwaltung meineArtLogs;
 
 // Konstruktor
 
@@ -54,9 +56,12 @@ public class EShopVerwaltung {
         // Rechnungsbestand aus Datei einlesen
         meineRechnungen = new RechnungsVerwaltung();
         meineRechnungen.liesDaten(datei + "_Rechnungen.ser");
-        //Mitarbeiter
+        //Mitarbeiterbestand aus Datei einlesen
         meineMitarbeiter = new MitarbeiterVerwaltung();
         meineMitarbeiter.liesDaten(datei + "_Mitarbeiter.ser");
+        //ArtikelLogs aus Datei einlesen
+        meineArtLogs = new ArtikelLogVerwaltung();
+        meineArtLogs.liesDaten(datei + "_ArtikelLog.ser");
     }
 
 // Methoden
@@ -99,6 +104,16 @@ public class EShopVerwaltung {
     public Vector gibAlleMitarbeiter() {
         // delegiert an die Mitarbeiterverwaltung
         return meineMitarbeiter.alleMitarbeiterZurueckgeben();
+    }
+
+    /**
+     * Methode, die eine Liste aller im Bestand befindlichen ArtikelLogs zurückgibt Aufgabe wird an die ArtikelLogVerwaltung delegiert
+     *
+     * @return Vector Liste aller ArtikelLogs im Bestand des EShops als Vector
+     */
+    public Vector gibAlleArtikelLogs() {
+        // delegiert an die ArtikelLogVerwaltung
+        return meineArtLogs.alleArtikelLogsZurueckgeben();
     }
 
     /**
@@ -336,6 +351,16 @@ public class EShopVerwaltung {
     public void schreibeMitarbeiter() throws IOException {
 
         meineMitarbeiter.schreibeDaten(datei + "_Mitarbeiter.ser");
+    }
+
+    /**
+     * Methode zum Speichern der ArtikelLogs in einer Datei.
+     *
+     * @throws IOException
+     */
+    public void schreibeArtikelLogs() throws IOException {
+
+        meineArtLogs.schreibeDaten(datei + "_ArtikelLog.ser");
     }
 
     public Kunde getKunde(int kNr) {
