@@ -26,8 +26,6 @@ public class EShopVerwaltung {
     private RechnungsVerwaltung meineRechnungen;
     // Erzeugt eine Mitarbeuterverwaltung
     private MitarbeiterVerwaltung meineMitarbeiter;
-    // Erzeugt eine ArtikelLogVerwaltung
-    private ArtikelLogVerwaltung meineArtLogs;
 
 // Konstruktor
 
@@ -56,9 +54,6 @@ public class EShopVerwaltung {
         //Mitarbeiterbestand aus Datei einlesen
         meineMitarbeiter = new MitarbeiterVerwaltung();
         meineMitarbeiter.liesDaten(datei + "_Mitarbeiter.ser");
-        //ArtikelLogs aus Datei einlesen
-        meineArtLogs = new ArtikelLogVerwaltung();
-        meineArtLogs.liesDaten(datei + "_ArtikelLog.ser");
     }
 
 // Methoden
@@ -101,16 +96,6 @@ public class EShopVerwaltung {
     public Vector gibAlleMitarbeiter() {
         // delegiert an die Mitarbeiterverwaltung
         return meineMitarbeiter.alleMitarbeiterZurueckgeben();
-    }
-
-    /**
-     * Methode, die eine Liste aller im Bestand befindlichen ArtikelLogs zurückgibt Aufgabe wird an die ArtikelLogVerwaltung delegiert
-     *
-     * @return Vector Liste aller ArtikelLogs im Bestand des EShops als Vector
-     */
-    public Vector gibAlleArtikelLogs() {
-        // delegiert an die ArtikelLogVerwaltung
-        return meineArtLogs.alleArtikelLogsZurueckgeben();
     }
 
     /**
@@ -257,7 +242,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeRechnungEin(Kunde kunde) {
+    public boolean fuegeRechnungEin(Kunde kunde) throws IOException{
         return meineRechnungen.rechnungHinzufuegen(kunde);
 
     }
@@ -355,10 +340,10 @@ public class EShopVerwaltung {
      *
      * @throws IOException
      */
-    public void schreibeArtikelLogs() throws IOException {
+   /* public void schreibeArtikelLogs() throws IOException {
 
-        meineArtLogs.schreibeDaten(datei + "_ArtikelLog.ser");
-    }
+        meineArtLogs.schreibeDaten(datei + "_ArtikelLog.txt");
+    }*/
 
     public Kunde getKunde(int kNr) {
         return meineKunden.getKunde(kNr);

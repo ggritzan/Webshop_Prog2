@@ -224,8 +224,6 @@ public class ArtikelVerwaltung {
             if(neuerBestand >= 0){
                 a.setBestand(neuerBestand);
                 artikelBestandNr.put(artNr, a);
-                ArtikelLogVerwaltung al = new ArtikelLogVerwaltung();
-                al.artikelLogHinzufuegen(artNr,a.getName(),neuerBestand,wert);
 
                 return true;
             }

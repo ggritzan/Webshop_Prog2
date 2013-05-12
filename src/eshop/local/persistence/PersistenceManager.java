@@ -46,10 +46,6 @@ public interface PersistenceManager {
         public Rechnung ladeRechnung() throws IOException, ClassNotFoundException;
 
         public boolean speichereRechnung(Rechnung r) throws IOException;
-
-        public ArtikelLog ladeArtikelLog() throws IOException, ClassNotFoundException;
-
-        public boolean speichereArtikelLog(ArtikelLog al) throws IOException;
 }
 
 

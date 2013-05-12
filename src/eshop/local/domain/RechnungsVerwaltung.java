@@ -6,7 +6,7 @@ import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Rechnung;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,6 +20,8 @@ import java.util.Vector;
  * To change this template use File | Settings | File Templates.
  */
 public class RechnungsVerwaltung {
+
+    private File dateiName = new File("Eshop_RechnungsLog.txt");
     // Hashmap zum speichern des Rechnungsbestandes als Key dienen die Rechnungsnummern
     private HashMap<Integer, Rechnung> rechnungsBestandNr;
 
@@ -101,7 +103,7 @@ public class RechnungsVerwaltung {
      * @param kunde
      */
 
-    public boolean rechnungHinzufuegen(Kunde kunde) {
+    public boolean rechnungHinzufuegen(Kunde kunde) throws IOException{
 
         // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
@@ -119,6 +121,11 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null){
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
+                String text = "Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde am " + rechnung.getFt().format(rechnung.getdNow()) + " hinzugefügt.";
+                BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
+                schreibeStrom.write(text);
+                schreibeStrom.newLine();
+                schreibeStrom.close();
 
                 return true;
             }
@@ -138,6 +145,11 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null){
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
+                String text = "Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde am " + rechnung.getFt().format(rechnung.getdNow()) + " hinzugefügt.";
+                BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
+                schreibeStrom.write(text);
+                schreibeStrom.newLine();
+                schreibeStrom.close();
 
                 return true;
             }
@@ -224,7 +236,7 @@ public class RechnungsVerwaltung {
     }
 
     /**
-     * Methode aendert den Bestand des gewuenschten Artikels wenn er exestiert
+     * Methode setzt das Datum einer Rechnung wenn sie exestiert
      *
      * @param rNr, dNow
      */
