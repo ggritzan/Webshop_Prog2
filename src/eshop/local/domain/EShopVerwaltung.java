@@ -197,7 +197,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeArtikelEin(String name, String beschreibung, double preis) {
+    public boolean fuegeArtikelEin(String name, String beschreibung, double preis) throws IOException{
         return meineArtikel.artikelHinzufuegen(name, beschreibung, preis);
 
     }
@@ -214,7 +214,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+    public boolean fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
         return meineKunden.kundeHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
 
     }
@@ -231,7 +231,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
      */
-    public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+    public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
         return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
     }
 
@@ -254,7 +254,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Artikel nicht gelöscht werden konnte)
      */
-    public boolean loescheArtikel(int artNr) {
+    public boolean loescheArtikel(int artNr) throws IOException{
         return meineArtikel.artikelLoeschen(artNr);
 
     }
@@ -266,7 +266,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
-    public boolean loescheKunde(int kunNr) {
+    public boolean loescheKunde(int kunNr) throws IOException{
         return meineKunden.kundenLoeschen(kunNr);
 
     }
@@ -278,7 +278,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
      */
-    public boolean loescheMitarbeiter(int mNr) {
+    public boolean loescheMitarbeiter(int mNr) throws IOException{
         return meineMitarbeiter.mitarbeiterLoeschen(mNr);
 
     }
@@ -290,7 +290,7 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
-    public boolean loescheRechnung(Rechnung rechnung) {
+    public boolean loescheRechnung(Rechnung rechnung) throws IOException{
         return meineRechnungen.rechnungLoeschen(rechnung);
 
     }
@@ -334,16 +334,6 @@ public class EShopVerwaltung {
 
         meineMitarbeiter.schreibeDaten(datei + "_Mitarbeiter.ser");
     }
-
-    /**
-     * Methode zum Speichern der ArtikelLogs in einer Datei.
-     *
-     * @throws IOException
-     */
-   /* public void schreibeArtikelLogs() throws IOException {
-
-        meineArtLogs.schreibeDaten(datei + "_ArtikelLog.txt");
-    }*/
 
     public Kunde getKunde(int kNr) {
         return meineKunden.getKunde(kNr);

@@ -1,6 +1,7 @@
 package eshop.local.domain;
 
 import eshop.local.persistence.FilePersistenceManager;
+import eshop.local.persistence.Log;
 import eshop.local.persistence.PersistenceManager;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
@@ -22,7 +23,7 @@ import java.util.Vector;
  */
 public class RechnungsVerwaltung {
 
-    // Dokument zum Speichern
+    // Dokument zum Speichern des Logs
     private File dateiName = new File("Eshop_RechnungsLog.txt");
 
     // Hashmap zum speichern des Rechnungsbestandes als Key dienen die Rechnungsnummern
@@ -36,6 +37,8 @@ public class RechnungsVerwaltung {
 
     // Anderes Datums-Format
     private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+
+    private Log l = new Log();
 
     // Konstruktor
     public RechnungsVerwaltung() {
@@ -128,10 +131,7 @@ public class RechnungsVerwaltung {
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
                 String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
-                BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
-                schreibeStrom.write(text);
-                schreibeStrom.newLine();
-                schreibeStrom.close();
+                l.write(dateiName, text);
 
                 return true;
             }
@@ -152,10 +152,7 @@ public class RechnungsVerwaltung {
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
                 String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
-                BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
-                schreibeStrom.write(text);
-                schreibeStrom.newLine();
-                schreibeStrom.close();
+                l.write(dateiName, text);
 
                 return true;
             }
@@ -196,7 +193,7 @@ public class RechnungsVerwaltung {
      *
      * @param rechnung
      */
-    public boolean rechnungLoeschen(Rechnung rechnung) {
+    public boolean rechnungLoeschen(Rechnung rechnung) throws IOException{
 
         Rechnung r = rechnung;
         Vector<Integer> vI = rechnungsBestandKundenNr.get(r.getkNr());
@@ -206,6 +203,9 @@ public class RechnungsVerwaltung {
 
             vI.removeElement(r.getrNr());
             rechnungsBestandKundenNr.put(r.getkNr(), vI);
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde gelöscht.";
+            l.write(dateiName, text);
             return true;
         } else {
             return false;

@@ -1,10 +1,14 @@
 package eshop.local.domain;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
@@ -19,6 +23,10 @@ import eshop.local.valueobjects.Mitarbeiter;
  * To change this template use File | Settings | File Templates.
  */
 public class MitarbeiterVerwaltung {
+
+    // Dokument zum Speichern des Logs
+    private File dateiName = new File("Eshop_MitarbeiterLog.txt");
+
     // Hashmap zum speichern des Mitarbeiterbestands als Key dienen die Mitarbeiternummern
     private HashMap<Integer, Mitarbeiter> mitarbeiterBestandNr;
 
@@ -27,6 +35,11 @@ public class MitarbeiterVerwaltung {
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
     private PersistenceManager pm = new FilePersistenceManager();
+
+    // Anderes Datums-Format
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+
+    private Log l = new Log();
 
 
 // Konstruktor
@@ -94,7 +107,7 @@ public class MitarbeiterVerwaltung {
     /**
      * Methode zum hinzufuegen von Mitarbeitern
      */
-    public boolean mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+    public boolean mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
 
         // Wenn der Name eines Mitarbeiters bereits vorhanden ist wird false zurück gegeben und kein neuer Mitarbeiter angelegt
         if (mitarbeiterBestandName.containsKey(benutzername)) {
@@ -105,6 +118,9 @@ public class MitarbeiterVerwaltung {
             Mitarbeiter mitarbeiter = new Mitarbeiter(vorname, nachname, benutzername, passwort, email, telefon, adresse);
             mitarbeiterBestandNr.put(mitarbeiter.getmNr(), mitarbeiter);
             mitarbeiterBestandName.put(benutzername, mitarbeiter.getmNr());
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Mitarbeiter '" + benutzername + "' mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " wurde hinzugefügt.";
+            l.write(dateiName, text);
             return true;
         }
 
@@ -128,13 +144,16 @@ public class MitarbeiterVerwaltung {
      * @param maNr
      * @return boolean
      */
-    public boolean mitarbeiterLoeschen(int maNr) {
+    public boolean mitarbeiterLoeschen(int maNr) throws IOException{
 
         if (mitarbeiterBestandNr.containsKey(maNr)) {
 
             Mitarbeiter m = mitarbeiterBestandNr.get(maNr);
             mitarbeiterBestandNr.remove(maNr);
             mitarbeiterBestandName.remove(m.getBenutzername());
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Mitarbeiter '" + m.getBenutzername() + "' mit der Mitarbeiternummer " + maNr + " wurde gelöscht.";
+            l.write(dateiName, text);
             return true;
 
         } else {

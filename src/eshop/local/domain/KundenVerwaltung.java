@@ -1,10 +1,14 @@
 package eshop.local.domain;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
@@ -20,6 +24,9 @@ import eshop.local.valueobjects.Kunde;
  */
 public class KundenVerwaltung {
 
+    // Dokument zum Speichern des Logs
+    private File dateiName = new File("Eshop_KundenLog.txt");
+
     // Hashmap zum speichern des Kundenbestands als Key dienen die Kundennummern
     private HashMap<Integer, Kunde> kundenBestandNr;
 
@@ -28,6 +35,11 @@ public class KundenVerwaltung {
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
     private PersistenceManager pm = new FilePersistenceManager();
+
+    // Anderes Datums-Format
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+
+    private Log l = new Log();
 
 
 // Konstruktor
@@ -114,7 +126,7 @@ public class KundenVerwaltung {
      * @param email
      * @param telefon
      */
-    public boolean kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+    public boolean kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
 
         // Wenn der Benutzername eines Kunden bereits vorhanden ist wird false zurück gegeben und kein neuer Kunde angelegt
         if (kundenBestandBenutzername.containsKey(benutzername)) {
@@ -126,6 +138,9 @@ public class KundenVerwaltung {
             Kunde kunde = new Kunde(vorname, nachname, benutzername, passwort, email, telefon, adresse);
             kundenBestandNr.put(kunde.getNummer(), kunde);
             kundenBestandBenutzername.put(benutzername, kunde.getNummer());
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Kunde '" + benutzername + "' mit der Kundennummer " + kunde.getNummer() + " wurde hinzugefügt.";
+            l.write(dateiName, text);
             return true;
         }
 
@@ -153,14 +168,16 @@ public class KundenVerwaltung {
      * @param kundenNr
      * @return boolean
      */
-    public boolean kundenLoeschen(int kundenNr) {
+    public boolean kundenLoeschen(int kundenNr) throws IOException{
 
         if (kundenBestandNr.containsKey(kundenNr)) {
 
             Kunde k = kundenBestandNr.get(kundenNr);
             kundenBestandNr.remove(kundenNr);
             kundenBestandBenutzername.remove(k.getBenutzername());
-
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Kunde '" + k.getBenutzername() + "' mit der Kundennummer " + kundenNr + " wurde gelöscht.";
+            l.write(dateiName, text);
 
             return true;
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
@@ -22,7 +23,7 @@ import eshop.local.persistence.PersistenceManager;
 
 public class ArtikelVerwaltung {
 
-    // Dokument zum Speichern
+    // Dokument zum Speichern des Logs
     private File dateiName = new File("Eshop_ArtikelLog.txt");
 
     // Hashmap zum speichern des Artikelbestands als Key dienen die Artikelnummern
@@ -36,6 +37,8 @@ public class ArtikelVerwaltung {
 
     // Anderes Datums-Format
     private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+
+    private Log l = new Log();
 
 
 // Konstruktor
@@ -121,7 +124,7 @@ public class ArtikelVerwaltung {
      * @param beschreibung
      * @param preis
      */
-    public boolean artikelHinzufuegen(String name, String beschreibung, double preis) {
+    public boolean artikelHinzufuegen(String name, String beschreibung, double preis) throws IOException{
 
         // Wenn der Name eines Artikels bereits vorhanden ist wird false zurück gegeben und kein neuer Artikel angelegt
         if (artikelBestandName.containsKey(name)) {
@@ -133,6 +136,9 @@ public class ArtikelVerwaltung {
             Artikel artikel = new Artikel(name, beschreibung, preis);
             artikelBestandNr.put(artikel.getNummer(), artikel);
             artikelBestandName.put(name, artikel.getNummer());
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Bestand des Artikels '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde hinzugefügt.";
+            l.write(dateiName, text);
             return true;
         }
 
@@ -158,7 +164,7 @@ public class ArtikelVerwaltung {
      * @param artNr
      * @return boolean
      */
-    public boolean artikelLoeschen(int artNr) {
+    public boolean artikelLoeschen(int artNr) throws IOException{
 
         if (artikelBestandNr.containsKey(artNr)) {
 
@@ -166,6 +172,9 @@ public class ArtikelVerwaltung {
             artikelBestandNr.remove(artNr);
             artikelBestandName.remove(a.getName());
 
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde gelöscht.";
+            l.write(dateiName, text);
 
             return true;
 
@@ -233,11 +242,8 @@ public class ArtikelVerwaltung {
                 a.setBestand(neuerBestand);
                 artikelBestandNr.put(artNr, a);
                 Date dNow = new Date();
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde um der Wert " + wert + " geaendert.\nDer jetzige Bestand betraegt: " + neuerBestand;
-                BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
-                schreibeStrom.write(text);
-                schreibeStrom.newLine();
-                schreibeStrom.close();
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde um der Wert " + wert + " geändert.\nDer jetzige Bestand beträgt: " + neuerBestand;
+                l.write(dateiName, text);
 
                 return true;
             }
