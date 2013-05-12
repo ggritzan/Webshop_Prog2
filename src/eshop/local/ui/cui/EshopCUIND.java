@@ -530,7 +530,7 @@ public class EshopCUIND {
                         break;
                     case 'q': System.out.println("Vielen Dank für die Verwendung des E-Shops.");
                         break;
-                    case 'a': eShopVerwaltung.
+                    case 'a': eShopVerwaltung.gibAlleKunden();
                     default : System.out.println("Unbekannte Eingabe!");
                         break;
                 }
