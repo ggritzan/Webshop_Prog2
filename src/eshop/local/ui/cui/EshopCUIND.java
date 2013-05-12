@@ -71,7 +71,7 @@ public class EshopCUIND {
         try {
             System.out.print("Name > ");
             String name = liesEingabe();
-            System.out.print("Nachname > ");
+            System.out.print("Beschreibung > ");
             String beschreibung = liesEingabe();
             System.out.print("Preis > ");
             String Spreis = liesEingabe();
@@ -224,7 +224,6 @@ public class EshopCUIND {
     public void run() {
         // Variable für Eingaben von der Konsole
         String input = "";
-        int durchlauf = 0;
         Person eingeloggt;
 
         // Hauptschleife der Benutzungsschnittstelle
@@ -250,6 +249,7 @@ public class EshopCUIND {
                         break;
                     case 'n': neuenArtikelAnlegen();
                         eShopVerwaltung.schreibeArtikel();
+                        break;
                     default : System.out.println("Unbekannte Eingabe!");
                         break;
                 }
