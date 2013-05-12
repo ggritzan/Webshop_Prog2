@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
-import eshop.local.valueobjects.Kunde;
-import eshop.local.valueobjects.Artikel;
-import eshop.local.valueobjects.Adresse;
-import eshop.local.valueobjects.Rechnung;
+import eshop.local.valueobjects.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -233,7 +230,7 @@ public class EShopVerwaltung {
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
     public boolean fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
-        return meineKunden.kundeHinzufuegen(vorname, nachname,benutzername, passwort, email, telefon, adresse);
+        return meineKunden.kundeHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
 
     }
 
@@ -250,7 +247,7 @@ public class EShopVerwaltung {
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
      */
     public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
-        return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname,benutzername, passwort, email, telefon, adresse);
+        return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
     }
 
     /**
@@ -373,6 +370,14 @@ public class EShopVerwaltung {
 
     public int getMnr(String bName) {
         return meineMitarbeiter.getMnr(bName);
+    }
+
+    public Mitarbeiter rufeMitarbeiter(String bName) {
+        return meineMitarbeiter.getMitarbeiter(bName);
+    }
+
+    public Kunde rufeKunden(String bName){
+        return meineKunden.getKunden(bName);
     }
 
 }

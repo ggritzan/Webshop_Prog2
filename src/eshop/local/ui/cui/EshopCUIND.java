@@ -2,9 +2,7 @@
 package eshop.local.ui.cui;
 
 import eshop.local.domain.EShopVerwaltung;
-import eshop.local.valueobjects.Adresse;
-import eshop.local.valueobjects.Artikel;
-import eshop.local.valueobjects.Kunde;
+import eshop.local.valueobjects.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,45 +37,29 @@ public class EshopCUIND {
         System.out.println("       \n  Programm beenden 'q'");
     }
 
-    private void gibLoginMenue() throws IOException {
+    private Person gibLoginMenue() throws IOException {
+        Person p;
         System.out.println("Benutzername:");
         String bName = liesEingabe();
         System.out.println("Passwort:");
         String bPasswort = liesEingabe();
         if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
             System.out.println("Ihr Login war erfolgreich.");
-            System.out.println("Willkommen Mitarbeiter");
-            gibMitarbeiterMenueAus();
+            p = eShopVerwaltung.rufeMitarbeiter(bName);
+            System.out.println("Willkommen Mitarbeiter " + p.getBenutzername());
+            return p;
         }else if(eShopVerwaltung.findeKunden(bName, bPasswort)) {
             System.out.println("Ihr Login war erfolgreich.");
             System.out.println("Willkommen Kunde");
             gibKundenMenueAus();
+            p = eShopVerwaltung.rufeKunden(bName);
+            return p;
         }else{
-            System.out.println("Ihr Login war leider nicht erfolgreich.");
-        }
-    }
 
-    private void gibmainMenue() {
-        System.out.print("Befehle: \n  Artikelmenue: 'a'");
-        System.out.print("         \n  Kundenmenue: 'k'");
-        System.out.print("         \n  Rechnungsmenue: 'r'");
-        System.out.print("         \n  Mitarbeitermenue:  'b'");
-        System.out.println("         \n  Beenden:        'q'");
-        System.out.print("> "); // Prompt
-        System.out.flush(); // ohne NL ausgeben
-    }
-
-    private void gibArtikelMenueAus() {
-        System.out.print("Befehle: \n  Artikel hinzufuegen: 'h'");
-        System.out.print("         \n  Bestand ändern: 'b'");
-        System.out.print("         \n  Artikel löschen: 'l");
-        System.out.print("         \n  Artikel ausgeben:  'a'");
-        System.out.print("         \n  Artikel suchen:  'f'");
-        System.out.print("         \n  Daten sichern:  's'");
-        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
-
-        System.out.print("> "); // Prompt
-        System.out.flush(); // ohne NL ausgeben
+        }System.out.println("Ihr Login war leider nicht erfolgreich.");
+        Adresse x = new Adresse("","","","","");
+        p = new Kunde("","","","","","",x);
+        return p;
     }
 
     private void gibKundenMenueAus() {
@@ -86,17 +68,6 @@ public class EshopCUIND {
         System.out.print("         \n  Kunden ausgeben:  'a'");
         // System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Artikel in den Warenkorb legen:  'w'");
-        System.out.print("         \n  Daten sichern:  's'");
-        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
-        System.out.print("> "); // Prompt
-        System.out.flush(); // ohne NL ausgeben
-    }
-
-    private void gibRechnungsMenueAus() {
-        System.out.print("Befehle: \n  Rechnung hinzufuegen: 'h'");
-        System.out.print("         \n  Rechnung löschen: 'l");
-        System.out.print("         \n  Rechnungen ausgeben:  'a'");
-        System.out.print("         \n  Rechnung suchen:  'f'");
         System.out.print("         \n  Daten sichern:  's'");
         System.out.print("         \n  zurück ins Hauptmenue: 'm'");
         System.out.print("> "); // Prompt
@@ -118,111 +89,25 @@ public class EshopCUIND {
         return in.readLine();
     }
 
-    private char verarbeiteMainEingabe(String line) throws IOException {
-
-        // Eingabe bearbeiten:
-        if (line.equals("l")) {
-            //zum Login
-            return 'l';
-        } else if (line.equals("k")) {
-            //zum anlegen neuer Kunden, Neuanmeldung
-            return 'k';
-        } else if (line.equals("q")) {
-        //zum anlegen neuer Kunden, Neuanmeldung
-        return 'q';
-    }
-        return 'm';
-    }
-
-    private void verarbeiteArtikelEingabe(String line) throws IOException {
-
-        // Eingabe bearbeiten:
-        if (line.equals("h")) {
-            //hinzufügen
-            // lese die notwendigen Parameter, einzeln pro Zeile
-            boolean ok = false;
-            try {
-                System.out.print("Artikel Name > ");
-                String aName = liesEingabe();
-                System.out.print("Artikel Beschreibung > ");
-                String aBeschreibung = liesEingabe();
-                System.out.print("Artikel Preis  > ");
-                String aPreisEingabe = liesEingabe();
-                double aPreis = Double.parseDouble(aPreisEingabe);
-
-
-                ok = eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
-
-            } catch (NumberFormatException e) {
-
-            }
-
-
-            if (ok)
-                System.out.println("Einfügen ok");
-            else
-                System.out.println("Der Artikel konnte leider nicht angelegt werden !");
-
-
-        } else if (line.equals("b")) {
-            //bearbeiten
-            boolean ok = false;
-            try {
-                System.out.println(eShopVerwaltung.gibAlleArtikel());
-                System.out.print("Artikelnummer: > ");
-                String aNr = liesEingabe();
-                int aNrInt = Integer.parseInt(aNr);
-                System.out.print("Bestand > ");
-                String aBestand = liesEingabe();
-                int aBestandInt = Integer.parseInt(aBestand);
-                ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
-
-            } catch (NumberFormatException e) {
-
-            }
-
-
-            if (ok)
-                System.out.println("Bestand wurde geändert !");
-            else
-                System.out.println("Der Bestand konnte nicht geändert werden da ein Fehler aufgetreten ist !");
-
-        } else if (line.equals("l")) {
-            //löschen
-            boolean ok = false;
-            try {
-                System.out.println(eShopVerwaltung.gibAlleArtikel());
-                System.out.print("Artikelnummer: > ");
-                String aNr = liesEingabe();
-                int aNrInt = Integer.parseInt(aNr);
-                ok = eShopVerwaltung.loescheArtikel(aNrInt);
-            } catch (NumberFormatException e) {
-
-            }
-
-            if (ok)
-                System.out.println("Artikel wurde geloescht !");
-            else
-                System.out.println("Beim löschen des Artikels ist ein Fehler aufgetreten !");
-
-
-        } else if (line.equals("a")) {
-            //alle ausgeben
-            System.out.println(eShopVerwaltung.gibAlleArtikel());
-
-        } else if (line.equals("f")) {
-            //suchen
-            System.out.print("Artikelname:  > ");
-            String titel = liesEingabe();
-            System.out.println(eShopVerwaltung.sucheNachName(titel));
-
-
-        } else if (line.equals("s")) {
-            //sichern
-            eShopVerwaltung.schreibeArtikel();
+    private void neuenArtikelAnlegen() throws IOException {
+        boolean ok = false;
+        System.out.println("Bitte geben sie die Daten des Artikels ein, den Sie anlegen wollen.");
+        try {
+            System.out.print("Name > ");
+            String name = liesEingabe();
+            System.out.print("Nachname > ");
+            String beschreibung = liesEingabe();
+            System.out.print("Preis > ");
+            String Spreis = liesEingabe();
+            int preis = Integer.parseInt(Spreis);
+            ok = eShopVerwaltung.fuegeArtikelEin(name, beschreibung, preis);
+        }catch (NumberFormatException e) {
+            System.out.println(e);
         }
-
-
+        if (ok)
+            System.out.println("Einfügen ok");
+        else
+            System.out.println("Der Artikel konnte leider nicht angelegt werden !");
     }
 
     private void neuenKundenAnlegen() throws IOException {
@@ -259,171 +144,31 @@ public class EshopCUIND {
             System.out.println("Der Kunde konnte leider nicht angelegt werden !");
     }
 
-    private void verarbeiteKundenEingabe(String line) throws IOException {
-
-        if (line.equals("h")) {
-            //hinzufügen
-            // lese die notwendigen Parameter, einzeln pro Zeile
-            boolean ok = false;
-            try {
-                System.out.print("Vorname > ");
-                String vorname = liesEingabe();
-                System.out.print("Nachname > ");
-                String nachname = liesEingabe();
-                System.out.print("Benutzername > ");
-                String benutzername = liesEingabe();
-                System.out.print("Passwort  > ");
-                String passwort = liesEingabe();
-                System.out.print("E-mail > ");
-                String email = liesEingabe();
-                System.out.print("Telefon > ");
-                String telefon = liesEingabe();
-                System.out.print("Straße > ");
-                String straße = liesEingabe();
-                System.out.print("PLZ > ");
-                String plz = liesEingabe();
-                System.out.print("Ort > ");
-                String ort = liesEingabe();
-                Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
-
-                ok = eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
-
-            } catch (NumberFormatException e) {
-
-            }
-            if (ok)
-                System.out.println("Einfügen ok");
-            else
-                System.out.println("Der Kunde konnte leider nicht angelegt werden !");
-        } else if (line.equals("l")) {
-            //löschen
-            boolean ok = false;
-            try {
-                System.out.println(eShopVerwaltung.gibAlleKunden());
-                System.out.print("Kundennummer: > ");
-                String kNr = liesEingabe();
-                int kNrInt = Integer.parseInt(kNr);
-                ok = eShopVerwaltung.loescheKunde(kNrInt);
-            } catch (NumberFormatException e) {
-
-            }
-
-            if (ok)
-                System.out.println("Kunde wurde geloescht !");
-            else
-                System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
-
-
-        } else if (line.equals("a")) {
-            //alle ausgeben
-            System.out.println(eShopVerwaltung.gibAlleKunden());
-
-        } else if (line.equals("s")) {
-            //sichern
-            eShopVerwaltung.schreibeKunden();
-        } else if (line.equals("w")) {
-            //artikel in warenkorb packen
-            boolean ok = false;
-
-            try {
-                System.out.println(eShopVerwaltung.gibAlleKunden());
-                System.out.print("Kundennummer: > ");
-                String kNr = liesEingabe();
-                int kNrInt = Integer.parseInt(kNr);
-                System.out.println(eShopVerwaltung.gibAlleArtikel());
-                System.out.print("Artikelnummer: > ");
-                String aNr = liesEingabe();
-                int aNrInt = Integer.parseInt(aNr);
-                System.out.print("Menge: > ");
-                String menge = liesEingabe();
-                int mengeInt = Integer.parseInt(menge);
-                Artikel a = eShopVerwaltung.getArtikel(aNrInt);
-                System.out.print("" + a );
-                ok = eShopVerwaltung.inWarenkorbLegen(a, kNrInt);
-            } catch (NumberFormatException e) {
-
-            }
-
-            if (ok) {
-                System.out.println("Artikel wurde in den Warenkorb gelegt !");
-            } else {
-                System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
-            }
-        }
-
-    }
-
-    private void verarbeiteRechnungsEingabe(String line) throws IOException {
-
-        // Eingabe bearbeiten:
-        if (line.equals("h")) {
-            //hinzufügen
-            // lese die notwendigen Parameter, einzeln pro Zeile
-            boolean ok = false;
-            int kNrInt = 0;
-            try {
-                System.out.print("Kundennummer > ");
-                String kNr = liesEingabe();
-                kNrInt = Integer.parseInt(kNr);
-                Kunde kunde = eShopVerwaltung.getKunde(kNrInt);
-                ok = eShopVerwaltung.fuegeRechnungEin(kunde);
-
-
-            } catch (NumberFormatException e) {
-
-            }
-
-            if (ok & kNrInt != 0) {
-                eShopVerwaltung.resetWarenkorb(kNrInt);
-                System.out.println("Rechnung wurde erstellt !");
-            } else {
-                System.out.println("Die Rechnung konnte leider nicht erstellt werden !");
-            }
-
-        } else if (line.equals("l")) {
-            //löschen Rechnung
-            boolean ok = false;
-            try {
-                System.out.println(eShopVerwaltung.gibAlleRechnungen());
-                System.out.print("Rechnungsnummer: > ");
-                String rNr = liesEingabe();
-                int rNrInt = Integer.parseInt(rNr);
-                ok = eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
-            } catch (NumberFormatException e) {
-
-            }
-
-            if (ok)
-                System.out.println("Kunde wurde geloescht !");
-            else
-                System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
-
-        } else if (line.equals("a")) {
-            //ale ausgeben
-            System.out.println(eShopVerwaltung.gibAlleRechnungen());
-
-        } else if (line.equals("f")) {
-            //suchen
-            System.out.print("Rechnungsnummer:  > ");
-            String rNr = liesEingabe();
-            int rNrInt = Integer.parseInt(rNr);
-            System.out.println(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
-
-
-        } else if (line.equals("s")) {
-            //sichern
-            eShopVerwaltung.schreibeRechung();
-        }
-
-
-    }
-
     private boolean pruefeEingabe(String input) {
         if(input.isEmpty()){
             System.out.println("Ungueltige Eingabe");
             return true;
         }
         return false;
+    }
+
+    private char verarbeiteMainEingabe(String line) throws IOException {
+
+        // Eingabe bearbeiten:
+        if (line.equals("l")) {
+            //zum Login
+            return 'l';
+        } else if (line.equals("k")) {
+            //zum anlegen neuer Kunden, Neuanmeldung
+            return 'k';
+        } else if (line.equals("a")) {
+            //zum anlegen neuer Kunden, Neuanmeldung
+            return 'a';
+        } else if (line.equals("q")) {
+            //zum anlegen neuer Kunden, Neuanmeldung
+            return 'q';
+        }
+        return 'm';
     }
 
     public void verarbeiteMitarbeiterEingabe(String line) throws IOException {
@@ -510,27 +255,32 @@ public class EshopCUIND {
     public void run() {
         // Variable für Eingaben von der Konsole
         String input = "";
+        int durchlauf = 0;
+        Person eingeloggt;
 
         // Hauptschleife der Benutzungsschnittstelle
         do {
-
             try {
-                Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
-                System.out.println(artList);
-                Collections.sort(artList);
-                System.out.println(artList);
                 gibStartMenue();
                 input = liesEingabe();
                 char var = verarbeiteMainEingabe(input);
                 switch(var) {
-                    case 'l': gibLoginMenue();
+                    case 'l': eingeloggt = gibLoginMenue();
+                              if(eingeloggt instanceof Mitarbeiter) {
+                                  System.out.println("Ein Mitarbeiter hat sich eingeloggt");
+                              } else if(eingeloggt instanceof Kunde && !eingeloggt.getBenutzername().isEmpty()){
+                                  System.out.println("Ein Kunde hat sich eingeloggt");
+                              } else{
+                                  System.out.println("Der eingeloggte Account konnte leider nicht zugeordnet werden.");
+                              }
                         break;
                     case 'k': neuenKundenAnlegen();
                               eShopVerwaltung.schreibeKunden();
                         break;
                     case 'q': System.out.println("Vielen Dank für die Verwendung des E-Shops.");
                         break;
-                    case 'a': eShopVerwaltung.
+                    case 'a': neuenArtikelAnlegen();
+                              eShopVerwaltung.schreibeArtikel();
                     default : System.out.println("Unbekannte Eingabe!");
                         break;
                 }

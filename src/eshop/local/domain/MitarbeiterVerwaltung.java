@@ -197,6 +197,20 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    public Mitarbeiter getMitarbeiter(String bName){
+        Mitarbeiter m;
+        if(mitarbeiterBestandName.containsKey(bName)){
+            int mnr = mitarbeiterBestandName.get(bName);
+            m = mitarbeiterBestandNr.get(mnr);
+            return m;
+        }else{
+            System.out.println("Der Mitarbeiteraccount konnte leider nicht gefunden werden.");
+            int mnr = mitarbeiterBestandName.get(bName);
+            m = mitarbeiterBestandNr.get(mnr);
+            return m;
+        }
+    }
+
     /**
      * Methode durchsucht alle Mitarbeiter nach dem Benutzernamen und gibt die Mitarbeiternummer zurück
      *

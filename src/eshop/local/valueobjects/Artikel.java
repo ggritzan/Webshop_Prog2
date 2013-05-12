@@ -72,7 +72,7 @@ public class Artikel implements Serializable, Comparable<Artikel> {
 
         public int compareTo(Artikel a){
           //ordnet nach Nummer
-            int result = beschreibung.compareTo(a.beschreibung);
+            int result = name.compareTo(a.name);
             if(0==result){
                 result = nummer - a.nummer;
             }

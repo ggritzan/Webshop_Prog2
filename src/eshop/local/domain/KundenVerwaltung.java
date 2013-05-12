@@ -261,6 +261,19 @@ public class KundenVerwaltung {
             return false;
         }
     }
+    public Kunde getKunden(String bName){
+        Kunde k;
+        if(kundenBestandBenutzername.containsKey(bName)){
+            int knr = kundenBestandBenutzername.get(bName);
+            k = kundenBestandNr.get(knr);
+            return k;
+        }else{
+            System.out.println("Der Kundenaccount konnte leider nicht gefunden werden.");
+            int mnr = kundenBestandBenutzername.get(bName);
+            k = kundenBestandNr.get(mnr);
+            return k;
+        }
+    }
 }
 
 
