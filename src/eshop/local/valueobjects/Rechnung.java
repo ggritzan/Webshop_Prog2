@@ -24,7 +24,7 @@ public class Rechnung implements Serializable {
     private Vector<Artikel> bestellteArtikel;
     private static int zaehler = 1000;
     private static final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss a zzz");
-    private Date dNow;
+    private Date dNow = null;
 
     //Konstruktor für neue Rechnungen
 
@@ -43,6 +43,7 @@ public class Rechnung implements Serializable {
         if(r.getrNr() >= zaehler){
             this.zaehler = (r.getrNr() +1);
         }
+        this.dNow = r.getdNow();
 
     }
 
