@@ -1,6 +1,8 @@
 package eshop.local.domain;
 
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
@@ -20,6 +22,9 @@ import eshop.local.persistence.PersistenceManager;
 
 public class ArtikelVerwaltung {
 
+    // Dokument zum Speichern
+    private File dateiName = new File("Eshop_ArtikelLog.txt");
+
     // Hashmap zum speichern des Artikelbestands als Key dienen die Artikelnummern
     private HashMap<Integer, Artikel> artikelBestandNr;
 
@@ -28,6 +33,9 @@ public class ArtikelVerwaltung {
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
     private PersistenceManager pm = new FilePersistenceManager();
+
+    // Anderes Datums-Format
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
 
 
 // Konstruktor
@@ -212,7 +220,7 @@ public class ArtikelVerwaltung {
      *
      * @param artNr,wert
      */
-    public boolean setBestand(int artNr, int wert) {
+    public boolean setBestand(int artNr, int wert) throws IOException{
 
         // Wenn die Artikelnummer exestiert wird der Bestand angepasst
         if (artikelBestandNr.containsKey(artNr)) {
@@ -224,6 +232,12 @@ public class ArtikelVerwaltung {
             if(neuerBestand >= 0){
                 a.setBestand(neuerBestand);
                 artikelBestandNr.put(artNr, a);
+                Date dNow = new Date();
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde um der Wert " + wert + " geaendert.\nDer jetzige Bestand betraegt: " + neuerBestand;
+                BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
+                schreibeStrom.write(text);
+                schreibeStrom.newLine();
+                schreibeStrom.close();
 
                 return true;
             }

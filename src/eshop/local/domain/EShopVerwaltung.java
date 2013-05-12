@@ -176,7 +176,7 @@ public class EShopVerwaltung {
      * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
      * @return boolean
      */
-    public boolean setBestand(int artNr, int wert) {
+    public boolean setBestand(int artNr, int wert) throws IOException{
         return meineArtikel.setBestand(artNr, wert);
     }
 

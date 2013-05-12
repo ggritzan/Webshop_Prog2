@@ -7,6 +7,7 @@ import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Rechnung;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,7 +22,9 @@ import java.util.Vector;
  */
 public class RechnungsVerwaltung {
 
+    // Dokument zum Speichern
     private File dateiName = new File("Eshop_RechnungsLog.txt");
+
     // Hashmap zum speichern des Rechnungsbestandes als Key dienen die Rechnungsnummern
     private HashMap<Integer, Rechnung> rechnungsBestandNr;
 
@@ -30,6 +33,9 @@ public class RechnungsVerwaltung {
 
     // Persistenz-Schnittstelle, die für die Details des Dateizugriffs verantwortlich ist
     private PersistenceManager pm = new FilePersistenceManager();
+
+    // Anderes Datums-Format
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
 
     // Konstruktor
     public RechnungsVerwaltung() {
@@ -121,7 +127,7 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null){
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
-                String text = rechnung.getFt().format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
+                String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
                 BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
                 schreibeStrom.write(text);
                 schreibeStrom.newLine();
@@ -145,7 +151,7 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null){
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
-                String text = "Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde am " + rechnung.getFt().format(rechnung.getdNow()) + " hinzugefügt.";
+                String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
                 BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
                 schreibeStrom.write(text);
                 schreibeStrom.newLine();
