@@ -50,37 +50,14 @@ public class EshopCUIND {
         }else if(eShopVerwaltung.findeKunden(bName, bPasswort)) {
             System.out.println("Ihr Login war erfolgreich.");
             System.out.println("Willkommen Kunde");
-            gibKundenMenueAus();
             p = eShopVerwaltung.rufeKunden(bName);
             return p;
         }else{
-
-        }System.out.println("Ihr Login war leider nicht erfolgreich.");
+        System.out.println("Ihr Login war leider nicht erfolgreich.");
         Adresse x = new Adresse("","","","","");
         p = new Kunde("","","","","","",x);
         return p;
-    }
-
-    private void gibKundenMenueAus() {
-        System.out.print("Befehle: \n  Kunde hinzufuegen: 'h'");
-        System.out.print("         \n  Kunde löschen: 'l");
-        System.out.print("         \n  Kunden ausgeben:  'a'");
-        // System.out.print("         \n  Artikel suchen:  'f'");
-        System.out.print("         \n  Artikel in den Warenkorb legen:  'w'");
-        System.out.print("         \n  Daten sichern:  's'");
-        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
-        System.out.print("> "); // Prompt
-        System.out.flush(); // ohne NL ausgeben
-    }
-
-    private void gibMitarbeiterMenueAus() {
-        System.out.print("Befehle: \n  Mitarbeiter hinzufuegen: 'h'");
-        System.out.print("         \n  Mitarbeiter löschen: 'l");
-        System.out.print("         \n  Mitarbeiter ausgeben:  'a'");
-        System.out.print("         \n  Daten sichern:  's'");
-        System.out.print("         \n  zurück ins Hauptmenue: 'm'");
-        System.out.print("> "); // Prompt
-        System.out.flush(); // ohne NL ausgeben
+        }
     }
 
     private String liesEingabe() throws IOException {
@@ -143,14 +120,6 @@ public class EshopCUIND {
             System.out.println("Der Kunde konnte leider nicht angelegt werden !");
     }
 
-    private boolean pruefeEingabe(String input) {
-        if(input.isEmpty()){
-            System.out.println("Ungueltige Eingabe");
-            return true;
-        }
-        return false;
-    }
-
     private char verarbeiteMainEingabe(String line) throws IOException {
 
         // Eingabe bearbeiten:
@@ -160,9 +129,9 @@ public class EshopCUIND {
         } else if (line.equals("k")) {
             //zum anlegen neuer Kunden, Neuanmeldung
             return 'k';
-        } else if (line.equals("a")) {
+        } else if (line.equals("n")) {
             //zum anlegen neuer Kunden, Neuanmeldung
-            return 'a';
+            return 'n';
         } else if (line.equals("q")) {
             //zum anlegen neuer Kunden, Neuanmeldung
             return 'q';
@@ -175,7 +144,8 @@ public class EshopCUIND {
             boolean ok = false;
             System.out.print("Vorname > ");
             String vorname = liesEingabe();
-            if(pruefeEingabe(vorname)){
+            if(vorname.isEmpty()){
+                System.out.println("Ungueltige Eingabe");
                 return;
             }
             System.out.print("Nachname > ");
