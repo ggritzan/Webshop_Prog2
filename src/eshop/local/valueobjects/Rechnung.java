@@ -1,6 +1,8 @@
 package eshop.local.valueobjects;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 /**
@@ -21,6 +23,8 @@ public class Rechnung implements Serializable {
     private int kNr;
     private Vector<Artikel> bestellteArtikel;
     private static int zaehler = 1000;
+    private static final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss a zzz");
+    private Date dNow;
 
     //Konstruktor für neue Rechnungen
 
@@ -53,13 +57,25 @@ public class Rechnung implements Serializable {
      */
     public String toString() {
         String string = new String();
-        string = "\tRechnungsnummer: " + getrNr()  + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() +  "\n" ;
+        string = "\tRechnungsnummer: " + getrNr()  + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() +  "\tDatum: " + getFt().format(getdNow()) +"\n" ;
         return string;
     }
 
     //Setter
 
+    public void setDate(Date dNow){
+        this.dNow = dNow;
+    }
+
     //Getter
+
+    public SimpleDateFormat getFt(){
+        return this.ft;
+    }
+
+    public Date getdNow () {
+        return this.dNow;
+    }
 
     public int getrNr(){
         return this.rNr;

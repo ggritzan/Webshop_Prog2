@@ -7,6 +7,7 @@ import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Rechnung;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
@@ -115,6 +116,8 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = rechnungsBestandKundenNr.get(kunde.getNummer());
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
+            Date dNow = new Date();
+            setDate(rechnung.getrNr(), dNow);
 
             return true;
 
@@ -128,6 +131,8 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = new Vector<Integer>();
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
+            Date dNow = new Date();
+            setDate(rechnung.getrNr(), dNow);
             return true;
         } else {
             return false;
@@ -148,6 +153,8 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = rechnungsBestandKundenNr.get(rechnung.getkNr());
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
+            Date dNow = new Date();
+            setDate(rechnung.getrNr(), dNow);
 
         } else {
             // Erzeugt eine Rechnung mit seiner bisherigen Rechnungsnummer
@@ -156,6 +163,8 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = new Vector<Integer>();
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
+            Date dNow = new Date();
+            setDate(rechnung.getrNr(), dNow);
         }
 
     }
@@ -209,5 +218,30 @@ public class RechnungsVerwaltung {
             return null;
         }
     }
+
+    /**
+     * Methode aendert den Bestand des gewuenschten Artikels wenn er exestiert
+     *
+     * @param rNr, dNow
+     */
+    public boolean setDate(int rNr, Date dNow) {
+
+        // Wenn die Artikelnummer exestiert wird der Bestand angepasst
+        if (rechnungsBestandNr.containsKey(rNr)) {
+
+            Rechnung r = rechnungsBestandNr.get(rNr);
+
+            r.setDate(dNow);
+            rechnungsBestandNr.put(rNr, r);
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
 }
 
