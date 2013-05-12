@@ -116,10 +116,14 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = rechnungsBestandKundenNr.get(kunde.getNummer());
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
-            Date dNow = new Date();
-            setDate(rechnung.getrNr(), dNow);
+            if (rechnung.getdNow() == null){
+                Date dNow = new Date();
+                setDate(rechnung.getrNr(), dNow);
 
-            return true;
+                return true;
+            }
+
+            return false;
 
         } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
             Vector<Artikel> wkV = new Vector<Artikel>();
@@ -131,9 +135,13 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = new Vector<Integer>();
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
-            Date dNow = new Date();
-            setDate(rechnung.getrNr(), dNow);
-            return true;
+            if (rechnung.getdNow() == null){
+                Date dNow = new Date();
+                setDate(rechnung.getrNr(), dNow);
+
+                return true;
+            }
+            return false;
         } else {
             return false;
         }
@@ -153,8 +161,6 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = rechnungsBestandKundenNr.get(rechnung.getkNr());
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
-            Date dNow = new Date();
-            setDate(rechnung.getrNr(), dNow);
 
         } else {
             // Erzeugt eine Rechnung mit seiner bisherigen Rechnungsnummer
@@ -163,8 +169,6 @@ public class RechnungsVerwaltung {
             Vector<Integer> vI = new Vector<Integer>();
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
-            Date dNow = new Date();
-            setDate(rechnung.getrNr(), dNow);
         }
 
     }
