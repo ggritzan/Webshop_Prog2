@@ -23,7 +23,7 @@ public class Rechnung implements Serializable {
     private int kNr;
     private Vector<Artikel> bestellteArtikel;
     private static int zaehler = 1000;
-    private static final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss a zzz");
+    private static final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
     private Date dNow;
 
     //Konstruktor für neue Rechnungen

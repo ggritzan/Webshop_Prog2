@@ -121,7 +121,7 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null){
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
-                String text = "Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde am " + rechnung.getFt().format(rechnung.getdNow()) + " hinzugefügt.";
+                String text = rechnung.getFt().format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
                 BufferedWriter schreibeStrom = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dateiName, true)));
                 schreibeStrom.write(text);
                 schreibeStrom.newLine();
