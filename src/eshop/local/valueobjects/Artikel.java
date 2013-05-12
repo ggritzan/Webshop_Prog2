@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 
-public class Artikel implements Serializable {
+public class Artikel implements Serializable, Comparable<Artikel> {
 
     // serialVersionUID um ein Artikel Objekt auch nach einer Änderung des Artikel Objekts wieder einlesen zu können
     private static final long serialVersionUID = 2109392536657810497L;
@@ -67,6 +67,16 @@ public class Artikel implements Serializable {
             String string = new String();
             string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() + "\t Bestand: " + getBestand() + "\n" + "\t BestellteMenge: " + getBestellteMenge() + "\n" ;
             return string;
+        }
+
+
+        public int compareTo(Artikel a){
+          //ordnet nach Nummer
+            int result = beschreibung.compareTo(a.beschreibung);
+            if(0==result){
+                result = nummer - a.nummer;
+            }
+            return result;
         }
 
 // Setter

@@ -10,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import java.util.Collections;
+import java.util.Vector;
+
 /**
  * Created with IntelliJ IDEA.
  * User: ninadoge
@@ -415,13 +418,20 @@ public class EshopCUIND {
 
     }
 
+    private boolean pruefeEingabe(String input) {
+        if(input.isEmpty()){
+            System.out.println("Ungueltige Eingabe");
+            return true;
+        }
+        return false;
+    }
+
     public void verarbeiteMitarbeiterEingabe(String line) throws IOException {
         if(line.equals("h")){
             boolean ok = false;
             System.out.print("Vorname > ");
             String vorname = liesEingabe();
-            if(vorname.isEmpty()){
-                System.out.println("Ungueltige Eingabe");
+            if(pruefeEingabe(vorname)){
                 return;
             }
             System.out.print("Nachname > ");
@@ -505,6 +515,10 @@ public class EshopCUIND {
         do {
 
             try {
+                Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                System.out.println(artList);
+                Collections.sort(artList);
+                System.out.println(artList);
                 gibStartMenue();
                 input = liesEingabe();
                 char var = verarbeiteMainEingabe(input);
@@ -516,6 +530,7 @@ public class EshopCUIND {
                         break;
                     case 'q': System.out.println("Vielen Dank für die Verwendung des E-Shops.");
                         break;
+                    case 'a': eShopVerwaltung.
                     default : System.out.println("Unbekannte Eingabe!");
                         break;
                 }
