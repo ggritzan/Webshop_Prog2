@@ -7,3 +7,5 @@ Der jetzige Bestand beträgt: 69
 Mo 2013.05.13 um 15:11:11 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 hat jetzt den Wert 64.
 Mo 2013.05.13 um 16:20:52 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert5
 Mo 2013.05.13 um 16:20:52 MESZ: Der Bestand des Artikels 'Uniform' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
+Mo 2013.05.13 um 17:28:55 MESZ: Der Bestand des Artikels 'Bluse' mit der Artikelnummer 1001 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
+Mo 2013.05.13 um 17:40:10 MESZ: Der Bestand des Artikels 'Nussbaum' mit der Artikelnummer 1005 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1

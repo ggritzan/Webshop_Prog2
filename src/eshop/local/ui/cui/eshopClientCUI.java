@@ -74,7 +74,8 @@ public class eshopClientCUI {
         System.out.print("              \n  ausgeben:  'aa'");
         System.out.println("              \n  suchen:  'af'");
 
-        System.out.println("Rechnung:    \n  : löschen 'rl'");
+        System.out.print("Rechnung:    \n  : löschen 'rl'");
+        System.out.println("             \n  : Rechnung anzeigen 'ra'");
 
 
         System.out.print("         \n  zurück ins Hauptmenue: 'o'");
@@ -610,6 +611,21 @@ public class eshopClientCUI {
                         System.out.println("Rechnung wurde geloescht !");
                     else
                         System.out.println("Beim löschen der Rechnung ist ein Fehler aufgetreten !");
+
+                } else if (input.equals("ra")) {
+                    boolean ok = false;
+                    try {
+                        System.out.println(eShopVerwaltung.gibAlleRechnungen());
+                        System.out.print("Rechnungsnummer: > ");
+                        String rNr = liesEingabe();
+                        int rNrInt = Integer.parseInt(rNr);
+                        System.out.println(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
+
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
                 }
 
             } catch (IOException e) {

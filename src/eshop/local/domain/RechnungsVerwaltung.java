@@ -77,7 +77,7 @@ public class RechnungsVerwaltung {
         } catch (IOException e) {
             System.out.println("Fehler beim einlesen der Rechnungsdaten !");
             e.printStackTrace();
-        }    finally{
+        } finally {
             pm.close();
         }
     }
@@ -112,22 +112,28 @@ public class RechnungsVerwaltung {
      * @param kunde
      */
 
-    public boolean rechnungHinzufuegen(Kunde kunde) throws IOException{
+    public boolean rechnungHinzufuegen(Kunde kunde) throws IOException {
 
         // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
             Vector<Artikel> wkV = new Vector<Artikel>();
-
+            double gesamtPreis = 0;
             for (Artikel elem : kunde.getWarenkorb().values())
 
                 wkV.add(elem);
 
-            Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV);
+
+            for (Artikel elem : kunde.getWarenkorb().values())
+
+                gesamtPreis = gesamtPreis + (elem.getPreis()*elem.getBestellteMenge());
+
+
+            Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV, gesamtPreis);
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
             Vector<Integer> vI = rechnungsBestandKundenNr.get(kunde.getNummer());
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
-            if (rechnung.getdNow() == null){
+            if (rechnung.getdNow() == null) {
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
                 String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
@@ -141,14 +147,21 @@ public class RechnungsVerwaltung {
         } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
             Vector<Artikel> wkV = new Vector<Artikel>();
 
+            double gesamtPreis = 0;
             for (Artikel elem : kunde.getWarenkorb().values())
+
                 wkV.add(elem);
-            Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV);
+
+
+            for (Artikel elem : kunde.getWarenkorb().values())
+
+                gesamtPreis = gesamtPreis + (elem.getPreis()*elem.getBestellteMenge());
+            Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV, gesamtPreis);
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
             Vector<Integer> vI = new Vector<Integer>();
             vI.add(rechnung.getrNr());
             rechnungsBestandKundenNr.put(kunde.getNummer(), vI);
-            if (rechnung.getdNow() == null){
+            if (rechnung.getdNow() == null) {
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
                 String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
@@ -193,7 +206,7 @@ public class RechnungsVerwaltung {
      *
      * @param rechnung
      */
-    public boolean rechnungLoeschen(Rechnung rechnung) throws IOException{
+    public boolean rechnungLoeschen(Rechnung rechnung) throws IOException {
 
         Rechnung r = rechnung;
         Vector<Integer> vI = rechnungsBestandKundenNr.get(r.getkNr());

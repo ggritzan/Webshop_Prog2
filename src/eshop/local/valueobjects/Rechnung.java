@@ -42,7 +42,7 @@ public class Rechnung implements Serializable {
         this.kNr = r.getkNr();
         this.rNr = r.getrNr();
         this.bestellteArtikel = r.getBestellteArtikel();
-        this.gesamtPreis = gesamtPreis;
+        this.gesamtPreis = r.getGesamtPreis();
         if (r.getrNr() >= zaehler) {
             this.zaehler = (r.getrNr() + 1);
         }
@@ -61,8 +61,16 @@ public class Rechnung implements Serializable {
      */
     public String toString() {
         String string = new String();
-        string = "\tRechnungsnummer: " + getrNr() + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() + "\tDatum und Zeit als die Rechnung erstellt wurde: " + getFt().format(getdNow()) + getGesamtPreis() + "\n";
+        string = "\tRechnungsnummer: " + getrNr() + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() + " Gesamtpreis: " + getGesamtPreis() + "\tDatum und Zeit als die Rechnung erstellt wurde: " + getFt().format(getdNow())  + "\n";
         return string;
+    }
+
+    public void plusGesamtPreis(double wert) {
+        this.gesamtPreis = this.gesamtPreis+ wert;
+    }
+
+    public void minusGesamtPreis(double wert) {
+        this.gesamtPreis = this.gesamtPreis - wert;
     }
 
     //Setter
@@ -70,6 +78,8 @@ public class Rechnung implements Serializable {
     public void setDate(Date dNow) {
         this.dNow = dNow;
     }
+
+
 
     //Getter
 
