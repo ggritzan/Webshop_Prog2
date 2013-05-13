@@ -235,14 +235,13 @@ public class ArtikelVerwaltung {
         if (artikelBestandNr.containsKey(artNr)) {
 
             Artikel a = artikelBestandNr.get(artNr);
-            int neuerBestand = wert;
 
             //Wenn der neue Bestand nicht ins negative geht.
-            if(neuerBestand >= 0){
-                a.setBestand(neuerBestand);
+            if(wert >= 0){
+                a.setBestand(wert);
                 artikelBestandNr.put(artNr, a);
                 Date dNow = new Date();
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde um der Wert " + wert + " geändert.\nDer jetzige Bestand beträgt: " + neuerBestand;
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " hat jetzt den Wert" + wert;
                 l.write(dateiName, text);
 
                 return true;
