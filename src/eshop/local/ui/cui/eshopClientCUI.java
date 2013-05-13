@@ -198,18 +198,17 @@ public class eshopClientCUI {
                         // nach Artikelnummer sortiert
                         if (sortInt == 1) {
                             ArtikelNameComperator a = new ArtikelNameComperator();
-                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, a);
                             System.out.println(artList);
                         } else if (sortInt == 2) {
                             ArtikelNumberComperator b = new ArtikelNumberComperator();
-                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
                             System.out.println(artList);
                         } else {
                             System.out.println("unbekannte Eingabe!");
                         }
-
 
 
                     } catch (NumberFormatException e) {
@@ -226,23 +225,26 @@ public class eshopClientCUI {
                         System.out.print("Artikelnummer: > ");
                         String aNr = liesEingabe();
                         int aNrInt = Integer.parseInt(aNr);
-                        System.out.print("Menge: > ");
-                        String menge = liesEingabe();
-                        int mengeInt = Integer.parseInt(menge);
+                        if (!eShopVerwaltung.existiertArtikel(aNrInt)) {
+                            System.out.println("Dieser Artikel exestier nicht !  ");
 
-                        Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
-
-
-                        a.setBestellteMenge(mengeInt);
-
-                        System.out.print("" + a);
-
-
-                        if (a.getBestand() >= mengeInt && mengeInt > 0) {
-
-                            ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
                         } else {
-                            ok = false;
+                            System.out.print("Menge: > ");
+                            String menge = liesEingabe();
+                            int mengeInt = Integer.parseInt(menge);
+
+                            Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
+
+
+                            a.setBestellteMenge(mengeInt);
+
+
+                            if (a.getBestand() >= mengeInt && mengeInt > 0) {
+                                System.out.print("" + a);
+                                ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
+                            } else {
+                                ok = false;
+                            }
                         }
                     } catch (NumberFormatException e) {
 
@@ -264,18 +266,23 @@ public class eshopClientCUI {
                         System.out.print("Artikelnummer: > ");
                         String aNr = liesEingabe();
                         int aNrInt = Integer.parseInt(aNr);
+                        if (eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getKunde(kNr),aNrInt)){
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
                         ok = eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
-
+                        } else {
+                            System.out.println("Artikel exestiert nicht!");
+                        }
                     } catch (NumberFormatException e) {
 
                     }
 
                     if (ok) {
                         System.out.println("Artikel wurde aus den Warenkorb gelöscht !");
-                    } else {
+                    } else  {
                         System.out.println("Beim löschen des Artikels aus dem Warenkorb ist ein Fehler aufgetreten !");
                     }
+
+
 
                     // Zeigt den Warenkorb eines eingeloggten Kunden an
                 } else if (var == 'a') {
@@ -560,18 +567,17 @@ public class eshopClientCUI {
                         // nach Artikelnummer sortiert
                         if (sortInt == 1) {
                             ArtikelNameComperator a = new ArtikelNameComperator();
-                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, a);
                             System.out.println(artList);
                         } else if (sortInt == 2) {
                             ArtikelNumberComperator b = new ArtikelNumberComperator();
-                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
                             System.out.println(artList);
                         } else {
                             System.out.println("unbekannte Eingabe!");
                         }
-
 
 
                     } catch (NumberFormatException e) {

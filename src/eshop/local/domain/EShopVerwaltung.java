@@ -151,6 +151,13 @@ public class EShopVerwaltung {
         return meineArtikel.getArtikel(aNr);
     }
 
+    public boolean existiertArtikel(int aNr) {
+        return meineArtikel.existiertArtikel(aNr);
+    }
+
+    public boolean istImWarenkorb(Kunde k, int aNr){
+        return meineKunden.istImWarenkorb(k,aNr);
+    }
 
     public boolean inWarenkorbLegen(Artikel a, int kNr){
         return meineKunden.inWarenkorbLegen(a, kNr);

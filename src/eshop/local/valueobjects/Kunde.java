@@ -102,6 +102,18 @@ public class Kunde extends Person implements Serializable {
         return this.wk;
     }
 
+    // Gibt an ob der enstsprechende Artikel im Warenkorb enthaltne ist
+    public boolean istImWarenkorb(int aNr) {
+        if (this.wk.containsKey(aNr)&& this.wk.size() > 0){
+            return true;
+        } else {
+            return false;
+        }
+
+
+
+    }
+
 
 
 }

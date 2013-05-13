@@ -236,6 +236,7 @@ public class KundenVerwaltung {
     }
 
     public boolean ausWarenkorbEtfernen(Artikel a, int kNr){
+
         Kunde k = kundenBestandNr.get(kNr);
         boolean ok = k.ausWarenkorbEntfernen(a);
         return ok;
@@ -290,6 +291,10 @@ public class KundenVerwaltung {
             k = kundenBestandNr.get(mnr);
             return k;
         }
+    }
+
+    public boolean istImWarenkorb(Kunde k, int aNr){
+        return k.istImWarenkorb(aNr);
     }
 }
 
