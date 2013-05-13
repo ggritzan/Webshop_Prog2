@@ -242,6 +242,20 @@ public class RechnungsVerwaltung {
     }
 
     /**
+     * Methode gibt ein Rechnungobject zurück
+     */
+    public Rechnung letzteKundenrechnungAusgeben(int kNr) {
+
+        Vector<Integer> rechnungsnummern = rechnungsBestandKundenNr.get(kNr);
+
+        int nr =  rechnungsnummern.lastElement();
+        Rechnung ergebnis = rechnungsBestandNr.get(nr);
+
+        return ergebnis;
+
+    }
+
+    /**
      * Methode durchsucht alle Rechnungen nach einer Rechnungsnummer
      *
      * @param rNr

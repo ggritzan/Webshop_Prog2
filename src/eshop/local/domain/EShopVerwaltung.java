@@ -333,6 +333,16 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Methode zum Speichern des Rechnungsbestanden in einer Datei.
+     *
+     * @throws IOException
+     */
+    public Rechnung letzteKundenrechnungAusgeben(int kNr) throws IOException {
+
+        return meineRechnungen.letzteKundenrechnungAusgeben(kNr);
+    }
+
+    /**
      * Methode zum Speichern des Mitarbeiterbestands in einer Datei.
      *
      * @throws IOException

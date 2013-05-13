@@ -341,6 +341,7 @@ public class eshopClientCUI {
 
                     if (ok) {
                         System.out.println("Ihre Artikel wurden erfolgreich bestellt und eine Rechnung wurde erstellt !");
+                        System.out.println("" + eShopVerwaltung.letzteKundenrechnungAusgeben(kNr));
                     } else {
                         System.out.println("Bei der Bestellung und der Rechnungserstellung ist ein Fehler aufgetreten !!");
                     }
