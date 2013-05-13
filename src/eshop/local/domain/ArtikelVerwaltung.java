@@ -231,22 +231,17 @@ public class ArtikelVerwaltung {
      */
     public boolean setBestand(int artNr, int wert) throws IOException{
 
-        // Wenn die Artikelnummer exestiert wird der Bestand angepasst
-        if (artikelBestandNr.containsKey(artNr)) {
+        // Wenn die Artikelnummer exestiert und der neue Bestand nicht ins negative geht wird der Bestand angepasst
+        if (artikelBestandNr.containsKey(artNr) && wert >= 0) {
 
             Artikel a = artikelBestandNr.get(artNr);
+            a.setBestand(wert);
+            artikelBestandNr.put(artNr, a);
+            Date dNow = new Date();
+            String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " hat jetzt den Wert" + wert;
+            l.write(dateiName, text);
+            return true;
 
-            //Wenn der neue Bestand nicht ins negative geht.
-            if(wert >= 0){
-                a.setBestand(wert);
-                artikelBestandNr.put(artNr, a);
-                Date dNow = new Date();
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " hat jetzt den Wert" + wert;
-                l.write(dateiName, text);
-
-                return true;
-            }
-            return false;
         } else {
 
             return false;
