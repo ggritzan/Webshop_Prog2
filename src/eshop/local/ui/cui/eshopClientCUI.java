@@ -198,9 +198,7 @@ public class eshopClientCUI {
                         // nach Artikelnummer sortiert
                         if (sortInt == 1) {
 
-                            Vector<Artikel> sorted = eShopVerwaltung.gibAlleArtikel();
-                            Collections.sort(sorted);
-                            System.out.print(sorted);
+                            System.out.print(eShopVerwaltung.gibAlleArtikel());
 
 
                         } else if (sortInt == 2) {
@@ -314,7 +312,7 @@ public class eshopClientCUI {
                                 Artikel a = (Artikel) iter.next();
                                 Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
                                 int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
-                                eShopVerwaltung.setBestand(a.getNummer(), neuerBestand);
+                                eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
                             }
 
 
@@ -515,7 +513,7 @@ public class eshopClientCUI {
                         System.out.print("Bestand > ");
                         String aBestand = liesEingabe();
                         int aBestandInt = Integer.parseInt(aBestand);
-                        ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
+                        ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt, eShopVerwaltung.getMitarbeiter(mNr));
 
                     } catch (NumberFormatException e) {
 

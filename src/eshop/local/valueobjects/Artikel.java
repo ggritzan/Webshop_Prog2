@@ -79,6 +79,8 @@ public class Artikel implements Serializable, Comparable<Artikel> {
             return result;
         }
 
+
+
 // Setter
 
         public void setName(String name) {
