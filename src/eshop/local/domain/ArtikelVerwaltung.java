@@ -235,7 +235,7 @@ public class ArtikelVerwaltung {
         if (artikelBestandNr.containsKey(artNr)) {
 
             Artikel a = artikelBestandNr.get(artNr);
-            int neuerBestand = a.getBestand() + wert;
+            int neuerBestand = wert;
 
             //Wenn der neue Bestand nicht ins negative geht.
             if(neuerBestand >= 0){

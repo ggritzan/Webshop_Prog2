@@ -6,3 +6,11 @@ So 2013.05.12 um 23:25:15 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnu
 Der jetzige Bestand beträgt: 5
 So 2013.05.12 um 23:26:07 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 3 geändert.
 Der jetzige Bestand beträgt: 8
+Mo 2013.05.13 um 10:23:22 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 300 geändert.
+Der jetzige Bestand beträgt: 308
+Mo 2013.05.13 um 10:25:00 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 0 geändert.
+Der jetzige Bestand beträgt: 308
+Mo 2013.05.13 um 10:27:16 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 12 geändert.
+Der jetzige Bestand beträgt: 20
+Mo 2013.05.13 um 10:29:23 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 2 geändert.
+Der jetzige Bestand beträgt: 2

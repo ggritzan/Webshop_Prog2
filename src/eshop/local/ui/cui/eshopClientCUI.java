@@ -183,7 +183,7 @@ public class eshopClientCUI {
 
                 // Liste der Artikel ausgeben
                 if (var == 'l') {
-                    boolean ok = false;
+
 
                     try {
 
@@ -198,7 +198,6 @@ public class eshopClientCUI {
                             Vector<Artikel> sorted = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(sorted);
                             System.out.print(sorted);
-
 
 
                         } else if (sortInt == 2) {
@@ -424,10 +423,142 @@ public class eshopClientCUI {
                     } else {
                         System.out.println("Beim löschen des Mitarbeiters ist ein Fehler aufgetreten.");
                     }
+
+                    // Liste aller Mitarbeiter ausgeben
                 } else if (input.equals("ma")) {
                     System.out.println(eShopVerwaltung.gibAlleMitarbeiter());
-                }
 
+                    // Kunden hinzufuegen
+                } else if (input.equals("kh")) {
+                    neuenKundenAnlegen();
+
+                    // Kunden loeschen
+                } else if (input.equals("kl")) {
+
+                    boolean ok = false;
+                    try {
+                        System.out.println(eShopVerwaltung.gibAlleKunden());
+                        System.out.print("Kundennummer: > ");
+                        String kNr = liesEingabe();
+                        int kNrInt = Integer.parseInt(kNr);
+                        ok = eShopVerwaltung.loescheKunde(kNrInt);
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    if (ok)
+                        System.out.println("Kunde wurde geloescht !");
+                    else
+                        System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
+
+                    // alle Kunden ausgeben
+                } else if (input.equals("ka")) {
+
+                    System.out.println(eShopVerwaltung.gibAlleKunden());
+
+                    // Artikel hinzufuegen
+                } else if (input.equals("ah")) {
+
+                    boolean ok = false;
+                    try {
+                        System.out.print("Artikel Name > ");
+                        String aName = liesEingabe();
+                        System.out.print("Artikel Beschreibung > ");
+                        String aBeschreibung = liesEingabe();
+                        System.out.print("Artikel Preis  > ");
+                        String aPreisEingabe = liesEingabe();
+                        double aPreis = Double.parseDouble(aPreisEingabe);
+
+
+                        ok = eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+
+                    if (ok)
+                        System.out.println("Einfügen ok");
+                    else
+                        System.out.println("Der Artikel konnte leider nicht angelegt werden !");
+
+                } else if (input.equals("ab")) {
+
+                    boolean ok = false;
+                    try {
+                        System.out.println(eShopVerwaltung.gibAlleArtikel());
+                        System.out.print("Artikelnummer: > ");
+                        String aNr = liesEingabe();
+                        int aNrInt = Integer.parseInt(aNr);
+                        System.out.print("Bestand > ");
+                        String aBestand = liesEingabe();
+                        int aBestandInt = Integer.parseInt(aBestand);
+                        ok = eShopVerwaltung.setBestand(aNrInt, aBestandInt);
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+
+                    if (ok)
+                        System.out.println("Bestand wurde geändert !");
+                    else
+                        System.out.println("Der Bestand konnte nicht geändert werden da ein Fehler aufgetreten ist !");
+
+                    // Artikel loeschen
+                } else if (input.equals("al")) {
+                    boolean ok = false;
+                    try {
+                        System.out.println(eShopVerwaltung.gibAlleArtikel());
+                        System.out.print("Artikelnummer: > ");
+                        String aNr = liesEingabe();
+                        int aNrInt = Integer.parseInt(aNr);
+                        ok = eShopVerwaltung.loescheArtikel(aNrInt);
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    if (ok)
+                        System.out.println("Artikel wurde geloescht !");
+                    else
+                        System.out.println("Beim löschen des Artikels ist ein Fehler aufgetreten !");
+
+                    // Alle Artikel ausgeben
+                } else if (input.equals("aa")) {
+
+                    try {
+
+                        System.out.print("Wie soll die Ausgabe sortiert werden ?: > ");
+                        System.out.print("1) nach Bezeichnung sortiert  > ");
+                        System.out.print("2) nach Artikelnummer sortiert  > ");
+                        String sort = liesEingabe();
+                        int sortInt = Integer.parseInt(sort);
+                        // nach Artikelnummer sortiert
+                        if (sortInt == 1) {
+
+                            Vector<Artikel> sorted = eShopVerwaltung.gibAlleArtikel();
+                            Collections.sort(sorted);
+                            System.out.print(sorted);
+
+
+                        } else if (sortInt == 2) {
+
+                            System.out.print(eShopVerwaltung.gibAlleArtikel());
+
+                        }
+
+
+                    } catch (NumberFormatException e) {
+
+                    }
+                } else if (input.equals("af")) {
+
+                    System.out.print("Artikelname:  > ");
+                    String titel = liesEingabe();
+                    System.out.println(eShopVerwaltung.sucheNachName(titel));
+
+
+                }
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
