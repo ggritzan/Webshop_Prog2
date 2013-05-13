@@ -206,6 +206,8 @@ public class eshopClientCUI {
                             Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
                             System.out.println(artList);
+                        } else {
+                            System.out.println("unbekannte Eingabe!");
                         }
 
 
@@ -566,6 +568,8 @@ public class eshopClientCUI {
                             Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
                             System.out.println(artList);
+                        } else {
+                            System.out.println("unbekannte Eingabe!");
                         }
 
 
