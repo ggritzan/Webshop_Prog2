@@ -266,7 +266,7 @@ public class eshopClientCUI {
                         System.out.print("Artikelnummer: > ");
                         String aNr = liesEingabe();
                         int aNrInt = Integer.parseInt(aNr);
-                        if (eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getKunde(kNr),aNrInt)){
+                        if (eShopVerwaltung.getKunde(kNr).istImWarenkorb(aNrInt)){
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
                         ok = eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
                         } else {
