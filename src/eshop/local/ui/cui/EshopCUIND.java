@@ -231,6 +231,7 @@ public class EshopCUIND {
             try {
                 ArtikelNameComperator a = new ArtikelNameComperator();
                 Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                System.out.println(artList);
                 Collections.sort(artList, a);
                 System.out.println(artList);
                 gibStartMenue();
