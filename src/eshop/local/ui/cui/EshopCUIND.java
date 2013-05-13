@@ -75,7 +75,7 @@ public class EshopCUIND {
             String beschreibung = liesEingabe();
             System.out.print("Preis > ");
             String Spreis = liesEingabe();
-            int preis = Integer.parseInt(Spreis);
+            double preis = Double.parseDouble(Spreis);
             ok = eShopVerwaltung.fuegeArtikelEin(name, beschreibung, preis);
         }catch (NumberFormatException e) {
             System.out.println(e);

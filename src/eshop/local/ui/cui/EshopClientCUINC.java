@@ -197,16 +197,13 @@ public class EshopClientCUINC {
                         int sortInt = Integer.parseInt(sort);
                         // nach Artikelnummer sortiert
                         if (sortInt == 1) {
-
-                            Vector<Artikel> sorted = eShopVerwaltung.gibAlleArtikel();
-                            Collections.sort(sorted);
-                            System.out.print(sorted);
-
-
+                            ArtikelNameComperator a = new ArtikelNameComperator();
+                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Collections.sort(artList, a);
                         } else if (sortInt == 2) {
-
-                            System.out.print(eShopVerwaltung.gibAlleArtikel());
-
+                            ArtikelNumberComperator b = new ArtikelNumberComperator();
+                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Collections.sort(artList, b);
                         }
 
 
@@ -557,16 +554,13 @@ public class EshopClientCUINC {
                         int sortInt = Integer.parseInt(sort);
                         // nach Artikelnummer sortiert
                         if (sortInt == 1) {
-
-                            Vector<Artikel> sorted = eShopVerwaltung.gibAlleArtikel();
-                            Collections.sort(sorted);
-                            System.out.print(sorted);
-
-
+                            ArtikelNameComperator a = new ArtikelNameComperator();
+                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Collections.sort(artList, a);
                         } else if (sortInt == 2) {
-
-                            System.out.print(eShopVerwaltung.gibAlleArtikel());
-
+                            ArtikelNumberComperator b = new ArtikelNumberComperator();
+                            Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                            Collections.sort(artList, b);
                         }
 
 
