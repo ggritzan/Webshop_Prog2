@@ -229,6 +229,10 @@ public class EshopCUIND {
         // Hauptschleife der Benutzungsschnittstelle
         do {
             try {
+                ArtikelNameComperator a = new ArtikelNameComperator();
+                Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
+                Collections.sort(artList, a);
+                System.out.println(artList);
                 gibStartMenue();
                 input = liesEingabe();
                 char var = verarbeiteMainEingabe(input);

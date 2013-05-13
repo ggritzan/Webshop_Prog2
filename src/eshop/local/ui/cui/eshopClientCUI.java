@@ -558,10 +558,12 @@ public class eshopClientCUI {
                             ArtikelNameComperator a = new ArtikelNameComperator();
                             Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, a);
+                            System.out.println(artList);
                         } else if (sortInt == 2) {
                             ArtikelNumberComperator b = new ArtikelNumberComperator();
                             Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
+                            System.out.println(artList);
                         }
 
 
