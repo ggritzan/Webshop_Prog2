@@ -243,6 +243,14 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    public Mitarbeiter getMitarbeiter(int mNr){
+        if (mitarbeiterBestandNr.containsKey(mNr)) {
+            return mitarbeiterBestandNr.get(mNr);
+        } else {
+            return null;
+        }
+    }
+
 
 }
 

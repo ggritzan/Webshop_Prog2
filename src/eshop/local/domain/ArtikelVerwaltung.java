@@ -11,6 +11,9 @@ import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
+import eshop.local.valueobjects.Kunde;
+import eshop.local.valueobjects.Mitarbeiter;
+import eshop.local.valueobjects.Person;
 
 /**
  * Created with IntelliJ IDEA.
@@ -229,7 +232,7 @@ public class ArtikelVerwaltung {
      *
      * @param artNr,wert
      */
-    public boolean setBestand(int artNr, int wert) throws IOException{
+    public boolean setBestand(int artNr, int wert, Person person) throws IOException{
 
         // Wenn die Artikelnummer exestiert und der neue Bestand nicht ins negative geht wird der Bestand angepasst
         if (artikelBestandNr.containsKey(artNr) && wert >= 0) {
@@ -238,9 +241,17 @@ public class ArtikelVerwaltung {
             a.setBestand(wert);
             artikelBestandNr.put(artNr, a);
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " hat jetzt den Wert" + wert;
-            l.write(dateiName, text);
-            return true;
+            if (person instanceof Kunde) {
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Kunden " + person.getBenutzername() +" mit der Kundennummer "+ ((Kunde) person).getNummer() + " geändert und hat jetzt den Wert" + wert;
+                l.write(dateiName, text);
+                return true;
+            }  else if (person instanceof Mitarbeiter){
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Mitarbeiter " + person.getBenutzername() +" mit der Mitarbeiternummer "+ ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt den Wert" + wert;
+                l.write(dateiName, text);
+                return  true;
+            }
+
+            return false;
 
         } else {
 

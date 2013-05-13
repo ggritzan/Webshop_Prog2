@@ -176,8 +176,8 @@ public class EShopVerwaltung {
      * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
      * @return boolean
      */
-    public boolean setBestand(int artNr, int wert) throws IOException{
-        return meineArtikel.setBestand(artNr, wert);
+    public boolean setBestand(int artNr, int wert, Person p) throws IOException{
+        return meineArtikel.setBestand(artNr, wert, p);
     }
 
     /**
@@ -350,6 +350,11 @@ public class EShopVerwaltung {
     public Mitarbeiter rufeMitarbeiter(String bName) {
         return meineMitarbeiter.getMitarbeiter(bName);
     }
+
+    public Mitarbeiter getMitarbeiter(int mNr) {
+        return meineMitarbeiter.getMitarbeiter(mNr);
+    }
+
 
     public Kunde rufeKunden(String bName){
         return meineKunden.getKunden(bName);
