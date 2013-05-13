@@ -336,9 +336,8 @@ public class eshopClientCUI {
                 input = liesEingabe();
 
 
-
                 // Liste der Artikel ausgeben
-                if (input.equals("mh") ) {
+                if (input.equals("mh")) {
                     boolean ok = false;
 
                     try {
@@ -407,13 +406,25 @@ public class eshopClientCUI {
                         }
 
 
-
-
-
                     } catch (NumberFormatException e) {
 
                     }
+
+                    // Mitarbeiter loeschen
+                } else if (input.equals("ml")) {
+                    System.out.println("Bitte geben Sie die Nummer des Mitarbeiters an, der gelöscht werden soll.");
+                    String mitNr = liesEingabe();
+                    int mNrInt = Integer.parseInt(mitNr);
+                    boolean ok = eShopVerwaltung.loescheMitarbeiter(mNrInt);
+                    if (ok) {
+                        System.out.println("Der Mitarbeiter wurde erfolgreich gelöscht.");
+                    } else {
+                        System.out.println("Beim löschen des Mitarbeiters ist ein Fehler aufgetreten.");
+                    }
+                } else if (input.equals("ma")) {
+                    System.out.println(eShopVerwaltung.gibAlleMitarbeiter());
                 }
+
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
