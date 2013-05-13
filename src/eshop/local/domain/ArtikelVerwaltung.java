@@ -140,7 +140,7 @@ public class ArtikelVerwaltung {
             artikelBestandNr.put(artikel.getNummer(), artikel);
             artikelBestandName.put(name, artikel.getNummer());
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Bestand des Artikels '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde hinzugefügt.";
+            String text = ft.format(dNow) + ": Der Artikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde hinzugefügt.";
             l.write(dateiName, text);
             return true;
         }
@@ -176,7 +176,7 @@ public class ArtikelVerwaltung {
             artikelBestandName.remove(a.getName());
 
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde gelöscht.";
+            String text = ft.format(dNow) + ": Der Artikel '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde gelöscht.";
             l.write(dateiName, text);
 
             return true;
