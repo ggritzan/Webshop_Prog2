@@ -195,7 +195,10 @@ public class eshopClientCUI {
                         // nach Artikelnummer sortiert
                         if (sortInt == 1) {
 
-                            System.out.print(eShopVerwaltung.gibAlleArtikel());
+                            Vector<Artikel> sorted = eShopVerwaltung.gibAlleArtikel();
+                            Collections.sort(sorted);
+                            System.out.print(sorted);
+
 
 
                         } else if (sortInt == 2) {
