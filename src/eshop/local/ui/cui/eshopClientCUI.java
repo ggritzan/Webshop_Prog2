@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Vector;
 
 
@@ -230,7 +231,6 @@ public class eshopClientCUI {
                         Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
 
 
-
                         a.setBestellteMenge(mengeInt);
 
                         System.out.print("" + a);
@@ -298,6 +298,7 @@ public class eshopClientCUI {
 
                     // Erstellt für den aktuellen Warenkorb eines Nutzers eine Rechnung
                 } else if (var == 'b') {
+
                     boolean ok = false;
 
                     try {
@@ -307,17 +308,22 @@ public class eshopClientCUI {
 
                         if (kunde.getWarenkorb().size() > 0) {
 
-                            /*
-                            Der Bestand muss angepasst werden
-                            ok = eShopVerwaltung.fuegeRechnungEin(kunde);
-                            do {
-                                eShopVerwaltung.setBestand()
-                            }while ();
-                            */
 
-                            kunde.resetWarenkorb();
+                            Iterator iter = kunde.getWarenkorb().values().iterator();
+                            while (iter.hasNext()) {
+                                Artikel a = (Artikel) iter.next();
+                                Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
+                                int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
+                                eShopVerwaltung.setBestand(a.getNummer(), neuerBestand);
+                            }
+
 
                         }
+
+
+                        ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+
+                        kunde.resetWarenkorb();
 
                     } catch (NumberFormatException e) {
 
@@ -336,7 +342,9 @@ public class eshopClientCUI {
                 e.printStackTrace();
             }
 
-        } while (!input.equals("o"));
+        }
+
+        while (!input.equals("o"));
 
 
     }
@@ -566,7 +574,7 @@ public class eshopClientCUI {
 
                     }
 
-                  // Artikel suchen
+                    // Artikel suchen
                 } else if (input.equals("af")) {
 
                     System.out.print("Artikelname:  > ");

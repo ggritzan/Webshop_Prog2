@@ -2,3 +2,5 @@ Mo 2013.05.13 um 10:59:39 MESZ: Der Bestand des Artikels 'Hose' mit der Artikeln
 Mo 2013.05.13 um 10:59:50 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde um der Wert 89 geändert.
 Der jetzige Bestand beträgt: 89
 Mo 2013.05.13 um 11:00:02 MESZ: Der Bestand des Artikels 'md He' mit der Artikelnummer 1001 wurde hinzugefügt.
+Mo 2013.05.13 um 13:01:43 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde um der Wert 69 geändert.
+Der jetzige Bestand beträgt: 69
