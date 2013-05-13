@@ -69,9 +69,11 @@ public class eshopClientCUI {
 
         System.out.print("Artikel:    \n  hinzufuegen: 'ah'");
         System.out.print("              \n  Bestand ändern: 'ab'");
-        System.out.print("              \n  löschen: 'al");
+        System.out.print("              \n  löschen: al");
         System.out.print("              \n  ausgeben:  'aa'");
         System.out.println("              \n  suchen:  'af'");
+
+        System.out.println("Rechnung:    \n  : löschen 'rl'");
 
 
         System.out.print("         \n  zurück ins Hauptmenue: 'o'");
@@ -224,12 +226,17 @@ public class eshopClientCUI {
                         System.out.print("Menge: > ");
                         String menge = liesEingabe();
                         int mengeInt = Integer.parseInt(menge);
-                        Artikel a = eShopVerwaltung.getArtikel(aNrInt);
+
+                        Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
+
+
+
                         a.setBestellteMenge(mengeInt);
+
                         System.out.print("" + a);
 
 
-                        if (a.getBestand() >= mengeInt) {
+                        if (a.getBestand() >= mengeInt && mengeInt > 0) {
 
                             ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
                         } else {
@@ -300,7 +307,14 @@ public class eshopClientCUI {
 
                         if (kunde.getWarenkorb().size() > 0) {
 
+                            /*
+                            Der Bestand muss angepasst werden
                             ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+                            do {
+                                eShopVerwaltung.setBestand()
+                            }while ();
+                            */
+
                             kunde.resetWarenkorb();
 
                         }
@@ -551,6 +565,8 @@ public class eshopClientCUI {
                     } catch (NumberFormatException e) {
 
                     }
+
+                  // Artikel suchen
                 } else if (input.equals("af")) {
 
                     System.out.print("Artikelname:  > ");
@@ -558,6 +574,24 @@ public class eshopClientCUI {
                     System.out.println(eShopVerwaltung.sucheNachName(titel));
 
 
+                } else if (input.equals("rl")) {
+                    boolean ok = false;
+                    try {
+                        System.out.println(eShopVerwaltung.gibAlleRechnungen());
+                        System.out.print("Rechnungsnummer: > ");
+                        String rNr = liesEingabe();
+                        int rNrInt = Integer.parseInt(rNr);
+
+                        ok = eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
+
+                    } catch (NumberFormatException e) {
+
+                    }
+
+                    if (ok)
+                        System.out.println("Rechnung wurde geloescht !");
+                    else
+                        System.out.println("Beim löschen der Rechnung ist ein Fehler aufgetreten !");
                 }
 
             } catch (IOException e) {

@@ -1,16 +1,4 @@
-So 2013.05.12 um 22:40:43 MESZ: Der Bestand des Artikels 'Uniform' mit der Artikelnummer 1002 wurde um der Wert 3 geändert.
-Der jetzige Bestand beträgt: 3
-So 2013.05.12 um 22:42:47 MESZ: Der Bestand des Artikels 'Nussbaum' mit der Artikelnummer 1005 wurde um der Wert 3 geändert.
-Der jetzige Bestand beträgt: 3
-So 2013.05.12 um 23:25:15 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 5 geändert.
-Der jetzige Bestand beträgt: 5
-So 2013.05.12 um 23:26:07 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 3 geändert.
-Der jetzige Bestand beträgt: 8
-Mo 2013.05.13 um 10:23:22 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 300 geändert.
-Der jetzige Bestand beträgt: 308
-Mo 2013.05.13 um 10:25:00 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 0 geändert.
-Der jetzige Bestand beträgt: 308
-Mo 2013.05.13 um 10:27:16 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 12 geändert.
-Der jetzige Bestand beträgt: 20
-Mo 2013.05.13 um 10:29:23 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde um der Wert 2 geändert.
-Der jetzige Bestand beträgt: 2
+Mo 2013.05.13 um 10:59:39 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde hinzugefügt.
+Mo 2013.05.13 um 10:59:50 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde um der Wert 89 geändert.
+Der jetzige Bestand beträgt: 89
+Mo 2013.05.13 um 11:00:02 MESZ: Der Bestand des Artikels 'md He' mit der Artikelnummer 1001 wurde hinzugefügt.
