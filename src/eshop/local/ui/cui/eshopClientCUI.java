@@ -206,14 +206,12 @@ public class eshopClientCUI {
                             Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
                             System.out.println(artList);
-                        } else {
-                            System.out.println("unbekannte Eingabe!");
                         }
 
 
 
                     } catch (NumberFormatException e) {
-
+                        System.out.println("unbekannte Eingabe!");
                     }
 
                     // Artikel in den Warenkorb legen
@@ -568,13 +566,12 @@ public class eshopClientCUI {
                             Vector <Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, b);
                             System.out.println(artList);
-                        }else {
-                            System.out.println("Ihre Eingabe ist keine Sortierungsmoeglichkeit");
                         }
 
 
-                    } catch (NumberFormatException e) {
 
+                    } catch (NumberFormatException e) {
+                        System.out.println("unbekannte Eingabe!");
                     }
 
                     // Artikel suchen
