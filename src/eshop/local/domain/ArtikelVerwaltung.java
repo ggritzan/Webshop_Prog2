@@ -281,5 +281,13 @@ public class ArtikelVerwaltung {
         }
     }
 
+    public boolean existiertArtikel(int aNr) {
+        if (artikelBestandNr.containsKey(aNr)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
