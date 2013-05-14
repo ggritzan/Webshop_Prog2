@@ -1,1 +1,2 @@
-So 2013.05.12 um 23:27:21 MESZ: Der Kunde 's.henke' mit der Kundennummer 1001 wurde hinzugefügt.
+Di 2013.05.14 um 14:14:28 MESZ: Der Kunde 'hmeyer' mit der Kundennummer 1000 wurde hinzugefügt.
+Di 2013.05.14 um 14:15:09 MESZ: Der Kunde 'ssorglos' mit der Kundennummer 1001 wurde hinzugefügt.

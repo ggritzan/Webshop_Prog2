@@ -1,2 +1,2 @@
-Mo 2013.05.13 um 08:57:04 MESZ: Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
-Mo 2013.05.13 um 08:57:55 MESZ: Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
+Di 2013.05.14 um 14:15:50 MESZ: Der Mitarbeiter 'test' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
+Di 2013.05.14 um 14:16:29 MESZ: Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1001 wurde hinzugefügt.

@@ -1,14 +1,12 @@
-Mo 2013.05.13 um 10:59:39 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde hinzugefügt.
-Mo 2013.05.13 um 10:59:50 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde um der Wert 89 geändert.
-Der jetzige Bestand beträgt: 89
-Mo 2013.05.13 um 11:00:02 MESZ: Der Bestand des Artikels 'md He' mit der Artikelnummer 1001 wurde hinzugefügt.
-Mo 2013.05.13 um 13:01:43 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde um der Wert 69 geändert.
-Der jetzige Bestand beträgt: 69
-Mo 2013.05.13 um 15:11:11 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 hat jetzt den Wert 64.
-Mo 2013.05.13 um 16:20:52 MESZ: Der Bestand des Artikels 'Axt' mit der Artikelnummer 1004 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert5
-Mo 2013.05.13 um 16:20:52 MESZ: Der Bestand des Artikels 'Uniform' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
-Mo 2013.05.13 um 17:28:55 MESZ: Der Bestand des Artikels 'Bluse' mit der Artikelnummer 1001 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
-Mo 2013.05.13 um 17:40:10 MESZ: Der Bestand des Artikels 'Nussbaum' mit der Artikelnummer 1005 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
-Mo 2013.05.13 um 18:02:01 MESZ: Der Bestand des Artikels 'Ananas' mit der Artikelnummer 1003 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
-Mo 2013.05.13 um 18:03:10 MESZ: Der Bestand des Artikels 'Hose' mit der Artikelnummer 1000 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert6
-Mo 2013.05.13 um 18:03:10 MESZ: Der Bestand des Artikels 'Uniform' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt den Wert1
+Di 2013.05.14 um 14:17:12 MESZ: Der Artikel 'HTC One S' mit der Artikelnummer 1000 wurde hinzugefügt.
+Di 2013.05.14 um 14:17:30 MESZ: Der Artikel 'Stift' mit der Artikelnummer 1001 wurde hinzugefügt.
+Di 2013.05.14 um 14:17:44 MESZ: Der Artikel 'Jeans' mit der Artikelnummer 1002 wurde hinzugefügt.
+Di 2013.05.14 um 14:17:59 MESZ: Der Artikel 'Flip Flops ' mit der Artikelnummer 1003 wurde hinzugefügt.
+Di 2013.05.14 um 14:18:30 MESZ: Der Bestand des Artikels 'HTC One S' mit der Artikelnummer 1000
+wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1001 geändert und hat jetzt den Wert 6.
+Di 2013.05.14 um 14:18:41 MESZ: Der Bestand des Artikels 'Stift' mit der Artikelnummer 1001
+wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1001 geändert und hat jetzt den Wert 4598.
+Di 2013.05.14 um 14:18:55 MESZ: Der Bestand des Artikels 'Jeans' mit der Artikelnummer 1002
+wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1001 geändert und hat jetzt den Wert 32.
+Di 2013.05.14 um 14:19:14 MESZ: Der Bestand des Artikels 'Flip Flops ' mit der Artikelnummer 1003
+wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1001 geändert und hat jetzt den Wert 87.
