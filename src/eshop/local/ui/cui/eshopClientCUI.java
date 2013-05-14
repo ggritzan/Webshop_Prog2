@@ -310,6 +310,7 @@ public class eshopClientCUI {
                 } else if (var == 'b') {
 
                     boolean ok = false;
+                    boolean bestandFehler = false;
 
                     try {
 
@@ -328,20 +329,22 @@ public class eshopClientCUI {
                                 eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
 
                                 } else {
+                                    bestandFehler = true;
                                     System.out.println("Der Bestand des Artikels " + a.getName() + " ist geringer als die bestellte Mnege");
                                     System.out.println("Noch vorhandener Bestand: " + eShopVerwaltung.getArtikel(a.getNummer()).getBestand() + "Stueck !");
                                     System.out.println("Die von Ihnen bestellte Menge: " + a.getBestellteMenge());
+
                                 }
                             }
 
 
                         }
 
-
+                        if (!bestandFehler) {
                         ok = eShopVerwaltung.fuegeRechnungEin(kunde);
 
                         kunde.resetWarenkorb();
-
+                        }
                     } catch (NumberFormatException e) {
 
                     }
