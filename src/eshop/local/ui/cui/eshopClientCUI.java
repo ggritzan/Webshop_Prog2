@@ -324,7 +324,14 @@ public class eshopClientCUI {
                                 Artikel a = (Artikel) iter.next();
                                 Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
                                 int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
+                                if (eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge()){
                                 eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
+
+                                } else {
+                                    System.out.println("Der Bestand des Artikels " + a.getName() + " ist geringer als die bestellte Mnege");
+                                    System.out.println("Noch vorhandener Bestand: " + eShopVerwaltung.getArtikel(a.getNummer()).getBestand() + "Stueck !");
+                                    System.out.println("Die von Ihnen bestellte Menge: " + a.getBestellteMenge());
+                                }
                             }
 
 
