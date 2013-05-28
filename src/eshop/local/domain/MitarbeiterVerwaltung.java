@@ -8,9 +8,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.exception.MitarbeiterExistiertBereitsException;
+import eshop.local.exception.MitarbeiterExistiertNichtException;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Adresse;
-import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
 import eshop.local.valueobjects.Mitarbeiter;
@@ -80,7 +81,10 @@ public class MitarbeiterVerwaltung {
             while (einMitarbeiter != null);
         } catch (IOException e) {
             System.out.println("Der Datenbestand ist leer");
-        } finally {
+        } catch (MitarbeiterExistiertBereitsException meb) {
+            System.err.println(meb.getMessage());
+        }
+        finally {
             pm.close();
         }
     }
@@ -107,12 +111,10 @@ public class MitarbeiterVerwaltung {
     /**
      * Methode zum hinzufuegen von Mitarbeitern
      */
-    public boolean mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
+    public void mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
 
-        // Wenn der Name eines Mitarbeiters bereits vorhanden ist wird false zurück gegeben und kein neuer Mitarbeiter angelegt
-        if (mitarbeiterBestandName.containsKey(benutzername)) {
-            return false;
-
+        if(mitarbeiterBestandName.containsKey(benutzername)){
+            throw new MitarbeiterExistiertBereitsException(benutzername);
         } else {
             // Ist der Mitarbeitername noch nicht vorhanden wird er neu angelegt und in den beiden HashMaps gespeichert (artikelBestandNr, artikelBestandName)
             Mitarbeiter mitarbeiter = new Mitarbeiter(vorname, nachname, benutzername, passwort, email, telefon, adresse);
@@ -121,7 +123,6 @@ public class MitarbeiterVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + ": Der Mitarbeiter '" + benutzername + "' mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " wurde hinzugefügt.";
             l.write(dateiName, text);
-            return true;
         }
 
     }
@@ -130,7 +131,7 @@ public class MitarbeiterVerwaltung {
      * Methode zum hinzufuegen von Mitarbeitern durch den PersistenceManager
      * @param mitarbeiter
      */
-    public void mitarbeiterHinzufuegen(Mitarbeiter mitarbeiter) {
+    public void mitarbeiterHinzufuegen(Mitarbeiter mitarbeiter) throws MitarbeiterExistiertBereitsException{
 
         // Erzeugt Mitarbeiter mit ihrer bisherigen Mitarbeiternummer
         Mitarbeiter m = new Mitarbeiter(mitarbeiter);
@@ -144,7 +145,7 @@ public class MitarbeiterVerwaltung {
      * @param maNr
      * @return boolean
      */
-    public boolean mitarbeiterLoeschen(int maNr) throws IOException{
+    public void mitarbeiterLoeschen(int maNr) throws IOException, MitarbeiterExistiertNichtException{
 
         if (mitarbeiterBestandNr.containsKey(maNr)) {
 
@@ -154,11 +155,9 @@ public class MitarbeiterVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + ": Der Mitarbeiter '" + m.getBenutzername() + "' mit der Mitarbeiternummer " + maNr + " wurde gelöscht.";
             l.write(dateiName, text);
-            return true;
 
         } else {
-
-            return false;
+            throw new MitarbeiterExistiertNichtException();
         }
 
     }
@@ -194,36 +193,35 @@ public class MitarbeiterVerwaltung {
 
         } else {
             Vector<String> error = new Vector<String>();
-            error.add("Der Mitarbeiter ist nicht vorhanden !");
+            error.add("Der Mitarbeiter "+benutzername+ " ist nicht vorhanden !");
 
             return error;
         }
 
     }
 
-    public boolean findeMitarbeiter(String benutzername, String passwort) {
+    public boolean findeMitarbeiter(String benutzername, String passwort){
         if (mitarbeiterBestandName.containsKey(benutzername)) {
             int mnr = mitarbeiterBestandName.get(benutzername);
             Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
             String p = m.getPasswort();
             if (p.equals(passwort)) {
-                return true;
-            }else{
-                return false;
+                System.out.println("Login erfolgreich");
             }
+            return true;
         } else {
+            System.out.println("Login nicht erfolgreich");
             return false;
         }
     }
 
-    public Mitarbeiter getMitarbeiter(String bName){
+    public Mitarbeiter getMitarbeiter(String bName) {
         Mitarbeiter m;
         if(mitarbeiterBestandName.containsKey(bName)){
             int mnr = mitarbeiterBestandName.get(bName);
             m = mitarbeiterBestandNr.get(mnr);
             return m;
         }else{
-            System.out.println("Der Mitarbeiteraccount konnte leider nicht gefunden werden.");
             int mnr = mitarbeiterBestandName.get(bName);
             m = mitarbeiterBestandNr.get(mnr);
             return m;
