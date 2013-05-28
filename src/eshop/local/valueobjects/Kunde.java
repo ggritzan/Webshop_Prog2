@@ -63,13 +63,9 @@ public class Kunde extends Person implements Serializable {
     }
 
     //fügt einen Artikel dem Warenkorb hinzu
-    public boolean inWarenkorbLegen(Artikel a) {
+    public void inWarenkorbLegen(Artikel a) {
         // fügt die bestellte Menge ein und packt das Artikelobjekt in den Warenkorb
-
-
         wk.put(a.getNummer(),a);
-
-        return true;
     }
 
     //Entfernt einen Artikel aus dem Warenkorb

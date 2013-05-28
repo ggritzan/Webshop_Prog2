@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.exception.*;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.persistence.FilePersistenceManager;
@@ -126,14 +127,14 @@ public class KundenVerwaltung {
      * @param email
      * @param telefon
      */
-    public boolean kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
+    public void kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, BenutzernameExistiertBereitsException {
 
         // Wenn der Benutzername eines Kunden bereits vorhanden ist wird false zurück gegeben und kein neuer Kunde angelegt
         if (kundenBestandBenutzername.containsKey(benutzername)) {
-            return false;
+            throw new BenutzernameExistiertBereitsException(benutzername);
 
 
-        } else {
+        } else if (!kundenBestandBenutzername.containsKey(benutzername)){
             // Ist der Benutzername noch nicht vergeben wird er neu angelegt und in den beiden HasMaps gespeichert (kundenBestandNr, kundenBestandBenutzername)
             Kunde kunde = new Kunde(vorname, nachname, benutzername, passwort, email, telefon, adresse);
             kundenBestandNr.put(kunde.getNummer(), kunde);
@@ -141,7 +142,6 @@ public class KundenVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + ": Der Kunde '" + benutzername + "' mit der Kundennummer " + kunde.getNummer() + " wurde hinzugefügt.";
             l.write(dateiName, text);
-            return true;
         }
 
 
@@ -168,7 +168,7 @@ public class KundenVerwaltung {
      * @param kundenNr
      * @return boolean
      */
-    public boolean kundenLoeschen(int kundenNr) throws IOException{
+    public void kundenLoeschen(int kundenNr) throws IOException, KundenNummerExistiertNichtException{
 
         if (kundenBestandNr.containsKey(kundenNr)) {
 
@@ -179,11 +179,8 @@ public class KundenVerwaltung {
             String text = ft.format(dNow) + ": Der Kunde '" + k.getBenutzername() + "' mit der Kundennummer " + kundenNr + " wurde gelöscht.";
             l.write(dateiName, text);
 
-            return true;
-
-        } else {
-
-            return false;
+        } else if(!kundenBestandNr.containsKey(kundenNr)){
+            throw new KundenNummerExistiertNichtException(kundenNr);
         }
 
     }
@@ -208,9 +205,11 @@ public class KundenVerwaltung {
      *
      * @param kNr
      */
-    public Kunde getKunde(int kNr) {
+    public Kunde getKunde(int kNr) throws KundenNummerExistiertNichtException {
         if (kundenBestandNr.containsKey(kNr)) {
             return kundenBestandNr.get(kNr);
+        } else if(!kundenBestandNr.containsKey(kNr)){
+            throw new KundenNummerExistiertNichtException(kNr);
         } else {
             return null;
         }
@@ -221,75 +220,81 @@ public class KundenVerwaltung {
      *
      * @param bName
      */
-    public int getKnr(String bName) {
+    public int getKnr(String bName) throws KundenNameExistiertNichtException{
         if (kundenBestandBenutzername.containsKey(bName)) {
             return kundenBestandBenutzername.get(bName);
+        } else if (!kundenBestandBenutzername.containsKey(bName)){
+            throw new KundenNameExistiertNichtException(bName);
         } else {
             return 0;
         }
     }
 
-    public boolean inWarenkorbLegen(Artikel a, int kNr) {
-         Kunde k = kundenBestandNr.get(kNr);
-        boolean ok =  k.inWarenkorbLegen(a);
-        return ok ;
+    public void inWarenkorbLegen(Artikel a, int kNr) throws KundenNummerExistiertNichtException {
+        if(kundenBestandNr.containsKey(kNr)){
+            Kunde k = kundenBestandNr.get(kNr);
+            k.inWarenkorbLegen(a);
+        } else if (!kundenBestandNr.containsKey(kNr)){
+            throw new KundenNummerExistiertNichtException(kNr);
+        }
     }
 
-    public boolean ausWarenkorbEtfernen(Artikel a, int kNr){
-
-        Kunde k = kundenBestandNr.get(kNr);
-        boolean ok = k.ausWarenkorbEntfernen(a);
-        return ok;
-    }
-
-    public boolean resetWarenkorb(int kNr) {
+    public void ausWarenkorbEtfernen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
 
         if(kundenBestandNr.containsKey(kNr)){
-        Kunde k = kundenBestandNr.get(kNr);
-        k.resetWarenkorb();
-        kundenBestandNr.put(kNr,k);
-        return true;
+            Kunde k = kundenBestandNr.get(kNr);
+            k.ausWarenkorbEntfernen(a);
+        } else if (!kundenBestandNr.containsKey(kNr)){
+            throw new KundenNummerExistiertNichtException(kNr);
         }
-        return false;
+    }
+
+    public void resetWarenkorb(int kNr) throws KundenNummerExistiertNichtException{
+
+        if(kundenBestandNr.containsKey(kNr)){
+            Kunde k = kundenBestandNr.get(kNr);
+            k.resetWarenkorb();
+            kundenBestandNr.put(kNr,k);
+        } else if(!kundenBestandNr.containsKey(kNr)){
+            throw new KundenNummerExistiertNichtException(kNr);
+        }
     }
     /**
      * Methode durchsucht alle Kunden nach dem Parameter Nachname und gibt die entsprechenden Kunden in einem Vektor zurueck
      *
      * @param
-
-    public Vector sucheArtikel(String name) {
-
-
-    }
      */
     /*
 
      */
-    public boolean findeKunden(String benutzername, String passwort) {
+    public boolean findeKunden(String benutzername, String passwort) throws PasswortFalschException, BenutzernameExistiertNichtException{
         if (kundenBestandBenutzername.containsKey(benutzername)) {
             int knr = kundenBestandBenutzername.get(benutzername);
             Kunde k = kundenBestandNr.get(knr);
             String p = k.getPasswort();
             if (p.equals(passwort)) {
                 return true;
-            }else{
+            }else if (!p.equals(passwort)){
+                throw new PasswortFalschException();
+            } else {
                 return false;
             }
+        } else if (!kundenBestandBenutzername.containsKey(benutzername)) {
+            throw new BenutzernameExistiertNichtException(benutzername);
         } else {
             return false;
         }
     }
-    public Kunde getKunden(String bName){
+    public Kunde getKunden(String bName) throws BenutzernameExistiertNichtException{
         Kunde k;
         if(kundenBestandBenutzername.containsKey(bName)){
             int knr = kundenBestandBenutzername.get(bName);
             k = kundenBestandNr.get(knr);
             return k;
-        }else{
-            System.out.println("Der Kundenaccount konnte leider nicht gefunden werden.");
-            int mnr = kundenBestandBenutzername.get(bName);
-            k = kundenBestandNr.get(mnr);
-            return k;
+        }else if (!kundenBestandBenutzername.containsKey(bName)){
+            throw new BenutzernameExistiertNichtException(bName);
+        } else {
+            return null;
         }
     }
 
