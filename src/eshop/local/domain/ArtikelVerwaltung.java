@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.exception.ArtikelBestandNegativException;
+import eshop.local.exception.ArtikelBestandZuNiedrigException;
+import eshop.local.exception.ArtikelBestellteMengeNegativException;
 import eshop.local.exception.ArtikelExestierBereitsException;
+import eshop.local.exception.ArtikelExestiertNichtException;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
@@ -138,6 +142,7 @@ public class ArtikelVerwaltung {
         } else {
             // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
 
+
             Artikel artikel = new Artikel(name, beschreibung, preis);
             artikelBestandNr.put(artikel.getNummer(), artikel);
             artikelBestandName.put(name, artikel.getNummer());
@@ -169,10 +174,14 @@ public class ArtikelVerwaltung {
      * @param artNr
      * @return boolean
      */
-    public boolean artikelLoeschen(int artNr) throws IOException{
+    public void artikelLoeschen(int artNr) throws IOException, ArtikelExestiertNichtException {
 
-        if (artikelBestandNr.containsKey(artNr)) {
+        if (!artikelBestandNr.containsKey(artNr)) {
 
+            throw  new ArtikelExestiertNichtException(artNr);
+
+
+        } else {
             Artikel a = artikelBestandNr.get(artNr);
             artikelBestandNr.remove(artNr);
             artikelBestandName.remove(a.getName());
@@ -181,11 +190,7 @@ public class ArtikelVerwaltung {
             String text = ft.format(dNow) + ": Der Artikel '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde gelöscht.";
             l.write(dateiName, text);
 
-            return true;
 
-        } else {
-
-            return false;
         }
 
     }
@@ -234,7 +239,7 @@ public class ArtikelVerwaltung {
      *
      * @param artNr,wert
      */
-    public boolean setBestand(int artNr, int wert, Person person) throws IOException{
+    public void setBestand(int artNr, int wert, Person person) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
 
         // Wenn die Artikelnummer exestiert und der neue Bestand nicht ins negative geht wird der Bestand angepasst
         if (artikelBestandNr.containsKey(artNr) && wert >= 0) {
@@ -246,18 +251,23 @@ public class ArtikelVerwaltung {
             if (person instanceof Kunde) {
                 String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Kunden " + person.getBenutzername() +" mit der Kundennummer "+ ((Kunde) person).getNummer() + " geändert und hat jetzt den Wert " + wert+".";
                 l.write(dateiName, text);
-                return true;
+
             }  else if (person instanceof Mitarbeiter){
                 String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Mitarbeiter " + person.getBenutzername() +" mit der Mitarbeiternummer "+ ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt den Wert " + wert+".";
                 l.write(dateiName, text);
-                return  true;
+
             }
 
-            return false;
 
-        } else {
+          //vwirft eine Exception wenn die Artikelnummer des Artikels nicht exestiert
+        } else if (!artikelBestandNr.containsKey(artNr)) {
+            throw new ArtikelExestiertNichtException(artNr);
 
-            return false;
+        }
+
+         // wirft eine ArtikelBestandNeagativException wenn versucht wird denn Bestand in negative zu aendern
+         else if (wert < 0) {
+           throw new ArtikelBestandNegativException();
         }
     }
 
@@ -266,19 +276,20 @@ public class ArtikelVerwaltung {
      *
      * @param menge Integer
      */
-    public boolean setBestellteMenge(int menge) {
+    public void setBestellteMenge(int menge) throws  ArtikelBestellteMengeNegativException {
         if (menge >= 0) {
             setBestellteMenge(menge);
-            return true;
+
         } else {
-            return false;
+            throw new ArtikelBestellteMengeNegativException();
         }
     }
 
     public Artikel getArtikel(int aNr) {
         if (artikelBestandNr.containsKey(aNr)) {
             return artikelBestandNr.get(aNr);
-        } else {
+        } else if (!artikelBestandNr.containsKey(aNr)) {
+
             return null;
         }
     }
