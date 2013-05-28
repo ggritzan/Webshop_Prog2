@@ -11,6 +11,8 @@ package eshop.local.ui.cui;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.ArtikelExestierBereitsException;
+import eshop.local.exception.MitarbeiterExistiertBereitsException;
+import eshop.local.exception.MitarbeiterExistiertNichtException;
 import eshop.local.valueobjects.*;
 
 import java.io.BufferedReader;
@@ -443,7 +445,7 @@ public class eshopClientCUI {
                             return;
                         }
                         Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
-                        ok = eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+                        eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
                         if (ok) {
                             System.out.println("Der Mitarbeiter wurde erfolgreich eingefuegt.");
                         } else {
@@ -453,6 +455,8 @@ public class eshopClientCUI {
 
                     } catch (NumberFormatException e) {
 
+                    } catch (MitarbeiterExistiertBereitsException meb){
+                        meb.getMessage();
                     }
 
                     // Mitarbeiter loeschen
@@ -460,12 +464,12 @@ public class eshopClientCUI {
                     System.out.println("Bitte geben Sie die Nummer des Mitarbeiters an, der gelöscht werden soll.");
                     String mitNr = liesEingabe();
                     int mNrInt = Integer.parseInt(mitNr);
-                    boolean ok = eShopVerwaltung.loescheMitarbeiter(mNrInt);
-                    if (ok) {
-                        System.out.println("Der Mitarbeiter wurde erfolgreich gelöscht.");
-                    } else {
-                        System.out.println("Beim löschen des Mitarbeiters ist ein Fehler aufgetreten.");
+                    try {
+                        eShopVerwaltung.loescheMitarbeiter(mNrInt);
+                    } catch (MitarbeiterExistiertNichtException men){
+                        System.err.println(men.getMessage());
                     }
+
 
                     // Liste aller Mitarbeiter ausgeben
                 } else if (input.equals("ma")) {
@@ -724,7 +728,7 @@ public class eshopClientCUI {
             System.out.println("Der Kunde konnte leider nicht angelegt werden !");
     }
 
-    private void neuenMitarbeiterAnlegen() throws IOException {
+    private void neuenMitarbeiterAnlegen() throws IOException, MitarbeiterExistiertBereitsException {
 
         boolean ok = false;
         System.out.print("Vorname > ");
@@ -782,7 +786,7 @@ public class eshopClientCUI {
             return;
         }
         Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
-        ok = eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+        eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         if (ok) {
             System.out.println("Der Mitarbeiter wurde erfolgreich eingefuegt.");
         } else {
@@ -840,8 +844,8 @@ public class eshopClientCUI {
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
-
-
+                    } catch (MitarbeiterExistiertBereitsException meb){
+                        System.err.println(meb.getMessage());
                     }
                 } else if (var == 's') {
                     // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung

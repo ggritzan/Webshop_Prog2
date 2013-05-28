@@ -5,6 +5,8 @@ import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
 import eshop.local.exception.ArtikelExestierBereitsException;
+import eshop.local.exception.MitarbeiterExistiertBereitsException;
+import eshop.local.exception.MitarbeiterExistiertNichtException;
 import eshop.local.valueobjects.*;
 
 /**
@@ -240,8 +242,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
      */
-    public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
-        return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+    public void fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
+        meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
     }
 
     /**
@@ -287,8 +289,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
      */
-    public boolean loescheMitarbeiter(int mNr) throws IOException{
-        return meineMitarbeiter.mitarbeiterLoeschen(mNr);
+    public void loescheMitarbeiter(int mNr) throws IOException, MitarbeiterExistiertNichtException{
+        meineMitarbeiter.mitarbeiterLoeschen(mNr);
 
     }
 
