@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
+import eshop.local.exception.ArtikelBestandNegativException;
+import eshop.local.exception.ArtikelBestellteMengeNegativException;
 import eshop.local.exception.ArtikelExestierBereitsException;
-import eshop.local.exception.MitarbeiterExistiertBereitsException;
-import eshop.local.exception.MitarbeiterExistiertNichtException;
+import eshop.local.exception.ArtikelExestiertNichtException;
 import eshop.local.valueobjects.*;
 
 /**
@@ -149,7 +150,7 @@ public class EShopVerwaltung {
      * @param aNr Artikelnummer des gesuchten Artikels
      * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
      */
-    public Artikel getArtikel(int aNr) {
+    public Artikel getArtikel(int aNr) throws ArtikelExestiertNichtException {
 
         return meineArtikel.getArtikel(aNr);
     }
@@ -186,8 +187,8 @@ public class EShopVerwaltung {
      * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
      * @return boolean
      */
-    public boolean setBestand(int artNr, int wert, Person p) throws IOException{
-        return meineArtikel.setBestand(artNr, wert, p);
+    public void setBestand(int artNr, int wert, Person p) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+        meineArtikel.setBestand(artNr, wert, p);
     }
 
     /**
@@ -196,8 +197,8 @@ public class EShopVerwaltung {
      * @param menge    Menge die vom Artikel bestellt werden soll
      * @return boolean
      */
-    public boolean setBestellteMenge(int menge) {
-        return meineArtikel.setBestellteMenge(menge);
+    public void setBestellteMenge(int menge) throws ArtikelBestellteMengeNegativException {
+        meineArtikel.setBestellteMenge(menge);
     }
 
     /**
@@ -242,8 +243,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
      */
-    public void fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
-        meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+    public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
+        return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
     }
 
     /**
@@ -265,8 +266,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Artikel nicht gelöscht werden konnte)
      */
-    public boolean loescheArtikel(int artNr) throws IOException{
-        return meineArtikel.artikelLoeschen(artNr);
+    public void loescheArtikel(int artNr) throws IOException, ArtikelExestiertNichtException {
+        meineArtikel.artikelLoeschen(artNr);
 
     }
 
@@ -289,8 +290,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
      */
-    public void loescheMitarbeiter(int mNr) throws IOException, MitarbeiterExistiertNichtException{
-        meineMitarbeiter.mitarbeiterLoeschen(mNr);
+    public boolean loescheMitarbeiter(int mNr) throws IOException{
+        return meineMitarbeiter.mitarbeiterLoeschen(mNr);
 
     }
 

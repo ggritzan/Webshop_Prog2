@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import eshop.local.exception.ArtikelBestandNegativException;
-import eshop.local.exception.ArtikelBestandZuNiedrigException;
 import eshop.local.exception.ArtikelBestellteMengeNegativException;
 import eshop.local.exception.ArtikelExestierBereitsException;
 import eshop.local.exception.ArtikelExestiertNichtException;
@@ -27,7 +26,6 @@ import eshop.local.valueobjects.Person;
  * Time: 14:35
  * To change this template use File | Settings | File Templates.
  */
-
 
 public class ArtikelVerwaltung {
 
@@ -126,11 +124,11 @@ public class ArtikelVerwaltung {
     }
 
     /**
-     * Methode zum hinzufuegen von Artikeln
-     *
      * @param name
      * @param beschreibung
-     * @param preis
+     * @param preis  * Methode zum hinzufuegen von Artikeln
+     *
+
      */
     public void artikelHinzufuegen(String name, String beschreibung, double preis) throws IOException, ArtikelExestierBereitsException {
 
@@ -169,7 +167,7 @@ public class ArtikelVerwaltung {
     }
 
     /**
-     * Methode zum löschen von Artikel
+     * Methode zum l&ouml;schen von Artikel
      *
      * @param artNr
      * @return boolean
@@ -178,7 +176,7 @@ public class ArtikelVerwaltung {
 
         if (!artikelBestandNr.containsKey(artNr)) {
 
-            throw  new ArtikelExestiertNichtException(artNr);
+            throw new ArtikelExestiertNichtException(artNr);
 
 
         } else {
@@ -249,25 +247,25 @@ public class ArtikelVerwaltung {
             artikelBestandNr.put(artNr, a);
             Date dNow = new Date();
             if (person instanceof Kunde) {
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Kunden " + person.getBenutzername() +" mit der Kundennummer "+ ((Kunde) person).getNummer() + " geändert und hat jetzt den Wert " + wert+".";
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Kunden " + person.getBenutzername() + " mit der Kundennummer " + ((Kunde) person).getNummer() + " geändert und hat jetzt den Wert " + wert + ".";
                 l.write(dateiName, text);
 
-            }  else if (person instanceof Mitarbeiter){
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Mitarbeiter " + person.getBenutzername() +" mit der Mitarbeiternummer "+ ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt den Wert " + wert+".";
+            } else if (person instanceof Mitarbeiter) {
+                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Mitarbeiter " + person.getBenutzername() + " mit der Mitarbeiternummer " + ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt den Wert " + wert + ".";
                 l.write(dateiName, text);
 
             }
 
 
-          //vwirft eine Exception wenn die Artikelnummer des Artikels nicht exestiert
+            //vwirft eine Exception wenn die Artikelnummer des Artikels nicht exestiert
         } else if (!artikelBestandNr.containsKey(artNr)) {
             throw new ArtikelExestiertNichtException(artNr);
 
         }
 
-         // wirft eine ArtikelBestandNeagativException wenn versucht wird denn Bestand in negative zu aendern
-         else if (wert < 0) {
-           throw new ArtikelBestandNegativException();
+        // wirft eine ArtikelBestandNeagativException wenn versucht wird denn Bestand in negative zu aendern
+        else if (wert < 0) {
+            throw new ArtikelBestandNegativException();
         }
     }
 
@@ -276,7 +274,7 @@ public class ArtikelVerwaltung {
      *
      * @param menge Integer
      */
-    public void setBestellteMenge(int menge) throws  ArtikelBestellteMengeNegativException {
+    public void setBestellteMenge(int menge) throws ArtikelBestellteMengeNegativException {
         if (menge >= 0) {
             setBestellteMenge(menge);
 
@@ -285,13 +283,17 @@ public class ArtikelVerwaltung {
         }
     }
 
-    public Artikel getArtikel(int aNr) {
+    public Artikel getArtikel(int aNr) throws ArtikelExestiertNichtException {
         if (artikelBestandNr.containsKey(aNr)) {
             return artikelBestandNr.get(aNr);
         } else if (!artikelBestandNr.containsKey(aNr)) {
 
+            throw new ArtikelExestiertNichtException(aNr);
+
+        } else {
             return null;
         }
+
     }
 
     public boolean existiertArtikel(int aNr) {
