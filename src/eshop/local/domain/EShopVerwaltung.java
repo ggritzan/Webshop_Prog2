@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
+import eshop.local.exception.ArtikelExestierBereitsException;
 import eshop.local.valueobjects.*;
 
 /**
@@ -204,8 +205,9 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeArtikelEin(String name, String beschreibung, double preis) throws IOException{
-        return meineArtikel.artikelHinzufuegen(name, beschreibung, preis);
+    public void fuegeArtikelEin(String name, String beschreibung, double preis) throws IOException, ArtikelExestierBereitsException {
+
+       meineArtikel.artikelHinzufuegen(name, beschreibung, preis);
 
     }
 

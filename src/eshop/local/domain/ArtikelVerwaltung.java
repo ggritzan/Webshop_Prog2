@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eshop.local.exception.ArtikelExestierBereitsException;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
@@ -127,22 +128,23 @@ public class ArtikelVerwaltung {
      * @param beschreibung
      * @param preis
      */
-    public boolean artikelHinzufuegen(String name, String beschreibung, double preis) throws IOException{
+    public void artikelHinzufuegen(String name, String beschreibung, double preis) throws IOException, ArtikelExestierBereitsException {
 
         // Wenn der Name eines Artikels bereits vorhanden ist wird false zurück gegeben und kein neuer Artikel angelegt
         if (artikelBestandName.containsKey(name)) {
-            return false;
+            throw new ArtikelExestierBereitsException(name);
 
 
         } else {
             // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
+
             Artikel artikel = new Artikel(name, beschreibung, preis);
             artikelBestandNr.put(artikel.getNummer(), artikel);
             artikelBestandName.put(name, artikel.getNummer());
             Date dNow = new Date();
             String text = ft.format(dNow) + ": Der Artikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde hinzugefügt.";
             l.write(dateiName, text);
-            return true;
+
         }
 
     }

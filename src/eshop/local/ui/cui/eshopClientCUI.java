@@ -10,6 +10,7 @@ package eshop.local.ui.cui;
 
 
 import eshop.local.domain.EShopVerwaltung;
+import eshop.local.exception.ArtikelExestierBereitsException;
 import eshop.local.valueobjects.*;
 
 import java.io.BufferedReader;
@@ -267,9 +268,9 @@ public class eshopClientCUI {
                         System.out.print("Artikelnummer: > ");
                         String aNr = liesEingabe();
                         int aNrInt = Integer.parseInt(aNr);
-                        if (eShopVerwaltung.getKunde(kNr).istImWarenkorb(aNrInt)){
-                        Artikel a = eShopVerwaltung.getArtikel(aNrInt);
-                        ok = eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
+                        if (eShopVerwaltung.getKunde(kNr).istImWarenkorb(aNrInt)) {
+                            Artikel a = eShopVerwaltung.getArtikel(aNrInt);
+                            ok = eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
                         } else {
                             System.out.println("Artikel exestiert nicht!");
                         }
@@ -279,10 +280,9 @@ public class eshopClientCUI {
 
                     if (ok) {
                         System.out.println("Artikel wurde aus den Warenkorb gelöscht !");
-                    } else  {
+                    } else {
                         System.out.println("Beim löschen des Artikels aus dem Warenkorb ist ein Fehler aufgetreten !");
                     }
-
 
 
                     // Zeigt den Warenkorb eines eingeloggten Kunden an
@@ -325,8 +325,8 @@ public class eshopClientCUI {
                                 Artikel a = (Artikel) iter.next();
                                 Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
                                 int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
-                                if (eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge()){
-                                eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
+                                if (eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge()) {
+                                    eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
 
                                 } else {
                                     bestandFehler = true;
@@ -341,9 +341,9 @@ public class eshopClientCUI {
                         }
 
                         if (!bestandFehler) {
-                        ok = eShopVerwaltung.fuegeRechnungEin(kunde);
+                            ok = eShopVerwaltung.fuegeRechnungEin(kunde);
 
-                        kunde.resetWarenkorb();
+                            kunde.resetWarenkorb();
                         }
                     } catch (NumberFormatException e) {
 
@@ -502,7 +502,7 @@ public class eshopClientCUI {
                     // Artikel hinzufuegen
                 } else if (input.equals("ah")) {
 
-                    boolean ok = false;
+
                     try {
                         System.out.print("Artikel Name > ");
                         String aName = liesEingabe();
@@ -513,17 +513,13 @@ public class eshopClientCUI {
                         double aPreis = Double.parseDouble(aPreisEingabe);
 
 
-                        ok = eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
+                        eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis);
 
                     } catch (NumberFormatException e) {
 
+                    } catch (ArtikelExestierBereitsException aeb) {
+                      System.err.println (aeb.getMessage());
                     }
-
-
-                    if (ok)
-                        System.out.println("Einfügen ok");
-                    else
-                        System.out.println("Der Artikel konnte leider nicht angelegt werden !");
 
                 } else if (input.equals("ab")) {
 
