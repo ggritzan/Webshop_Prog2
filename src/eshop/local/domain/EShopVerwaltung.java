@@ -105,7 +105,7 @@ public class EShopVerwaltung {
      * @param bName Benutzername des gesuchten Mitarbeiters
      * @return Vector Rückgabe eines Vectors mit dem gefundenen Mitarbeiter
      */
-    public boolean findeMitarbeiter(String bName, String bPasswort) {
+    public boolean findeMitarbeiter(String bName, String bPasswort) throws PasswortFalschException, BenutzernameExistiertNichtException {
          return meineMitarbeiter.findeMitarbeiter(bName, bPasswort);
     }
 
