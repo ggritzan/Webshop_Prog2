@@ -47,9 +47,9 @@ public class eshopClientCUI {
     private String liesEingabe() throws IOException, LeereEingabeException {
         // einlesen von der Konsole
         String s = in.readLine();
-        if(s.isEmpty()){
+        if (s.isEmpty()) {
             throw new LeereEingabeException();
-        }else{
+        } else {
             return s;
         }
     }
@@ -126,7 +126,7 @@ public class eshopClientCUI {
 
     }
 
-    private void verarbeiteLogin() throws IOException, LeereEingabeException{
+    private void verarbeiteLogin() throws IOException, LeereEingabeException {
         try {
             System.out.println("Benutzernamen:");
             String bName = liesEingabe();
@@ -225,7 +225,7 @@ public class eshopClientCUI {
 
                     } catch (NumberFormatException e) {
                         System.out.println("unbekannte Eingabe!");
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     }
 
@@ -247,19 +247,24 @@ public class eshopClientCUI {
                         Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
 
 
-                        a.setBestellteMenge(mengeInt);
-
-
+                        eShopVerwaltung.setBestellteMenge(mengeInt, eShopVerwaltung.getArtikel(aNrInt));
 
 
                     } catch (NumberFormatException e) {
 
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
+
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
-                    }
 
+                    } catch (ArtikelBestellteMengeNegativException abmn){
+                        System.err.println(abmn.getMessage());
+
+                    } catch (ArtikelBestandZuNiedrigException abzne) {
+                        System.err.println(abzne.getMessage());
+
+                    }
 
 
                     // Artikel aus dem Warenkorb löschen
@@ -282,7 +287,7 @@ public class eshopClientCUI {
 
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     }
 
@@ -312,7 +317,7 @@ public class eshopClientCUI {
 
                     } catch (NumberFormatException e) {
 
-                    } catch (KundenNummerExistiertNichtException kne){
+                    } catch (KundenNummerExistiertNichtException kne) {
                         System.err.println(kne.getMessage());
                     }
 
@@ -357,7 +362,7 @@ public class eshopClientCUI {
                         }
                     } catch (NumberFormatException e) {
 
-                    } catch (KundenNummerExistiertNichtException kne){
+                    } catch (KundenNummerExistiertNichtException kne) {
                         System.err.println(kne.getMessage());
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
@@ -379,9 +384,9 @@ public class eshopClientCUI {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            } catch (KundenNummerExistiertNichtException kne){
+            } catch (KundenNummerExistiertNichtException kne) {
                 System.err.println(kne.getMessage());
-            } catch (LeereEingabeException le){
+            } catch (LeereEingabeException le) {
                 System.err.println(le.getMessage());
             } catch (RechnungExestiertNichtException ren) {
                 System.err.println(ren.getMessage());
@@ -411,12 +416,12 @@ public class eshopClientCUI {
 
                     try {
 
-                         neuenMitarbeiterAnlegen();
+                        neuenMitarbeiterAnlegen();
 
 
                     } catch (NumberFormatException e) {
 
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     }
 
@@ -430,7 +435,7 @@ public class eshopClientCUI {
                     } catch (MitarbeiterExistiertNichtException men) {
                         System.err.println(men.getMessage());
                     }
-                        System.out.println("Der Mitarbeiter wurde erfolgreich gelöscht.");
+                    System.out.println("Der Mitarbeiter wurde erfolgreich gelöscht.");
 
 
                     // Liste aller Mitarbeiter ausgeben
@@ -486,9 +491,9 @@ public class eshopClientCUI {
                     } catch (NumberFormatException e) {
 
                     } catch (ArtikelExestierBereitsException aeb) {
-                      System.err.println (aeb.getMessage());
+                        System.err.println(aeb.getMessage());
 
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     }
 
@@ -509,7 +514,7 @@ public class eshopClientCUI {
 
                     } catch (MitarbeiterExistiertNichtException men) {
                         System.err.println(men.getMessage());
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
@@ -534,7 +539,7 @@ public class eshopClientCUI {
                         eShopVerwaltung.loescheArtikel(aNrInt);
                     } catch (NumberFormatException e) {
 
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (ArtikelExestiertNichtException ane) {
                         System.err.println(ane.getMessage());
@@ -574,7 +579,7 @@ public class eshopClientCUI {
                     } catch (NumberFormatException e) {
                         System.out.println("unbekannte Eingabe!");
 
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     }
 
@@ -598,7 +603,7 @@ public class eshopClientCUI {
 
                     } catch (NumberFormatException e) {
 
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (RechnungExestiertNichtException ren) {
                         System.err.println(ren.getMessage());
@@ -623,7 +628,7 @@ public class eshopClientCUI {
 
                     } catch (NumberFormatException e) {
 
-                    } catch (LeereEingabeException le){
+                    } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (RechnungExestiertNichtException ren) {
                         System.err.println(ren.getMessage());
@@ -636,7 +641,7 @@ public class eshopClientCUI {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            } catch (LeereEingabeException le){
+            } catch (LeereEingabeException le) {
                 System.err.println(le.getMessage());
             }
 
@@ -681,7 +686,7 @@ public class eshopClientCUI {
             eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         } catch (NumberFormatException e) {
             System.out.println(e);
-        } catch (LeereEingabeException le){
+        } catch (LeereEingabeException le) {
             System.err.println(le.getMessage());
         } catch (BenutzernameExistiertBereitsException beb) {
             System.err.println(beb.getMessage());

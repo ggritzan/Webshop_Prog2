@@ -194,8 +194,8 @@ public class EShopVerwaltung {
      * @param menge    Menge die vom Artikel bestellt werden soll
      * @return boolean
      */
-    public void setBestellteMenge(int menge) throws ArtikelBestellteMengeNegativException {
-        meineArtikel.setBestellteMenge(menge);
+    public void setBestellteMenge(int menge,Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException {
+        meineArtikel.setBestellteMenge(menge, artikel);
     }
 
     /**

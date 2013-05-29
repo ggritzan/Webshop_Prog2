@@ -231,7 +231,7 @@ public class KundenVerwaltung {
     }
 
     public void inWarenkorbLegen(Artikel a, int kNr) throws KundenNummerExistiertNichtException {
-        if(kundenBestandNr.containsKey(kNr)){
+        if(kundenBestandNr.containsKey(kNr) ){
             Kunde k = kundenBestandNr.get(kNr);
             k.inWarenkorbLegen(a);
         } else if (!kundenBestandNr.containsKey(kNr)){

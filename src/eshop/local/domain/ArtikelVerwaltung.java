@@ -7,10 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
-import eshop.local.exception.ArtikelBestandNegativException;
-import eshop.local.exception.ArtikelBestellteMengeNegativException;
-import eshop.local.exception.ArtikelExestierBereitsException;
-import eshop.local.exception.ArtikelExestiertNichtException;
+import eshop.local.exception.*;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.persistence.FilePersistenceManager;
@@ -274,12 +271,15 @@ public class ArtikelVerwaltung {
      *
      * @param menge Integer
      */
-    public void setBestellteMenge(int menge) throws ArtikelBestellteMengeNegativException {
-        if (menge >= 0) {
-            setBestellteMenge(menge);
+    public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException {
+        if ((menge >= 0) & (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge) ) {
+            artikelBestandNr.get(artikel.getNummer()).setBestellteMenge(menge);
 
-        } else {
+        } else if (!(menge >= 0)) {
             throw new ArtikelBestellteMengeNegativException();
+
+        } else if(!(artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge) ) {
+            throw new ArtikelBestandZuNiedrigException(artikel);
         }
     }
 
