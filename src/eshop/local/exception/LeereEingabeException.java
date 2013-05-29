@@ -11,4 +11,7 @@ public class LeereEingabeException extends Exception {
     public LeereEingabeException(){
         super("Leere Eingaben sind ungültig!");
     }
+    public LeereEingabeException(String para){
+        super("Bitte tragen sie einen gültigen "+para+ " Parameter ein!");
+    }
 }

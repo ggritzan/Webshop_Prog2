@@ -84,7 +84,7 @@ public class EShopVerwaltung {
      *
      * @return Vector Liste aller Rechnungen im Bestand des EShops als Vector
      */
-    public Vector gibAlleRechnungen() {
+    public Vector gibAlleRechnungen() throws RechnungKeineVorhandenException {
         // delegiert an die Rechnungsverwaltung
         return meineRechnungen.alleRechnungenZurueckgeben();
     }
@@ -136,7 +136,7 @@ public class EShopVerwaltung {
      * @param rNr Rechnungsnummer der gesuchten Rechnung
      * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
      */
-    public Rechnung sucheNachRechnungsnummer(int rNr) {
+    public Rechnung sucheNachRechnungsnummer(int rNr) throws RechnungExestiertNichtException {
 
         return meineRechnungen.sucheRechnung(rNr);
     }
@@ -251,8 +251,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeRechnungEin(Kunde kunde) throws IOException{
-        return meineRechnungen.rechnungHinzufuegen(kunde);
+    public void fuegeRechnungEin(Kunde kunde) throws IOException, RechnungExestiertNichtException{
+        meineRechnungen.rechnungHinzufuegen(kunde);
 
     }
 
@@ -299,8 +299,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
-    public boolean loescheRechnung(Rechnung rechnung) throws IOException{
-        return meineRechnungen.rechnungLoeschen(rechnung);
+    public void loescheRechnung(Rechnung rechnung) throws IOException, RechnungExestiertNichtException{
+       meineRechnungen.rechnungLoeschen(rechnung);
 
     }
 
@@ -339,7 +339,7 @@ public class EShopVerwaltung {
      *
      * @throws IOException
      */
-    public Rechnung letzteKundenrechnungAusgeben(int kNr) throws IOException {
+    public Rechnung letzteKundenrechnungAusgeben(int kNr) throws IOException, RechnungExestiertNichtException {
 
         return meineRechnungen.letzteKundenrechnungAusgeben(kNr);
     }
