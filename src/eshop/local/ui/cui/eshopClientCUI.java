@@ -126,7 +126,7 @@ public class eshopClientCUI {
 
     }
 
-    private void verarbeiteLogin() throws IOException, PasswortFalschException, BenutzernameExistiertNichtException, LeereEingabeException{
+    private void verarbeiteLogin() throws IOException, LeereEingabeException{
         try {
             System.out.println("Benutzernamen:");
             String bName = liesEingabe();
@@ -137,7 +137,6 @@ public class eshopClientCUI {
                 System.out.println("Willkommen Mitarbeiter");
                 MitarbeiterEingabe(eShopVerwaltung.getMnr(bName));
 
-
             } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Kunde");
@@ -145,12 +144,14 @@ public class eshopClientCUI {
 
 
             } else {
-                System.out.println("Ihr Login war leider nicht erfolgreich.");
+                System.out.println("Benutzername oder Passwort leider falsch!.");
 
 
             }
         } catch (KundenNummerExistiertNichtException knen) {
             System.err.println(knen.getMessage());
+        } catch (BenutzernameExistiertNichtException ben) {
+            System.err.println(ben.getMessage());
         }
     }
 
@@ -785,12 +786,6 @@ public class eshopClientCUI {
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
-
-
-                    } catch (PasswortFalschException pf) {
-                        System.err.println(pf.getMessage());
-                    } catch (BenutzernameExistiertNichtException ben) {
-                        System.err.println(ben.getMessage());
                     }
 
 

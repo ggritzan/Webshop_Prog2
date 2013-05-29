@@ -2,3 +2,4 @@ Di 2013.05.14 um 14:14:28 MESZ: Der Kunde 'hmeyer' mit der Kundennummer 1000 wur
 Di 2013.05.14 um 14:15:09 MESZ: Der Kunde 'ssorglos' mit der Kundennummer 1001 wurde hinzugefügt.
 Mi 2013.05.29 um 12:03:19 MESZ: Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
 Mi 2013.05.29 um 12:03:31 MESZ: Der Kunde 'wqd' mit der Kundennummer 1002 wurde hinzugefügt.
+Mi 2013.05.29 um 12:11:58 MESZ: Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.

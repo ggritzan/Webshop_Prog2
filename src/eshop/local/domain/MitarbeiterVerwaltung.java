@@ -11,7 +11,6 @@ import java.util.Vector;
 import eshop.local.exception.BenutzernameExistiertNichtException;
 import eshop.local.exception.MitarbeiterExistiertBereitsException;
 import eshop.local.exception.MitarbeiterExistiertNichtException;
-import eshop.local.exception.PasswortFalschException;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.persistence.FilePersistenceManager;
@@ -202,18 +201,16 @@ public class MitarbeiterVerwaltung {
 
     }
 
-    public boolean findeMitarbeiter(String benutzername, String passwort) throws PasswortFalschException, BenutzernameExistiertNichtException{
+    public boolean findeMitarbeiter(String benutzername, String passwort) {
         if (mitarbeiterBestandName.containsKey(benutzername)) {
             int mnr = mitarbeiterBestandName.get(benutzername);
             Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
             String p = m.getPasswort();
             if (p.equals(passwort)) {
-            } else if (!p.equals(passwort)) {
-                throw new PasswortFalschException();
-            }
             return true;
-        } else if (!mitarbeiterBestandName.containsKey(benutzername)) {
-            throw new BenutzernameExistiertNichtException(benutzername);
+            }else {
+                return false;
+            }
         } else {
             return false;
         }

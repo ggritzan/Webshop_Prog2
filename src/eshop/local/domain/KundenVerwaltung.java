@@ -267,20 +267,18 @@ public class KundenVerwaltung {
     /*
 
      */
-    public boolean findeKunden(String benutzername, String passwort) throws PasswortFalschException, BenutzernameExistiertNichtException{
+    public boolean findeKunden(String benutzername, String passwort) {
         if (kundenBestandBenutzername.containsKey(benutzername)) {
             int knr = kundenBestandBenutzername.get(benutzername);
             Kunde k = kundenBestandNr.get(knr);
             String p = k.getPasswort();
+            System.out.println(p);
+            System.out.println(k.getPasswort());
             if (p.equals(passwort)) {
                 return true;
-            }else if (!p.equals(passwort)){
-                throw new PasswortFalschException();
             } else {
                 return false;
             }
-        } else if (!kundenBestandBenutzername.containsKey(benutzername)) {
-            throw new BenutzernameExistiertNichtException(benutzername);
         } else {
             return false;
         }
