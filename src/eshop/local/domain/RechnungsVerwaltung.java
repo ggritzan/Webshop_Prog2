@@ -1,5 +1,7 @@
 package eshop.local.domain;
 
+import eshop.local.exception.RechnungExestiertNichtException;
+import eshop.local.exception.RechnungKeineVorhandenException;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.Log;
 import eshop.local.persistence.PersistenceManager;
@@ -50,11 +52,13 @@ public class RechnungsVerwaltung {
         rechnungsBestandKundenNr = new HashMap<Integer, Vector<Integer>>();
     }
 
+
     /**
      * Methode zum Einlesen der Rechnungen aus einer Datei.
      *
      * @param datei
-     * @throws IOException,ClassNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException
      *
      */
     public void liesDaten(String datei) throws IOException, ClassNotFoundException {
@@ -110,9 +114,9 @@ public class RechnungsVerwaltung {
      * Methode zum Hinzufuegen von Rechnungen
      *
      * @param kunde
+     * @throws IOException
      */
-
-    public boolean rechnungHinzufuegen(Kunde kunde) throws IOException {
+    public void rechnungHinzufuegen(Kunde kunde) throws IOException {
 
         // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
@@ -139,10 +143,10 @@ public class RechnungsVerwaltung {
                 String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
                 l.write(dateiName, text);
 
-                return true;
+
             }
 
-            return false;
+
 
         } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
             Vector<Artikel> wkV = new Vector<Artikel>();
@@ -167,11 +171,9 @@ public class RechnungsVerwaltung {
                 String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
                 l.write(dateiName, text);
 
-                return true;
+
             }
-            return false;
-        } else {
-            return false;
+
         }
 
     }
@@ -205,8 +207,10 @@ public class RechnungsVerwaltung {
      * Methode zum loeschen von Kunden durch den PersistenceManager
      *
      * @param rechnung
+     * @throws IOException
+     * @throws RechnungExestiertNichtException
      */
-    public boolean rechnungLoeschen(Rechnung rechnung) throws IOException {
+    public void rechnungLoeschen(Rechnung rechnung) throws IOException, RechnungExestiertNichtException {
 
         Rechnung r = rechnung;
         Vector<Integer> vI = rechnungsBestandKundenNr.get(r.getkNr());
@@ -219,9 +223,9 @@ public class RechnungsVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde gelöscht.";
             l.write(dateiName, text);
-            return true;
-        } else {
-            return false;
+
+        } else if ((!(rechnungsBestandNr.containsKey(r.getrNr()))) & (!(vI.contains(r.getrNr())))) {
+            throw new RechnungExestiertNichtException(r.getrNr());
         }
 
 
@@ -229,29 +233,48 @@ public class RechnungsVerwaltung {
 
     /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Rechnungen enthaelt
+     *
+     * @return
+     * @throws RechnungKeineVorhandenException
      */
-    public Vector alleRechnungenZurueckgeben() {
+    public Vector alleRechnungenZurueckgeben() throws RechnungKeineVorhandenException {
 
+        if ((!rechnungsBestandNr.values().isEmpty())){
         Vector<Rechnung> ergebnis = new Vector<Rechnung>();
 
         for (Rechnung elem : rechnungsBestandNr.values())
             ergebnis.add(elem);
 
         return ergebnis;
-
+        } else if (rechnungsBestandNr.values().isEmpty()){
+            throw new RechnungKeineVorhandenException();
+        } else {
+            return null;
+        }
     }
 
     /**
      * Methode gibt ein Rechnungobject zurück
+     *
+     * @param kNr
+     * @return
+     * @throws RechnungExestiertNichtException
+     *
      */
-    public Rechnung letzteKundenrechnungAusgeben(int kNr) {
+    public Rechnung letzteKundenrechnungAusgeben(int kNr) throws RechnungExestiertNichtException {
 
+        if (rechnungsBestandKundenNr.containsKey(kNr)){
         Vector<Integer> rechnungsnummern = rechnungsBestandKundenNr.get(kNr);
 
         int nr =  rechnungsnummern.lastElement();
         Rechnung ergebnis = rechnungsBestandNr.get(nr);
 
         return ergebnis;
+        } else if(!rechnungsBestandKundenNr.containsKey(kNr)) {
+          throw new RechnungExestiertNichtException();
+        } else {
+            return null;
+        }
 
     }
 
