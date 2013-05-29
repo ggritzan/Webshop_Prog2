@@ -220,11 +220,11 @@ public class KundenVerwaltung {
      *
      * @param bName
      */
-    public int getKnr(String bName) throws KundenNameExistiertNichtException{
+    public int getKnr(String bName) throws BenutzernameExistiertNichtException{
         if (kundenBestandBenutzername.containsKey(bName)) {
             return kundenBestandBenutzername.get(bName);
         } else if (!kundenBestandBenutzername.containsKey(bName)){
-            throw new KundenNameExistiertNichtException(bName);
+            throw new BenutzernameExistiertNichtException(bName);
         } else {
             return 0;
         }

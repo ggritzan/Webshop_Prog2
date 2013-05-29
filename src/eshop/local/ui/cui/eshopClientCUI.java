@@ -11,6 +11,9 @@ package eshop.local.ui.cui;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.ArtikelExestierBereitsException;
+import eshop.local.exception.BenutzernameExistiertNichtException;
+import eshop.local.exception.KundenNummerExistiertNichtException;
+import eshop.local.exception.PasswortFalschException;
 import eshop.local.valueobjects.*;
 
 import java.io.BufferedReader;
@@ -121,7 +124,7 @@ public class eshopClientCUI {
 
     }
 
-    private void verarbeiteLogin() throws IOException {
+    private void verarbeiteLogin() throws IOException, PasswortFalschException, BenutzernameExistiertNichtException{
         System.out.println("Benutzernamen:");
         String bName = liesEingabe();
         System.out.println("Passwort:");
@@ -175,7 +178,7 @@ public class eshopClientCUI {
         return 'o';
     }
 
-    private void KundenEingabe(int kNr) throws IOException {
+    private void KundenEingabe(int kNr) throws IOException, KundenNummerExistiertNichtException {
         // Variable für Eingaben von der Konsole
         String input = "";
         do {
@@ -243,13 +246,15 @@ public class eshopClientCUI {
 
                             if (a.getBestand() >= mengeInt && mengeInt > 0) {
                                 System.out.print("" + a);
-                                ok = eShopVerwaltung.inWarenkorbLegen(a, kNr);
+                                eShopVerwaltung.inWarenkorbLegen(a, kNr);
                             } else {
                                 ok = false;
                             }
                         }
                     } catch (NumberFormatException e) {
 
+                    } catch (KundenNummerExistiertNichtException kne){
+                        System.err.println(kne.getMessage());
                     }
 
                     if (ok) {
@@ -304,6 +309,8 @@ public class eshopClientCUI {
 
                     } catch (NumberFormatException e) {
 
+                    } catch (KundenNummerExistiertNichtException kne){
+                        System.err.println(kne.getMessage());
                     }
 
                     // Erstellt für den aktuellen Warenkorb eines Nutzers eine Rechnung
@@ -347,6 +354,8 @@ public class eshopClientCUI {
                         }
                     } catch (NumberFormatException e) {
 
+                    } catch (KundenNummerExistiertNichtException kne){
+                        System.err.println(kne.getMessage());
                     }
 
                     if (ok) {
@@ -361,6 +370,8 @@ public class eshopClientCUI {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+            } catch (KundenNummerExistiertNichtException kne){
+                System.err.println(kne.getMessage());
             }
 
         }

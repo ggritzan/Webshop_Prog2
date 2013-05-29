@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
-import eshop.local.exception.ArtikelBestandNegativException;
-import eshop.local.exception.ArtikelBestellteMengeNegativException;
-import eshop.local.exception.ArtikelExestierBereitsException;
-import eshop.local.exception.ArtikelExestiertNichtException;
+import eshop.local.exception.*;
 import eshop.local.valueobjects.*;
 
 /**
@@ -118,7 +115,7 @@ public class EShopVerwaltung {
      * @param bName Benutzername des gesuchten Mitarbeiters
      * @return Vector Rückgabe eines Vectors mit dem gefundenen Mitarbeiter
      */
-    public boolean findeKunden(String bName, String bPasswort) {
+    public boolean findeKunden(String bName, String bPasswort) throws BenutzernameExistiertNichtException, PasswortFalschException{
         return meineKunden.findeKunden(bName, bPasswort);
     }
 
@@ -163,12 +160,12 @@ public class EShopVerwaltung {
         return meineKunden.istImWarenkorb(k,aNr);
     }
 
-    public boolean inWarenkorbLegen(Artikel a, int kNr){
-        return meineKunden.inWarenkorbLegen(a, kNr);
+    public void inWarenkorbLegen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
+        meineKunden.inWarenkorbLegen(a, kNr);
     }
 
-    public boolean ausWarenkorbEntfernen(Artikel a, int kNr){
-        return meineKunden.ausWarenkorbEtfernen(a, kNr);
+    public void ausWarenkorbEntfernen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
+        meineKunden.ausWarenkorbEtfernen(a, kNr);
     }
 
     /**
@@ -177,8 +174,8 @@ public class EShopVerwaltung {
      * @param kNr Kundennummer
      * @return boolean ob der Warenkorb zurück gestzt wurde oder nicht
      */
-    public boolean resetWarenkorb(int kNr){
-       return meineKunden.resetWarenkorb(kNr);
+    public void resetWarenkorb(int kNr) throws KundenNummerExistiertNichtException{
+       meineKunden.resetWarenkorb(kNr);
     }
 
     /**
@@ -226,8 +223,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public boolean fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
-        return meineKunden.kundeHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+    public void fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, BenutzernameExistiertBereitsException{
+        meineKunden.kundeHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
 
     }
 
@@ -243,8 +240,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
      */
-    public boolean fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException{
-        return meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+    public void fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
+        meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
     }
 
     /**
@@ -278,8 +275,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
-    public boolean loescheKunde(int kunNr) throws IOException{
-        return meineKunden.kundenLoeschen(kunNr);
+    public void loescheKunde(int kunNr) throws IOException, KundenNummerExistiertNichtException{
+        meineKunden.kundenLoeschen(kunNr);
 
     }
 
@@ -290,8 +287,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
      */
-    public boolean loescheMitarbeiter(int mNr) throws IOException{
-        return meineMitarbeiter.mitarbeiterLoeschen(mNr);
+    public void loescheMitarbeiter(int mNr) throws IOException, MitarbeiterExistiertNichtException{
+        meineMitarbeiter.mitarbeiterLoeschen(mNr);
 
     }
 
@@ -357,11 +354,11 @@ public class EShopVerwaltung {
         meineMitarbeiter.schreibeDaten(datei + "_Mitarbeiter.ser");
     }
 
-    public Kunde getKunde(int kNr) {
+    public Kunde getKunde(int kNr) throws KundenNummerExistiertNichtException{
         return meineKunden.getKunde(kNr);
     }
 
-    public int getKnr(String bName) {
+    public int getKnr(String bName) throws BenutzernameExistiertNichtException{
         return meineKunden.getKnr(bName);
     }
 
@@ -378,7 +375,7 @@ public class EShopVerwaltung {
     }
 
 
-    public Kunde rufeKunden(String bName){
+    public Kunde rufeKunden(String bName) throws BenutzernameExistiertNichtException{
         return meineKunden.getKunden(bName);
     }
 
