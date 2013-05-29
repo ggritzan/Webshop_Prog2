@@ -59,7 +59,6 @@ public class RechnungsVerwaltung {
      * @param datei
      * @throws IOException
      * @throws ClassNotFoundException
-     *
      */
     public void liesDaten(String datei) throws IOException, ClassNotFoundException {
 
@@ -115,8 +114,10 @@ public class RechnungsVerwaltung {
      *
      * @param kunde
      * @throws IOException
+     * @throws RechnungExestiertNichtException
+     *
      */
-    public void rechnungHinzufuegen(Kunde kunde) throws IOException {
+    public void rechnungHinzufuegen(Kunde kunde) throws IOException, RechnungExestiertNichtException {
 
         // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
@@ -129,7 +130,7 @@ public class RechnungsVerwaltung {
 
             for (Artikel elem : kunde.getWarenkorb().values())
 
-                gesamtPreis = gesamtPreis + (elem.getPreis()*elem.getBestellteMenge());
+                gesamtPreis = gesamtPreis + (elem.getPreis() * elem.getBestellteMenge());
 
 
             Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV, gesamtPreis);
@@ -147,7 +148,6 @@ public class RechnungsVerwaltung {
             }
 
 
-
         } else if (!rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
             Vector<Artikel> wkV = new Vector<Artikel>();
 
@@ -159,7 +159,7 @@ public class RechnungsVerwaltung {
 
             for (Artikel elem : kunde.getWarenkorb().values())
 
-                gesamtPreis = gesamtPreis + (elem.getPreis()*elem.getBestellteMenge());
+                gesamtPreis = gesamtPreis + (elem.getPreis() * elem.getBestellteMenge());
             Rechnung rechnung = new Rechnung(kunde.getNummer(), wkV, gesamtPreis);
             rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
             Vector<Integer> vI = new Vector<Integer>();
@@ -209,6 +209,7 @@ public class RechnungsVerwaltung {
      * @param rechnung
      * @throws IOException
      * @throws RechnungExestiertNichtException
+     *
      */
     public void rechnungLoeschen(Rechnung rechnung) throws IOException, RechnungExestiertNichtException {
 
@@ -236,17 +237,18 @@ public class RechnungsVerwaltung {
      *
      * @return
      * @throws RechnungKeineVorhandenException
+     *
      */
     public Vector alleRechnungenZurueckgeben() throws RechnungKeineVorhandenException {
 
-        if ((!rechnungsBestandNr.values().isEmpty())){
-        Vector<Rechnung> ergebnis = new Vector<Rechnung>();
+        if ((!rechnungsBestandNr.values().isEmpty())) {
+            Vector<Rechnung> ergebnis = new Vector<Rechnung>();
 
-        for (Rechnung elem : rechnungsBestandNr.values())
-            ergebnis.add(elem);
+            for (Rechnung elem : rechnungsBestandNr.values())
+                ergebnis.add(elem);
 
-        return ergebnis;
-        } else if (rechnungsBestandNr.values().isEmpty()){
+            return ergebnis;
+        } else if (rechnungsBestandNr.values().isEmpty()) {
             throw new RechnungKeineVorhandenException();
         } else {
             return null;
@@ -263,15 +265,15 @@ public class RechnungsVerwaltung {
      */
     public Rechnung letzteKundenrechnungAusgeben(int kNr) throws RechnungExestiertNichtException {
 
-        if (rechnungsBestandKundenNr.containsKey(kNr)){
-        Vector<Integer> rechnungsnummern = rechnungsBestandKundenNr.get(kNr);
+        if (rechnungsBestandKundenNr.containsKey(kNr)) {
+            Vector<Integer> rechnungsnummern = rechnungsBestandKundenNr.get(kNr);
 
-        int nr =  rechnungsnummern.lastElement();
-        Rechnung ergebnis = rechnungsBestandNr.get(nr);
+            int nr = rechnungsnummern.lastElement();
+            Rechnung ergebnis = rechnungsBestandNr.get(nr);
 
-        return ergebnis;
-        } else if(!rechnungsBestandKundenNr.containsKey(kNr)) {
-          throw new RechnungExestiertNichtException();
+            return ergebnis;
+        } else if (!rechnungsBestandKundenNr.containsKey(kNr)) {
+            throw new RechnungExestiertNichtException();
         } else {
             return null;
         }
@@ -282,10 +284,15 @@ public class RechnungsVerwaltung {
      * Methode durchsucht alle Rechnungen nach einer Rechnungsnummer
      *
      * @param rNr
+     * @return
+     * @throws RechnungExestiertNichtException
+     *
      */
-    public Rechnung sucheRechnung(int rNr) {
+    public Rechnung sucheRechnung(int rNr) throws RechnungExestiertNichtException {
         if (rechnungsBestandNr.containsKey(rNr)) {
             return rechnungsBestandNr.get(rNr);
+        } else if (!rechnungsBestandNr.containsKey(rNr)) {
+            throw new RechnungExestiertNichtException(rNr);
         } else {
             return null;
         }
@@ -294,9 +301,12 @@ public class RechnungsVerwaltung {
     /**
      * Methode setzt das Datum einer Rechnung wenn sie exestiert
      *
-     * @param rNr, dNow
+     * @param rNr
+     * @param dNow
+     * @throws RechnungExestiertNichtException
+     *
      */
-    public boolean setDate(int rNr, Date dNow) {
+    public void setDate(int rNr, Date dNow) throws RechnungExestiertNichtException {
 
         // Wenn die Artikelnummer exestiert wird der Bestand angepasst
         if (rechnungsBestandNr.containsKey(rNr)) {
@@ -306,11 +316,10 @@ public class RechnungsVerwaltung {
             r.setDate(dNow);
             rechnungsBestandNr.put(rNr, r);
 
-            return true;
 
-        } else {
 
-            return false;
+        } else if (!rechnungsBestandNr.containsKey(rNr)) {
+          throw new RechnungExestiertNichtException(rNr);
         }
 
     }
