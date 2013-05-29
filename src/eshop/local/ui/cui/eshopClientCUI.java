@@ -231,7 +231,7 @@ public class eshopClientCUI {
 
                     // Artikel in den Warenkorb legen
                 } else if (var == 'w') {
-                    boolean ok = false;
+
 
                     try {
 
@@ -239,42 +239,28 @@ public class eshopClientCUI {
                         System.out.print("Artikelnummer: > ");
                         String aNr = liesEingabe();
                         int aNrInt = Integer.parseInt(aNr);
-                        if (!eShopVerwaltung.existiertArtikel(aNrInt)) {
-                            System.out.println("Dieser Artikel exestier nicht !  ");
 
-                        } else {
-                            System.out.print("Menge: > ");
-                            String menge = liesEingabe();
-                            int mengeInt = Integer.parseInt(menge);
+                        System.out.print("Menge: > ");
+                        String menge = liesEingabe();
+                        int mengeInt = Integer.parseInt(menge);
 
-                            Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
+                        Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
 
 
-                            a.setBestellteMenge(mengeInt);
+                        a.setBestellteMenge(mengeInt);
 
 
-                            if (a.getBestand() >= mengeInt && mengeInt > 0) {
-                                System.out.print("" + a);
-                                eShopVerwaltung.inWarenkorbLegen(a, kNr);
-                            } else {
-                                ok = false;
-                            }
-                        }
+
+
                     } catch (NumberFormatException e) {
 
-                    } catch (KundenNummerExistiertNichtException kne){
-                        System.err.println(kne.getMessage());
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
                     }
 
-                    if (ok) {
-                        System.out.println("Artikel wurde in den Warenkorb gelegt !");
-                    } else {
-                        System.out.println("Beim einfügen des Artikels in den Warenkorb ist ein Fehler aufgetreten !");
-                    }
+
 
                     // Artikel aus dem Warenkorb löschen
                 } else if (var == 'e') {
