@@ -215,16 +215,14 @@ public class MitarbeiterVerwaltung {
         }
     }
 
-    public Mitarbeiter getMitarbeiter(String bName) {
+    public Mitarbeiter getMitarbeiter(String bName) throws MitarbeiterExistiertNichtException {
         Mitarbeiter m;
         if(mitarbeiterBestandName.containsKey(bName)){
             int mnr = mitarbeiterBestandName.get(bName);
             m = mitarbeiterBestandNr.get(mnr);
             return m;
         }else{
-            int mnr = mitarbeiterBestandName.get(bName);
-            m = mitarbeiterBestandNr.get(mnr);
-            return m;
+            throw new MitarbeiterExistiertNichtException();
         }
     }
 

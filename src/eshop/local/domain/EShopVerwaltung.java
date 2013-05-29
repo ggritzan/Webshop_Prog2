@@ -366,11 +366,11 @@ public class EShopVerwaltung {
         return meineMitarbeiter.getMnr(bName);
     }
 
-    public Mitarbeiter rufeMitarbeiter(String bName) {
+    public Mitarbeiter rufeMitarbeiter(String bName) throws MitarbeiterExistiertNichtException{
         return meineMitarbeiter.getMitarbeiter(bName);
     }
 
-    public Mitarbeiter getMitarbeiter(int mNr) {
+    public Mitarbeiter getMitarbeiter(int mNr) throws MitarbeiterExistiertNichtException{
         return meineMitarbeiter.getMitarbeiter(mNr);
     }
 
