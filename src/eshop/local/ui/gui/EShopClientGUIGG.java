@@ -18,9 +18,8 @@ public class EShopClientGUIGG extends JFrame {
     private LoginPanel addLoginPanel;
 
 
-
     /**
-     *  Konstructor Funktion der Gui
+     * Konstructor Funktion der Gui
      */
     public EShopClientGUIGG(String datei) throws IOException, ClassNotFoundException {
         super(datei);
@@ -38,7 +37,7 @@ public class EShopClientGUIGG extends JFrame {
     }
 
     /**
-     *  Richtet die Grafischen Komponenten der GUI ein und fuegt sie dem Fenster hinzu
+     * Richtet die Grafischen Komponenten der GUI ein und fuegt sie dem Fenster hinzu
      */
     public void initComponents() {
 
@@ -78,28 +77,26 @@ public class EShopClientGUIGG extends JFrame {
     }
 
     /**
-     *  Intialisiert die Listener
+     * Intialisiert die Listener für die verschiedenen Events
      */
     private void initListeners() {
         // Finale Selbstreferenz (damit GUI-Referenz "this" auch im ActionListener-Kontext verf�gbar ist)
         final EShopClientGUIGG eShopClientGUIGG = this;
 
+        // Actionlistener für das LoginPanel
         addLoginPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                // 1. Möglichkeit
-                //GUI.this.setVisible(false);
 
-                // 2. Möglichkeit
-                //gui.setVisible(false);
 
                 try {
                     char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
-                    if (erg == 'm'){
+                    if (erg == 'm') {
+
                         addLoginPanel.setVisible(false);
-                    } else if(erg == 'k') {
+                    } else if (erg == 'k') {
                         addLoginPanel.setVisible(false);
-                    } else if(erg == 'u') {
+                    } else if (erg == 'u') {
 
                     }
 
@@ -110,6 +107,52 @@ public class EShopClientGUIGG extends JFrame {
 
             }
         });
+
+        // ActionListener für das Speichern des EShops
+        menuDateiSpeichern.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                // 1. Möglichkeit
+                //GUI.this.setVisible(false);
+
+                // 2. Möglichkeit
+                //gui.setVisible(false);
+
+                // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
+                try {
+                    eShopVerwaltung.schreibeKunden();
+                    eShopVerwaltung.schreibeArtikel();
+                    eShopVerwaltung.schreibeMitarbeiter();
+                    eShopVerwaltung.schreibeRechung();
+                    System.out.println("Alle Daten des EShops wurden gesichert!");
+
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+
+                }
+
+            }
+        });
+
+        // ActionListener für das Beenden des EShops
+        menuDateiQuit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                // Beendet das Programm und fragt vorher noch ob das beenden gewünscht ist
+                int result = JOptionPane.showConfirmDialog(null, "Wollen sie das Programm wirklich beenden", "Programm beenden", JOptionPane.YES_NO_OPTION);
+                switch (result) {
+                    case JOptionPane.YES_OPTION:
+                        System.exit(0);
+                    case JOptionPane.NO_OPTION:
+                }
+
+
+            }
+        });
+
+
     }
 
     public static void main(String[] args) throws ClassNotFoundException,
@@ -125,7 +168,7 @@ public class EShopClientGUIGG extends JFrame {
             gui = new EShopClientGUIGG("EShop");
         } catch (IOException e) {
             e.printStackTrace();
-    }
+        }
 
-}
+    }
 }
