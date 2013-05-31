@@ -94,7 +94,14 @@ public class EShopClientGUIGG extends JFrame {
                 //gui.setVisible(false);
 
                 try {
-                    addLoginPanel.verarbeiteLogin(eShopVerwaltung);
+                    char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
+                    if (erg == 'm'){
+                        addLoginPanel.setVisible(false);
+                    } else if(erg == 'k') {
+                        addLoginPanel.setVisible(false);
+                    } else if(erg == 'u') {
+
+                    }
 
 
                 } catch (IOException e) {

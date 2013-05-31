@@ -96,7 +96,13 @@ public class LoginPanel extends JPanel{
         loginButton.addActionListener(a);
     }
 
-    public void verarbeiteLogin(EShopVerwaltung eShopVerwaltung) throws IOException {
+    /**
+     *
+     * @param eShopVerwaltung
+     * @return 1 für Mitarbeiter / 2 für Kunde / 0 keines von beiden
+     * @throws IOException
+     */
+    public char verarbeiteLogin(EShopVerwaltung eShopVerwaltung) throws IOException {
 
             String bName = loginName.getText();
             String bPasswort = loginPassword.getText();
@@ -104,17 +110,17 @@ public class LoginPanel extends JPanel{
             if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Mitarbeiter");
-                // MitarbeiterEingabe(eShopVerwaltung.getMnr(bName));
+                return 'm';
 
             } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Kunde");
-                // KundenEingabe(eShopVerwaltung.getKnr(bName));
+                return 'k';
 
 
             } else {
-                System.out.println("Benutzername oder Passwort leider falsch!.");
-
+                System.err.println("Benutzername oder Passwort leider falsch!");
+                return 'u';
 
             }
 
