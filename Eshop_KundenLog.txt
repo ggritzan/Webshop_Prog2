@@ -8,3 +8,4 @@ Sa 2013.06.01 um 12:46:18 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hin
 Sa 2013.06.01 um 12:46:53 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
 Sa 2013.06.01 um 12:47:26 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
 Sa 2013.06.01 um 13:02:46 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
+Sa 2013.06.01 um 13:28:06 MESZ: Der Kunde 'mmustermann' mit der Kundennummer 1001 wurde hinzugefügt.

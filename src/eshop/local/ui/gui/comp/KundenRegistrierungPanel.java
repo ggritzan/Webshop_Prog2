@@ -182,7 +182,7 @@ public class KundenRegistrierungPanel extends JPanel {
 
     public void neuenKundenAnlegen(EShopVerwaltung eShopVerwaltung) throws IOException, LeereEingabeException {
 
-        System.out.println("Willkommen bei der Kundenregistrierung.");
+
 
         try {
             boolean eingabeComplete = false;

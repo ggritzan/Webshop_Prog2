@@ -84,13 +84,9 @@ public class EShopClientGUIGG extends JFrame {
         addKundenRegistrierungPanel = new KundenRegistrierungPanel();
 
 
-
-
         // Erzeugt das LoginPanel und fügt es in der Mitte dem Layoutmanager hinzu
         addLoginPanel = new LoginPanel();
         switchPanel.add(addLoginPanel, BorderLayout.CENTER);
-
-
 
 
     }
@@ -144,14 +140,16 @@ public class EShopClientGUIGG extends JFrame {
                 if (source == addKundenRegistrierungPanel.getRegisterButton()) {
                     try {
 
-                       addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);
-                       addKundenRegistrierungPanel.setVisible(false);
-                       addLoginPanel.setVisible(true);
+                        addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);
+                        addKundenRegistrierungPanel.setVisible(false);
+                        addLoginPanel.setVisible(true);
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                    } catch (LeereEingabeException e) {
-                        e.printStackTrace();
+                    } catch (LeereEingabeException lee) {
+                        System.err.println(lee.getMessage());
+
+
                     }
                 }
 
