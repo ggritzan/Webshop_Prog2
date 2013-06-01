@@ -4,6 +4,7 @@ import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.LeereEingabeException;
 import eshop.local.ui.gui.comp.KundenRegistrierungPanel;
 import eshop.local.ui.gui.comp.LoginPanel;
+import eshop.local.ui.gui.comp.MitarbeiterRegistrierungPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class EShopClientGUIGG extends JFrame {
     private JPanel switchPanel; // damit die Panels ausgetausch werden können
     private LoginPanel addLoginPanel;
     private KundenRegistrierungPanel addKundenRegistrierungPanel;
+    private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
 
 
     /**
@@ -83,6 +85,8 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt das KundenRegistrierungsPanel
         addKundenRegistrierungPanel = new KundenRegistrierungPanel();
 
+        // Erzeugt das KundenRegistrierungsPanel
+        addMitarbeiterRegistrierungPanel = new MitarbeiterRegistrierungPanel();
 
         // Erzeugt das LoginPanel und fügt es in der Mitte dem Layoutmanager hinzu
         addLoginPanel = new LoginPanel();
@@ -124,6 +128,7 @@ public class EShopClientGUIGG extends JFrame {
                     }
                 } else if (source == addLoginPanel.getRegisterButton()) {
                     addLoginPanel.setVisible(false);
+
                     switchPanel.add(addKundenRegistrierungPanel, BorderLayout.CENTER);
                 }
 
@@ -137,7 +142,7 @@ public class EShopClientGUIGG extends JFrame {
 
 
                 Object source = ae.getSource();
-                if (source == addKundenRegistrierungPanel.getRegisterButton()) {
+                if (source == addKundenRegistrierungPanel.getKundenRegisterButton()) {
                     try {
 
                         addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);

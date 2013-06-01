@@ -684,6 +684,7 @@ public class eshopClientCUI {
 
             Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
             eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+
         } catch (NumberFormatException e) {
             System.out.println(e);
         } catch (LeereEingabeException le) {

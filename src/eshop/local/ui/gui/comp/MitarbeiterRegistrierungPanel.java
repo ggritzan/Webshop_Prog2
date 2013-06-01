@@ -3,6 +3,7 @@ package eshop.local.ui.gui.comp;
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.BenutzernameExistiertBereitsException;
 import eshop.local.exception.LeereEingabeException;
+import eshop.local.exception.MitarbeiterExistiertBereitsException;
 import eshop.local.valueobjects.Adresse;
 
 import javax.swing.*;
@@ -14,11 +15,11 @@ import java.io.IOException;
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
- * Date: 31.05.13
- * Time: 21:47
+ * Date: 01.06.13
+ * Time: 13:33
  * To change this template use File | Settings | File Templates.
  */
-public class KundenRegistrierungPanel extends JPanel {
+public class MitarbeiterRegistrierungPanel extends JPanel {
 
     private JTextField vorname;
     private JTextField nachname;
@@ -29,12 +30,12 @@ public class KundenRegistrierungPanel extends JPanel {
     private JTextField straße;
     private JTextField plz;
     private JTextField ort;
-    private JButton KundenRegisterButton;
+    private JButton MitarbeiterRegisterButton;
 
     /**
      * Konstructor
      */
-    public KundenRegistrierungPanel() {
+    public MitarbeiterRegistrierungPanel() {
         super();
 
 
@@ -47,7 +48,7 @@ public class KundenRegistrierungPanel extends JPanel {
         straße = new JTextField();
         plz = new JTextField();
         ort = new JTextField();
-        KundenRegisterButton = new JButton("Register");
+        MitarbeiterRegisterButton = new JButton("Register");
 
         // Layout außen
         GridLayout layout = new GridLayout(20, 4);
@@ -55,7 +56,7 @@ public class KundenRegistrierungPanel extends JPanel {
         this.setLayout(layout);    // 20 Zeilen, 4 Spalten
 
         // Rahmen außen
-        Border ba = BorderFactory.createTitledBorder("Kundenregistrierung");
+        Border ba = BorderFactory.createTitledBorder("Mitarbeiterregistrierung");
         this.setBorder(ba);
 
         // Hinzufuegen der Unterkomponenten zum inneren Layout (von oben links nach unten rechts)
@@ -117,7 +118,7 @@ public class KundenRegistrierungPanel extends JPanel {
 
         this.add(new JPanel());
         this.add(new JPanel());
-        this.add(KundenRegisterButton);
+        this.add(MitarbeiterRegisterButton);
         this.add(new JPanel());
 
         this.add(new JPanel());
@@ -166,8 +167,8 @@ public class KundenRegistrierungPanel extends JPanel {
     /**
      * @return
      */
-    public JButton getKundenRegisterButton() {
-        return KundenRegisterButton;
+    public JButton getMitarbeiterRegisterButton() {
+        return MitarbeiterRegisterButton;
     }
 
     /**
@@ -176,11 +177,11 @@ public class KundenRegistrierungPanel extends JPanel {
      * @param a
      */
     public void addActionListener(ActionListener a) {
-        KundenRegisterButton.addActionListener(a);
+        MitarbeiterRegisterButton.addActionListener(a);
 
     }
 
-    public void neuenKundenAnlegen(EShopVerwaltung eShopVerwaltung) throws IOException, LeereEingabeException {
+    public void neuenMitarbeiterAnlegen(EShopVerwaltung eShopVerwaltung) throws IOException, LeereEingabeException {
 
 
 
@@ -209,15 +210,15 @@ public class KundenRegistrierungPanel extends JPanel {
             if (!(vorname.isEmpty() | nachname.isEmpty() | benutzername.isEmpty() | passwort.isEmpty() | email.isEmpty() | email.isEmpty() | telefon.isEmpty() | straße.isEmpty() | plz.isEmpty() | ort.isEmpty())) {
                 Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
 
-                eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+                eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
 
             } else {
                 throw new LeereEingabeException();
             }
         } catch (NumberFormatException e) {
             System.out.println(e);
-        } catch (BenutzernameExistiertBereitsException beb) {
-            System.err.println(beb.getMessage());
+        } catch (MitarbeiterExistiertBereitsException mebe) {
+            System.err.println(mebe.getMessage());
         }
 
     }
