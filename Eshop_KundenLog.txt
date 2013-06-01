@@ -3,3 +3,8 @@ Di 2013.05.14 um 14:15:09 MESZ: Der Kunde 'ssorglos' mit der Kundennummer 1001 w
 Mi 2013.05.29 um 12:03:19 MESZ: Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
 Mi 2013.05.29 um 12:03:31 MESZ: Der Kunde 'wqd' mit der Kundennummer 1002 wurde hinzugefügt.
 Mi 2013.05.29 um 12:11:58 MESZ: Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
+Sa 2013.06.01 um 12:40:22 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
+Sa 2013.06.01 um 12:46:18 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
+Sa 2013.06.01 um 12:46:53 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
+Sa 2013.06.01 um 12:47:26 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
+Sa 2013.06.01 um 13:02:46 MESZ: Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.

@@ -17,6 +17,7 @@ public class LoginPanel extends JPanel{
     private JTextField loginName;	    // Textfeld fuer den Loginnamen
     private JTextField loginPassword;	// Textfeld für das Passwort
     private JButton loginButton;		// Button zum einloggen
+    private JButton registerButton;     // Button um sich neu zu registrieren
 
     /**
      *  Konstructor
@@ -28,24 +29,31 @@ public class LoginPanel extends JPanel{
         loginName = new JTextField();
         loginPassword = new JTextField();
         loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
 
-        // Eigenschaften
+        /** // Eigenschaften
         Dimension d = new Dimension(100,150);
         this.setMinimumSize(d);
         this.setPreferredSize(d);
         this.setMaximumSize(d);
-
+        */
 
         // Layout außen
         GridLayout layout = new GridLayout(5, 3);
         layout.setHgap(5);		// Lass' 5px Abstand zwischen den Komponenten
-        this.setLayout(layout);	// 3 Zeilen, 2 Spalte
+        this.setLayout(layout);	// 5 Zeilen, 3 Spalte
 
         // Layout innen
-        JPanel frame = new JPanel();
+        JPanel framelog = new JPanel();
         GridLayout layoutlog = new GridLayout(3, 3);
         layoutlog.setHgap(5);		// Lass' 5px Abstand zwischen den Komponenten
-        frame.setLayout(layoutlog);
+        framelog.setLayout(layoutlog);
+
+        JPanel frameregister = new JPanel();
+        GridLayout layoutregister = new GridLayout(3, 3);
+        layoutlog.setHgap(5);		// Lass' 5px Abstand zwischen den Komponenten
+        frameregister.setLayout(layoutregister);
+
 
         // Rahmen außen
         Border ba = BorderFactory.createTitledBorder("Login Screen");
@@ -58,15 +66,29 @@ public class LoginPanel extends JPanel{
 
 
         // Hinzufuegen der Unterkomponenten zum inneren Layout (von oben links nach unten rechts)
-        frame.add(new JPanel());
-        frame.add(new JLabel("Username"));
-        frame.add(loginName);
-        frame.add(new JPanel());
-        frame.add(new JLabel("Passwort"));
-        frame.add(loginPassword);
-        frame.add(new JPanel());
-        frame.add(new JPanel());
-        frame.add(loginButton);
+        framelog.add(new JPanel());
+        framelog.add(new JLabel("Username"));
+        framelog.add(loginName);
+        framelog.add(new JPanel());
+        framelog.add(new JLabel("Passwort"));
+        framelog.add(loginPassword);
+        framelog.add(new JPanel());
+        framelog.add(new JPanel());
+        framelog.add(loginButton);
+
+        // Hinzufuegen der Unterkomponenten zum inneren Layout (von oben links nach unten rechts)
+        frameregister.add(new JPanel());
+        frameregister.add(new JPanel());
+        frameregister.add(new JPanel());
+        frameregister.add(registerButton);
+        frameregister.add(new JPanel());
+        frameregister.add(new JPanel());
+        frameregister.add(new JPanel());
+        frameregister.add(new JPanel());
+        frameregister.add(new JPanel());
+
+
+
 
         // // Hinzufuegen der Unterkomponenten zum äußeren Layout (von oben links nach unten rechts)
         this.add(new JPanel());
@@ -76,9 +98,10 @@ public class LoginPanel extends JPanel{
         this.add(new JPanel());
         this.add(new JPanel());
         this.add(new JPanel());
-        this.add(frame);
+        this.add(framelog);
         this.add(new JPanel());
         this.add(new JPanel());
+        this.add(frameregister);
         this.add(new JPanel());
         this.add(new JPanel());
         this.add(new JPanel());
@@ -86,6 +109,15 @@ public class LoginPanel extends JPanel{
 
 
 
+
+    }
+
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
+    public JButton getRegisterButton() {
+        return registerButton;
     }
 
     /**
@@ -94,7 +126,10 @@ public class LoginPanel extends JPanel{
      */
     public void addActionListener(ActionListener a) {
         loginButton.addActionListener(a);
+        registerButton.addActionListener(a);
     }
+
+
 
     /**
      *
@@ -104,8 +139,8 @@ public class LoginPanel extends JPanel{
      */
     public char verarbeiteLogin(EShopVerwaltung eShopVerwaltung) throws IOException {
 
-            String bName = loginName.getText();
-            String bPasswort = loginPassword.getText();
+            String bName = this.loginName.getText();
+            String bPasswort = this.loginPassword.getText();
 
             if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");

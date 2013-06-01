@@ -1,6 +1,8 @@
 package eshop.local.ui.gui;
 
 import eshop.local.domain.EShopVerwaltung;
+import eshop.local.exception.LeereEingabeException;
+import eshop.local.ui.gui.comp.KundenRegistrierungPanel;
 import eshop.local.ui.gui.comp.LoginPanel;
 
 import javax.swing.*;
@@ -15,7 +17,9 @@ public class EShopClientGUIGG extends JFrame {
     private EShopVerwaltung eShopVerwaltung;
     private MenuItem menuDateiSpeichern;
     private MenuItem menuDateiQuit;
+    private JPanel switchPanel; // damit die Panels ausgetausch werden können
     private LoginPanel addLoginPanel;
+    private KundenRegistrierungPanel addKundenRegistrierungPanel;
 
 
     /**
@@ -69,10 +73,25 @@ public class EShopClientGUIGG extends JFrame {
 
         this.setMenuBar(mbar);
 
-        // Erzeugt das LoginPanel in der Mitte
+
+        // Erzeugt das SwitchPanel damit die Panels ausgetausch werden können
+        switchPanel = new JPanel();
+        BorderLayout b2 = new BorderLayout();
+        switchPanel.setLayout(b2);
+        this.add(switchPanel, BorderLayout.CENTER);
+
+        // Erzeugt das KundenRegistrierungsPanel
+        addKundenRegistrierungPanel = new KundenRegistrierungPanel();
+
+
+
+
+        // Erzeugt das LoginPanel und fügt es in der Mitte dem Layoutmanager hinzu
         addLoginPanel = new LoginPanel();
-        this.add(addLoginPanel, BorderLayout.CENTER);
-        this.add(new JPanel(), BorderLayout.WEST);
+        switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+
+
+
 
     }
 
@@ -88,21 +107,52 @@ public class EShopClientGUIGG extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
+                // Wenn der Actionlistener durch den LoginButton ausgelöst wurde wird die folgende Methode augerufen
+                Object source = ae.getSource();
+                if (source == addLoginPanel.getLoginButton()) {
+                    try {
+                        char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
+                        if (erg == 'm') {
+                            addLoginPanel.setVisible(false);
 
-                try {
-                    char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
-                    if (erg == 'm') {
+                        } else if (erg == 'k') {
+                            addLoginPanel.setVisible(false);
 
-                        addLoginPanel.setVisible(false);
-                    } else if (erg == 'k') {
-                        addLoginPanel.setVisible(false);
-                    } else if (erg == 'u') {
+                        } else if (erg == 'u') {
 
+                        }
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                } else if (source == addLoginPanel.getRegisterButton()) {
+                    addLoginPanel.setVisible(false);
+                    switchPanel.add(addKundenRegistrierungPanel, BorderLayout.CENTER);
+                }
+
+            }
+        });
+
+        // Actionlistener für das KundenRegistrierungPanel
+        addKundenRegistrierungPanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
 
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                Object source = ae.getSource();
+                if (source == addKundenRegistrierungPanel.getRegisterButton()) {
+                    try {
+
+                       addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);
+                       addKundenRegistrierungPanel.setVisible(false);
+                       addLoginPanel.setVisible(true);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (LeereEingabeException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
