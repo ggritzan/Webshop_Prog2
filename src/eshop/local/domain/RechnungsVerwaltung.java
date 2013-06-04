@@ -1,5 +1,6 @@
 package eshop.local.domain;
 
+import eshop.local.exception.KennNummerExistiertNichtException;
 import eshop.local.exception.RechnungExestiertNichtException;
 import eshop.local.exception.RechnungKeineVorhandenException;
 import eshop.local.persistence.FilePersistenceManager;
@@ -10,6 +11,7 @@ import eshop.local.valueobjects.Kunde;
 import eshop.local.valueobjects.Rechnung;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,7 +40,7 @@ public class RechnungsVerwaltung {
     private PersistenceManager pm = new FilePersistenceManager();
 
     // Anderes Datums-Format
-    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz':'");
 
     private Log l = new Log();
 
@@ -141,8 +143,8 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null) {
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
-                String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
-                l.write(dateiName, text);
+                String text = ft.format(rechnung.getdNow()) + "\nDie Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
+                l.writeLog(dateiName, text);
 
 
             }
@@ -168,8 +170,8 @@ public class RechnungsVerwaltung {
             if (rechnung.getdNow() == null) {
                 Date dNow = new Date();
                 setDate(rechnung.getrNr(), dNow);
-                String text = ft.format(rechnung.getdNow()) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
-                l.write(dateiName, text);
+                String text = ft.format(rechnung.getdNow()) + "\nDie Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde hinzugefügt.";
+                l.writeLog(dateiName, text);
 
 
             }
@@ -223,7 +225,7 @@ public class RechnungsVerwaltung {
             rechnungsBestandKundenNr.put(r.getkNr(), vI);
             Date dNow = new Date();
             String text = ft.format(dNow) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde gelöscht.";
-            l.write(dateiName, text);
+            l.writeLog(dateiName, text);
 
         } else if ((!(rechnungsBestandNr.containsKey(r.getrNr()))) & (!(vI.contains(r.getrNr())))) {
             throw new RechnungExestiertNichtException(r.getrNr());
@@ -308,7 +310,7 @@ public class RechnungsVerwaltung {
      */
     public void setDate(int rNr, Date dNow) throws RechnungExestiertNichtException {
 
-        // Wenn die Artikelnummer exestiert wird der Bestand angepasst
+        // Wenn die Rechnungsnummer exestiert wird das heutige Datum auf die Rechnung gesetzt
         if (rechnungsBestandNr.containsKey(rNr)) {
 
             Rechnung r = rechnungsBestandNr.get(rNr);
@@ -322,6 +324,14 @@ public class RechnungsVerwaltung {
           throw new RechnungExestiertNichtException(rNr);
         }
 
+    }
+
+    public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return l.printLog("Eshop_RechnungsLog.txt", daysInPast, rNr);
+    }
+
+    public String printRechnungsLog() throws FileNotFoundException{
+        return l.printLog("Eshop_RechnungsLog.txt");
     }
 
 }

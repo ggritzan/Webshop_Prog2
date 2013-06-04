@@ -1,6 +1,7 @@
 package eshop.local.domain;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class ArtikelVerwaltung {
     private PersistenceManager pm = new FilePersistenceManager();
 
     // Anderes Datums-Format
-    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz':'");
 
     private Log l = new Log();
 
@@ -127,7 +128,7 @@ public class ArtikelVerwaltung {
      *
 
      */
-    public void artikelHinzufuegen(String name, String beschreibung, double preis) throws IOException, ArtikelExestierBereitsException {
+    public void artikelHinzufuegen(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
         // Wenn der Name eines Artikels bereits vorhanden ist wird false zurück gegeben und kein neuer Artikel angelegt
         if (artikelBestandName.containsKey(name)) {
@@ -142,8 +143,8 @@ public class ArtikelVerwaltung {
             artikelBestandNr.put(artikel.getNummer(), artikel);
             artikelBestandName.put(name, artikel.getNummer());
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Artikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde hinzugefügt.";
-            l.write(dateiName, text);
+            String text = ft.format(dNow) + "\nDer Artikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
+            l.writeLog(dateiName, text);
 
         }
 
@@ -169,7 +170,7 @@ public class ArtikelVerwaltung {
      * @param artNr
      * @return boolean
      */
-    public void artikelLoeschen(int artNr) throws IOException, ArtikelExestiertNichtException {
+    public void artikelLoeschen(int artNr, Mitarbeiter m) throws IOException, ArtikelExestiertNichtException {
 
         if (!artikelBestandNr.containsKey(artNr)) {
 
@@ -182,8 +183,8 @@ public class ArtikelVerwaltung {
             artikelBestandName.remove(a.getName());
 
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Artikel '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde gelöscht.";
-            l.write(dateiName, text);
+            String text = ft.format(dNow) + "\nDer Artikel '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " gelöscht.";
+            l.writeLog(dateiName, text);
 
 
         }
@@ -234,7 +235,7 @@ public class ArtikelVerwaltung {
      *
      * @param artNr,wert
      */
-    public void setBestand(int artNr, int wert, Person person) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+    public void setBestand(int artNr, int wert, Person person, int aenderung) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
 
         // Wenn die Artikelnummer exestiert und der neue Bestand nicht ins negative geht wird der Bestand angepasst
         if (artikelBestandNr.containsKey(artNr) && wert >= 0) {
@@ -244,12 +245,12 @@ public class ArtikelVerwaltung {
             artikelBestandNr.put(artNr, a);
             Date dNow = new Date();
             if (person instanceof Kunde) {
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Kunden " + person.getBenutzername() + " mit der Kundennummer " + ((Kunde) person).getNummer() + " geändert und hat jetzt den Wert " + wert + ".";
-                l.write(dateiName, text);
+                String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Kunden " + person.getBenutzername() + " mit der Kundennummer " + ((Kunde) person).getNummer() + " um den Wert -" + aenderung + " geändert und hat jetzt die Menge " + wert + ".";
+                l.writeLog(dateiName, text);
 
             } else if (person instanceof Mitarbeiter) {
-                String text = ft.format(dNow) + ": Der Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + "\nwurde durch den Mitarbeiter " + person.getBenutzername() + " mit der Mitarbeiternummer " + ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt den Wert " + wert + ".";
-                l.write(dateiName, text);
+                String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Mitarbeiter " + person.getBenutzername() + " mit der Mitarbeiternummer " + ((Mitarbeiter) person).getmNr()+ " um den Wert +" + aenderung + " geändert und hat jetzt die Menge " + wert + ".";
+                l.writeLog(dateiName, text);
 
             }
 
@@ -302,6 +303,14 @@ public class ArtikelVerwaltung {
         } else {
             return false;
         }
+    }
+
+    public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
+        return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
+    }
+
+    public String printArtikelLog() throws FileNotFoundException{
+        return l.printLog("Eshop_ArtikelLog.txt");
     }
 
 }

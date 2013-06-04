@@ -1,7 +1,9 @@
 package eshop.local.domain;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
 import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Kunde;
+import eshop.local.valueobjects.Mitarbeiter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,7 +41,7 @@ public class KundenVerwaltung {
     private PersistenceManager pm = new FilePersistenceManager();
 
     // Anderes Datums-Format
-    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz':'");
 
     private Log l = new Log();
 
@@ -140,8 +143,8 @@ public class KundenVerwaltung {
             kundenBestandNr.put(kunde.getNummer(), kunde);
             kundenBestandBenutzername.put(benutzername, kunde.getNummer());
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Kunde '" + benutzername + "' mit der Kundennummer " + kunde.getNummer() + " wurde hinzugefügt.";
-            l.write(dateiName, text);
+            String text = ft.format(dNow) + "\nDer Kunde '" + benutzername + "' mit der Kundennummer " + kunde.getNummer() + " wurde hinzugefügt.";
+            l.writeLog(dateiName, text);
         }
 
 
@@ -168,7 +171,7 @@ public class KundenVerwaltung {
      * @param kundenNr
      * @return boolean
      */
-    public void kundenLoeschen(int kundenNr) throws IOException, KundenNummerExistiertNichtException{
+    public void kundenLoeschen(int kundenNr, Mitarbeiter m) throws IOException, KundenNummerExistiertNichtException{
 
         if (kundenBestandNr.containsKey(kundenNr)) {
 
@@ -176,8 +179,8 @@ public class KundenVerwaltung {
             kundenBestandNr.remove(kundenNr);
             kundenBestandBenutzername.remove(k.getBenutzername());
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Kunde '" + k.getBenutzername() + "' mit der Kundennummer " + kundenNr + " wurde gelöscht.";
-            l.write(dateiName, text);
+            String text = ft.format(dNow) + "\nDer Kunde '" + k.getBenutzername() + "' mit der Kundennummer " + kundenNr + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " gelöscht.";
+            l.writeLog(dateiName, text);
 
         } else if(!kundenBestandNr.containsKey(kundenNr)){
             throw new KundenNummerExistiertNichtException(kundenNr);
@@ -298,6 +301,14 @@ public class KundenVerwaltung {
 
     public boolean istImWarenkorb(Kunde k, int aNr){
         return k.istImWarenkorb(aNr);
+    }
+
+    public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
+        return l.printLog("Eshop_KundenLog.txt", daysInPast, kNr);
+    }
+
+    public String printKundenLog() throws FileNotFoundException{
+        return l.printLog("Eshop_KundenLog.txt");
     }
 }
 

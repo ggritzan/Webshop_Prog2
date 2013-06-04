@@ -1,7 +1,9 @@
 package eshop.local.domain;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import eshop.local.exception.BenutzernameExistiertNichtException;
+import eshop.local.exception.KennNummerExistiertNichtException;
 import eshop.local.exception.MitarbeiterExistiertBereitsException;
 import eshop.local.exception.MitarbeiterExistiertNichtException;
 import eshop.local.persistence.Log;
@@ -39,7 +42,7 @@ public class MitarbeiterVerwaltung {
     private PersistenceManager pm = new FilePersistenceManager();
 
     // Anderes Datums-Format
-    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz");
+    private final SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz':'");
 
     private Log l = new Log();
 
@@ -122,8 +125,8 @@ public class MitarbeiterVerwaltung {
             mitarbeiterBestandNr.put(mitarbeiter.getmNr(), mitarbeiter);
             mitarbeiterBestandName.put(benutzername, mitarbeiter.getmNr());
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Mitarbeiter '" + benutzername + "' mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " wurde hinzugefügt.";
-            l.write(dateiName, text);
+            String text = ft.format(dNow) + "\nDer Mitarbeiter '" + benutzername + "' mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " wurde hinzugefügt.";
+            l.writeLog(dateiName, text);
         }
 
     }
@@ -146,7 +149,7 @@ public class MitarbeiterVerwaltung {
      * @param maNr
      * @return boolean
      */
-    public void mitarbeiterLoeschen(int maNr) throws IOException, MitarbeiterExistiertNichtException{
+    public void mitarbeiterLoeschen(int maNr, Mitarbeiter mitarbeiter) throws IOException, MitarbeiterExistiertNichtException{
 
         if (mitarbeiterBestandNr.containsKey(maNr)) {
 
@@ -154,8 +157,8 @@ public class MitarbeiterVerwaltung {
             mitarbeiterBestandNr.remove(maNr);
             mitarbeiterBestandName.remove(m.getBenutzername());
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Der Mitarbeiter '" + m.getBenutzername() + "' mit der Mitarbeiternummer " + maNr + " wurde gelöscht.";
-            l.write(dateiName, text);
+            String text = ft.format(dNow) + "\nDer Mitarbeiter '" + m.getBenutzername() + "' mit der Mitarbeiternummer " + maNr + " wurde vom Mitarbeiter " + mitarbeiter.getBenutzername() + " mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " gelöscht.";
+            l.writeLog(dateiName, text);
 
         } else {
             throw new MitarbeiterExistiertNichtException();
@@ -246,6 +249,14 @@ public class MitarbeiterVerwaltung {
         } else {
             return null;
         }
+    }
+
+    public Vector<String> printMitarbeiterLog(int daysInPast, String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
+        return l.printLog("Eshop_MitarbeiterLog.txt", daysInPast, mNr);
+    }
+
+    public String printMitarbeiterLog() throws FileNotFoundException{
+        return l.printLog("Eshop_MitarbeiterLog.txt");
     }
 
 

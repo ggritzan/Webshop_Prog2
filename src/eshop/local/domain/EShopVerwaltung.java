@@ -1,6 +1,8 @@
 package eshop.local.domain;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
@@ -184,8 +186,8 @@ public class EShopVerwaltung {
      * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
      * @return boolean
      */
-    public void setBestand(int artNr, int wert, Person p) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
-        meineArtikel.setBestand(artNr, wert, p);
+    public void setBestand(int artNr, int wert, Person p, int aenderung) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+        meineArtikel.setBestand(artNr, wert, p, aenderung);
     }
 
     /**
@@ -205,9 +207,9 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
      */
-    public void fuegeArtikelEin(String name, String beschreibung, double preis) throws IOException, ArtikelExestierBereitsException {
+    public void fuegeArtikelEin(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
-       meineArtikel.artikelHinzufuegen(name, beschreibung, preis);
+       meineArtikel.artikelHinzufuegen(name, beschreibung, preis, m);
 
     }
 
@@ -263,8 +265,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Artikel nicht gelöscht werden konnte)
      */
-    public void loescheArtikel(int artNr) throws IOException, ArtikelExestiertNichtException {
-        meineArtikel.artikelLoeschen(artNr);
+    public void loescheArtikel(int artNr, Mitarbeiter m) throws IOException, ArtikelExestiertNichtException {
+        meineArtikel.artikelLoeschen(artNr, m);
 
     }
 
@@ -275,8 +277,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
-    public void loescheKunde(int kunNr) throws IOException, KundenNummerExistiertNichtException{
-        meineKunden.kundenLoeschen(kunNr);
+    public void loescheKunde(int kunNr,  Mitarbeiter m) throws IOException, KundenNummerExistiertNichtException{
+        meineKunden.kundenLoeschen(kunNr, m);
 
     }
 
@@ -287,8 +289,8 @@ public class EShopVerwaltung {
      *
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
      */
-    public void loescheMitarbeiter(int mNr) throws IOException, MitarbeiterExistiertNichtException{
-        meineMitarbeiter.mitarbeiterLoeschen(mNr);
+    public void loescheMitarbeiter(int mNr, Mitarbeiter m) throws IOException, MitarbeiterExistiertNichtException{
+        meineMitarbeiter.mitarbeiterLoeschen(mNr, m);
 
     }
 
@@ -377,6 +379,38 @@ public class EShopVerwaltung {
 
     public Kunde rufeKunden(String bName) throws BenutzernameExistiertNichtException{
         return meineKunden.getKunden(bName);
+    }
+
+    public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineArtikel.printArtikelLog(daysInPast, aNr);
+    }
+
+    public String printArtikelLog() throws FileNotFoundException{
+        return meineArtikel.printArtikelLog();
+    }
+
+    public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineKunden.printKundenLog(daysInPast, kNr);
+    }
+
+    public String printKundenLog() throws FileNotFoundException{
+        return meineKunden.printKundenLog();
+    }
+
+    public Vector<String> printMitarbeiterLog(int daysInPast, String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineMitarbeiter.printMitarbeiterLog(daysInPast, mNr);
+    }
+
+    public String printMitarbeiterLog() throws FileNotFoundException{
+        return meineMitarbeiter.printMitarbeiterLog();
+    }
+
+    public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineRechnungen.printRechnungsLog(daysInPast, rNr);
+    }
+
+    public String printRechnungsLog() throws FileNotFoundException{
+        return meineRechnungen.printRechnungsLog();
     }
 
 }
