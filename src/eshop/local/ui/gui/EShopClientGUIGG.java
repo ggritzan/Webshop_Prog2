@@ -4,6 +4,7 @@ import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.LeereEingabeException;
 import eshop.local.ui.gui.comp.KundenRegistrierungPanel;
 import eshop.local.ui.gui.comp.LoginPanel;
+import eshop.local.ui.gui.comp.MitarbeiterPanel;
 import eshop.local.ui.gui.comp.MitarbeiterRegistrierungPanel;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class EShopClientGUIGG extends JFrame {
     private LoginPanel addLoginPanel;
     private KundenRegistrierungPanel addKundenRegistrierungPanel;
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
+    private MitarbeiterPanel addMitarbeiterPanel;
 
 
     /**
@@ -92,6 +94,9 @@ public class EShopClientGUIGG extends JFrame {
         addLoginPanel = new LoginPanel();
         switchPanel.add(addLoginPanel, BorderLayout.CENTER);
 
+        // Erzeugt das MitarbeiterPanel
+        addMitarbeiterPanel = new MitarbeiterPanel();
+
 
     }
 
@@ -99,7 +104,7 @@ public class EShopClientGUIGG extends JFrame {
      * Intialisiert die Listener für die verschiedenen Events
      */
     private void initListeners() {
-        // Finale Selbstreferenz (damit GUI-Referenz "this" auch im ActionListener-Kontext verf�gbar ist)
+        // Finale Selbstreferenz (damit GUI-Referenz "this" auch im ActionListener-Kontext verfuegbar ist)
         final EShopClientGUIGG eShopClientGUIGG = this;
 
         // Actionlistener für das LoginPanel
@@ -114,6 +119,7 @@ public class EShopClientGUIGG extends JFrame {
                         char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
                         if (erg == 'm') {
                             addLoginPanel.setVisible(false);
+                            switchPanel.add(addMitarbeiterPanel, BorderLayout.CENTER);
 
                         } else if (erg == 'k') {
                             addLoginPanel.setVisible(false);
