@@ -29,6 +29,7 @@ public class Log {
         SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz':'");
         Calendar cal = new GregorianCalendar();
         Date today = new Date();
+        Vector<String> log = new Vector<String>();
         Vector<Date> convertedDate = new Vector<Date>();
         Vector<String[]> eintraege = new Vector<String[]>();
         Vector<String> string = new Vector<String>();
@@ -42,7 +43,7 @@ public class Log {
         }
 
         Scanner filescan = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))).useDelimiter("\n");
-        Vector<String> log = new Vector<String>();
+
         while (filescan.hasNext()){
             log.add(filescan.next());
         }
