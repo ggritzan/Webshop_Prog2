@@ -10,10 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
-import eshop.local.exception.BenutzernameExistiertNichtException;
-import eshop.local.exception.KennNummerExistiertNichtException;
-import eshop.local.exception.MitarbeiterExistiertBereitsException;
-import eshop.local.exception.MitarbeiterExistiertNichtException;
+import eshop.local.exception.*;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.Adresse;
 import eshop.local.persistence.FilePersistenceManager;
@@ -255,7 +252,15 @@ public class MitarbeiterVerwaltung {
         return l.printLog("Eshop_MitarbeiterLog.txt", daysInPast, mNr);
     }
 
-    public String printMitarbeiterLog() throws FileNotFoundException{
+    public Vector<String> printMitarbeiterLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
+        return l.printLog("Eshop_MitarbeiterLog.txt", daysInPast);
+    }
+
+    public Vector<String> printMitarbeiterLog(String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return l.printLog("Eshop_MitarbeiterLog.txt", mNr);
+    }
+
+    public String printMitarbeiterLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return l.printLog("Eshop_MitarbeiterLog.txt");
     }
 

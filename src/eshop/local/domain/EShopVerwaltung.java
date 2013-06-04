@@ -385,7 +385,15 @@ public class EShopVerwaltung {
         return meineArtikel.printArtikelLog(daysInPast, aNr);
     }
 
-    public String printArtikelLog() throws FileNotFoundException{
+    public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
+        return meineArtikel.printArtikelLog(daysInPast);
+    }
+
+    public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineArtikel.printArtikelLog(aNr);
+    }
+
+    public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineArtikel.printArtikelLog();
     }
 
@@ -393,7 +401,15 @@ public class EShopVerwaltung {
         return meineKunden.printKundenLog(daysInPast, kNr);
     }
 
-    public String printKundenLog() throws FileNotFoundException{
+    public Vector<String> printKundenLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
+        return meineKunden.printKundenLog(daysInPast);
+    }
+
+    public Vector<String> printKundenLog(String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineKunden.printKundenLog(kNr);
+    }
+
+    public String printKundenLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineKunden.printKundenLog();
     }
 
@@ -401,7 +417,15 @@ public class EShopVerwaltung {
         return meineMitarbeiter.printMitarbeiterLog(daysInPast, mNr);
     }
 
-    public String printMitarbeiterLog() throws FileNotFoundException{
+    public Vector<String> printMitarbeiterLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
+        return meineMitarbeiter.printMitarbeiterLog(daysInPast);
+    }
+
+    public Vector<String> printMitarbeiterLog(String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineMitarbeiter.printMitarbeiterLog(mNr);
+    }
+
+    public String printMitarbeiterLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineMitarbeiter.printMitarbeiterLog();
     }
 
@@ -409,7 +433,15 @@ public class EShopVerwaltung {
         return meineRechnungen.printRechnungsLog(daysInPast, rNr);
     }
 
-    public String printRechnungsLog() throws FileNotFoundException{
+    public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
+        return meineRechnungen.printRechnungsLog(daysInPast);
+    }
+
+    public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineRechnungen.printRechnungsLog(rNr);
+    }
+
+    public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineRechnungen.printRechnungsLog();
     }
 

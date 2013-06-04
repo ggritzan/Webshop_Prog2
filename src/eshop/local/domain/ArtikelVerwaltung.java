@@ -309,7 +309,15 @@ public class ArtikelVerwaltung {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
     }
 
-    public String printArtikelLog() throws FileNotFoundException{
+    public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
+        return l.printLog("Eshop_ArtikelLog.txt", daysInPast);
+    }
+
+    public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return l.printLog("Eshop_ArtikelLog.txt", aNr);
+    }
+
+    public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return l.printLog("Eshop_ArtikelLog.txt");
     }
 

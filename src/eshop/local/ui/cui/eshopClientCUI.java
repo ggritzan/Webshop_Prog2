@@ -651,13 +651,29 @@ public class eshopClientCUI {
 
                 } else if (input.equals("la")){
                     try {
-                        System.out.print("1) gesamten ArtikelLog anzeigen  > ");
-                        System.out.print("2) Log eines bestimmten Artikels ab einem bestimmten Tag anzeigen > ");
+                        System.out.println("1) gesamten ArtikelLog anzeigen  > ");
+                        System.out.println("2) gesamten ArtikelLog ab einem bestimmten Tag anzeigen > ");
+                        System.out.println("3) gesamten Log eines bestimmten Artikels anzeigen > ");
+                        System.out.println("4) Log eines bestimmten Artikels ab einem bestimmten Tag anzeigen > ");
                         String anzeige = liesEingabe();
                         int anzeigeInt = Integer.parseInt(anzeige);
                         if (anzeigeInt == 1){
                             System.out.println(this.eShopVerwaltung.printArtikelLog());
                         } else if(anzeigeInt == 2){
+                            System.out.print("Wie viele Tage soll der Log zurückliegen?: > ");
+                            String tage = liesEingabe();
+                            int days = Integer.parseInt(tage);
+                            for(int i = 0; i < this.eShopVerwaltung.printArtikelLog(days).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printArtikelLog(days).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 3){
+                            System.out.println(this.eShopVerwaltung.gibAlleArtikel());
+                            System.out.print("Artikelnummer: >");
+                            String aNr = liesEingabe();
+                            for(int i = 0; i < this.eShopVerwaltung.printArtikelLog(aNr).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printArtikelLog(aNr).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 4){
                             System.out.println(this.eShopVerwaltung.gibAlleArtikel());
                             System.out.print("Artikelnummer: >");
                             String aNr = liesEingabe();
@@ -676,16 +692,34 @@ public class eshopClientCUI {
                         System.err.println("Sie müssen eine Zahl eingeben!");
                     } catch (KennNummerExistiertNichtException ke){
                         System.err.println(ke.getMessage());
+                    } catch (KeineEintraegeVorhandenException kve){
+                        System.err.println(kve.getMessage());
                     }
                 } else if (input.equals("lk")){
                     try {
-                        System.out.print("1) gesamten KundenLog anzeigen  > ");
-                        System.out.print("2) Log eines bestimmten Kunden ab einem bestimmten Tag anzeigen  > ");
+                        System.out.println("1) gesamten KundenLog anzeigen  > ");
+                        System.out.println("2) gesamten KundenLog ab einem bestimmten Tag anzeigen > ");
+                        System.out.println("3) gesamten Log eines bestimmten Kunden anzeigen > ");
+                        System.out.println("4) Log eines bestimmten Kunden ab einem bestimmten Tag anzeigen  > ");
                         String anzeige = liesEingabe();
                         int anzeigeInt = Integer.parseInt(anzeige);
                         if (anzeigeInt == 1){
                             System.out.println(this.eShopVerwaltung.printKundenLog());
-                        } else if(anzeigeInt == 2) {
+                        } else if(anzeigeInt == 2){
+                            System.out.print("Wie viele Tage soll der Log zurückliegen?: > ");
+                            String tage = liesEingabe();
+                            int days = Integer.parseInt(tage);
+                            for(int i = 0; i < this.eShopVerwaltung.printKundenLog(days).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printKundenLog(days).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 3){
+                            System.out.println(this.eShopVerwaltung.gibAlleKunden());
+                            System.out.print("Kundennummer: >");
+                            String kNr = liesEingabe();
+                            for(int i = 0; i < this.eShopVerwaltung.printKundenLog(kNr).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printKundenLog(kNr).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 4) {
                             System.out.println(this.eShopVerwaltung.gibAlleKunden());
                             System.out.print("Kundennummer: >");
                             String kNr = liesEingabe();
@@ -704,16 +738,34 @@ public class eshopClientCUI {
                         System.err.println("Sie müssen eine Zahl eingeben!");
                     } catch (KennNummerExistiertNichtException ke){
                         System.err.println(ke.getMessage());
+                    } catch (KeineEintraegeVorhandenException kve){
+                        System.err.println(kve.getMessage());
                     }
                 } else if (input.equals("lm")){
                     try {
-                        System.out.print("1) gesamten MitarbeiterLog anzeigen  > ");
-                        System.out.print("2) Log eines Mitarbeiters ab einem bestimmten Tag anzeigen  > ");
+                        System.out.println("1) gesamten MitarbeiterLog anzeigen  > ");
+                        System.out.println("2) gesamten MitarbeiterLog ab einem bestimmten Tag anzeigen > ");
+                        System.out.println("3) gesamten Log eines bestimmten Mitarbeiters anzeigen > ");
+                        System.out.println("4) Log eines Mitarbeiters ab einem bestimmten Tag anzeigen  > ");
                         String anzeige = liesEingabe();
                         int anzeigeInt = Integer.parseInt(anzeige);
                         if (anzeigeInt == 1){
                             System.out.println(this.eShopVerwaltung.printMitarbeiterLog());
                         } else if(anzeigeInt == 2){
+                            System.out.print("Wie viele Tage soll der Log zurückliegen?: > ");
+                            String tage = liesEingabe();
+                            int days = Integer.parseInt(tage);
+                            for(int i = 0; i < this.eShopVerwaltung.printMitarbeiterLog(days).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printMitarbeiterLog(days).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 3){
+                            System.out.println(this.eShopVerwaltung.gibAlleMitarbeiter());
+                            System.out.print("Mitarbeiternummer: >");
+                            String mitarNr = liesEingabe();
+                            for(int i = 0; i < this.eShopVerwaltung.printMitarbeiterLog(mitarNr).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printMitarbeiterLog(mitarNr).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 4){
                             System.out.println(this.eShopVerwaltung.gibAlleMitarbeiter());
                             System.out.print("Mitarbeiternummer: >");
                             String mitarNr = liesEingabe();
@@ -732,16 +784,34 @@ public class eshopClientCUI {
                         System.err.println("Sie müssen eine Zahl eingeben!");
                     } catch (KennNummerExistiertNichtException ke){
                         System.err.println(ke.getMessage());
+                    } catch (KeineEintraegeVorhandenException kve){
+                        System.err.println(kve.getMessage());
                     }
                 } else if (input.equals("lr")){
                     try {
-                        System.out.print("1) gesamten RechnungsLog anzeigen  > ");
-                        System.out.print("2) Log einer bestimmten Rechnung ab einem bestimmten Tag anzeigen  > ");
+                        System.out.println("1) gesamten RechnungsLog anzeigen  > ");
+                        System.out.println("2) gesamten RechnungsLog ab einem bestimmten Tag anzeigen > ");
+                        System.out.println("3) gesamten Log einer bestimmten Rechnung anzeigen > ");
+                        System.out.println("4) Log einer bestimmten Rechnung ab einem bestimmten Tag anzeigen  > ");
                         String anzeige = liesEingabe();
                         int anzeigeInt = Integer.parseInt(anzeige);
                         if (anzeigeInt == 1){
                             System.out.println(this.eShopVerwaltung.printRechnungsLog());
                         } else if(anzeigeInt == 2){
+                            System.out.print("Wie viele Tage soll der Log zurückliegen?: > ");
+                            String tage = liesEingabe();
+                            int days = Integer.parseInt(tage);
+                            for(int i = 0; i < this.eShopVerwaltung.printRechnungsLog(days).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printRechnungsLog(days).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 3){
+                            System.out.println(this.eShopVerwaltung.gibAlleRechnungen());
+                            System.out.print("Rechnungsnummer: >");
+                            String rNr = liesEingabe();
+                            for(int i = 0; i < this.eShopVerwaltung.printRechnungsLog(rNr).size(); i++){
+                                System.out.println(this.eShopVerwaltung.printRechnungsLog(rNr).elementAt(i));
+                            }
+                        } else if(anzeigeInt == 4){
                             System.out.println(this.eShopVerwaltung.gibAlleRechnungen());
                             System.out.print("Rechnungsnummer: >");
                             String rNr = liesEingabe();
@@ -762,6 +832,8 @@ public class eshopClientCUI {
                         System.err.println(ke.getMessage());
                     } catch (RechnungKeineVorhandenException rve){
                         System.err.println(rve.getMessage());
+                    } catch (KeineEintraegeVorhandenException kve){
+                        System.err.println(kve.getMessage());
                     }
                 }
 

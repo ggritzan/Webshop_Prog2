@@ -1,5 +1,6 @@
 package eshop.local.domain;
 
+import eshop.local.exception.KeineEintraegeVorhandenException;
 import eshop.local.exception.KennNummerExistiertNichtException;
 import eshop.local.exception.RechnungExestiertNichtException;
 import eshop.local.exception.RechnungKeineVorhandenException;
@@ -330,7 +331,15 @@ public class RechnungsVerwaltung {
         return l.printLog("Eshop_RechnungsLog.txt", daysInPast, rNr);
     }
 
-    public String printRechnungsLog() throws FileNotFoundException{
+    public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
+        return l.printLog("Eshop_RechnungsLog.txt", daysInPast);
+    }
+
+    public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return l.printLog("Eshop_RechnungsLog.txt", rNr);
+    }
+
+    public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return l.printLog("Eshop_RechnungsLog.txt");
     }
 

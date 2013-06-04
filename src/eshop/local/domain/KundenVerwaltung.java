@@ -307,7 +307,15 @@ public class KundenVerwaltung {
         return l.printLog("Eshop_KundenLog.txt", daysInPast, kNr);
     }
 
-    public String printKundenLog() throws FileNotFoundException{
+    public Vector<String> printKundenLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
+        return l.printLog("Eshop_KundenLog.txt", daysInPast);
+    }
+
+    public Vector<String> printKundenLog(String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return l.printLog("Eshop_KundenLog.txt", kNr);
+    }
+
+    public String printKundenLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return l.printLog("Eshop_KundenLog.txt");
     }
 }
