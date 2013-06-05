@@ -43,8 +43,7 @@ public class Adresse implements Serializable {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        String string = new String();
-        string = "\n" +	"Anschrift: " + "\n" + "\t" + getVorname() + "\n" + "\t" + getNachname() + "\n" + "\t" + getStraße() + "\n" + "\t" + getPlz() + "\n" + "\t" + getOrt() + "\n";
+        String string = "\n" +	"Anschrift: " + "\n" + "\t" + getVorname() + "\n" + "\t" + getNachname() + "\n" + "\t" + getStraße() + "\n" + "\t" + getPlz() + "\n" + "\t" + getOrt() + "\n";
         return string;
     }
 
