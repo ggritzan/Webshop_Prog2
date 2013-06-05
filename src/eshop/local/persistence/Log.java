@@ -221,7 +221,7 @@ public class Log {
 
         // alle Datumseingaben
         for (int i = 0; i < log.size(); i+=3){
-            convertedDate.add((Date) formatter.parse(log.elementAt(i)));
+            convertedDate.add(formatter.parse(log.elementAt(i)));
         }
 
         // alle Einträge als Tokens
