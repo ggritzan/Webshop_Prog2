@@ -31,53 +31,40 @@ public class MitarbeiterPanel extends JPanel {
         logoutButton = new JButton("Logout");
 
 
+
+
         // Layout Ebene 0
         GridLayout layoutEbene0 = new GridLayout(1, 2);
         this.setLayout(layoutEbene0);	// 1 Zeilen, 2 Spalte
 
         // Layout Ebene 1
         JPanel frameEbene1 = new JPanel();
-        GridLayout layoutEbene1 = new GridLayout(1, 2);
-        frameEbene1.setLayout(layoutEbene1);	// 1 Zeilen, 2 Spalte
-
-        // Layout Ebene 2
-        JPanel frameEbene2 = new JPanel();
-        GridLayout layoutEbene2 = new GridLayout(1, 2);
-        frameEbene2.setLayout(layoutEbene2);	// 1 Zeilen, 2 Spalte
-
-        // Layout Ebene 3
-        JPanel frameEbene3 = new JPanel();
-        GridLayout layoutEbene3 = new GridLayout(15, 1);
-        layoutEbene3.setHgap(5);        // Lass' 5px Abstand zwischen den Komponenten
-        frameEbene3.setLayout(layoutEbene3);	// 15 Zeilen, 1 Spalte
+        GridLayout layoutEbene1 = new GridLayout(15, 1);
+        layoutEbene1.setHgap(5);        // Lass' 5px Abstand zwischen den Komponenten
+        frameEbene1.setLayout(layoutEbene1);	// 15 Zeilen, 1 Spalte
 
         // Hinzufügen der Elemente für die Ebene 3
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(artikelButton);
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(mitarbeiterButton);
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(kundenButton);
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(rechnungenButton);
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(logsButton);
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(logoutButton);
-        frameEbene3.add(new JPanel());
-        frameEbene3.add(new JPanel());
-
-        // Hinzufügen der Elemente für die Ebene 2
-        frameEbene2.add(new JPanel());
-        frameEbene2.add(frameEbene3);
-
-        // Hinzufügen der Elemente für die Ebene 1
-        frameEbene1.add(frameEbene2);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(artikelButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(mitarbeiterButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(kundenButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(rechnungenButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(logsButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(logoutButton);
+        frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
 
+
+
         // Hinzufügen der Elemente für die Ebene 0
-        this.add(frameEbene1);
         this.add(new JPanel());
+        this.add(frameEbene1);
+
     }
 
     public JButton getArtikelButton() {

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class LoginPanel extends JPanel{
 
     private JTextField loginName;	    // Textfeld fuer den Loginnamen
-    private JTextField loginPassword;	// Textfeld für das Passwort
+    private JPasswordField loginPassword;	// Textfeld für das Passwort
     private JButton loginButton;		// Button zum einloggen
     private JButton registerButton;     // Button um sich neu zu registrieren
 
@@ -27,7 +27,7 @@ public class LoginPanel extends JPanel{
         super();
 
         loginName = new JTextField();
-        loginPassword = new JTextField();
+        loginPassword = new JPasswordField();
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
 
@@ -145,16 +145,22 @@ public class LoginPanel extends JPanel{
             if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Mitarbeiter");
+                this.loginName.setText("");
+                this.loginPassword.setText("");
                 return 'm';
 
             } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Kunde");
+                this.loginName.setText("");
+                this.loginPassword.setText("");
                 return 'k';
 
 
             } else {
                 System.err.println("Benutzername oder Passwort leider falsch!");
+                this.loginPassword.setText("");
+
                 return 'u';
 
             }

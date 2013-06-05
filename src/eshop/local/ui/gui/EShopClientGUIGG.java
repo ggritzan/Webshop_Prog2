@@ -2,10 +2,7 @@ package eshop.local.ui.gui;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.LeereEingabeException;
-import eshop.local.ui.gui.comp.KundenRegistrierungPanel;
-import eshop.local.ui.gui.comp.LoginPanel;
-import eshop.local.ui.gui.comp.MitarbeiterPanel;
-import eshop.local.ui.gui.comp.MitarbeiterRegistrierungPanel;
+import eshop.local.ui.gui.comp.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +21,7 @@ public class EShopClientGUIGG extends JFrame {
     private KundenRegistrierungPanel addKundenRegistrierungPanel;
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
     private MitarbeiterPanel addMitarbeiterPanel;
+    private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
 
 
     /**
@@ -50,7 +48,7 @@ public class EShopClientGUIGG extends JFrame {
     public void initComponents() {
 
         // definiert die Groesse des Fensters
-        this.setSize(800, 600);
+        this.setSize(1024, 768);
 
         // definiert wo das Fenster angezeigt werden soll
         this.setLocation(400, 100);
@@ -97,7 +95,15 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt das MitarbeiterPanel
         addMitarbeiterPanel = new MitarbeiterPanel();
 
+        // Erzeugt die ArtikellistePanel
+        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
 
+
+    }
+
+    public void switchPanelRepainter() {
+        switchPanel.repaint();
+        switchPanel.revalidate();
     }
 
     /**
@@ -118,8 +124,10 @@ public class EShopClientGUIGG extends JFrame {
                     try {
                         char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
                         if (erg == 'm') {
-                            addLoginPanel.setVisible(false);
-                            switchPanel.add(addMitarbeiterPanel, BorderLayout.CENTER);
+                            switchPanel.remove(addLoginPanel);
+                            switchPanelRepainter();
+                            switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+
 
                         } else if (erg == 'k') {
                             addLoginPanel.setVisible(false);
@@ -133,9 +141,10 @@ public class EShopClientGUIGG extends JFrame {
                         e.printStackTrace();
                     }
                 } else if (source == addLoginPanel.getRegisterButton()) {
-                    addLoginPanel.setVisible(false);
-
+                    switchPanel.remove(addLoginPanel);
+                    switchPanelRepainter();
                     switchPanel.add(addKundenRegistrierungPanel, BorderLayout.CENTER);
+
                 }
 
             }
@@ -152,8 +161,11 @@ public class EShopClientGUIGG extends JFrame {
                     try {
 
                         addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);
-                        addKundenRegistrierungPanel.setVisible(false);
-                        addLoginPanel.setVisible(true);
+
+
+                        switchPanel.remove(addKundenRegistrierungPanel);
+                        switchPanelRepainter();
+                        switchPanel.add(addLoginPanel, BorderLayout.CENTER);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -162,6 +174,27 @@ public class EShopClientGUIGG extends JFrame {
 
 
                     }
+                }
+
+            }
+        });
+
+        // ActionListener für das MitarbeiterPanel
+        addMitarbeiterPanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                if (source == addMitarbeiterPanel.getArtikelButton()) {
+                    switchPanelRepainter();
+                    switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+                    System.err.print("Funtzt bis hier");
+
+                } else if (source == addMitarbeiterPanel.getLogoutButton()) {
+                    switchPanel.removeAll();
+                    switchPanelRepainter();
+                    switchPanel.add(addLoginPanel, BorderLayout.CENTER);
                 }
 
             }
