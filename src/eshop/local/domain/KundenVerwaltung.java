@@ -188,7 +188,7 @@ public class KundenVerwaltung {
 
     }
 
-   /**
+    /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Kunden enthaelt
      */
     public Vector alleKundenZurueckgeben() {

@@ -108,7 +108,7 @@ public class EShopVerwaltung {
      * @return Vector Rückgabe eines Vectors mit dem gefundenen Mitarbeiter
      */
     public boolean findeMitarbeiter(String bName, String bPasswort)  {
-         return meineMitarbeiter.findeMitarbeiter(bName, bPasswort);
+        return meineMitarbeiter.findeMitarbeiter(bName, bPasswort);
     }
 
     /**
@@ -177,7 +177,7 @@ public class EShopVerwaltung {
      * @return boolean ob der Warenkorb zurück gestzt wurde oder nicht
      */
     public void resetWarenkorb(int kNr) throws KundenNummerExistiertNichtException{
-       meineKunden.resetWarenkorb(kNr);
+        meineKunden.resetWarenkorb(kNr);
     }
 
     /**
@@ -186,8 +186,8 @@ public class EShopVerwaltung {
      * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
      * @return boolean
      */
-    public void setBestand(int artNr, int wert, Person p, int aenderung) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
-        meineArtikel.setBestand(artNr, wert, p, aenderung);
+    public void setBestand(int artNr, int wert, Person p) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+        meineArtikel.setBestand(artNr, wert, p);
     }
 
     /**
@@ -209,7 +209,7 @@ public class EShopVerwaltung {
      */
     public void fuegeArtikelEin(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
-       meineArtikel.artikelHinzufuegen(name, beschreibung, preis, m);
+        meineArtikel.artikelHinzufuegen(name, beschreibung, preis, m);
 
     }
 
@@ -302,7 +302,7 @@ public class EShopVerwaltung {
      * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
     public void loescheRechnung(Rechnung rechnung) throws IOException, RechnungExestiertNichtException{
-       meineRechnungen.rechnungLoeschen(rechnung);
+        meineRechnungen.rechnungLoeschen(rechnung);
 
     }
 

@@ -207,7 +207,7 @@ public class MitarbeiterVerwaltung {
             Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
             String p = m.getPasswort();
             if (p.equals(passwort)) {
-            return true;
+                return true;
             }else {
                 return false;
             }

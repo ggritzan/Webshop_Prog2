@@ -346,7 +346,7 @@ public class eshopClientCUI {
                                 Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
                                 int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
                                 if (eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge()) {
-                                    eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde, a.getBestellteMenge());
+                                    eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
 
                                 } else {
                                     bestandFehler = true;
@@ -517,9 +517,7 @@ public class eshopClientCUI {
                         System.out.print("Bestand > ");
                         String aBestand = liesEingabe();
                         int aBestandInt = Integer.parseInt(aBestand);
-                        Artikel puffer = eShopVerwaltung.getArtikel(aNrInt);
-                        int neuerBestand = puffer.getBestand() + aBestandInt;
-                        eShopVerwaltung.setBestand(aNrInt, neuerBestand, eShopVerwaltung.getMitarbeiter(mNr), aBestandInt);
+                        eShopVerwaltung.setBestand(aNrInt, aBestandInt, eShopVerwaltung.getMitarbeiter(mNr));
 
                     } catch (NumberFormatException e) {
 

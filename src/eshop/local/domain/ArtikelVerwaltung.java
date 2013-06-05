@@ -29,6 +29,7 @@ public class ArtikelVerwaltung {
 
     // Dokument zum Speichern des Logs
     private File dateiName = new File("Eshop_ArtikelLog.txt");
+    private File dateiFuerGraph = new File("Eshop_BestandsGraph.txt");
 
     // Hashmap zum speichern des Artikelbestands als Key dienen die Artikelnummern
     private HashMap<Integer, Artikel> artikelBestandNr;
@@ -145,6 +146,8 @@ public class ArtikelVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Artikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
             l.writeLog(dateiName, text);
+            String graphData = ft.format(dNow) + "%'" + name + "'%" + artikel.getNummer() + "%" + 0 + "%";
+            l.writeGraphData(dateiFuerGraph, graphData);
 
         }
 
@@ -185,6 +188,8 @@ public class ArtikelVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Artikel '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " gelöscht.";
             l.writeLog(dateiName, text);
+            String graphData = ft.format(dNow) + "%'" + a.getName() + "'%" + artNr + "%" + 0 + "%";
+            l.writeGraphData(dateiFuerGraph, graphData);
 
 
         }
@@ -235,22 +240,26 @@ public class ArtikelVerwaltung {
      *
      * @param artNr,wert
      */
-    public void setBestand(int artNr, int wert, Person person, int aenderung) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+    public void setBestand(int artNr, int menge, Person person) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
 
         // Wenn die Artikelnummer exestiert und der neue Bestand nicht ins negative geht wird der Bestand angepasst
-        if (artikelBestandNr.containsKey(artNr) && wert >= 0) {
+        if (artikelBestandNr.containsKey(artNr) && menge >= 0) {
 
             Artikel a = artikelBestandNr.get(artNr);
-            a.setBestand(wert);
+            a.setBestand(menge);
             artikelBestandNr.put(artNr, a);
             Date dNow = new Date();
             if (person instanceof Kunde) {
-                String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Kunden " + person.getBenutzername() + " mit der Kundennummer " + ((Kunde) person).getNummer() + " um den Wert -" + aenderung + " geändert und hat jetzt die Menge " + wert + ".";
+                String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Kunden " + person.getBenutzername() + " mit der Kundennummer " + ((Kunde) person).getNummer() + " geändert und hat jetzt die Menge " + menge + ".";
                 l.writeLog(dateiName, text);
+                String graphData = ft.format(dNow) + "%'" + a.getName() + "'%" + artNr + "%" + menge + "%";
+                l.writeGraphData(dateiFuerGraph, graphData);
 
             } else if (person instanceof Mitarbeiter) {
-                String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Mitarbeiter " + person.getBenutzername() + " mit der Mitarbeiternummer " + ((Mitarbeiter) person).getmNr()+ " um den Wert +" + aenderung + " geändert und hat jetzt die Menge " + wert + ".";
+                String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Mitarbeiter " + person.getBenutzername() + " mit der Mitarbeiternummer " + ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt die Menge " + menge + ".";
                 l.writeLog(dateiName, text);
+                String graphData = ft.format(dNow) + "%'" + a.getName() + "'%" + artNr + "%" + menge + "%";
+                l.writeGraphData(dateiFuerGraph, graphData);
 
             }
 
@@ -262,7 +271,7 @@ public class ArtikelVerwaltung {
         }
 
         // wirft eine ArtikelBestandNeagativException wenn versucht wird denn Bestand in negative zu aendern
-        else if (wert < 0) {
+        else if (menge < 0) {
             throw new ArtikelBestandNegativException();
         }
     }
