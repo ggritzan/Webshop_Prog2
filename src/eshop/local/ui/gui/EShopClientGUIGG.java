@@ -1,7 +1,9 @@
 package eshop.local.ui.gui;
 
 import eshop.local.domain.EShopVerwaltung;
+import eshop.local.exception.ArtikelExestierBereitsException;
 import eshop.local.exception.LeereEingabeException;
+import eshop.local.exception.MitarbeiterExistiertNichtException;
 import eshop.local.ui.gui.comp.*;
 
 import javax.swing.*;
@@ -22,6 +24,8 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
+    private int aktuellerMitarbeiter;
+    private int aktuellerKunde;
 
 
     /**
@@ -124,6 +128,7 @@ public class EShopClientGUIGG extends JFrame {
                     try {
                         char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
                         if (erg == 'm') {
+                            aktuellerMitarbeiter = eShopVerwaltung.getMnr(addLoginPanel.getName());
                             switchPanel.remove(addLoginPanel);
                             switchPanelRepainter();
                             switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
@@ -189,12 +194,51 @@ public class EShopClientGUIGG extends JFrame {
                 if (source == addMitarbeiterPanel.getArtikelButton()) {
                     switchPanelRepainter();
                     switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
-                    System.err.print("Funtzt bis hier");
+
 
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
+                    aktuellerMitarbeiter = 0;
                     switchPanel.removeAll();
                     switchPanelRepainter();
                     switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+                }
+
+            }
+        });
+
+        // ActionListener für MitarbeiterArtikelListePanel
+        addMitarbeiterArtikelListePanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                if (source == addMitarbeiterArtikelListePanel.getArtikelHinzufuegenButton()) {
+                    try {
+
+                        String aName = addMitarbeiterArtikelListePanel.getArtikelName();
+                        String aBeschreibung = addMitarbeiterArtikelListePanel.getArtikelBeschreibung();
+                        double aPreis = addMitarbeiterArtikelListePanel.getArtikelPreis();
+
+                        eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                        System.out.print("Der Artikel wurde hinzugefügt!");
+
+
+                        switchPanel.validate();
+
+
+                    } catch (NumberFormatException e) {
+
+                    } catch (ArtikelExestierBereitsException aeb) {
+                        System.err.println(aeb.getMessage());
+
+                    } catch (MitarbeiterExistiertNichtException me) {
+                        System.err.println(me.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
 
             }
@@ -204,11 +248,7 @@ public class EShopClientGUIGG extends JFrame {
         menuDateiSpeichern.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                // 1. Möglichkeit
-                //GUI.this.setVisible(false);
 
-                // 2. Möglichkeit
-                //gui.setVisible(false);
 
                 // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
                 try {

@@ -46,3 +46,15 @@ Der Artikel 'Füller' mit der Artikelnummer 1004 wurde gelöscht.
 Di 2013.06.04 um 03:15:07 MESZ:
 Der Bestand des Artikels 'Jeans' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1001 um den Wert +2 geändert und hat jetzt die Menge 31.
 
+Mi 2013.06.05 um 16:45:37 MESZ:
+Der Artikel 'Schirm' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+
+Mi 2013.06.05 um 16:47:31 MESZ:
+Der Artikel 'Regenschirm' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+
+Mi 2013.06.05 um 16:50:21 MESZ:
+Der Artikel 'Schrim' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+
+Mi 2013.06.05 um 16:54:45 MESZ:
+Der Artikel 'Zuckerwürfel' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+

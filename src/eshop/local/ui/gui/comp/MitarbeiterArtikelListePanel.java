@@ -3,6 +3,7 @@ package eshop.local.ui.gui.comp;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 /**
@@ -17,6 +18,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     // Objekte fuer die korrekte Darstellung der Tabellenansicht
     private JTable table;
     private ArtikelTableModel tmodel;            // TableModel fuer die Artikel-Tabelle
+    private MitarbeiterArtikelHinzufuegenPanel addMitarbeiterArtikelHinzufuegenPanel;
 
     public MitarbeiterArtikelListePanel(Vector alleArtikel) {
         // Tabelle erzeugen und Eigenschaften setzen
@@ -25,17 +27,43 @@ public class MitarbeiterArtikelListePanel extends JPanel {
         table.setModel(tmodel);
 
         // Rahmen außen
-        Border ba = BorderFactory.createTitledBorder("Artikelmenue");
+        Border ba = BorderFactory.createTitledBorder("Artikelmenü");
         this.setBorder(ba);
 
         // Layout Ebene 0
         GridLayout layoutEbene0 = new GridLayout(2, 1);
         this.setLayout(layoutEbene0);    // 1 Zeilen, 2 Spalte
 
+
+        // Initialisierung eines addMitarbeiterArtikelHinzufuegenPanel
+        addMitarbeiterArtikelHinzufuegenPanel   = new MitarbeiterArtikelHinzufuegenPanel();
+
         // Hinzufügen der Elemente für die Ebene 0
         this.add(table);
-        this.add(new JPanel());
+        this.add(addMitarbeiterArtikelHinzufuegenPanel);
 
 
+    }
+
+
+
+    public void addActionListener(ActionListener a) {
+        addMitarbeiterArtikelHinzufuegenPanel.addActionListener(a);
+    }
+
+    public String getArtikelName() {
+        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelName();
+    }
+
+    public String getArtikelBeschreibung() {
+        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelBeschreibung();
+    }
+
+    public double getArtikelPreis() {
+        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelPreis();
+    }
+
+    public JButton getArtikelHinzufuegenButton() {
+        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelHinzufuegenButton();
     }
 }
