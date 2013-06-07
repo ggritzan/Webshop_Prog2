@@ -23,7 +23,10 @@ public class ArtikelTableModel extends AbstractTableModel {
 
     private Class<?>[] columnClass = {Integer.class, String.class, Float.class, Integer.class};
 
-
+    /**
+     * Konstruktor
+     * @param alleAktuellenArtikel
+     */
     public ArtikelTableModel(Vector<Artikel> alleAktuellenArtikel) {
         this.artikelVector = alleAktuellenArtikel;
     }

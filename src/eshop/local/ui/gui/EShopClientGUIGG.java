@@ -6,6 +6,10 @@ import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestandAendernDialog;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelPopup;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenListePanel;
 import eshop.local.ui.gui.comp.registrierung.*;
 import eshop.local.valueobjects.Adresse;
 
@@ -30,6 +34,7 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
+    private MitarbeiterKundenListePanel addMitarbeiterKundenListePanel;
     private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
     private int aktuellerMitarbeiter;
@@ -117,8 +122,11 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt das MitarbeiterPanel
         addMitarbeiterPanel = new MitarbeiterPanel();
 
-        // Erzeugt die ArtikellistePanel
+        // Erzeugt das ArtikellistePanel
         addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
+
+        // Erzeugt das KundenListenPanel
+        addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
 
         // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
@@ -366,7 +374,7 @@ public class EShopClientGUIGG extends JFrame {
 
 
 
-// ActionListener für das MitarbeiterPanel
+        // ActionListener für das MitarbeiterPanel
         addMitarbeiterPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -374,15 +382,24 @@ public class EShopClientGUIGG extends JFrame {
 
                 Object source = ae.getSource();
                 if (source == addMitarbeiterPanel.getArtikelButton()) {
+                    switchPanel.removeAll();
                     switchPanelRepainter();
+                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                     switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
 
 
-                } else if (source == addMitarbeiterPanel.getLogoutButton()) {
+                } else if (source == addMitarbeiterPanel.getKundenButton()) {
+                    switchPanel.removeAll();
+                    switchPanelRepainter();
+                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                    switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
+
+                }else if (source == addMitarbeiterPanel.getLogoutButton()) {
                     aktuellerMitarbeiter = 0;
                     switchPanel.removeAll();
                     switchPanelRepainter();
                     switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+
                 }
 
             }

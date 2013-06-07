@@ -1,7 +1,6 @@
-package eshop.local.ui.gui.comp.mitarbeiterMenue;
+package eshop.local.ui.gui.comp.mitarbeiterMenue.artikel;
 
 import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
-import eshop.local.valueobjects.ArtikelNumberComperator;
 
 import javax.swing.*;
 import javax.swing.border.Border;
