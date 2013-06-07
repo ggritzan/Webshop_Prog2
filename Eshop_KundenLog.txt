@@ -30,3 +30,6 @@ Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
 
 Sa 2013.06.01 um 13:28:06 MESZ:
 Der Kunde 'mmustermann' mit der Kundennummer 1001 wurde hinzugefügt.
+Fr 2013.06.07 um 23:31:56 MESZ:
+Der Kunde 'skeks' mit der Kundennummer 1001 wurde hinzugefügt.
+

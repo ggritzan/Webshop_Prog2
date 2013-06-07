@@ -23,6 +23,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     // Objekte fuer die korrekte Darstellung der Tabellenansicht
     private JTable table;
     private ArtikelTableModel tmodel;            // TableModel fuer die Artikel-Tabelle
+    private RowSorter<ArtikelTableModel> sorter;
     private MitarbeiterArtikelHinzufuegenPanel addMitarbeiterArtikelHinzufuegenPanel;
 
     public MitarbeiterArtikelListePanel(Vector alleArtikel) {
@@ -30,7 +31,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
         table = new JTable();
         tmodel = new ArtikelTableModel(alleArtikel);
         table.setModel(tmodel);
-        RowSorter<ArtikelTableModel> sorter = new TableRowSorter<ArtikelTableModel>(tmodel);
+        sorter = new TableRowSorter<ArtikelTableModel>(tmodel);
         table.setRowSorter(sorter);
 
 

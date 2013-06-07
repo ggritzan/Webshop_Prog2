@@ -7,6 +7,7 @@ import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
 import eshop.local.ui.gui.comp.registrierung.*;
+import eshop.local.valueobjects.Adresse;
 
 // Imports der von Java bereit gestellten Klassen
 import javax.swing.*;
@@ -242,28 +243,60 @@ public class EShopClientGUIGG extends JFrame {
                 Object source = ae.getSource();
                 if (source == addKundenRegistrierungPanel.getKundenRegisterButton()) {
                     try {
+                        String vorname = addKundenRegistrierungPanel.getVorname().getText();
 
+                        String nachname = addKundenRegistrierungPanel.getNachname().getText();
 
-                        addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);
+                        String benutzername = addKundenRegistrierungPanel.getBenutzername().getText();
 
+                        String passwort = addKundenRegistrierungPanel.getPasswort().getText();
 
-                        switchPanel.remove(addKundenRegistrierungPanel);
-                        switchPanelRepainter();
-                        switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+                        String email = addKundenRegistrierungPanel.getEmail().getText();
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (LeereEingabeException lee) {
-                        System.err.println(lee.getMessage());
+                        String telefon = addKundenRegistrierungPanel.getTelefon().getText();
 
+                        String straße = addKundenRegistrierungPanel.getStraße().getText();
 
+                        String plz = addKundenRegistrierungPanel.getPlz().getText();
+
+                        String ort = addKundenRegistrierungPanel.getOrt().getText();
+
+                        if (!(vorname.isEmpty() | nachname.isEmpty() | benutzername.isEmpty() | passwort.isEmpty() | email.isEmpty() | email.isEmpty() | telefon.isEmpty() | straße.isEmpty() | plz.isEmpty() | ort.isEmpty())) {
+                            Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
+
+                            eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+
+                            addKundenRegistrierungPanel.resetAllJTextfields();
+
+                            switchPanel.remove(addKundenRegistrierungPanel);
+                            switchPanelRepainter();
+                            switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+
+                        } else {
+                            throw new LeereEingabeException();
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println(e);
+                    } catch (BenutzernameExistiertBereitsException beb) {
+                        System.err.println(beb.getMessage());
+                    } catch (LeereEingabeException le) {
+                        System.err.println(le.getMessage());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
 
+                } else if (source == addKundenRegistrierungPanel.getBackToLoginButton()) {
+                    addKundenRegistrierungPanel.resetAllJTextfields();
+                    switchPanel.remove(addKundenRegistrierungPanel);
+                    switchPanelRepainter();
+                    switchPanel.add(addLoginPanel, BorderLayout.CENTER);
                 }
 
-            }
-        });
 
+            }
+
+
+        });
 
         // Actionlistener für das MitarbeiterRegistrierungPanel
         addMitarbeiterRegistrierungPanel.addActionListener(new ActionListener() {
@@ -274,30 +307,66 @@ public class EShopClientGUIGG extends JFrame {
                 Object source = ae.getSource();
                 if (source == addMitarbeiterRegistrierungPanel.getMitarbeiterRegisterButton()) {
                     try {
+                        String vorname = addMitarbeiterRegistrierungPanel.getVorname().getText();
 
+                        String nachname = addMitarbeiterRegistrierungPanel.getNachname().getText();
 
-                        addMitarbeiterRegistrierungPanel.neuenMitarbeiterAnlegen(eShopVerwaltung);
+                        String benutzername = addMitarbeiterRegistrierungPanel.getBenutzername().getText();
 
+                        String passwort = addMitarbeiterRegistrierungPanel.getPasswort().getText();
 
-                        switchPanel.remove(addMitarbeiterRegistrierungPanel);
-                        switchPanelRepainter();
-                        switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+                        String email = addMitarbeiterRegistrierungPanel.getEmail().getText();
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (LeereEingabeException lee) {
-                        System.err.println(lee.getMessage());
+                        String telefon = addMitarbeiterRegistrierungPanel.getTelefon().getText();
 
+                        String straße = addMitarbeiterRegistrierungPanel.getStraße().getText();
 
+                        String plz = addMitarbeiterRegistrierungPanel.getPlz().getText();
+
+                        String ort = addMitarbeiterRegistrierungPanel.getOrt().getText();
+
+                        if (!(vorname.isEmpty() | nachname.isEmpty() | benutzername.isEmpty() | passwort.isEmpty() | email.isEmpty() | email.isEmpty() | telefon.isEmpty() | straße.isEmpty() | plz.isEmpty() | ort.isEmpty())) {
+                            Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
+
+                            eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+
+                            addMitarbeiterRegistrierungPanel.resetAllJTextfields();
+
+                            switchPanel.remove(addMitarbeiterRegistrierungPanel);
+                            switchPanelRepainter();
+                            switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+
+                        } else {
+                            throw new LeereEingabeException();
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println(e);
+                    } catch (LeereEingabeException le) {
+                        System.err.println(le.getMessage());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (MitarbeiterExistiertBereitsException mebe) {
+                        System.err.println(mebe.getMessage());
                     }
 
+                } else if (source == addMitarbeiterRegistrierungPanel.getBackToLoginButton()) {
+                    addMitarbeiterRegistrierungPanel.resetAllJTextfields();
+                    switchPanel.remove(addMitarbeiterRegistrierungPanel);
+                    switchPanelRepainter();
+                    switchPanel.add(addLoginPanel, BorderLayout.CENTER);
                 }
 
+
             }
+
+
         });
 
 
-        // ActionListener für das MitarbeiterPanel
+
+
+
+// ActionListener für das MitarbeiterPanel
         addMitarbeiterPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -319,7 +388,7 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-        // ActionListener für MitarbeiterArtikelListePanel
+// ActionListener für MitarbeiterArtikelListePanel
         addMitarbeiterArtikelListePanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -356,7 +425,7 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-        // MouseListener für MitarbeiterArtikelListePanel erzeugt ein Popup bei Rechtsklick
+// MouseListener für MitarbeiterArtikelListePanel erzeugt ein Popup bei Rechtsklick
         addMitarbeiterArtikelListePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -367,38 +436,38 @@ public class EShopClientGUIGG extends JFrame {
                     aktuellePositionY = e.getYOnScreen();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
-                    // Artikelnummer des ausgewählten Artikels
+// Artikelnummer des ausgewählten Artikels
                     ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
 
 
-                    // Erzeugt ein Popup für das Artikelmenü
+// Erzeugt ein Popup für das Artikelmenü
                     addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
-                    // setzt das Popup Menue an die Position des MouseEvents
+// setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterArtikelPopup.setLocation(aktuellePositionX, aktuellePositionY);
-                    // macht das Popup Menue sichtbar
+// macht das Popup Menue sichtbar
                     addMitarbeiterArtikelPopup.setVisible(true);
 
-                    // ActionListener für MitarbeiterArtikelPopup
+// ActionListener für MitarbeiterArtikelPopup
                     addMitarbeiterArtikelPopup.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent ae) {
 
 
                             Object source = ae.getSource();
-                            // Ändert den Bestand des entsprechenden Artikels im E-Shop
+// Ändert den Bestand des entsprechenden Artikels im E-Shop
                             if (source == addMitarbeiterArtikelPopup.getBestandAendern()) {
 
 
                                 // blendet das MitarbeiterArtikelPopup aus
                                 addMitarbeiterArtikelPopup.setVisible(false);
-                                // setzt das Popup Menue an die Position des MouseEvents
+// setzt das Popup Menue an die Position des MouseEvents
                                 addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuellePositionX, aktuellePositionY);
 
-                                // macht das Popup Menue sichtbar
+// macht das Popup Menue sichtbar
                                 addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
 
 
-                                // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
+// Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
                             } else if (source == addMitarbeiterArtikelPopup.getLoeschen()) {
 
                                 // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
@@ -438,13 +507,13 @@ public class EShopClientGUIGG extends JFrame {
         });
 
 
-        // ActionListener für MitarbeiterArtikelListePanel
+// ActionListener für MitarbeiterArtikelListePanel
         addMitarbeiterArtikelBestandAendernDialog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
                 Object source = ae.getSource();
-                // Ändert den Bestand des entsprechenden Artikels im E-Shop
+// Ändert den Bestand des entsprechenden Artikels im E-Shop
                 if (source == addMitarbeiterArtikelBestandAendernDialog.getBestandAendern()) {
 
                     try {
@@ -472,7 +541,7 @@ public class EShopClientGUIGG extends JFrame {
         });
 
 
-        // ActionListener für das Speichern des EShops
+// ActionListener für das Speichern des EShops
         menuDateiSpeichern.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -495,7 +564,7 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-        // ActionListener für das Beenden des EShops
+// ActionListener für das Beenden des EShops
         menuDateiQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -533,7 +602,7 @@ public class EShopClientGUIGG extends JFrame {
         // Look and Feel der Anwendung setzen
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-        // Neues GUI-Objekt erzeugen
+// Neues GUI-Objekt erzeugen
         EShopClientGUIGG gui;
         try {
             gui = new EShopClientGUIGG("EShop");

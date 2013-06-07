@@ -124,7 +124,7 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
 
         this.add(new JPanel());
         this.add(new JPanel());
-        this.add(new JPanel());
+        this.add(backToLoginButton);
         this.add(new JPanel());
 
         this.add(new JPanel());
@@ -165,7 +165,9 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
 
     }
 
+
     /**
+     * Getter für kundenRegisterButton
      * @return
      */
     public JButton getMitarbeiterRegisterButton() {
@@ -173,7 +175,7 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
     }
 
     /**
-     *
+     * Getter für backToLoginButton
      * @return
      */
     public JButton getBackToLoginButton() {
@@ -181,7 +183,80 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
     }
 
     /**
-     * Fuegt dem Button den gegebenen ActionListener hinzu
+     * Getter für JTextfield vorname
+     * @return
+     */
+    public JTextField getVorname() {
+        return vorname;
+    }
+
+    /**
+     * Getter für JTextfield nachname
+     * @return
+     */
+    public JTextField getNachname() {
+        return nachname;
+    }
+
+    /**
+     * Getter für JTextfield benutzername
+     * @return
+     */
+    public JTextField getBenutzername() {
+        return benutzername;
+    }
+
+    /**
+     * Getter für JTextfield passwort
+     * @return
+     */
+    public JTextField getPasswort() {
+        return passwort;
+    }
+
+    /**
+     * Getter für JTextfield email
+     * @return
+     */
+    public JTextField getEmail() {
+        return email;
+    }
+
+    /**
+     * Getter für JTextfield telefon
+     * @return
+     */
+    public JTextField getTelefon() {
+        return telefon;
+    }
+
+    /**
+     * Getter für JTextfield plz
+     * @return
+     */
+    public JTextField getPlz() {
+        return plz;
+    }
+
+    /**
+     * Getter für JTextfield straße
+     * @return
+     */
+    public JTextField getStraße() {
+        return straße;
+    }
+
+    /**
+     * Getter für JTextfield ort
+     * @return
+     */
+    public JTextField getOrt() {
+        return ort;
+    }
+
+
+    /**
+     * Fuegt dem mitarbeiterRegisterButton & dem backToLoginButton einen ActionListener hinzu
      *
      * @param a
      */
@@ -190,46 +265,21 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
         backToLoginButton.addActionListener(a);
     }
 
-    public void neuenMitarbeiterAnlegen(EShopVerwaltung eShopVerwaltung) throws IOException, LeereEingabeException {
-
-
-
-        try {
-
-
-
-            String vorname = this.vorname.getText();
-
-            String nachname = this.nachname.getText();
-
-            String benutzername = this.benutzername.getText();
-
-            String passwort = this.passwort.getText();
-
-            String email = this.email.getText();
-
-            String telefon = this.telefon.getText();
-
-            String straße = this.straße.getText();
-
-            String plz = this.plz.getText();
-
-            String ort = this.ort.getText();
-
-            if (!(vorname.isEmpty() | nachname.isEmpty() | benutzername.isEmpty() | passwort.isEmpty() | email.isEmpty() | email.isEmpty() | telefon.isEmpty() | straße.isEmpty() | plz.isEmpty() | ort.isEmpty())) {
-                Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
-
-                eShopVerwaltung.fuegeMitarbeiterEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
-
-            } else {
-                throw new LeereEingabeException();
-            }
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        } catch (MitarbeiterExistiertBereitsException mebe) {
-            System.err.println(mebe.getMessage());
-        }
-
+    /**
+     * Löscht alle JTextfields der Mitarbeiterregistrierung
+     */
+    public void resetAllJTextfields() {
+        vorname.setText("");
+        nachname.setText("");
+        benutzername.setText("");
+        passwort.setText("");
+        email.setText("");
+        telefon.setText("");
+        straße.setText("");
+        plz.setText("");
+        ort.setText("");
     }
+
+
 
 }
