@@ -15,7 +15,9 @@ public class MitarbeiterArtikelPopup extends JPopupMenu {
     private JMenuItem bestandAendern;
     private JMenuItem loeschen;
 
-
+    /**
+     *  Konstruktor
+     */
     public MitarbeiterArtikelPopup() {
         super();
 
@@ -26,14 +28,26 @@ public class MitarbeiterArtikelPopup extends JPopupMenu {
         this.add(loeschen);
     }
 
+    /**
+     * Getter fuer das JMenuItem bestandAendern
+     * @return
+     */
     public JMenuItem getBestandAendern() {
         return bestandAendern;
     }
 
+    /**
+     * Getter fuer das JMenueItem loeschen
+     * @return
+     */
     public JMenuItem getLoeschen() {
         return loeschen;
     }
 
+    /**
+     * Fügt den JMenuItems bestandAendern & loeschen einen Actionlistener hinzu
+     * @param a
+     */
     public void addActionListener(ActionListener a) {
         bestandAendern.addActionListener(a);
         loeschen.addActionListener(a);

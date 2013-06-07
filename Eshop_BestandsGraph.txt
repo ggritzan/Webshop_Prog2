@@ -3,3 +3,7 @@ Mi 2013.06.05 um 00:20:34 MESZ:%'HTC One S'%1000%80%
 Mi 2013.06.05 um 00:20:51 MESZ:%'Stift'%1001%4590%
 Mi 2013.06.05 um 00:21:51 MESZ:%'Stift'%1001%4590%
 Do 2013.06.06 um 00:20:51 MESZ:%'Stift'%1001%4590%
+Fr 2013.06.07 um 14:33:18 MESZ:%'Regenschirm'%1004%0%
+Fr 2013.06.07 um 14:33:34 MESZ:%'Regenschirm'%1005%0%
+Fr 2013.06.07 um 14:39:40 MESZ:%'kurze Hose'%1006%0%
+Fr 2013.06.07 um 14:39:45 MESZ:%'kurze Hose'%1006%0%

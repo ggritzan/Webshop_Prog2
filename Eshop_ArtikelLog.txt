@@ -100,3 +100,15 @@ Der Artikel 'Bluse' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mi
 Fr 2013.06.07 um 13:54:47 MESZ:
 Der Artikel 'Bluse' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 gelöscht.
 
+Fr 2013.06.07 um 14:33:18 MESZ:
+Der Artikel 'Regenschirm' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 gelöscht.
+
+Fr 2013.06.07 um 14:33:34 MESZ:
+Der Artikel 'Regenschirm' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+
+Fr 2013.06.07 um 14:39:40 MESZ:
+Der Artikel 'kurze Hose' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+
+Fr 2013.06.07 um 14:39:45 MESZ:
+Der Artikel 'kurze Hose' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 gelöscht.
+

@@ -49,12 +49,12 @@ public class KundenRegistrierungPanel extends JPanel {
         ort = new JTextField();
         KundenRegisterButton = new JButton("Register");
 
-        // Layout außen
+        // Layout Ebene 0
         GridLayout layout = new GridLayout(20, 4);
         layout.setHgap(15);        // Lass' 5px Abstand zwischen den Komponenten
         this.setLayout(layout);    // 20 Zeilen, 4 Spalten
 
-        // Rahmen außen
+        // Rahmen Ebene 1
         Border ba = BorderFactory.createTitledBorder("Kundenregistrierung");
         this.setBorder(ba);
 
@@ -171,7 +171,7 @@ public class KundenRegistrierungPanel extends JPanel {
     }
 
     /**
-     * Fuegt dem Button den gegebenen ActionListener hinzu
+     * Fuegt dem Button einen ActionListener hinzu
      *
      * @param a
      */

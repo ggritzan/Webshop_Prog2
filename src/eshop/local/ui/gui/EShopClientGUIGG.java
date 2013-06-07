@@ -1,17 +1,14 @@
 package eshop.local.ui.gui;
 
-import eshop.local.domain.EShopVerwaltung;
-import eshop.local.exception.ArtikelExestierBereitsException;
-import eshop.local.exception.ArtikelExestiertNichtException;
-import eshop.local.exception.LeereEingabeException;
-import eshop.local.exception.MitarbeiterExistiertNichtException;
-import eshop.local.ui.gui.comp.*;
-import eshop.local.ui.gui.comp.mitarbeiterMenue.MitarbeiterArtikelListePanel;
-import eshop.local.ui.gui.comp.mitarbeiterMenue.MitarbeiterArtikelPopup;
-import eshop.local.ui.gui.comp.mitarbeiterMenue.MitarbeiterPanel;
-import eshop.local.ui.gui.comp.registrierung.KundenRegistrierungPanel;
-import eshop.local.ui.gui.comp.registrierung.MitarbeiterRegistrierungPanel;
+// Imports der eigenen Klassen
 
+import eshop.local.domain.EShopVerwaltung;
+import eshop.local.exception.*;
+import eshop.local.ui.gui.comp.*;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
+import eshop.local.ui.gui.comp.registrierung.*;
+
+// Imports der von Java bereit gestellten Klassen
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,8 +30,11 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
     private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
+    private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
     private int aktuellerMitarbeiter;
     private int aktuellerKunde;
+    private int aktuelleMenuePositionX;
+    private int aktuelleMenuePositionY;
     private int ausgewaehlterArtikel;
     private int ausgewaehlterKunde;
     private int ausgewaehlterMitarbeiter;
@@ -42,7 +42,7 @@ public class EShopClientGUIGG extends JFrame {
 
 
     /**
-     * Konstructor Funktion der Gui
+     * Konstructor der GUI
      */
     public EShopClientGUIGG(String datei) throws IOException, ClassNotFoundException {
         super(datei);
@@ -50,17 +50,20 @@ public class EShopClientGUIGG extends JFrame {
         // erzeugt eine eShopVerwaltung
         eShopVerwaltung = new EShopVerwaltung(datei);
 
-        // Komponenten und Layout initialisieren
+        // Initialiisert die Komponenten
         this.initComponents();
 
+        // Initialisiert die Listener
         this.initListeners();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // macht das Frame sichtbar
         setVisible(true);
     }
 
     /**
-     * Richtet die Grafischen Komponenten der GUI ein und fuegt sie dem Fenster hinzu
+     * Initialisiert die Komponenten
      */
     public void initComponents() {
 
@@ -74,7 +77,7 @@ public class EShopClientGUIGG extends JFrame {
         BorderLayout bl = new BorderLayout();
         this.setLayout(bl);
 
-        // Men�leiste einrichten
+        // Menueleiste einrichten
         MenuBar mbar = new MenuBar();
 
         // Erster Menuereiter "Datei" mit "Beenden" & "Speichern"
@@ -83,13 +86,14 @@ public class EShopClientGUIGG extends JFrame {
         menuDateiQuit = new MenuItem("Beenden");
         menuDatei.add(menuDateiSpeichern);
         menuDatei.add(menuDateiQuit);
+        // fügt den Menuereiter Datei hinzu
         mbar.add(menuDatei);
 
         // Zweiter Menuereiter "Ansicht"
         Menu menuAnsicht = new Menu("Ansicht");
         mbar.add(menuAnsicht);
 
-
+        // fügt die MenuBar dem Frame hinzu
         this.setMenuBar(mbar);
 
 
@@ -126,6 +130,17 @@ public class EShopClientGUIGG extends JFrame {
         switchPanel.revalidate();
     }
 
+    /**
+     * Dient zum neu Laden der jeweiligen Listen Panels
+     * als Paramter muss ein char übergeben werden damit die Funktion weiß welche Listen Panels aktulasiert werden sollen
+     * 'a' für das ArtikelListePanel
+     * 'm' für das MitarbeiterListePanel
+     * 'k' für das KundenListePanel
+     * 'r' für das RechnungListePanel
+     * 'l' für das Rechnungslog
+     *
+     * @param param
+     */
     public void mitarbeiterPanelReloader(char param) {
         switch (param) {
             case 'a':
@@ -134,8 +149,6 @@ public class EShopClientGUIGG extends JFrame {
                 switchPanelRepainter();
                 switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                 initListeners();
-
-
 
             case 'm':
 
@@ -170,8 +183,6 @@ public class EShopClientGUIGG extends JFrame {
                             switchPanel.remove(addLoginPanel);
                             switchPanelRepainter();
                             switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-
-
 
 
                         } else if (erg == 'k') {
@@ -266,9 +277,6 @@ public class EShopClientGUIGG extends JFrame {
                         mitarbeiterPanelReloader('a');
 
 
-
-
-
                     } catch (NumberFormatException e) {
 
                     } catch (ArtikelExestierBereitsException aeb) {
@@ -293,17 +301,18 @@ public class EShopClientGUIGG extends JFrame {
 
                 if (e.isPopupTrigger()) {
                     JTable source = (JTable) e.getSource();
+                    aktuelleMenuePositionX = e.getXOnScreen();
+                    aktuelleMenuePositionY = e.getYOnScreen();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
                     // Artikelnummer des ausgewählten Artikels
                     ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
-                    System.out.print(" Artikelnummer: " + ausgewaehlterArtikel);
 
 
                     // Erzeugt ein Popup für das Artikelmenü
                     addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
                     // setzt das Popup Menue an die Position des MouseEvents
-                    addMitarbeiterArtikelPopup.setLocation(e.getXOnScreen(), e.getYOnScreen());
+                    addMitarbeiterArtikelPopup.setLocation(aktuelleMenuePositionX, aktuelleMenuePositionY);
                     // macht das Popup Menue sichtbar
                     addMitarbeiterArtikelPopup.setVisible(true);
 
@@ -314,11 +323,18 @@ public class EShopClientGUIGG extends JFrame {
 
 
                             Object source = ae.getSource();
+                            // Ändert den Bestand des entsprechenden Artikels im E-Shop
                             if (source == addMitarbeiterArtikelPopup.getBestandAendern()) {
 
-                                System.out.print(" ändern: " + ausgewaehlterArtikel);
+                                // Erzeugt ein Popup zum Bestand aendern
+                                addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
+                                // blendet das MitarbeiterArtikelPopup aus
                                 addMitarbeiterArtikelPopup.setVisible(false);
-                                ausgewaehlterArtikel = -1;
+                                // setzt das Popup Menue an die Position des MouseEvents
+                                addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuelleMenuePositionX, aktuelleMenuePositionY);
+                                // macht das Popup Menue sichtbar
+                                addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
+
 
                                 // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
                             } else if (source == addMitarbeiterArtikelPopup.getLoeschen()) {
@@ -358,6 +374,33 @@ public class EShopClientGUIGG extends JFrame {
                 }
             }
         });
+
+
+        // ActionListener für MitarbeiterArtikelListePanel
+        addMitarbeiterArtikelBestandAendernDialog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                try {
+                    int neuerBestand = Integer.parseInt(addMitarbeiterArtikelBestandAendernDialog.getNeuerBestand().getText());
+                    eShopVerwaltung.setBestand(ausgewaehlterArtikel, neuerBestand, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+
+                } catch (MitarbeiterExistiertNichtException me) {
+                    System.err.println(me.getMessage());
+                } catch (ArtikelBestandNegativException abn) {
+                    System.err.println(abn.getMessage());
+                } catch (ArtikelExestiertNichtException aen) {
+                    System.err.println(aen.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+
+        });
+
 
         // ActionListener für das Speichern des EShops
         menuDateiSpeichern.addActionListener(new ActionListener() {
@@ -402,6 +445,17 @@ public class EShopClientGUIGG extends JFrame {
 
     }
 
+
+    /**
+     * Die Main der E-Shop GUI
+     *
+     * @param args
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws UnsupportedLookAndFeelException
+     *
+     */
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException,
             UnsupportedLookAndFeelException {
