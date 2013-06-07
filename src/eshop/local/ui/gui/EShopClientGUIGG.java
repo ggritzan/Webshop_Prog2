@@ -119,6 +119,9 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt die ArtikellistePanel
         addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
 
+        // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
+        addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
+
 
     }
 
@@ -326,14 +329,15 @@ public class EShopClientGUIGG extends JFrame {
                             // Ändert den Bestand des entsprechenden Artikels im E-Shop
                             if (source == addMitarbeiterArtikelPopup.getBestandAendern()) {
 
-                                // Erzeugt ein Popup zum Bestand aendern
-                                addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
+
                                 // blendet das MitarbeiterArtikelPopup aus
                                 addMitarbeiterArtikelPopup.setVisible(false);
                                 // setzt das Popup Menue an die Position des MouseEvents
                                 addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuelleMenuePositionX, aktuelleMenuePositionY);
                                 // macht das Popup Menue sichtbar
                                 addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
+
+
 
 
                                 // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
@@ -381,20 +385,29 @@ public class EShopClientGUIGG extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                try {
-                    int neuerBestand = Integer.parseInt(addMitarbeiterArtikelBestandAendernDialog.getNeuerBestand().getText());
-                    eShopVerwaltung.setBestand(ausgewaehlterArtikel, neuerBestand, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                Object source = ae.getSource();
+                // Ändert den Bestand des entsprechenden Artikels im E-Shop
+                if (source == addMitarbeiterArtikelBestandAendernDialog.getBestandAendern()) {
 
-                } catch (MitarbeiterExistiertNichtException me) {
-                    System.err.println(me.getMessage());
-                } catch (ArtikelBestandNegativException abn) {
-                    System.err.println(abn.getMessage());
-                } catch (ArtikelExestiertNichtException aen) {
-                    System.err.println(aen.getMessage());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+
+                        int neuerBestand = Integer.parseInt(addMitarbeiterArtikelBestandAendernDialog.getNeuerBestand().getText());
+                        eShopVerwaltung.setBestand(ausgewaehlterArtikel, neuerBestand, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                        addMitarbeiterArtikelBestandAendernDialog.setVisible(false);
+                        mitarbeiterPanelReloader('a');
+
+
+
+                    } catch (MitarbeiterExistiertNichtException me) {
+                        System.err.println(me.getMessage());
+                    } catch (ArtikelBestandNegativException abn) {
+                        System.err.println(abn.getMessage());
+                    } catch (ArtikelExestiertNichtException aen) {
+                        System.err.println(aen.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
 
             }
 

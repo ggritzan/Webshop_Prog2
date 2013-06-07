@@ -26,6 +26,9 @@ public class MitarbeiterArtikelBestandAendernDialog extends JDialog {
         neuerBestand = new JTextField();
         bestandAendern = new JButton("Bestand ändern");
 
+        // Eigenschaften
+
+        this.setResizable(false);
 
         // Layout außen
         GridLayout layout = new GridLayout(2, 2);
