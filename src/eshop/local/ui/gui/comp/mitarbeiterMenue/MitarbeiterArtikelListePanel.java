@@ -1,9 +1,11 @@
 package eshop.local.ui.gui.comp.mitarbeiterMenue;
 
 import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
+import eshop.local.valueobjects.ArtikelNumberComperator;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -28,6 +30,9 @@ public class MitarbeiterArtikelListePanel extends JPanel {
         table = new JTable();
         tmodel = new ArtikelTableModel(alleArtikel);
         table.setModel(tmodel);
+        RowSorter<ArtikelTableModel> sorter = new TableRowSorter<ArtikelTableModel>(tmodel);
+        table.setRowSorter(sorter);
+
 
         // Rahmen außen
         Border ba = BorderFactory.createTitledBorder("Artikelmenü");
@@ -42,7 +47,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
         addMitarbeiterArtikelHinzufuegenPanel   = new MitarbeiterArtikelHinzufuegenPanel();
 
         // Hinzufügen der Elemente für die Ebene 0
-        this.add(table);
+        this.add(new JScrollPane(table));
         this.add(addMitarbeiterArtikelHinzufuegenPanel);
 
 

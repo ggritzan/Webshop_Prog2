@@ -8,4 +8,6 @@ package eshop.local.ui.gui.comp.tableModels;
  * To change this template use File | Settings | File Templates.
  */
 public class KundenTableModel {
+
+
 }
