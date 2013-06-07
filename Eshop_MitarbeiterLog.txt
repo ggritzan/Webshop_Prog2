@@ -15,3 +15,6 @@ Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
 
 Mi 2013.05.29 um 12:01:19 MESZ:
 Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
+Fr 2013.06.07 um 20:11:51 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
+

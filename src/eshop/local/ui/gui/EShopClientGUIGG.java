@@ -33,8 +33,8 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
     private int aktuellerMitarbeiter;
     private int aktuellerKunde;
-    private int aktuelleMenuePositionX;
-    private int aktuelleMenuePositionY;
+    private int aktuellePositionX;
+    private int aktuellePositionY;
     private int ausgewaehlterArtikel;
     private int ausgewaehlterKunde;
     private int ausgewaehlterMitarbeiter;
@@ -200,9 +200,33 @@ public class EShopClientGUIGG extends JFrame {
                         e.printStackTrace();
                     }
                 } else if (source == addLoginPanel.getRegisterButton()) {
-                    switchPanel.remove(addLoginPanel);
-                    switchPanelRepainter();
-                    switchPanel.add(addKundenRegistrierungPanel, BorderLayout.CENTER);
+
+
+                    Object[] options = {"Mitarbeiter", "Kunde"};
+                    int result = JOptionPane.showOptionDialog(switchPanel,
+                            "Welche Art der Registrierung wollen sie durchführen?",
+                            "Registrierung",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,     //do not use a custom Icon
+                            options,  //the titles of buttons
+                            options[0]); //default button title
+
+                    if (result == JOptionPane.YES_OPTION) {
+
+                        switchPanel.remove(addLoginPanel);
+                        switchPanelRepainter();
+                        switchPanel.add(addMitarbeiterRegistrierungPanel, BorderLayout.CENTER);
+
+                    } else if (result == JOptionPane.NO_OPTION) {
+
+
+                        switchPanel.remove(addLoginPanel);
+                        switchPanelRepainter();
+                        switchPanel.add(addKundenRegistrierungPanel, BorderLayout.CENTER);
+
+                    }
+
 
                 }
 
@@ -219,6 +243,7 @@ public class EShopClientGUIGG extends JFrame {
                 if (source == addKundenRegistrierungPanel.getKundenRegisterButton()) {
                     try {
 
+
                         addKundenRegistrierungPanel.neuenKundenAnlegen(eShopVerwaltung);
 
 
@@ -233,10 +258,44 @@ public class EShopClientGUIGG extends JFrame {
 
 
                     }
+
                 }
 
             }
         });
+
+
+        // Actionlistener für das MitarbeiterRegistrierungPanel
+        addMitarbeiterRegistrierungPanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                if (source == addMitarbeiterRegistrierungPanel.getMitarbeiterRegisterButton()) {
+                    try {
+
+
+                        addMitarbeiterRegistrierungPanel.neuenMitarbeiterAnlegen(eShopVerwaltung);
+
+
+                        switchPanel.remove(addMitarbeiterRegistrierungPanel);
+                        switchPanelRepainter();
+                        switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (LeereEingabeException lee) {
+                        System.err.println(lee.getMessage());
+
+
+                    }
+
+                }
+
+            }
+        });
+
 
         // ActionListener für das MitarbeiterPanel
         addMitarbeiterPanel.addActionListener(new ActionListener() {
@@ -304,8 +363,8 @@ public class EShopClientGUIGG extends JFrame {
 
                 if (e.isPopupTrigger()) {
                     JTable source = (JTable) e.getSource();
-                    aktuelleMenuePositionX = e.getXOnScreen();
-                    aktuelleMenuePositionY = e.getYOnScreen();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
                     // Artikelnummer des ausgewählten Artikels
@@ -315,7 +374,7 @@ public class EShopClientGUIGG extends JFrame {
                     // Erzeugt ein Popup für das Artikelmenü
                     addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
                     // setzt das Popup Menue an die Position des MouseEvents
-                    addMitarbeiterArtikelPopup.setLocation(aktuelleMenuePositionX, aktuelleMenuePositionY);
+                    addMitarbeiterArtikelPopup.setLocation(aktuellePositionX, aktuellePositionY);
                     // macht das Popup Menue sichtbar
                     addMitarbeiterArtikelPopup.setVisible(true);
 
@@ -333,11 +392,10 @@ public class EShopClientGUIGG extends JFrame {
                                 // blendet das MitarbeiterArtikelPopup aus
                                 addMitarbeiterArtikelPopup.setVisible(false);
                                 // setzt das Popup Menue an die Position des MouseEvents
-                                addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuelleMenuePositionX, aktuelleMenuePositionY);
+                                addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuellePositionX, aktuellePositionY);
+
                                 // macht das Popup Menue sichtbar
                                 addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
-
-
 
 
                                 // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
@@ -395,7 +453,6 @@ public class EShopClientGUIGG extends JFrame {
                         eShopVerwaltung.setBestand(ausgewaehlterArtikel, neuerBestand, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
                         addMitarbeiterArtikelBestandAendernDialog.setVisible(false);
                         mitarbeiterPanelReloader('a');
-
 
 
                     } catch (MitarbeiterExistiertNichtException me) {

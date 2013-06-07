@@ -28,7 +28,7 @@ public class MitarbeiterArtikelBestandAendernDialog extends JDialog {
 
         // Eigenschaften
 
-        this.setResizable(false);
+
 
         // Layout außen
         GridLayout layout = new GridLayout(2, 2);

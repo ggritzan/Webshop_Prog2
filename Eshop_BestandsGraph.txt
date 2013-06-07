@@ -32,3 +32,8 @@ Fr 2013.06.07 um 16:38:53 MESZ:%'Stift'%1001%400%
 Fr 2013.06.07 um 16:38:53 MESZ:%'Stift'%1001%400%
 Fr 2013.06.07 um 16:38:53 MESZ:%'Stift'%1001%400%
 Fr 2013.06.07 um 16:42:08 MESZ:%'Regenschirm'%1005%20%
+Fr 2013.06.07 um 17:14:19 MESZ:%'Regenschirm'%1005%10%
+Fr 2013.06.07 um 17:17:38 MESZ:%'Wasser'%1006%13%
+Fr 2013.06.07 um 20:12:27 MESZ:%'Memorie'%1007%0%
+Fr 2013.06.07 um 20:12:32 MESZ:%'Memorie'%1007%320%
+Fr 2013.06.07 um 20:12:33 MESZ:%'Memorie'%1007%320%

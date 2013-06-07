@@ -187,3 +187,18 @@ Der Bestand des Artikels 'Stift' mit der Artikelnummer 1001 wurde durch den Mita
 Fr 2013.06.07 um 16:42:08 MESZ:
 Der Bestand des Artikels 'Regenschirm' mit der Artikelnummer 1005 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 20.
 
+Fr 2013.06.07 um 17:14:19 MESZ:
+Der Bestand des Artikels 'Regenschirm' mit der Artikelnummer 1005 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 10.
+
+Fr 2013.06.07 um 17:17:38 MESZ:
+Der Bestand des Artikels 'Wasser' mit der Artikelnummer 1006 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 13.
+
+Fr 2013.06.07 um 20:12:27 MESZ:
+Der Artikel 'Memorie' mit der Artikelnummer 1007 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 0 hinzugefügt.
+
+Fr 2013.06.07 um 20:12:32 MESZ:
+Der Bestand des Artikels 'Memorie' mit der Artikelnummer 1007 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 320.
+
+Fr 2013.06.07 um 20:12:33 MESZ:
+Der Bestand des Artikels 'Memorie' mit der Artikelnummer 1007 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 320.
+
