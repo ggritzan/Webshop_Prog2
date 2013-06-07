@@ -1,7 +1,6 @@
 package eshop.local.ui.gui.comp.registrierung;
 
 import eshop.local.domain.EShopVerwaltung;
-import eshop.local.exception.BenutzernameExistiertBereitsException;
 import eshop.local.exception.LeereEingabeException;
 import eshop.local.exception.MitarbeiterExistiertBereitsException;
 import eshop.local.valueobjects.Adresse;
@@ -30,7 +29,8 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
     private JTextField straße;
     private JTextField plz;
     private JTextField ort;
-    private JButton MitarbeiterRegisterButton;
+    private JButton mitarbeiterRegisterButton;
+    private JButton backToLoginButton;
 
     /**
      * Konstructor
@@ -48,7 +48,8 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
         straße = new JTextField();
         plz = new JTextField();
         ort = new JTextField();
-        MitarbeiterRegisterButton = new JButton("Register");
+        mitarbeiterRegisterButton = new JButton("Register");
+        backToLoginButton = new JButton("Back");
 
         // Layout außen
         GridLayout layout = new GridLayout(20, 4);
@@ -118,7 +119,7 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
 
         this.add(new JPanel());
         this.add(new JPanel());
-        this.add(MitarbeiterRegisterButton);
+        this.add(mitarbeiterRegisterButton);
         this.add(new JPanel());
 
         this.add(new JPanel());
@@ -168,7 +169,15 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
      * @return
      */
     public JButton getMitarbeiterRegisterButton() {
-        return MitarbeiterRegisterButton;
+        return mitarbeiterRegisterButton;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public JButton getBackToLoginButton() {
+        return backToLoginButton;
     }
 
     /**
@@ -177,8 +186,8 @@ public class MitarbeiterRegistrierungPanel extends JPanel {
      * @param a
      */
     public void addActionListener(ActionListener a) {
-        MitarbeiterRegisterButton.addActionListener(a);
-
+        mitarbeiterRegisterButton.addActionListener(a);
+        backToLoginButton.addActionListener(a);
     }
 
     public void neuenMitarbeiterAnlegen(EShopVerwaltung eShopVerwaltung) throws IOException, LeereEingabeException {

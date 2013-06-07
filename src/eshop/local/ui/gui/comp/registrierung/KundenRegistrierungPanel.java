@@ -29,7 +29,8 @@ public class KundenRegistrierungPanel extends JPanel {
     private JTextField straße;
     private JTextField plz;
     private JTextField ort;
-    private JButton KundenRegisterButton;
+    private JButton kundenRegisterButton;
+    private JButton backToLoginButton;
 
     /**
      * Konstructor
@@ -47,8 +48,8 @@ public class KundenRegistrierungPanel extends JPanel {
         straße = new JTextField();
         plz = new JTextField();
         ort = new JTextField();
-        KundenRegisterButton = new JButton("Register");
-
+        kundenRegisterButton = new JButton("Register");
+        backToLoginButton = new JButton("Back");
         // Layout Ebene 0
         GridLayout layout = new GridLayout(20, 4);
         layout.setHgap(15);        // Lass' 5px Abstand zwischen den Komponenten
@@ -117,7 +118,7 @@ public class KundenRegistrierungPanel extends JPanel {
 
         this.add(new JPanel());
         this.add(new JPanel());
-        this.add(KundenRegisterButton);
+        this.add(kundenRegisterButton);
         this.add(new JPanel());
 
         this.add(new JPanel());
@@ -167,7 +168,15 @@ public class KundenRegistrierungPanel extends JPanel {
      * @return
      */
     public JButton getKundenRegisterButton() {
-        return KundenRegisterButton;
+        return kundenRegisterButton;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public JButton getBackToLoginButton() {
+        return backToLoginButton;
     }
 
     /**
@@ -176,7 +185,8 @@ public class KundenRegistrierungPanel extends JPanel {
      * @param a
      */
     public void addActionListener(ActionListener a) {
-        KundenRegisterButton.addActionListener(a);
+        kundenRegisterButton.addActionListener(a);
+        backToLoginButton.addActionListener(a);
 
     }
 

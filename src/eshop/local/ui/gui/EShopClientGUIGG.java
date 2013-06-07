@@ -334,7 +334,7 @@ public class EShopClientGUIGG extends JFrame {
                         double aPreis = addMitarbeiterArtikelListePanel.getArtikelPreis();
 
                         eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
-                        System.out.print("Der Artikel wurde hinzugefügt!");
+                        System.out.println("Der Artikel wurde hinzugefügt!");
 
                         mitarbeiterPanelReloader('a');
 

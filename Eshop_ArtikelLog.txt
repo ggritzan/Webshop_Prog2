@@ -202,3 +202,6 @@ Der Bestand des Artikels 'Memorie' mit der Artikelnummer 1007 wurde durch den Mi
 Fr 2013.06.07 um 20:12:33 MESZ:
 Der Bestand des Artikels 'Memorie' mit der Artikelnummer 1007 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 320.
 
+Fr 2013.06.07 um 21:16:52 MESZ:
+Der Bestand des Artikels 'HTC One S' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 0 geändert und hat jetzt die Menge 22.
+
