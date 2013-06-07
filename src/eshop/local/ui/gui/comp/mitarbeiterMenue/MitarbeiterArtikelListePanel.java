@@ -1,9 +1,12 @@
-package eshop.local.ui.gui.comp;
+package eshop.local.ui.gui.comp.mitarbeiterMenue;
+
+import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.Vector;
 
 /**
@@ -47,9 +50,15 @@ public class MitarbeiterArtikelListePanel extends JPanel {
 
 
 
-    public void addActionListener(ActionListener a) {
-        addMitarbeiterArtikelHinzufuegenPanel.addActionListener(a);
+    public void addActionListener(ActionListener aL) {
+        addMitarbeiterArtikelHinzufuegenPanel.addActionListener(aL);
     }
+
+    public void addMouseListener(MouseAdapter mA) {
+        table.addMouseListener(mA);
+    }
+
+
 
     public String getArtikelName() {
         return addMitarbeiterArtikelHinzufuegenPanel.getArtikelName();

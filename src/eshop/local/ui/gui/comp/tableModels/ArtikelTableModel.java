@@ -1,4 +1,4 @@
-package eshop.local.ui.gui.comp;
+package eshop.local.ui.gui.comp.tableModels;
 
 import eshop.local.valueobjects.Artikel;
 

@@ -1,4 +1,4 @@
-package eshop.local.ui.gui.comp;
+package eshop.local.ui.gui.comp.mitarbeiterMenue;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.ArtikelExestierBereitsException;

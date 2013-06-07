@@ -1,4 +1,4 @@
-package eshop.local.ui.gui.comp;
+package eshop.local.ui.gui.comp.registrierung;
 
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.BenutzernameExistiertBereitsException;
