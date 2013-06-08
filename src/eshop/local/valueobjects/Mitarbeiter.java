@@ -18,28 +18,29 @@ public class Mitarbeiter extends Person implements Serializable {
     private static int zaehler = 1000;
 
     // Konstruktor
-    public Mitarbeiter (String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
+    public Mitarbeiter(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.mNr = this.zaehler;
-        this.zaehler ++;
+        this.zaehler++;
     }
 
     // Konstruktor für das einlesen von Mitarbeitern
     public Mitarbeiter(Mitarbeiter mitarbeiter) {
         super(mitarbeiter);
-        if(mitarbeiter.getmNr() >= zaehler){
-            this.zaehler = (mitarbeiter.getmNr() +1);
-        }
+        this.mNr = mitarbeiter.getmNr();
+        this.zaehler = (mitarbeiter.getmNr() + 1);
+
     }
+
     //Methoden
 
     public String toString() {
-        String string = "Mitarbeiternummer: " + getmNr() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t E-mail: " +getTelefon() + "\n" + getAdresse();
+        String string = "Mitarbeiternummer: " + getmNr() + "\tVorname: " + getVorname() + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " + getEmail() + "\t E-mail: " + getTelefon() + "\n" + getAdresse();
         return string;
     }
 
     //Setzt den Bestand des Artikels auf den gewünschten Wert
-    public void bestandErhoehen(Artikel a, int wert)   {
+    public void bestandErhoehen(Artikel a, int wert) {
         a.setBestand(wert);
     }
 
@@ -59,13 +60,13 @@ public class Mitarbeiter extends Person implements Serializable {
 
     // Setter
 
-    public void setmNr(int mNr){
+    public void setmNr(int mNr) {
         this.mNr = mNr;
     }
 
     // Getter
 
-    public int getmNr(){
+    public int getmNr() {
         return this.mNr;
     }
 }

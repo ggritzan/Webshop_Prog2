@@ -130,6 +130,7 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt das MitarbeiterMitarbeiterListePanel
         addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
 
+
         // Erzeugt das KundenListenPanel
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
 
@@ -419,6 +420,7 @@ public class EShopClientGUIGG extends JFrame {
                 if (source == addMitarbeiterPanel.getArtikelButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
+                    mitarbeiterPanelReloader('a');
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                     switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
 
@@ -427,6 +429,7 @@ public class EShopClientGUIGG extends JFrame {
                 } else if (source == addMitarbeiterPanel.getMitarbeiterButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
+                    mitarbeiterPanelReloader('m');
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                     switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
 
@@ -434,6 +437,7 @@ public class EShopClientGUIGG extends JFrame {
                 } else if (source == addMitarbeiterPanel.getKundenButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
+                    mitarbeiterPanelReloader('k');
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                     switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
 

@@ -20,7 +20,7 @@ public class KundenTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"Kundennummer","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
 
-    private Class<?>[] columnClass = {int.class,String.class, String.class, String.class, String.class, String.class, String.class,String.class, String.class, String.class};
+    private Class<?>[] columnClass = {Integer.class,String.class, String.class, String.class, String.class, String.class, String.class,String.class, String.class, String.class};
 
     /**
      * Konstruktor
