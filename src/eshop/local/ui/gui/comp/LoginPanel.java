@@ -112,6 +112,10 @@ public class LoginPanel extends JPanel{
 
     }
 
+    public String getLoginName() {
+        return loginName.getText();
+    }
+
     public JButton getLoginButton() {
         return loginButton;
     }
@@ -145,15 +149,11 @@ public class LoginPanel extends JPanel{
             if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Mitarbeiter");
-                this.loginName.setText("");
-                this.loginPassword.setText("");
                 return 'm';
 
             } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                 System.out.println("Ihr Login war erfolgreich.");
                 System.out.println("Willkommen Kunde");
-                this.loginName.setText("");
-                this.loginPassword.setText("");
                 return 'k';
 
 
@@ -167,5 +167,10 @@ public class LoginPanel extends JPanel{
 
     }
 
+    public void resetJTextfields() {
+        loginName.setText("");
+        loginPassword.setText("");
+
+    }
 
 }

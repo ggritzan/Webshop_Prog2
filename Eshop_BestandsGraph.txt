@@ -38,3 +38,6 @@ Fr 2013.06.07 um 20:12:27 MESZ:%'Memorie'%1007%0%
 Fr 2013.06.07 um 20:12:32 MESZ:%'Memorie'%1007%320%
 Fr 2013.06.07 um 20:12:33 MESZ:%'Memorie'%1007%320%
 Fr 2013.06.07 um 21:16:52 MESZ:%'HTC One S'%1000%22%
+Sa 2013.06.08 um 20:37:48 MESZ:%'Memorie'%1007%0%
+Sa 2013.06.08 um 20:53:39 MESZ:%'Memorie'%1007%0%
+Sa 2013.06.08 um 21:13:54 MESZ:%'Memorie'%1007%0%

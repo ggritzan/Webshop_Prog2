@@ -1,9 +1,9 @@
-Sa 2013.06.08 um 12:20:13 MESZ:
+Sa 2013.06.08 um 20:18:51 MESZ:
 Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
 
-Sa 2013.06.08 um 12:24:50 MESZ:
-Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
+Sa 2013.06.08 um 20:22:53 MESZ:
+Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
 
-Sa 2013.06.08 um 12:35:02 MESZ:
+Sa 2013.06.08 um 20:25:39 MESZ:
 Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
 

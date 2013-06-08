@@ -163,19 +163,22 @@ public class EShopClientGUIGG extends JFrame {
     public void mitarbeiterPanelReloader(char param) {
         switch (param) {
             case 'a':
-                switchPanel.remove(addMitarbeiterArtikelListePanel);
+                switchPanel.removeAll();
                 addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
                 addMitarbeiterArtikelListePanel.resetAllJTextfields();
-                switchPanelRepainter();
+                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                 switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+                switchPanelRepainter();
                 initListeners();
                 break;
 
+
             case 'm':
-                switchPanel.remove(addMitarbeiterMitarbeiterListePanel);
+                switchPanel.removeAll();
                 addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
-                switchPanelRepainter();
+                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                 switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
+                switchPanelRepainter();
                 initListeners();
                 break;
 
@@ -217,7 +220,8 @@ public class EShopClientGUIGG extends JFrame {
                     try {
                         char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
                         if (erg == 'm') {
-                            aktuellerMitarbeiter = eShopVerwaltung.getMnr(addLoginPanel.getName());
+                            aktuellerMitarbeiter = eShopVerwaltung.getMitarbeiterNr(addLoginPanel.getLoginName());
+                            addLoginPanel.resetJTextfields();
                             switchPanel.remove(addLoginPanel);
                             addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
                             addMitarbeiterArtikelListePanel.resetAllJTextfields();
@@ -237,6 +241,8 @@ public class EShopClientGUIGG extends JFrame {
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (MitarbeiterExistiertNichtException mene) {
+                        System.err.println(mene.getMessage());
                     }
 
                     // RegisterButton
@@ -425,7 +431,6 @@ public class EShopClientGUIGG extends JFrame {
                     switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
 
 
-
                 } else if (source == addMitarbeiterPanel.getMitarbeiterButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
@@ -453,7 +458,7 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-// ActionListener für MitarbeiterArtikelListePanel
+        // ActionListener für MitarbeiterArtikelListePanel
         addMitarbeiterArtikelListePanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -490,7 +495,7 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-// MouseListener für MitarbeiterArtikelListePanel erzeugt ein Popup bei Rechtsklick
+        // MouseListener für MitarbeiterArtikelListePanel erzeugt ein Popup bei Rechtsklick
         addMitarbeiterArtikelListePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -501,38 +506,35 @@ public class EShopClientGUIGG extends JFrame {
                     aktuellePositionY = e.getYOnScreen();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
-// Artikelnummer des ausgewählten Artikels
+                    // Artikelnummer des ausgewählten Artikels
                     ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
 
 
-// Erzeugt ein Popup für das Artikelmenü
+                    // Erzeugt ein Popup für das Artikelmenü
                     addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
-// setzt das Popup Menue an die Position des MouseEvents
-                    addMitarbeiterArtikelPopup.setLocation(aktuellePositionX, aktuellePositionY);
-// macht das Popup Menue sichtbar
-                    addMitarbeiterArtikelPopup.setVisible(true);
 
-// ActionListener für MitarbeiterArtikelPopup
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addMitarbeiterArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
+
+                    // ActionListener für MitarbeiterArtikelPopup
                     addMitarbeiterArtikelPopup.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent ae) {
 
 
                             Object source = ae.getSource();
-// Ändert den Bestand des entsprechenden Artikels im E-Shop
+                            // Ändert den Bestand des entsprechenden Artikels im E-Shop
                             if (source == addMitarbeiterArtikelPopup.getBestandAendern()) {
 
 
-                                // blendet das MitarbeiterArtikelPopup aus
-                                addMitarbeiterArtikelPopup.setVisible(false);
-// setzt das Popup Menue an die Position des MouseEvents
+                                // setzt das Popup Menue an die Position des MouseEvents
                                 addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuellePositionX, aktuellePositionY);
 
-// macht das Popup Menue sichtbar
+                                // macht das Popup Menue sichtbar
                                 addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
 
 
-// Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
+                                // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
                             } else if (source == addMitarbeiterArtikelPopup.getLoeschen()) {
 
                                 // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
@@ -543,6 +545,7 @@ public class EShopClientGUIGG extends JFrame {
                                         try {
                                             eShopVerwaltung.loescheArtikel(ausgewaehlterArtikel, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
                                             mitarbeiterPanelReloader('a');
+
                                         } catch (IOException e1) {
                                             e1.printStackTrace();
                                         } catch (ArtikelExestiertNichtException aen) {
@@ -552,12 +555,12 @@ public class EShopClientGUIGG extends JFrame {
                                         }
 
 
-                                        addMitarbeiterArtikelPopup.setVisible(false);
+
                                         ausgewaehlterArtikel = -1;
 
                                     case JOptionPane.NO_OPTION:
 
-                                        addMitarbeiterArtikelPopup.setVisible(false);
+
                                         ausgewaehlterArtikel = -1;
                                 }
 

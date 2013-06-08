@@ -112,6 +112,15 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Gibt die entsprechende MitarbeiterNr zu einem Benutzernamen zurück
+     * @return
+     */
+    public int getMitarbeiterNr(String benutzername) throws MitarbeiterExistiertNichtException{
+
+       return meineMitarbeiter.getMitarbeiterNr(benutzername);
+    }
+
+    /**
      * Methode zum Suchen von Mitarbeitern anhand des Benutzernamens
      *
      * @param bName Benutzername des gesuchten Mitarbeiters

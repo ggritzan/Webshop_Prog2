@@ -124,6 +124,7 @@ public class MitarbeiterVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Mitarbeiter '" + benutzername + "' mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " wurde hinzugefügt.";
             l.writeLog(dateiName, text);
+
         }
 
     }
@@ -201,6 +202,24 @@ public class MitarbeiterVerwaltung {
             return error;
         }
 
+    }
+
+    /**
+     * Gibt die entsprechende MitarbeiterNr zu einem Benutzernamen zurück
+     * @return
+     */
+    public int getMitarbeiterNr(String benutzername) throws MitarbeiterExistiertNichtException{
+
+        if (mitarbeiterBestandName.containsKey(benutzername)) {
+            int mnr = mitarbeiterBestandName.get(benutzername);
+            Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
+
+            return m.getmNr();
+
+        } else {
+
+            throw new MitarbeiterExistiertNichtException();
+        }
     }
 
     public boolean findeMitarbeiter(String benutzername, String passwort) {

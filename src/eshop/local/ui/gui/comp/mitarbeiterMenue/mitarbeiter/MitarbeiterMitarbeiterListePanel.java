@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.Vector;
 
@@ -39,19 +40,23 @@ public class MitarbeiterMitarbeiterListePanel extends JPanel {
         this.setBorder(ba);
 
         // Layout Ebene 0
-        GridLayout layoutEbene0 = new GridLayout(2, 1);
-        this.setLayout(layoutEbene0);    // 1 Zeilen, 2 Spalte
+        BorderLayout layoutEbene0 = new BorderLayout();
+        this.setLayout(layoutEbene0);
 
 
         // Kundenregistrierungspanel erzeugen
         addMitarbeiterRegistrierungPanel = new MitarbeiterRegistrierungPanel();
 
         // Hinzufügen der Elemente für die Ebene 0
-        this.add(new JScrollPane(table));
-        this.add(addMitarbeiterRegistrierungPanel);
+        this.add(new JScrollPane(table), BorderLayout.CENTER);
+
 }
 
     public void addMouseListener(MouseAdapter mA) {
         table.addMouseListener(mA);
     }
+
+
+
+
 }
