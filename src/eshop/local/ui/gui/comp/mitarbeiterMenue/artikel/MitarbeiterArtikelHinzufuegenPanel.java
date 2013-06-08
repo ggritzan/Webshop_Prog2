@@ -73,6 +73,10 @@ public class MitarbeiterArtikelHinzufuegenPanel extends JPanel {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public JButton getArtikelHinzufuegenButton() {
         return artikelHinzufuegenButton;
     }
@@ -93,6 +97,12 @@ public class MitarbeiterArtikelHinzufuegenPanel extends JPanel {
 
     public void addActionListener(ActionListener a) {
         artikelHinzufuegenButton.addActionListener(a);
+    }
+
+    public void resetAllJTextfields(){
+        this.artikelName.setText("");
+        this.artikelBeschreibung.setText("");
+        this.artikelPreis.setText("");
     }
 
 

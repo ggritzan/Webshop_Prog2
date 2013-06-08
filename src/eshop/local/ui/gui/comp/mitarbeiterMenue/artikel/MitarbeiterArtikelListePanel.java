@@ -80,4 +80,9 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     public JButton getArtikelHinzufuegenButton() {
         return addMitarbeiterArtikelHinzufuegenPanel.getArtikelHinzufuegenButton();
     }
+
+    // Setzt alle JTextfield des Artikel hinzufügen Panels zurück
+    public void resetAllJTextfields(){
+        addMitarbeiterArtikelHinzufuegenPanel.resetAllJTextfields();
+    }
 }

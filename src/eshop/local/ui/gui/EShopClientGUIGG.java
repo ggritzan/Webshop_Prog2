@@ -10,6 +10,7 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestan
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenListePanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterListePanel;
 import eshop.local.ui.gui.comp.registrierung.*;
 import eshop.local.valueobjects.Adresse;
 
@@ -34,6 +35,7 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
+    private MitarbeiterMitarbeiterListePanel addMitarbeiterMitarbeiterListePanel;
     private MitarbeiterKundenListePanel addMitarbeiterKundenListePanel;
     private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
@@ -125,6 +127,9 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt das ArtikellistePanel
         addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
 
+        // Erzeugt das MitarbeiterMitarbeiterListePanel
+        addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
+
         // Erzeugt das KundenListenPanel
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
 
@@ -142,6 +147,7 @@ public class EShopClientGUIGG extends JFrame {
         switchPanel.revalidate();
     }
 
+
     /**
      * Dient zum neu Laden der jeweiligen Listen Panels
      * als Paramter muss ein char übergeben werden damit die Funktion weiß welche Listen Panels aktulasiert werden sollen
@@ -158,20 +164,38 @@ public class EShopClientGUIGG extends JFrame {
             case 'a':
                 switchPanel.remove(addMitarbeiterArtikelListePanel);
                 addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
+                addMitarbeiterArtikelListePanel.resetAllJTextfields();
                 switchPanelRepainter();
                 switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                 initListeners();
+                break;
 
             case 'm':
+                switchPanel.remove(addMitarbeiterMitarbeiterListePanel);
+                addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
+                switchPanelRepainter();
+                switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
+                initListeners();
+                break;
+
 
             case 'k':
+                switchPanel.remove(addMitarbeiterKundenListePanel);
+                addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
+                switchPanelRepainter();
+                switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
+                initListeners();
+                break;
 
             case 'r':
+                break;
 
             case 'l':
+                break;
 
         }
     }
+
 
     /**
      * Intialisiert die Listener für die verschiedenen Events
@@ -180,21 +204,26 @@ public class EShopClientGUIGG extends JFrame {
         // Finale Selbstreferenz (damit GUI-Referenz "this" auch im ActionListener-Kontext verfuegbar ist)
         final EShopClientGUIGG eShopClientGUIGG = this;
 
-        // Actionlistener für das LoginPanel
+        // Actionlistener - LoginPanel
         addLoginPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                // Wenn der Actionlistener durch den LoginButton ausgelöst wurde wird die folgende Methode augerufen
                 Object source = ae.getSource();
+
+                // LoginButton
                 if (source == addLoginPanel.getLoginButton()) {
                     try {
                         char erg = addLoginPanel.verarbeiteLogin(eShopVerwaltung);
                         if (erg == 'm') {
                             aktuellerMitarbeiter = eShopVerwaltung.getMnr(addLoginPanel.getName());
                             switchPanel.remove(addLoginPanel);
+                            addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
+                            addMitarbeiterArtikelListePanel.resetAllJTextfields();
                             switchPanelRepainter();
+                            switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                             switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                            initListeners();
 
 
                         } else if (erg == 'k') {
@@ -208,6 +237,8 @@ public class EShopClientGUIGG extends JFrame {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    // RegisterButton
                 } else if (source == addLoginPanel.getRegisterButton()) {
 
 
@@ -221,12 +252,14 @@ public class EShopClientGUIGG extends JFrame {
                             options,  //the titles of buttons
                             options[0]); //default button title
 
+                    // Mitarbeiterregistrierung
                     if (result == JOptionPane.YES_OPTION) {
 
                         switchPanel.remove(addLoginPanel);
                         switchPanelRepainter();
                         switchPanel.add(addMitarbeiterRegistrierungPanel, BorderLayout.CENTER);
 
+                        // Kundenregistrierung
                     } else if (result == JOptionPane.NO_OPTION) {
 
 
@@ -242,13 +275,14 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-        // Actionlistener für das KundenRegistrierungPanel
+        // Actionlistener - KundenRegistrierungPanel
         addKundenRegistrierungPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-
                 Object source = ae.getSource();
+
+                // KundenRegisterButton
                 if (source == addKundenRegistrierungPanel.getKundenRegisterButton()) {
                     try {
                         String vorname = addKundenRegistrierungPanel.getVorname().getText();
@@ -269,9 +303,11 @@ public class EShopClientGUIGG extends JFrame {
 
                         String ort = addKundenRegistrierungPanel.getOrt().getText();
 
+                        // Wenn alle Felder ausgefüllt sind
                         if (!(vorname.isEmpty() | nachname.isEmpty() | benutzername.isEmpty() | passwort.isEmpty() | email.isEmpty() | email.isEmpty() | telefon.isEmpty() | straße.isEmpty() | plz.isEmpty() | ort.isEmpty())) {
                             Adresse adresse = new Adresse(vorname, nachname, straße, plz, ort);
 
+                            // einfügen eines Kunden
                             eShopVerwaltung.fuegeKundeEin(vorname, nachname, benutzername, passwort, email, telefon, adresse);
 
                             addKundenRegistrierungPanel.resetAllJTextfields();
@@ -371,10 +407,9 @@ public class EShopClientGUIGG extends JFrame {
         });
 
 
-
-
-
-        // ActionListener für das MitarbeiterPanel
+        /**
+         * ActionListener für das MitarbeiterPanel
+         */
         addMitarbeiterPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -388,13 +423,22 @@ public class EShopClientGUIGG extends JFrame {
                     switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
 
 
+
+                } else if (source == addMitarbeiterPanel.getMitarbeiterButton()) {
+                    switchPanel.removeAll();
+                    switchPanelRepainter();
+                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                    switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
+
+
                 } else if (source == addMitarbeiterPanel.getKundenButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                     switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
 
-                }else if (source == addMitarbeiterPanel.getLogoutButton()) {
+
+                } else if (source == addMitarbeiterPanel.getLogoutButton()) {
                     aktuellerMitarbeiter = 0;
                     switchPanel.removeAll();
                     switchPanelRepainter();
