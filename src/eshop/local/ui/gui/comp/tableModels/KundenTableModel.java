@@ -30,16 +30,30 @@ public class KundenTableModel extends AbstractTableModel {
         this.kundenVector = alleAktuellenKunden;
     }
 
+    /**
+     * definiert die Anzahl der Spalten
+     * @return
+     */
     @Override
     public int getRowCount() {
         return kundenVector.size();
     }
 
+    /**
+     * definiert die Anzahl der Zeilen
+     * @return
+     */
     @Override
     public int getColumnCount() {
         return columnNames.length;
     }
 
+    /**
+     * Methode um einen Wert aus der Tabelle auszulesen
+     * @param row
+     * @param col
+     * @return
+     */
     @Override
     public Object getValueAt(int row, int col) {
         Kunde kunde = kundenVector.get(row);
@@ -70,11 +84,21 @@ public class KundenTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * gibt den Namen eines Zeileneintrags an der Stelle "col" zurueck
+     * @param col
+     * @return
+     */
     @Override
     public String getColumnName(int col) {
         return columnNames[col];
     }
 
+    /**
+     * gibt die Klasse eines Zeileneintrags an der Stelle "col" zurueck
+     * @param col
+     * @return
+     */
     @Override
     public Class<?> getColumnClass(int col) {
         return columnClass[col];
