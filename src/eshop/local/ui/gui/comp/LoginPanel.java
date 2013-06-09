@@ -116,6 +116,12 @@ public class LoginPanel extends JPanel{
         return loginName.getText();
     }
 
+    public String getLoginPassword() {
+
+        return loginPassword.getText();
+
+    }
+
     public JButton getLoginButton() {
         return loginButton;
     }
@@ -133,40 +139,9 @@ public class LoginPanel extends JPanel{
         registerButton.addActionListener(a);
     }
 
-
-
     /**
-     *
-     * @param eShopVerwaltung
-     * @return 1 für Mitarbeiter / 2 für Kunde / 0 keines von beiden
-     * @throws IOException
+     * Löscht alle JTextfields
      */
-    public char verarbeiteLogin(EShopVerwaltung eShopVerwaltung) throws IOException {
-
-            String bName = this.loginName.getText();
-            String bPasswort = this.loginPassword.getText();
-
-            if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
-                System.out.println("Ihr Login war erfolgreich.");
-                System.out.println("Willkommen Mitarbeiter");
-                return 'm';
-
-            } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
-                System.out.println("Ihr Login war erfolgreich.");
-                System.out.println("Willkommen Kunde");
-                return 'k';
-
-
-            } else {
-                System.err.println("Benutzername oder Passwort leider falsch!");
-                this.loginPassword.setText("");
-
-                return 'u';
-
-            }
-
-    }
-
     public void resetJTextfields() {
         loginName.setText("");
         loginPassword.setText("");
