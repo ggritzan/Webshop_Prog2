@@ -389,6 +389,7 @@ public class EShopVerwaltung {
         return meineKunden.getKunden(bName);
     }
 
+
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineArtikel.printArtikelLog(daysInPast, aNr);
     }
