@@ -11,6 +11,7 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListeP
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterListePanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterPopup;
 import eshop.local.ui.gui.comp.registrierung.*;
 import eshop.local.valueobjects.Adresse;
 
@@ -36,6 +37,7 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
     private MitarbeiterMitarbeiterListePanel addMitarbeiterMitarbeiterListePanel;
+    private MitarbeiterMitarbeiterPopup addMitarbeiterMitarbeiterPopup;
     private MitarbeiterKundenListePanel addMitarbeiterKundenListePanel;
     private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
@@ -129,7 +131,6 @@ public class EShopClientGUIGG extends JFrame {
 
         // Erzeugt das MitarbeiterMitarbeiterListePanel
         addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
-
 
         // Erzeugt das KundenListenPanel
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
@@ -575,13 +576,80 @@ public class EShopClientGUIGG extends JFrame {
         });
 
 
-// ActionListener für MitarbeiterArtikelListePanel
+        // MouseListener für MitarbeiterMitarbeiterListePanel erzeugt ein Popup bei Rechtsklick
+        addMitarbeiterMitarbeiterListePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                if (e.isPopupTrigger()) {
+                    JTable source = (JTable) e.getSource();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+                    // Mitarbeiternummer des ausgewählten Artikels
+                    ausgewaehlterMitarbeiter = (Integer) source.getValueAt(row, 0);
+
+
+                    // Erzeugt ein Popup für das Mitarbeitermenü
+                    addMitarbeiterMitarbeiterPopup = new MitarbeiterMitarbeiterPopup();
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addMitarbeiterMitarbeiterPopup.show(e.getComponent(), e.getX(), e.getY());
+
+                    // ActionListener für MitarbeiterMitarbeiterPopup
+                    addMitarbeiterMitarbeiterPopup.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+
+
+                            Object source = ae.getSource();
+                            // Wenn der loeschen Menueintrag ausgewaehlt wird
+                            if (source == addMitarbeiterMitarbeiterPopup.getLoeschen()) {
+
+                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Mitarbeiter wirklich löschen", "Mitarbeiter löschen", JOptionPane.YES_NO_OPTION);
+                                switch (result) {
+                                    case JOptionPane.YES_OPTION:
+
+                                        try {
+                                            eShopVerwaltung.loescheMitarbeiter(ausgewaehlterMitarbeiter, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                                            mitarbeiterPanelReloader('m');
+
+                                        } catch (IOException e1) {
+                                            e1.printStackTrace();
+                                        } catch (MitarbeiterExistiertNichtException men) {
+                                            System.err.println(men.getMessage());
+                                        }
+
+
+
+                                        ausgewaehlterMitarbeiter = -1;
+
+                                    case JOptionPane.NO_OPTION:
+
+
+                                        ausgewaehlterMitarbeiter = -1;
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+                }
+            }
+        });
+
+
+        // ActionListener für MitarbeiterArtikelListePanel
         addMitarbeiterArtikelBestandAendernDialog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
                 Object source = ae.getSource();
-// Ändert den Bestand des entsprechenden Artikels im E-Shop
+                // Ändert den Bestand des entsprechenden Artikels im E-Shop
                 if (source == addMitarbeiterArtikelBestandAendernDialog.getBestandAendern()) {
 
                     try {
@@ -609,7 +677,7 @@ public class EShopClientGUIGG extends JFrame {
         });
 
 
-// ActionListener für das Speichern des EShops
+        // ActionListener für das Speichern des EShops
         menuDateiSpeichern.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -632,7 +700,7 @@ public class EShopClientGUIGG extends JFrame {
             }
         });
 
-// ActionListener für das Beenden des EShops
+        // ActionListener für das Beenden des EShops
         menuDateiQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

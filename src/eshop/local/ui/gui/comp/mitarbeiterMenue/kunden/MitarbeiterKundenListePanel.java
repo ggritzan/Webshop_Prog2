@@ -40,16 +40,15 @@ public class MitarbeiterKundenListePanel extends JPanel{
         this.setBorder(ba);
 
         // Layout Ebene 0
-        GridLayout layoutEbene0 = new GridLayout(2, 1);
-        this.setLayout(layoutEbene0);    // 1 Zeilen, 2 Spalte
+        BorderLayout layoutEbene0 = new BorderLayout();
+        this.setLayout(layoutEbene0);
 
 
         // Kundenregistrierungspanel erzeugen
         addKundenRegistrierungPanel = new KundenRegistrierungPanel();
 
         // Hinzufügen der Elemente für die Ebene 0
-        this.add(new JScrollPane(table));
-        this.add(addKundenRegistrierungPanel);
+        this.add(new JScrollPane(table), BorderLayout.CENTER);
 
 
     }

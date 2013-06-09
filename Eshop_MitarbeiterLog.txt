@@ -7,3 +7,6 @@ Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
 Sa 2013.06.08 um 20:25:39 MESZ:
 Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
 
+So 2013.06.09 um 13:47:27 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
