@@ -10,8 +10,12 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestan
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenListePanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterPopup;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterListePanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsListePanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsPopup;
 import eshop.local.ui.gui.comp.registrierung.*;
 import eshop.local.valueobjects.Adresse;
 
@@ -36,10 +40,13 @@ public class EShopClientGUIGG extends JFrame {
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
+    private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
     private MitarbeiterMitarbeiterListePanel addMitarbeiterMitarbeiterListePanel;
     private MitarbeiterMitarbeiterPopup addMitarbeiterMitarbeiterPopup;
     private MitarbeiterKundenListePanel addMitarbeiterKundenListePanel;
-    private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
+    private MitarbeiterKundenPopup addMitarbeiterKundenPopup;
+    private MitarbeiterRechnungsListePanel addMitarbeiterRechnungsListePanel;
+    private MitarbeiterRechnungsPopup addMitarbeiterRechnungsPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
     private int aktuellerMitarbeiter;
     private int aktuellerKunde;
@@ -135,6 +142,9 @@ public class EShopClientGUIGG extends JFrame {
         // Erzeugt das KundenListenPanel
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
 
+        // Erzeugt das RechnungsListenPanel
+        addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungen());
+
         // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
 
@@ -185,14 +195,23 @@ public class EShopClientGUIGG extends JFrame {
 
 
             case 'k':
-                switchPanel.remove(addMitarbeiterKundenListePanel);
+                switchPanel.removeAll();
                 addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
                 switchPanelRepainter();
+                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                 switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
+                switchPanelRepainter();
                 initListeners();
                 break;
 
             case 'r':
+                switchPanel.removeAll();
+                addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungen());
+                switchPanelRepainter();
+                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
+                switchPanelRepainter();
+                initListeners();
                 break;
 
             case 'l':
@@ -428,24 +447,28 @@ public class EShopClientGUIGG extends JFrame {
                     switchPanel.removeAll();
                     switchPanelRepainter();
                     mitarbeiterPanelReloader('a');
-                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                    switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+
 
 
                 } else if (source == addMitarbeiterPanel.getMitarbeiterButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
                     mitarbeiterPanelReloader('m');
-                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                    switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
+
 
 
                 } else if (source == addMitarbeiterPanel.getKundenButton()) {
                     switchPanel.removeAll();
                     switchPanelRepainter();
                     mitarbeiterPanelReloader('k');
-                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                    switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
+
+
+
+                } else if (source == addMitarbeiterPanel.getRechnungenButton()) {
+                    switchPanel.removeAll();
+                    switchPanelRepainter();
+                    mitarbeiterPanelReloader('r');
+
 
 
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
@@ -630,6 +653,140 @@ public class EShopClientGUIGG extends JFrame {
 
 
                                         ausgewaehlterMitarbeiter = -1;
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+                }
+            }
+        });
+
+
+        // MouseListener für MitarbeiterKundenListePanel erzeugt ein Popup bei Rechtsklick
+        addMitarbeiterKundenListePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                if (e.isPopupTrigger()) {
+                    JTable source = (JTable) e.getSource();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+                    // Kundennummer des ausgewählten Kunden
+                    ausgewaehlterKunde = (Integer) source.getValueAt(row, 0);
+
+
+                    // Erzeugt ein Popup für das Kundenmenü
+                    addMitarbeiterKundenPopup = new MitarbeiterKundenPopup();
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addMitarbeiterKundenPopup.show(e.getComponent(), e.getX(), e.getY());
+
+                    // ActionListener für MitarbeiterKundenPopup
+                    addMitarbeiterKundenPopup.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+
+
+                            Object source = ae.getSource();
+                            // Wenn der loeschen Menueintrag ausgewaehlt wird
+                            if (source == addMitarbeiterKundenPopup.getLoeschen()) {
+
+                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Kunden wirklich löschen", "Kunden löschen", JOptionPane.YES_NO_OPTION);
+                                switch (result) {
+                                    case JOptionPane.YES_OPTION:
+
+                                        try {
+                                            eShopVerwaltung.loescheKunde(ausgewaehlterKunde, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                                            mitarbeiterPanelReloader('k');
+
+                                        } catch (IOException e1) {
+                                            e1.printStackTrace();
+                                        } catch (MitarbeiterExistiertNichtException men) {
+                                            System.err.println(men.getMessage());
+                                        } catch (KundenNummerExistiertNichtException knene) {
+                                            System.err.println(knene.getMessage());
+                                        }
+
+
+                                        ausgewaehlterKunde = -1;
+
+                                    case JOptionPane.NO_OPTION:
+
+
+                                        ausgewaehlterKunde = -1;
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+                }
+            }
+        });
+
+
+        // MouseListener für MitarbeiterRechnungsListePanel erzeugt ein Popup bei Rechtsklick
+        addMitarbeiterRechnungsListePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                if (e.isPopupTrigger()) {
+                    JTable source = (JTable) e.getSource();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+                    // Rechnungsnummer des ausgewählten Rechnung
+                    ausgewaehlteRechnung = (Integer) source.getValueAt(row, 0);
+
+
+                    // Erzeugt ein Popup für das Rechnungsmenü
+                    addMitarbeiterRechnungsPopup = new MitarbeiterRechnungsPopup();
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addMitarbeiterRechnungsPopup.show(e.getComponent(), e.getX(), e.getY());
+
+                    // ActionListener für MitarbeiterRechnungsPopup
+                    addMitarbeiterRechnungsPopup.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+
+
+                            Object source = ae.getSource();
+                            // Wenn der loeschen Menueintrag ausgewaehlt wird                               sa
+                            if (source == addMitarbeiterRechnungsPopup.getLoeschen()) {
+
+                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                                int result = JOptionPane.showConfirmDialog(null, "Wollen die Rechnung wirklich löschen", "Rechnung löschen", JOptionPane.YES_NO_OPTION);
+                                switch (result) {
+                                    case JOptionPane.YES_OPTION:
+
+                                        try {
+                                            eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung));
+                                            mitarbeiterPanelReloader('r');
+
+                                        } catch (IOException e1) {
+                                            e1.printStackTrace();
+                                        } catch (RechnungExestiertNichtException rene) {
+                                            System.err.println(rene.getMessage());
+                                        }
+
+
+                                        ausgewaehlteRechnung = -1;
+
+                                    case JOptionPane.NO_OPTION:
+
+
+                                        ausgewaehlteRechnung = -1;
                                 }
 
                             }

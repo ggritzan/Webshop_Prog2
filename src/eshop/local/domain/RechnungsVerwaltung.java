@@ -242,7 +242,7 @@ public class RechnungsVerwaltung {
      * @throws RechnungKeineVorhandenException
      *
      */
-    public Vector alleRechnungenZurueckgeben() throws RechnungKeineVorhandenException {
+    public Vector alleRechnungenZurueckgeben()  {
 
         if ((!rechnungsBestandNr.values().isEmpty())) {
             Vector<Rechnung> ergebnis = new Vector<Rechnung>();
@@ -251,8 +251,6 @@ public class RechnungsVerwaltung {
                 ergebnis.add(elem);
 
             return ergebnis;
-        } else if (rechnungsBestandNr.values().isEmpty()) {
-            throw new RechnungKeineVorhandenException();
         } else {
             return null;
         }

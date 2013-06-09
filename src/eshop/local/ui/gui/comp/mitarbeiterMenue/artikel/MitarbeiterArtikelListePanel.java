@@ -24,6 +24,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     private ArtikelTableModel tmodel;            // TableModel fuer die Artikel-Tabelle
     private RowSorter<ArtikelTableModel> sorter;
     private MitarbeiterArtikelHinzufuegenPanel addMitarbeiterArtikelHinzufuegenPanel;
+    private MitarbeiterMassengutartikelHinzufuegenPanel addMitarbeiterMassengutartikelHinzufuegenPanel;
 
     public MitarbeiterArtikelListePanel(Vector alleArtikel) {
         // Tabelle erzeugen und Eigenschaften setzen
@@ -40,15 +41,32 @@ public class MitarbeiterArtikelListePanel extends JPanel {
 
         // Layout Ebene 0
         GridLayout layoutEbene0 = new GridLayout(2, 1);
-        this.setLayout(layoutEbene0);    // 1 Zeilen, 2 Spalte
+        this.setLayout(layoutEbene0);    // 2 Zeilen, 1 Spalte
+
+        // Layoout Ebene 1
+        JPanel frameEbene1 = new JPanel();
+        GridLayout layoutEbene1 = new GridLayout(5, 1);
+        frameEbene1.setLayout(layoutEbene1);    // 5 Zeilen, 1 Spalte
+
+
 
 
         // Initialisierung eines addMitarbeiterArtikelHinzufuegenPanel
         addMitarbeiterArtikelHinzufuegenPanel   = new MitarbeiterArtikelHinzufuegenPanel();
 
+        // Initialisierung eines addMitarbeiterMassengutartikelHinzufuegenPanel
+        addMitarbeiterMassengutartikelHinzufuegenPanel   = new MitarbeiterMassengutartikelHinzufuegenPanel();
+
+        // Hinzufügen der Elemente für die Ebene 1
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(addMitarbeiterArtikelHinzufuegenPanel);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(addMitarbeiterMassengutartikelHinzufuegenPanel);
+        frameEbene1.add(new JPanel());
+
         // Hinzufügen der Elemente für die Ebene 0
         this.add(new JScrollPane(table));
-        this.add(addMitarbeiterArtikelHinzufuegenPanel);
+        this.add(frameEbene1);
 
 
     }
@@ -57,6 +75,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
 
     public void addActionListener(ActionListener aL) {
         addMitarbeiterArtikelHinzufuegenPanel.addActionListener(aL);
+        addMitarbeiterMassengutartikelHinzufuegenPanel.addActionListener(aL);
     }
 
     public void addMouseListener(MouseAdapter mA) {
@@ -84,5 +103,6 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     // Setzt alle JTextfield des Artikel hinzufügen Panels zurück
     public void resetAllJTextfields(){
         addMitarbeiterArtikelHinzufuegenPanel.resetAllJTextfields();
+        addMitarbeiterMassengutartikelHinzufuegenPanel.resetAllJTextfields();
     }
 }

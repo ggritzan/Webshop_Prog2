@@ -18,7 +18,7 @@ public class KundenTableModel extends AbstractTableModel {
 
     private Vector<Kunde> kundenVector;
 
-    private String[] columnNames = {"Kundennummer","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
+    private String[] columnNames = {"KNr","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
 
     private Class<?>[] columnClass = {Integer.class,String.class, String.class, String.class, String.class, String.class, String.class,String.class, String.class, String.class};
 

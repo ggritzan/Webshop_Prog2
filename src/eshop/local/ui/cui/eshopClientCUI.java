@@ -618,8 +618,6 @@ public class eshopClientCUI {
                         System.err.println(le.getMessage());
                     } catch (RechnungExestiertNichtException ren) {
                         System.err.println(ren.getMessage());
-                    } catch (RechnungKeineVorhandenException rkv) {
-                        System.err.println(rkv.getMessage());
                     }
 
                     if (ok)
@@ -643,8 +641,6 @@ public class eshopClientCUI {
                         System.err.println(le.getMessage());
                     } catch (RechnungExestiertNichtException ren) {
                         System.err.println(ren.getMessage());
-                    } catch (RechnungKeineVorhandenException rkv) {
-                        System.err.println(rkv.getMessage());
                     }
 
                 } else if (input.equals("la")){
@@ -828,9 +824,7 @@ public class eshopClientCUI {
                         System.err.println("Sie müssen eine Zahl eingeben!");
                     } catch (KennNummerExistiertNichtException ke){
                         System.err.println(ke.getMessage());
-                    } catch (RechnungKeineVorhandenException rve){
-                        System.err.println(rve.getMessage());
-                    } catch (KeineEintraegeVorhandenException kve){
+                    }  catch (KeineEintraegeVorhandenException kve){
                         System.err.println(kve.getMessage());
                     }
                 }

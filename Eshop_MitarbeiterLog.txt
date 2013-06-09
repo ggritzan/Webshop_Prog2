@@ -10,3 +10,6 @@ Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
 So 2013.06.09 um 13:47:27 MESZ:
 Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+So 2013.06.09 um 15:06:23 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

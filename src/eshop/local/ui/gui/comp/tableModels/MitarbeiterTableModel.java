@@ -18,7 +18,7 @@ public class MitarbeiterTableModel extends AbstractTableModel {
 
     private Vector<Mitarbeiter> mitarbeiterVector;
 
-    private String[] columnNames = {"Mitarbeiternummer","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
+    private String[] columnNames = {"MNr","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
 
     private Class<?>[] columnClass = {Integer.class,String.class, String.class, String.class, String.class, String.class, String.class,String.class, String.class, String.class};
 

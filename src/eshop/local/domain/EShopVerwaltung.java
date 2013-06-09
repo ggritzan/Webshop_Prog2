@@ -86,7 +86,7 @@ public class EShopVerwaltung {
      *
      * @return Vector Liste aller Rechnungen im Bestand des EShops als Vector
      */
-    public Vector gibAlleRechnungen() throws RechnungKeineVorhandenException {
+    public Vector gibAlleRechnungen()  {
         // delegiert an die Rechnungsverwaltung
         return meineRechnungen.alleRechnungenZurueckgeben();
     }
@@ -308,7 +308,6 @@ public class EShopVerwaltung {
      *
      * @param rechnung         Nummer des Kunden der geloescht werden soll.
      *
-     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
      */
     public void loescheRechnung(Rechnung rechnung) throws IOException, RechnungExestiertNichtException{
         meineRechnungen.rechnungLoeschen(rechnung);

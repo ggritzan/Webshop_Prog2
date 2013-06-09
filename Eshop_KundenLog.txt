@@ -33,3 +33,12 @@ Der Kunde 'mmustermann' mit der Kundennummer 1001 wurde hinzugefügt.
 Fr 2013.06.07 um 23:31:56 MESZ:
 Der Kunde 'skeks' mit der Kundennummer 1001 wurde hinzugefügt.
 
+So 2013.06.09 um 14:08:56 MESZ:
+Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+So 2013.06.09 um 14:42:28 MESZ:
+Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
+
+So 2013.06.09 um 15:06:28 MESZ:
+Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
