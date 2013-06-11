@@ -24,11 +24,12 @@ public class MassengutArtikel extends Artikel implements Serializable {
          this.packungsgroesse = packungsgroesse;
 
     }
-
+    /*
     public MassengutArtikel (MassengutArtikel artikel) {
         super(artikel);
         this.packungsgroesse = artikel.getPackungsgroesse();
     }
+    */
     public String toString() {
         String string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() +"\t\tPackungsgroesse : " + getPackungsgroesse() + "\t Bestand: " + getBestand() + "\n" + "\t BestellteMenge: " + getBestellteMenge() + "\n" ;
         return string;

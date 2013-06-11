@@ -74,6 +74,7 @@ public class ArtikelVerwaltung {
             // PersistenzManager für Lesevorgänge wird geöffnet
             pm.openForReading(datei);
 
+            /*
             HashMap<Integer,Artikel> puffer = pm.ladeArtikel();
 
             artikelBestandNr = puffer;
@@ -91,8 +92,8 @@ public class ArtikelVerwaltung {
                 }
 
             }
+            */
 
-            /**
             do {
                 // Artikel-Objekt einlesen
                 einArtikel = pm.ladeArtikel();
@@ -102,7 +103,7 @@ public class ArtikelVerwaltung {
                 }
 
             } while (einArtikel != null);
-            */
+
 
 
 
@@ -127,22 +128,23 @@ public class ArtikelVerwaltung {
         // PersistenzManager für Schreibvorgänge öffnen
         pm.openForWriting(datei);
 
-        /**
         // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Datei schreiben
         if (!artikelBestandNr.isEmpty()) {
-            Iterator iter = artikelBestandNr.values().iterator();
+            Iterator<Artikel> iter = artikelBestandNr.values().iterator();
             while (iter.hasNext()) {
-                if(iter instanceof MassengutArtikel) {
-                    MassengutArtikel m = (MassengutArtikel) iter.next();
+                Artikel a = iter.next();
+                if (a instanceof MassengutArtikel) {
+                    MassengutArtikel m = (MassengutArtikel) a;
                     pm.speichereMassengutArtikel(m);
                 } else {
-                    Artikel a = (Artikel) iter.next();
                      pm.speichereArtikel(a);
                 }
             }
         }
-        */
+
+        /*
         pm.speichereArtikel(artikelBestandNr);
+        */
 
         //Persistenz-Schnittstelle wieder schließen
         pm.close();
@@ -203,21 +205,23 @@ public class ArtikelVerwaltung {
      *
      * @param artikel
      */
-    public void artikelHinzufuegen(Artikel artikel) {
+    public void artikelHinzufuegen(Artikel a) {
 
         // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
-        Artikel a = new Artikel(artikel);
+//        Artikel a = new Artikel(artikel);
         artikelBestandNr.put(a.getNummer(), a);
-        artikelBestandName.put(artikel.getName(), a.getNummer());
+        artikelBestandName.put(a.getName(), a.getNummer());
 
     }
 
+    /*
+    // TODO: löschen!!!! (auch MassengutArtikel-Copy-Konstruktor
     public void massengutArtikelHinzufuegen(MassengutArtikel artikel) {
         MassengutArtikel m = new MassengutArtikel(artikel);
         artikelBestandNr.put(m.getNummer(), m);
         artikelBestandName.put(artikel.getName(), m.getNummer());
     }
-
+     */
     /**
      * Methode zum l&ouml;schen von Artikel
      *

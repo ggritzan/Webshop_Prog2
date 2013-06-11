@@ -249,7 +249,7 @@ public class eshopClientCUI {
                         String menge = liesEingabe();
                         int mengeInt = Integer.parseInt(menge);
 
-                        Artikel a = new Artikel(eShopVerwaltung.getArtikel(aNrInt));
+                        Artikel a = eShopVerwaltung.getArtikel(aNrInt);
 
 
                         eShopVerwaltung.setBestellteMenge(mengeInt, eShopVerwaltung.getArtikel(aNrInt));

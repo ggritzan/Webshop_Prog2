@@ -37,7 +37,7 @@ public class Artikel implements Serializable {
             this.zaehler  ++;
 
          }
-
+      /*
         // Konstruktor für das einlesen von Artikeln
         public Artikel(Artikel artikel) {
             this.name = artikel.getName();
@@ -51,7 +51,7 @@ public class Artikel implements Serializable {
             }
 
         }
-
+        */
 
 
 // Methoden

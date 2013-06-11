@@ -61,3 +61,15 @@ Der Masengutartikel 'a' mit der Artikelnummer 1007 und der Packungsgröße 12 wu
 Di 2013.06.11 um 15:09:19 MESZ:
 Der Masengutartikel 'test' mit der Artikelnummer 1008 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+Di 2013.06.11 um 16:58:39 MESZ:
+Der Artikel 'Test' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 17:20:56 MESZ:
+Der Artikel '1' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 17:21:02 MESZ:
+Der Masengutartikel '3' mit der Artikelnummer 1001 und der Packungsgröße 3 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 17:24:59 MESZ:
+Der Masengutartikel '5' mit der Artikelnummer 1002 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+

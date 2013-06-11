@@ -26,12 +26,13 @@ public interface PersistenceManager {
          *
          * @return Artikel-Objekt, wenn Einlesen erfolgreich, false null
          */
-        /**
+
         public Artikel ladeArtikel() throws IOException, ClassNotFoundException;
-        */
 
+
+        /**
         public HashMap<Integer,Artikel> ladeArtikel() throws IOException, ClassNotFoundException;
-
+        */
 
 
         /**
@@ -40,10 +41,9 @@ public interface PersistenceManager {
          * @param a Artikel-Objekt, das gespeichert werden soll
          * @return true, wenn Schreibvorgang erfolgreich, false sonst
          */
-        /**
         public boolean speichereArtikel(Artikel a) throws IOException;
-        */
-        public boolean speichereArtikel(HashMap<Integer,Artikel> artikelHashMap) throws IOException;
+
+        // public boolean speichereArtikel(HashMap<Integer,Artikel> artikelHashMap) throws IOException;
 
         public boolean speichereMassengutArtikel(MassengutArtikel m) throws IOException;
 
