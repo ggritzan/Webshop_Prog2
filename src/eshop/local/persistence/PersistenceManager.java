@@ -1,5 +1,6 @@
 package eshop.local.persistence;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import eshop.local.valueobjects.*;
@@ -35,6 +36,8 @@ public interface PersistenceManager {
          * @return true, wenn Schreibvorgang erfolgreich, false sonst
          */
         public boolean speichereArtikel(Artikel a) throws IOException;
+
+        public boolean speichereArtikel(HashMap<Artikel,MassengutArtikel> artikelHashMap) throws IOException;
 
         public boolean speichereMassengutArtikel(MassengutArtikel m) throws IOException;
 

@@ -1,6 +1,7 @@
 package eshop.local.persistence;
 
 import java.io.*;
+import java.util.HashMap;
 
 import eshop.local.valueobjects.*;
 
@@ -153,6 +154,19 @@ public class FilePersistenceManager implements PersistenceManager {
         }
 
 
+    }
+
+    public boolean speichereArtikel (HashMap<Artikel, MassengutArtikel> artikelHashMap) throws IOException {
+        try {
+
+            oos.writeObject(artikelHashMap);
+
+            return true;
+
+        } catch (IOException e) {
+
+            return false;
+        }
     }
 
     public boolean speichereMassengutArtikel(MassengutArtikel a) throws IOException {
