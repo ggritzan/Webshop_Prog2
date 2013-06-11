@@ -27,6 +27,7 @@ public interface PersistenceManager {
          */
         public Artikel ladeArtikel() throws IOException, ClassNotFoundException;
 
+
         /**
          * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
          *
@@ -34,6 +35,8 @@ public interface PersistenceManager {
          * @return true, wenn Schreibvorgang erfolgreich, false sonst
          */
         public boolean speichereArtikel(Artikel a) throws IOException;
+
+        public boolean speichereMassengutArtikel(MassengutArtikel m) throws IOException;
 
         public Kunde ladeKunde() throws IOException, ClassNotFoundException;
 

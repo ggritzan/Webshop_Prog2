@@ -2,10 +2,7 @@ package eshop.local.persistence;
 
 import java.io.*;
 
-import eshop.local.valueobjects.Artikel;
-import eshop.local.valueobjects.Kunde;
-import eshop.local.valueobjects.Mitarbeiter;
-import eshop.local.valueobjects.Rechnung;
+import eshop.local.valueobjects.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -158,6 +155,22 @@ public class FilePersistenceManager implements PersistenceManager {
 
     }
 
+    public boolean speichereMassengutArtikel(MassengutArtikel a) throws IOException {
+
+        try {
+
+            oos.writeObject(a);
+
+            return true;
+
+        } catch (IOException e) {
+
+            return false;
+        }
+
+
+    }
+
     /**
      * Methode zum Speichern der Kundendaten in eine externe Datenquelle.
      *
@@ -224,11 +237,13 @@ public class FilePersistenceManager implements PersistenceManager {
     private Artikel liesArtikel(ObjectInputStream ois) throws IOException, ClassNotFoundException {
 
         try {
-
-            Artikel a = new Artikel((Artikel) ois.readObject());
-
-
-            return a;
+            if (ois.readObject() instanceof MassengutArtikel) {
+                MassengutArtikel mA = new MassengutArtikel((MassengutArtikel)ois.readObject());
+                return mA;
+            } else {
+                Artikel a = new Artikel((Artikel)ois.readObject());
+                return a;
+            }
 
         } catch (EOFException exc) {
 

@@ -19,3 +19,45 @@ Der Masengutartikel 'a' mit der Artikelnummer 1006 und der Packungsgröße 2 wur
 Di 2013.06.11 um 13:44:07 MESZ:
 Der Masengutartikel 'Massengutartikel' mit der Artikelnummer 1006 und der Packungsgröße 10 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+Di 2013.06.11 um 13:54:00 MESZ:
+Der Masengutartikel 's' mit der Artikelnummer 1007 und der Packungsgröße 2 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 13:58:24 MESZ:
+Der Masengutartikel 'b' mit der Artikelnummer 1008 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 14:05:22 MESZ:
+Der Masengutartikel 'a' mit der Artikelnummer 1009 und der Packungsgröße 3 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 14:10:59 MESZ:
+Der Masengutartikel 'd' mit der Artikelnummer 1010 und der Packungsgröße 4 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 14:22:59 MESZ:
+Der Masengutartikel 'masse' mit der Artikelnummer 1011 und der Packungsgröße 70 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 14:24:00 MESZ:
+Der Artikel 'masse' mit der Artikelnummer 1011 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Di 2013.06.11 um 14:24:05 MESZ:
+Der Artikel 'd' mit der Artikelnummer 1010 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Di 2013.06.11 um 14:24:09 MESZ:
+Der Artikel 'a' mit der Artikelnummer 1009 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Di 2013.06.11 um 14:24:14 MESZ:
+Der Artikel 'b' mit der Artikelnummer 1008 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Di 2013.06.11 um 14:24:19 MESZ:
+Der Artikel 'Massengutartikel' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Di 2013.06.11 um 14:24:31 MESZ:
+Der Artikel 's' mit der Artikelnummer 1007 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Di 2013.06.11 um 14:28:25 MESZ:
+Der Masengutartikel 'Masse' mit der Artikelnummer 1006 und der Packungsgröße 9 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 14:49:26 MESZ:
+Der Masengutartikel 'a' mit der Artikelnummer 1007 und der Packungsgröße 12 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.11 um 15:09:19 MESZ:
+Der Masengutartikel 'test' mit der Artikelnummer 1008 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+

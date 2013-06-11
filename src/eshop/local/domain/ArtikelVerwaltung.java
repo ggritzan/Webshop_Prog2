@@ -78,10 +78,8 @@ public class ArtikelVerwaltung {
                 // Artikel-Objekt einlesen
                 einArtikel = pm.ladeArtikel();
                 if (einArtikel != null) {
-
                     // Artikel einfügen
                     artikelHinzufuegen(einArtikel);
-
                 }
 
             } while (einArtikel != null);
@@ -110,8 +108,13 @@ public class ArtikelVerwaltung {
         if (!artikelBestandNr.isEmpty()) {
             Iterator iter = artikelBestandNr.values().iterator();
             while (iter.hasNext()) {
-                Artikel a = (Artikel) iter.next();
-                pm.speichereArtikel(a);
+                if(iter instanceof MassengutArtikel) {
+                    MassengutArtikel m = (MassengutArtikel) iter.next();
+                    pm.speichereMassengutArtikel(m);
+                } else {
+                    Artikel a = (Artikel) iter.next();
+                     pm.speichereArtikel(a);
+                }
             }
         }
 
@@ -183,6 +186,12 @@ public class ArtikelVerwaltung {
 
     }
 
+    public void massengutArtikelHinzufuegen(MassengutArtikel artikel) {
+        MassengutArtikel m = new MassengutArtikel(artikel);
+        artikelBestandNr.put(m.getNummer(), m);
+        artikelBestandName.put(artikel.getName(), m.getNummer());
+    }
+
     /**
      * Methode zum l&ouml;schen von Artikel
      *
@@ -220,8 +229,13 @@ public class ArtikelVerwaltung {
         Vector<Artikel> ergebnis = new Vector<Artikel>();
 
         for (Artikel elem : artikelBestandNr.values())
-            ergebnis.add(elem);
-
+                if(elem instanceof MassengutArtikel) {
+                    System.out.println("MG");
+                    ergebnis.add(elem);
+                } else {
+                    System.out.println("A");
+                    ergebnis.add(elem);
+                }
 
         return ergebnis;
 
