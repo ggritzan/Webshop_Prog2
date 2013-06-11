@@ -85,11 +85,20 @@ public class FilePersistenceManager implements PersistenceManager {
      * @throws IOException,ClassNotFoundException
      *
      */
+    /**
     public Artikel ladeArtikel() throws IOException, ClassNotFoundException {
 
         Artikel artikel = liesArtikel(ois);
 
         return artikel;
+    }
+     */
+
+    public HashMap<Integer,Artikel> ladeArtikel() throws IOException, ClassNotFoundException {
+
+        HashMap<Integer,Artikel> artikelHashMap = liesArtikel(ois);
+        return  artikelHashMap;
+
     }
 
     /**
@@ -140,6 +149,7 @@ public class FilePersistenceManager implements PersistenceManager {
      * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
      * @throws IOException
      */
+    /**
     public boolean speichereArtikel(Artikel a) throws IOException {
 
         try {
@@ -155,8 +165,9 @@ public class FilePersistenceManager implements PersistenceManager {
 
 
     }
+    */
 
-    public boolean speichereArtikel (HashMap<Artikel, MassengutArtikel> artikelHashMap) throws IOException {
+    public boolean speichereArtikel (HashMap<Integer,Artikel> artikelHashMap) throws IOException {
         try {
 
             oos.writeObject(artikelHashMap);
@@ -248,6 +259,7 @@ public class FilePersistenceManager implements PersistenceManager {
      * @return Artikel, wenn sich noch ein Artikel Objekt im ObjectInputstream befindet.
      * @throws IOException,ClassNotFoundException
      */
+    /**
     private Artikel liesArtikel(ObjectInputStream ois) throws IOException, ClassNotFoundException {
 
         try {
@@ -265,6 +277,18 @@ public class FilePersistenceManager implements PersistenceManager {
         }
 
 
+    }
+     */
+
+    private HashMap<Integer,Artikel> liesArtikel(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        try {
+
+            HashMap<Integer,Artikel> artikelHashMap = new HashMap<Integer, Artikel>((HashMap<Integer,Artikel>)ois.readObject());
+            return artikelHashMap;
+
+        } catch (EOFException exc){
+            return null;
+        }
     }
 
     /**

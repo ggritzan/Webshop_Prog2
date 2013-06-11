@@ -74,6 +74,25 @@ public class ArtikelVerwaltung {
             // PersistenzManager für Lesevorgänge wird geöffnet
             pm.openForReading(datei);
 
+            HashMap<Integer,Artikel> puffer = pm.ladeArtikel();
+
+            artikelBestandNr = puffer;
+
+
+            if(!artikelBestandNr.isEmpty()){
+                Iterator iter = artikelBestandNr.values().iterator();
+                while(iter.hasNext()){
+                    Artikel a = (Artikel)iter.next();
+                    artikelBestandName.put(a.getName(),a.getNummer());
+                    if(a.getNummer() > a.getZaehler()){
+                        a.setZaehler((a.getNummer()+1));
+
+                    }
+                }
+
+            }
+
+            /**
             do {
                 // Artikel-Objekt einlesen
                 einArtikel = pm.ladeArtikel();
@@ -83,6 +102,10 @@ public class ArtikelVerwaltung {
                 }
 
             } while (einArtikel != null);
+            */
+
+
+
 
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
@@ -104,6 +127,7 @@ public class ArtikelVerwaltung {
         // PersistenzManager für Schreibvorgänge öffnen
         pm.openForWriting(datei);
 
+        /**
         // Artikel-Objekte aus der Hashmap artikelBestandNr einlesen und in die Datei schreiben
         if (!artikelBestandNr.isEmpty()) {
             Iterator iter = artikelBestandNr.values().iterator();
@@ -117,6 +141,8 @@ public class ArtikelVerwaltung {
                 }
             }
         }
+        */
+        pm.speichereArtikel(artikelBestandNr);
 
         //Persistenz-Schnittstelle wieder schließen
         pm.close();

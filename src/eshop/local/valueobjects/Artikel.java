@@ -91,6 +91,10 @@ public class Artikel implements Serializable {
             this.bestellteMenge = menge;
         }
 
+        public void setZaehler(int zaehler){
+            this.zaehler = zaehler;
+        }
+
 
 // Getter
 
@@ -123,6 +127,10 @@ public class Artikel implements Serializable {
         // gibt die bestellte Menge eines Artikels zurück
         public int getBestellteMenge() {
             return this.bestellteMenge;
+        }
+
+        public int getZaehler() {
+            return this.zaehler;
         }
 
 
