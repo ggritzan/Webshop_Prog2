@@ -16,7 +16,7 @@ public class MitarbeiterPanel extends JPanel {
     private JButton mitarbeiterButton;
     private JButton kundenButton;
     private JButton rechnungenButton;
-    private JButton logsButton;
+    private JButton bestandsDiagramButton;
     private JButton logoutButton;
 
 
@@ -27,7 +27,7 @@ public class MitarbeiterPanel extends JPanel {
         mitarbeiterButton = new JButton("Mitarbeiter");
         kundenButton = new JButton("Kunden");
         rechnungenButton = new JButton("Rechnungen");
-        logsButton = new JButton("Logs");
+        bestandsDiagramButton = new JButton("Bestand-Diagram");
         logoutButton = new JButton("Logout");
 
 
@@ -45,17 +45,17 @@ public class MitarbeiterPanel extends JPanel {
 
         // Hinzufügen der Elemente für die Ebene 3
         frameEbene1.add(new JPanel());
+        frameEbene1.add(new JPanel());
         frameEbene1.add(artikelButton);
-        frameEbene1.add(new JPanel());
         frameEbene1.add(mitarbeiterButton);
-        frameEbene1.add(new JPanel());
         frameEbene1.add(kundenButton);
-        frameEbene1.add(new JPanel());
         frameEbene1.add(rechnungenButton);
+        frameEbene1.add(bestandsDiagramButton);
         frameEbene1.add(new JPanel());
-        frameEbene1.add(logsButton);
         frameEbene1.add(new JPanel());
         frameEbene1.add(logoutButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
 
@@ -83,8 +83,8 @@ public class MitarbeiterPanel extends JPanel {
         return rechnungenButton;
     }
 
-    public JButton getLogsButton() {
-        return logsButton;
+    public JButton getBestandsDiagramButton() {
+        return bestandsDiagramButton;
     }
 
     public JButton getLogoutButton() {
@@ -96,7 +96,7 @@ public class MitarbeiterPanel extends JPanel {
         mitarbeiterButton.addActionListener(a);
         kundenButton.addActionListener(a);
         rechnungenButton.addActionListener(a);
-        logsButton.addActionListener(a);
+        bestandsDiagramButton.addActionListener(a);
         logoutButton.addActionListener(a);
     }
 
