@@ -44,3 +44,7 @@ Sa 2013.06.08 um 21:13:54 MESZ:%'Memorie'%1007%0%
 So 2013.06.09 um 16:06:16 MESZ:%'Stift'%1001%390%
 So 2013.06.09 um 16:06:16 MESZ:%'HTC One S'%1000%4%
 So 2013.06.09 um 16:06:16 MESZ:%'Jeans'%1002%41%
+Di 2013.06.11 um 12:36:25 MESZ:%'Testartikel'%1007%0%
+Di 2013.06.11 um 12:57:55 MESZ:%'MG'%1007%0%
+Di 2013.06.11 um 13:00:48 MESZ:%'a'%1006%0%
+Di 2013.06.11 um 13:44:07 MESZ:%'Massengutartikel'%1006%0%

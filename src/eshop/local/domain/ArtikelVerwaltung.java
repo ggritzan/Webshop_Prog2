@@ -10,12 +10,9 @@ import java.util.Vector;
 
 import eshop.local.exception.*;
 import eshop.local.persistence.Log;
-import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.*;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.PersistenceManager;
-import eshop.local.valueobjects.Kunde;
-import eshop.local.valueobjects.Mitarbeiter;
-import eshop.local.valueobjects.Person;
 
 /**
  * Created with IntelliJ IDEA.
@@ -151,6 +148,25 @@ public class ArtikelVerwaltung {
 
         }
 
+    }
+
+    public void massengutartikelHinzufuegen (String name, String beschreibung, double preis, int packung, Mitarbeiter m) throws ArtikelExestierBereitsException, IOException{
+        if (artikelBestandName.containsKey(name)) {
+            throw new ArtikelExestierBereitsException(name);
+
+        } else {
+            // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
+
+            MassengutArtikel artikel = new MassengutArtikel(name, beschreibung, preis, packung);
+            artikelBestandNr.put(artikel.getNummer(), artikel);
+            artikelBestandName.put(name, artikel.getNummer());
+            Date dNow = new Date();
+            String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() +" und der Packungsgröße "+ artikel.getPackungsgroesse()+ " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
+            l.writeLog(dateiName, text);
+            String graphData = ft.format(dNow) + "%'" + name + "'%" + artikel.getNummer() + "%" + 0 + "%";
+            l.writeGraphData(dateiFuerGraph, graphData);
+
+        }
     }
 
     /**

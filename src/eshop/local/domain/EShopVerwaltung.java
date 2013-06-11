@@ -222,6 +222,10 @@ public class EShopVerwaltung {
 
     }
 
+    public void fuegeMassengutArtikelEin(String name, String beschreibung, double preis, int packung, Mitarbeiter m ) throws IOException, ArtikelExestierBereitsException {
+        meineArtikel.massengutartikelHinzufuegen(name, beschreibung, preis, packung, m);
+    }
+
     /**
      * Methode zum Einfügen eines neuen Kunden in den Bestand.
      *

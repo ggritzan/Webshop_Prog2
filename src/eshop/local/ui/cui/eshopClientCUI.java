@@ -506,6 +506,28 @@ public class eshopClientCUI {
                         System.err.println(me.getMessage());
                     }
 
+                } else if (input.equals("am")) {
+                    try {
+                        System.out.println("Artikelname: ");
+                        String aName = liesEingabe();
+                        System.out.print("Artikel Beschreibung > ");
+                        String aBeschreibung = liesEingabe();
+                        System.out.print("Artikel Preis  > ");
+                        String aPreisEingabe = liesEingabe();
+                        double aPreis = Double.parseDouble(aPreisEingabe);
+                        System.out.println("Zulaessige Packungsgroesse :");
+                        String aPackungEingabe = liesEingabe();
+                        int aPackung = Integer.parseInt(aPackungEingabe);
+                        eShopVerwaltung.fuegeMassengutArtikelEin(aName, aBeschreibung, aPreis, aPackung, eShopVerwaltung.getMitarbeiter(mNr));
+                    } catch(NumberFormatException e) {
+
+                    } catch (LeereEingabeException le) {
+                        System.err.println(le.getMessage());
+                    } catch (MitarbeiterExistiertNichtException men) {
+                        System.err.println(men.getMessage());
+                    } catch (ArtikelExestierBereitsException aeb) {
+                        System.err.println(aeb.getMessage());
+                    }
                 } else if (input.equals("ab")) {
 
                     boolean ok = false;

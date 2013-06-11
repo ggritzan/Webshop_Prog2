@@ -1,5 +1,7 @@
 package eshop.local.valueobjects;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
@@ -8,9 +10,11 @@ package eshop.local.valueobjects;
  * To change this template use File | Settings | File Templates.
  */
 
-public class MassengutArtikel extends Artikel{
+public class MassengutArtikel extends Artikel implements Serializable {
 
+    private static final long serialVersionUID = 2109398534357810497L;
     // Attribute zur Beschreibung eines MassengutArtikels
+
     private int packungsgroesse;
 
     // Konstruktor für neue MassengutArtikel
@@ -19,6 +23,10 @@ public class MassengutArtikel extends Artikel{
          super(name, beschreibung, preis);
          this.packungsgroesse = packungsgroesse;
 
+    }
+    public String toString() {
+        String string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() +"\t\tPackungsgroesse : " + getPackungsgroesse() + "\t Bestand: " + getBestand() + "\n" + "\t BestellteMenge: " + getBestellteMenge() + "\n" ;
+        return string;
     }
 
     // Setter & Getter
