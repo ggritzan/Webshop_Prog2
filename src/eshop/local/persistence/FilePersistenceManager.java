@@ -88,7 +88,7 @@ public class FilePersistenceManager implements PersistenceManager {
 
     public Artikel ladeArtikel() throws IOException, ClassNotFoundException {
 
-        Artikel artikel = (Artikel) ois.readObject(); //liesArtikel(ois);
+        Artikel artikel = liesArtikel(ois); //liesArtikel(ois);
 
         return artikel;
     }
@@ -266,15 +266,7 @@ public class FilePersistenceManager implements PersistenceManager {
 
         try {
             return (Artikel) ois.readObject();
-//            Object obj = ois.readObject();
-//            if (obj instanceof MassengutArtikel) {
-////                MassengutArtikel mA = new MassengutArtikel((MassengutArtikel)ois.readObject());
-////                return mA;
-//                return (MassengutArtikel) obj;
-//            } else {
-//                Artikel a = new Artikel((Artikel)ois.readObject());
-//                return a;
-//            }
+
 
         } catch (EOFException exc) {
             return null;
@@ -320,6 +312,8 @@ public class FilePersistenceManager implements PersistenceManager {
 
 
     }
+
+
 
     /**
      * Methode zum auslesen von Mitarbeiter Objekten aus einem uebergebenden ObjectInputStream.
