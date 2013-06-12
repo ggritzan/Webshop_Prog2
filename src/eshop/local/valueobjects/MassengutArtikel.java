@@ -13,8 +13,8 @@ import java.io.Serializable;
 public class MassengutArtikel extends Artikel implements Serializable {
 
     private static final long serialVersionUID = 2109398534357810497L;
-    // Attribute zur Beschreibung eines MassengutArtikels
 
+    // Attribute zur Beschreibung eines MassengutArtikels
     private int packungsgroesse;
 
     // Konstruktor für neue MassengutArtikel
