@@ -105,9 +105,6 @@ public class ArtikelVerwaltung {
             } while (einArtikel != null);
 
 
-
-
-
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
         } catch (IOException e) {
@@ -137,7 +134,7 @@ public class ArtikelVerwaltung {
                     MassengutArtikel m = (MassengutArtikel) a;
                     pm.speichereMassengutArtikel(m);
                 } else {
-                     pm.speichereArtikel(a);
+                    pm.speichereArtikel(a);
                 }
             }
         }
@@ -153,9 +150,7 @@ public class ArtikelVerwaltung {
     /**
      * @param name
      * @param beschreibung
-     * @param preis  * Methode zum hinzufuegen von Artikeln
-     *
-
+     * @param preis        * Methode zum hinzufuegen von Artikeln
      */
     public void artikelHinzufuegen(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
@@ -181,7 +176,7 @@ public class ArtikelVerwaltung {
 
     }
 
-    public void massengutartikelHinzufuegen (String name, String beschreibung, double preis, int packung, Mitarbeiter m) throws ArtikelExestierBereitsException, IOException{
+    public void massengutartikelHinzufuegen(String name, String beschreibung, double preis, int packung, Mitarbeiter m) throws ArtikelExestierBereitsException, IOException {
         if (artikelBestandName.containsKey(name)) {
             throw new ArtikelExestierBereitsException(name);
 
@@ -192,7 +187,7 @@ public class ArtikelVerwaltung {
             artikelBestandNr.put(artikel.getNummer(), artikel);
             artikelBestandName.put(name, artikel.getNummer());
             Date dNow = new Date();
-            String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() +" und der Packungsgröße "+ artikel.getPackungsgroesse()+ " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
+            String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " und der Packungsgröße " + artikel.getPackungsgroesse() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
             l.writeLog(dateiName, text);
             String graphData = ft.format(dNow) + "%'" + name + "'%" + artikel.getNummer() + "%" + 0 + "%";
             l.writeGraphData(dateiFuerGraph, graphData);
@@ -203,14 +198,17 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
      *
-     * @param artikel
+     * @param a
      */
     public void artikelHinzufuegen(Artikel a) {
 
         // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
-//        Artikel a = new Artikel(artikel);
+//       Artikel a = new Artikel(artikel);
         artikelBestandNr.put(a.getNummer(), a);
         artikelBestandName.put(a.getName(), a.getNummer());
+        if (a.getZaehler() <= a.getNummer()) {
+            a.setZaehler(a.getNummer() + 1);
+        }
 
     }
 
@@ -222,6 +220,7 @@ public class ArtikelVerwaltung {
         artikelBestandName.put(artikel.getName(), m.getNummer());
     }
      */
+
     /**
      * Methode zum l&ouml;schen von Artikel
      *
@@ -259,15 +258,25 @@ public class ArtikelVerwaltung {
         Vector<Artikel> ergebnis = new Vector<Artikel>();
 
         for (Artikel elem : artikelBestandNr.values())
-                if(elem instanceof MassengutArtikel) {
-                    System.out.println("MG");
-                    ergebnis.add(elem);
-                } else {
-                    System.out.println("A");
-                    ergebnis.add(elem);
-                }
+            if (elem instanceof MassengutArtikel) {
+                System.out.println("MG");
+                ergebnis.add(elem);
+            } else {
+                System.out.println("A");
+                ergebnis.add(elem);
+            }
 
         return ergebnis;
+
+    }
+
+    /**
+     * Methode gibt die HashMap zurueck die alle vorhandenen Artikeln enthaelt
+     */
+    public HashMap<Integer, Artikel> alleArtikelHashMapZurueckgeben() {
+
+
+        return artikelBestandNr;
 
     }
 
@@ -342,13 +351,13 @@ public class ArtikelVerwaltung {
      * @param menge Integer
      */
     public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException {
-        if ((menge >= 0) & (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge) ) {
+        if ((menge >= 0) & (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge)) {
             artikelBestandNr.get(artikel.getNummer()).setBestellteMenge(menge);
 
         } else if (!(menge >= 0)) {
             throw new ArtikelBestellteMengeNegativException();
 
-        } else if(!(artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge) ) {
+        } else if (!(artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge)) {
             throw new ArtikelBestandZuNiedrigException(artikel);
         }
     }
@@ -378,15 +387,15 @@ public class ArtikelVerwaltung {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
     }
 
-    public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
+    public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast);
     }
 
-    public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+    public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_ArtikelLog.txt", aNr);
     }
 
-    public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
+    public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException {
         return l.printLog("Eshop_ArtikelLog.txt");
     }
 

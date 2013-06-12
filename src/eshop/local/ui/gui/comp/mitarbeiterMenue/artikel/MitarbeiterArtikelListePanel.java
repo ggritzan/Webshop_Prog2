@@ -1,6 +1,7 @@
 package eshop.local.ui.gui.comp.mitarbeiterMenue.artikel;
 
 import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
+import eshop.local.valueobjects.Artikel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -8,6 +9,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -26,7 +28,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     private MitarbeiterArtikelHinzufuegenPanel addMitarbeiterArtikelHinzufuegenPanel;
     private MitarbeiterMassengutartikelHinzufuegenPanel addMitarbeiterMassengutartikelHinzufuegenPanel;
 
-    public MitarbeiterArtikelListePanel(Vector alleArtikel) {
+    public MitarbeiterArtikelListePanel(HashMap<Integer,Artikel> alleArtikel) {
         // Tabelle erzeugen und Eigenschaften setzen
         table = new JTable();
         tmodel = new ArtikelTableModel(alleArtikel);
@@ -82,7 +84,9 @@ public class MitarbeiterArtikelListePanel extends JPanel {
         table.addMouseListener(mA);
     }
 
-
+    public ArtikelTableModel getTmodel() {
+        return tmodel;
+    }
 
     public String getArtikelName() {
         return addMitarbeiterArtikelHinzufuegenPanel.getArtikelName();

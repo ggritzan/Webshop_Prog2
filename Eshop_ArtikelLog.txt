@@ -73,3 +73,30 @@ Der Masengutartikel '3' mit der Artikelnummer 1001 und der Packungsgröße 3 wur
 Di 2013.06.11 um 17:24:59 MESZ:
 Der Masengutartikel '5' mit der Artikelnummer 1002 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+Mi 2013.06.12 um 14:56:20 MESZ:
+Der Artikel 'Hans' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:34:25 MESZ:
+Der Artikel '5' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Mi 2013.06.12 um 17:38:11 MESZ:
+Der Artikel 'Jeans' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:38:23 MESZ:
+Der Artikel 'Hose' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:47:16 MESZ:
+Der Artikel 'Blkubbber' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:50:35 MESZ:
+Der Artikel 'Turnhose' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:50:58 MESZ:
+Der Artikel 'ggga' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:52:04 MESZ:
+Der Artikel 'asd' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 17:52:48 MESZ:
+Der Artikel 'asd' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+

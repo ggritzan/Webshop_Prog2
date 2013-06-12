@@ -1,8 +1,10 @@
 package eshop.local.ui.gui.comp.tableModels;
 
 import eshop.local.valueobjects.Artikel;
+import eshop.local.valueobjects.MassengutArtikel;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,7 +19,8 @@ public class ArtikelTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -5473134880835886184L;
 
-    private Vector<Artikel> artikelVector;
+    //private Vector<Artikel> artikelVector;
+    private HashMap<Integer, Artikel> artikelHashMap;
 
     private String[] columnNames = {"ArtNr", "Bezeichnung", "Preis", "Bestand"};
 
@@ -27,21 +30,22 @@ public class ArtikelTableModel extends AbstractTableModel {
      * Konstruktor
      * @param alleAktuellenArtikel
      */
-    public ArtikelTableModel(Vector<Artikel> alleAktuellenArtikel) {
-        this.artikelVector = alleAktuellenArtikel;
-    }
+    public ArtikelTableModel(HashMap<Integer,Artikel> alleAktuellenArtikel) {
+        this.artikelHashMap = alleAktuellenArtikel;
 
-    /**
-     * definiert die Anzahl der Spalten
-     * @return
-     */
-    @Override
-    public int getRowCount() {
-        return artikelVector.size();
     }
 
     /**
      * definiert die Anzahl der Zeilen
+     * @return
+     */
+    @Override
+    public int getRowCount() {
+        return artikelHashMap.size();
+    }
+
+    /**
+     * definiert die Anzahl der Spalten
      * @return
      */
     @Override
@@ -57,7 +61,18 @@ public class ArtikelTableModel extends AbstractTableModel {
      */
     @Override
     public Object getValueAt(int row, int col) {
-        Artikel artikel = artikelVector.get(row);
+
+        Vector<Artikel> getValue = new Vector<Artikel>();
+
+        //
+        for (Artikel elem : artikelHashMap.values()){
+            getValue.add(elem);
+
+        }
+
+        Artikel artikel = getValue.get(row);
+
+
 
         switch (col) {
             case 0:
@@ -71,6 +86,7 @@ public class ArtikelTableModel extends AbstractTableModel {
             default:
                 return null;
         }
+
     }
 
     /**

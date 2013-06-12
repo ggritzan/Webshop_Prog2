@@ -15,6 +15,7 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeit
 import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsPopup;
 import eshop.local.ui.gui.comp.registrierung.*;
+import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
 import eshop.local.valueobjects.Adresse;
 
 // Imports der von Java bereit gestellten Klassen
@@ -144,7 +145,7 @@ public class EShopClientGUI extends JFrame {
         addMitarbeiterPanel = new MitarbeiterPanel();
 
         // Erzeugt das ArtikellistePanel
-        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
+        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.giballeArtikelHashMapZurueckgeben());
 
         // Erzeugt das MitarbeiterMitarbeiterListePanel
         addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
@@ -184,13 +185,14 @@ public class EShopClientGUI extends JFrame {
     public void mitarbeiterPanelReloader(char param) {
         switch (param) {
             case 'a':
-                switchPanel.removeAll();
-                addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
+                //switchPanel.removeAll();
+                //addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
                 addMitarbeiterArtikelListePanel.resetAllJTextfields();
-                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+                //switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                //switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+                addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
                 switchPanelRepainter();
-                initListeners();
+                //initListeners();
                 break;
 
 
@@ -265,7 +267,7 @@ public class EShopClientGUI extends JFrame {
                         }
                         addLoginPanel.resetJTextfields();
                         switchPanel.remove(addLoginPanel);
-                        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
+                        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.giballeArtikelHashMapZurueckgeben());
                         addMitarbeiterArtikelListePanel.resetAllJTextfields();
                         switchPanelRepainter();
                         switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);

@@ -3,6 +3,7 @@ package eshop.local.domain;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
@@ -69,6 +70,15 @@ public class EShopVerwaltung {
     public Vector gibAlleArtikel() {
         // delegiert an die Artikelverwaltung
         return meineArtikel.alleArtikelZurueckgeben();
+    }
+
+    /**
+     * Methode gibt die HashMap zurueck die alle vorhandenen Artikeln enthaelt
+     */
+    public HashMap<Integer,Artikel> giballeArtikelHashMapZurueckgeben() {
+
+        return meineArtikel.alleArtikelHashMapZurueckgeben();
+
     }
 
     /**
