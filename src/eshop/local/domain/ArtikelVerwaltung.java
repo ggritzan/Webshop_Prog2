@@ -203,7 +203,7 @@ public class ArtikelVerwaltung {
     /**
      * Methode zum hinzufuegen von Artikeln durch den PersistenceManager
      *
-     * @param artikel
+     * @param a
      */
     public void artikelHinzufuegen(Artikel a) {
 
@@ -341,9 +341,18 @@ public class ArtikelVerwaltung {
      *
      * @param menge Integer
      */
-    public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException {
-        if ((menge >= 0) & (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge) ) {
+    public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException, BestellteMengeEntsprichtNichtderPackungsgroesseException {
+
+        if ((menge >= 0) && (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge) ) {
             artikelBestandNr.get(artikel.getNummer()).setBestellteMenge(menge);
+
+            if (artikel instanceof MassengutArtikel) {
+                if (menge % ((MassengutArtikel) artikel).getPackungsgroesse() == 0) {
+                    artikelBestandNr.get(artikel.getNummer()).setBestellteMenge(menge);
+                } else {
+                    throw new BestellteMengeEntsprichtNichtderPackungsgroesseException((MassengutArtikel)artikel, menge);
+                }
+            }
 
         } else if (!(menge >= 0)) {
             throw new ArtikelBestellteMengeNegativException();

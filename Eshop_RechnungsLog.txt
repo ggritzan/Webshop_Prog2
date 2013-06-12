@@ -15,3 +15,12 @@ So 2013.06.09 um 20:53:46 MESZ:: Die Rechnung mit der Rechnungsnummer 1001 wurde
 
 Mo 2013.06.10 um 14:54:12 MESZ:: Die Rechnung mit der Rechnungsnummer 1001 wurde gelöscht.
 
+Mi 2013.06.12 um 14:26:37 MESZ:
+Die Rechnung mit der Rechnungsnummer 1003 wurde hinzugefügt.
+
+Mi 2013.06.12 um 15:19:18 MESZ:
+Die Rechnung mit der Rechnungsnummer 1003 wurde hinzugefügt.
+
+Mi 2013.06.12 um 15:19:37 MESZ:
+Die Rechnung mit der Rechnungsnummer 1004 wurde hinzugefügt.
+

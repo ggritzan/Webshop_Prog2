@@ -73,3 +73,24 @@ Der Masengutartikel '3' mit der Artikelnummer 1001 und der Packungsgröße 3 wur
 Di 2013.06.11 um 17:24:59 MESZ:
 Der Masengutartikel '5' mit der Artikelnummer 1002 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+Mi 2013.06.12 um 14:22:19 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 200.
+
+Mi 2013.06.12 um 14:22:40 MESZ:
+Der Bestand des Artikels '3' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 200.
+
+Mi 2013.06.12 um 15:05:34 MESZ:
+Der Masengutartikel 'Große Sieben' mit der Artikelnummer 1000 und der Packungsgröße 7 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 15:06:44 MESZ:
+Der Bestand des Artikels 'Große Sieben' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 777.
+
+Mi 2013.06.12 um 15:19:18 MESZ:
+Der Bestand des Artikels '3' mit der Artikelnummer 1001 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 197.
+
+Mi 2013.06.12 um 15:19:18 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 195.
+
+Mi 2013.06.12 um 15:19:37 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 190.
+
