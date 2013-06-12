@@ -64,7 +64,7 @@ public class ArtikelTableModel extends AbstractTableModel {
 
         Vector<Artikel> getValue = new Vector<Artikel>();
 
-        //
+        // Füllt den ArtikelVector getValue mit den Artikel aus der Hashmap
         for (Artikel elem : artikelHashMap.values()){
             getValue.add(elem);
 

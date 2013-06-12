@@ -147,6 +147,9 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt das ArtikellistePanel
         addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.giballeArtikelHashMapZurueckgeben());
 
+        // Erzeugt ein Popup für das Artikelmenü
+        addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
+
         // Erzeugt das MitarbeiterMitarbeiterListePanel
         addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
 
@@ -185,7 +188,15 @@ public class EShopClientGUI extends JFrame {
     public void mitarbeiterPanelReloader(char param) {
         switch (param) {
             case 'a':
+                //leert das SwitchPanel
+                switchPanel.removeAll();
+                // fuegt das MitarbeiterPanel hinzu
+                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // fuegt das MitarbeiterArtikelListePanel hinzu
+                switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+                // setzt die JTextfields des MitarbeiterArtikelListePanel zurueck
                 addMitarbeiterArtikelListePanel.resetAllJTextfields();
+                // aktualisiert die ArtikelListe
                 addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
                 switchPanelRepainter();
                 break;
@@ -262,12 +273,11 @@ public class EShopClientGUI extends JFrame {
                         }
                         addLoginPanel.resetJTextfields();
                         switchPanel.remove(addLoginPanel);
-                        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.giballeArtikelHashMapZurueckgeben());
-                        addMitarbeiterArtikelListePanel.resetAllJTextfields();
-                        switchPanelRepainter();
+                        mitarbeiterPanelReloader('a');
                         switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                         switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                         initListeners();
+
                       // Überprüft ob der Kunde exestier und wechselt bei einem positiven Ergebnis in das Kundenmenue
                     } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                         System.out.println("Ihr Login war erfolgreich.");
@@ -468,9 +478,8 @@ public class EShopClientGUI extends JFrame {
 
                 Object source = ae.getSource();
                 if (source == addMitarbeiterPanel.getArtikelButton()) {
-                    switchPanel.removeAll();
-                    switchPanelRepainter();
                     mitarbeiterPanelReloader('a');
+
 
 
                 } else if (source == addMitarbeiterPanel.getMitarbeiterButton()) {
@@ -554,12 +563,9 @@ public class EShopClientGUI extends JFrame {
                     aktuellePositionY = e.getYOnScreen();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
+
                     // Artikelnummer des ausgewählten Artikels
                     ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
-
-
-                    // Erzeugt ein Popup für das Artikelmenü
-                    addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
 
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
@@ -886,7 +892,7 @@ public class EShopClientGUI extends JFrame {
                     eShopVerwaltung.schreibeArtikel();
                     eShopVerwaltung.schreibeMitarbeiter();
                     eShopVerwaltung.schreibeRechung();
-                    System.out.println("Alle Daten des EShops wurden gesichert!");
+
 
                 } catch (IOException e) {
                     // TODO Auto-generated catch block

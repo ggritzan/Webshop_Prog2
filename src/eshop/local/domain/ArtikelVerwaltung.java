@@ -324,12 +324,13 @@ public class ArtikelVerwaltung {
         }
     }
 
+    //TODO @Nina Hey hier ist beim mergen irgendwas daneben gegangen guck dir das Bitte nochmal an
     /**
      * Methode setzt den Wert wieviel Artikel bestellt werden sollen
      *
      * @param menge Integer
      */
-    public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException {
+    public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException, BestellteMengeEntsprichtNichtderPackungsgroesseException {
         if ((menge >= 0) & (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge)) {
             artikelBestandNr.get(artikel.getNummer()).setBestellteMenge(menge);
 
