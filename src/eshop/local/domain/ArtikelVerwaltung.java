@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import eshop.local.exception.*;
 import eshop.local.persistence.Log;
 import eshop.local.valueobjects.*;
@@ -74,26 +75,6 @@ public class ArtikelVerwaltung {
             // PersistenzManager für Lesevorgänge wird geöffnet
             pm.openForReading(datei);
 
-            /*
-            HashMap<Integer,Artikel> puffer = pm.ladeArtikel();
-
-            artikelBestandNr = puffer;
-
-
-            if(!artikelBestandNr.isEmpty()){
-                Iterator iter = artikelBestandNr.values().iterator();
-                while(iter.hasNext()){
-                    Artikel a = (Artikel)iter.next();
-                    artikelBestandName.put(a.getName(),a.getNummer());
-                    if(a.getNummer() > a.getZaehler()){
-                        a.setZaehler((a.getNummer()+1));
-
-                    }
-                }
-
-            }
-            */
-
             do {
                 // Artikel-Objekt einlesen
                 einArtikel = pm.ladeArtikel();
@@ -139,18 +120,17 @@ public class ArtikelVerwaltung {
             }
         }
 
-        /*
-        pm.speichereArtikel(artikelBestandNr);
-        */
 
         //Persistenz-Schnittstelle wieder schließen
         pm.close();
     }
 
     /**
+     * Methode zum hinzufuegen von Artikeln
+     *
      * @param name
      * @param beschreibung
-     * @param preis        * Methode zum hinzufuegen von Artikeln
+     * @param preis
      */
     public void artikelHinzufuegen(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
@@ -176,6 +156,18 @@ public class ArtikelVerwaltung {
 
     }
 
+    /**
+     * Die Methode fügt einen Massengutartikel hinzu
+     *
+     * @param name
+     * @param beschreibung
+     * @param preis
+     * @param packung
+     * @param m
+     * @throws ArtikelExestierBereitsException
+     *
+     * @throws IOException
+     */
     public void massengutartikelHinzufuegen(String name, String beschreibung, double preis, int packung, Mitarbeiter m) throws ArtikelExestierBereitsException, IOException {
         if (artikelBestandName.containsKey(name)) {
             throw new ArtikelExestierBereitsException(name);
@@ -183,13 +175,13 @@ public class ArtikelVerwaltung {
         } else {
             // Ist der Artikelname noch nicht vorhanden wird er neu angelegt und in den beiden HasMaps gespeichert (artikelBestandNr, artikelBestandName)
 
-            MassengutArtikel artikel = new MassengutArtikel(name, beschreibung, preis, packung);
-            artikelBestandNr.put(artikel.getNummer(), artikel);
-            artikelBestandName.put(name, artikel.getNummer());
+            MassengutArtikel massengutArtikel = new MassengutArtikel(name, beschreibung, preis, packung);
+            artikelBestandNr.put(massengutArtikel.getNummer(), massengutArtikel);
+            artikelBestandName.put(name, massengutArtikel.getNummer());
             Date dNow = new Date();
-            String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " und der Packungsgröße " + artikel.getPackungsgroesse() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
+            String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + massengutArtikel.getNummer() + " und der Packungsgröße " + massengutArtikel.getPackungsgroesse() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
             l.writeLog(dateiName, text);
-            String graphData = ft.format(dNow) + "%'" + name + "'%" + artikel.getNummer() + "%" + 0 + "%";
+            String graphData = ft.format(dNow) + "%'" + name + "'%" + massengutArtikel.getNummer() + "%" + 0 + "%";
             l.writeGraphData(dateiFuerGraph, graphData);
 
         }
@@ -201,28 +193,15 @@ public class ArtikelVerwaltung {
      * @param a
      */
     public void artikelHinzufuegen(Artikel a) {
-
-        // Erzeugt Artikel mit ihrer bisherigen Artikelnummer
-//       Artikel a = new Artikel(artikel);
         artikelBestandNr.put(a.getNummer(), a);
         artikelBestandName.put(a.getName(), a.getNummer());
         if (a.getZaehler() <= a.getNummer()) {
             a.setZaehler(a.getNummer() + 1);
         }
-
     }
-
-    /*
-    // TODO: löschen!!!! (auch MassengutArtikel-Copy-Konstruktor
-    public void massengutArtikelHinzufuegen(MassengutArtikel artikel) {
-        MassengutArtikel m = new MassengutArtikel(artikel);
-        artikelBestandNr.put(m.getNummer(), m);
-        artikelBestandName.put(artikel.getName(), m.getNummer());
-    }
-     */
 
     /**
-     * Methode zum l&ouml;schen von Artikel
+     * Methode zum loeschen von Artikel
      *
      * @param artNr
      * @return boolean
@@ -252,11 +231,12 @@ public class ArtikelVerwaltung {
 
     /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Artikeln enthaelt
+     * @return
      */
     public Vector alleArtikelZurueckgeben() {
 
         Vector<Artikel> ergebnis = new Vector<Artikel>();
-
+        //TODO Systemout noch entfernen @NINA (wenn du sie nicht mehr bruachst)
         for (Artikel elem : artikelBestandNr.values())
             if (elem instanceof MassengutArtikel) {
                 System.out.println("MG");
@@ -272,15 +252,14 @@ public class ArtikelVerwaltung {
 
     /**
      * Methode gibt die HashMap zurueck die alle vorhandenen Artikeln enthaelt
+     * @return
      */
     public HashMap<Integer, Artikel> alleArtikelHashMapZurueckgeben() {
-
-
         return artikelBestandNr;
-
     }
 
     /**
+     * Relikt aus der CUI
      * Methode durchsucht alle Artikel nach dem Parameter name und gibt den entsprechenden Artikel in einem Vektor zurueck
      *
      * @param name
@@ -333,7 +312,7 @@ public class ArtikelVerwaltung {
             }
 
 
-            //vwirft eine Exception wenn die Artikelnummer des Artikels nicht exestiert
+          // wirft eine Exception wenn die Artikelnummer des Artikels nicht exestiert
         } else if (!artikelBestandNr.containsKey(artNr)) {
             throw new ArtikelExestiertNichtException(artNr);
 
@@ -362,6 +341,12 @@ public class ArtikelVerwaltung {
         }
     }
 
+    /**
+     * Gibt einen Artikel anhand der Artikenummer zurueck
+     * @param aNr
+     * @return
+     * @throws ArtikelExestiertNichtException
+     */
     public Artikel getArtikel(int aNr) throws ArtikelExestiertNichtException {
         if (artikelBestandNr.containsKey(aNr)) {
             return artikelBestandNr.get(aNr);
@@ -375,6 +360,11 @@ public class ArtikelVerwaltung {
 
     }
 
+    /**
+     * Gibt true zurück wenn der Artikel exestiert, false wenn er nicht exestiert
+     * @param aNr
+     * @return
+     */
     public boolean existiertArtikel(int aNr) {
         if (artikelBestandNr.containsKey(aNr)) {
             return true;
@@ -383,6 +373,7 @@ public class ArtikelVerwaltung {
         }
     }
 
+    // TODO @Noshaba Kommentieren Bitte !!!
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
     }

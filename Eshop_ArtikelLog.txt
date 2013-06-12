@@ -73,3 +73,12 @@ Der Masengutartikel '3' mit der Artikelnummer 1001 und der Packungsgröße 3 wur
 Di 2013.06.11 um 17:24:59 MESZ:
 Der Masengutartikel '5' mit der Artikelnummer 1002 und der Packungsgröße 5 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+Mi 2013.06.12 um 18:22:14 MESZ:
+Der Artikel 'Hose' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Mi 2013.06.12 um 18:22:23 MESZ:
+Der Artikel 'Test' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mi 2013.06.12 um 18:22:55 MESZ:
+Der Artikel 'Turnhose' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

@@ -185,14 +185,9 @@ public class EShopClientGUI extends JFrame {
     public void mitarbeiterPanelReloader(char param) {
         switch (param) {
             case 'a':
-                //switchPanel.removeAll();
-                //addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikel());
                 addMitarbeiterArtikelListePanel.resetAllJTextfields();
-                //switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                //switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                 addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
                 switchPanelRepainter();
-                //initListeners();
                 break;
 
 
