@@ -1,6 +1,7 @@
 package eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung;
 
 import eshop.local.ui.gui.comp.tableModels.RechnungsTableModel;
+import eshop.local.valueobjects.Rechnung;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -8,6 +9,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -24,7 +26,7 @@ public class MitarbeiterRechnungsListePanel extends JPanel {
     private RowSorter<RechnungsTableModel> sorter;
 
 
-    public MitarbeiterRechnungsListePanel(Vector alleRechnungen) {
+    public MitarbeiterRechnungsListePanel(HashMap<Integer,Rechnung> alleRechnungen) {
         // Tabelle erzeugen und Eigenschaften setzen
         table = new JTable();
         tmodel = new RechnungsTableModel(alleRechnungen);
@@ -55,7 +57,13 @@ public class MitarbeiterRechnungsListePanel extends JPanel {
         table.addMouseListener(mA);
     }
 
+// Getter
 
-
-
+    /**
+     * Getter fuer der TableModel
+     * @return
+     */
+    public RechnungsTableModel getTmodel() {
+        return tmodel;
+    }
 }

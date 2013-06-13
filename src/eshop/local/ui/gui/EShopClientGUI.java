@@ -156,7 +156,7 @@ public class EShopClientGUI extends JFrame {
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKundenHashMapZurueckgeben());
 
         // Erzeugt das RechnungsListenPanel
-        addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungen());
+        addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungenHashMapZurueckgeben());
 
         // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
@@ -186,6 +186,8 @@ public class EShopClientGUI extends JFrame {
      */
     public void mitarbeiterPanelReloader(char param) {
         switch (param) {
+
+
             case 'a':
                 //leert das SwitchPanel
                 switchPanel.removeAll();
@@ -214,9 +216,6 @@ public class EShopClientGUI extends JFrame {
                 break;
 
 
-
-
-
             case 'k':
                 //leert das SwitchPanel
                 switchPanel.removeAll();
@@ -229,14 +228,19 @@ public class EShopClientGUI extends JFrame {
                 switchPanelRepainter();
                 break;
 
+
             case 'r':
+                //leert das SwitchPanel
                 switchPanel.removeAll();
-                addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungen());
-                switchPanelRepainter();
+                // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // aktualisiert die RechnungsListe
+                addMitarbeiterRechnungsListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das MitarbeiterRechnungsListePanel hinzu
                 switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
                 break;
+
 
             case 'd':
                 break;

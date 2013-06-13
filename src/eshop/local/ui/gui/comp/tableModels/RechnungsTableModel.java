@@ -1,10 +1,10 @@
 package eshop.local.ui.gui.comp.tableModels;
 
-import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Rechnung;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -17,8 +17,7 @@ import java.util.Vector;
 public class RechnungsTableModel extends AbstractTableModel {
     private static final long serialVersionUID = -937113488035886184L;
 
-    private Vector<Rechnung> rechnungsVector;
-
+    private HashMap<Integer, Rechnung> rechnungsHashMap;
 
     private String[] columnNames = {"ReNr", "KNr", "bestellte Artikel", "gesamt Preis"};
 
@@ -28,8 +27,8 @@ public class RechnungsTableModel extends AbstractTableModel {
      * Konstruktor
      * @param alleAktuellenRechnungen
      */
-    public RechnungsTableModel(Vector<Rechnung> alleAktuellenRechnungen) {
-        this.rechnungsVector = alleAktuellenRechnungen;
+    public RechnungsTableModel(HashMap<Integer, Rechnung> alleAktuellenRechnungen) {
+        this.rechnungsHashMap = alleAktuellenRechnungen;
     }
 
     /**
@@ -38,7 +37,7 @@ public class RechnungsTableModel extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return rechnungsVector.size();
+        return rechnungsHashMap.size();
     }
 
     /**
@@ -58,7 +57,15 @@ public class RechnungsTableModel extends AbstractTableModel {
      */
     @Override
     public Object getValueAt(int row, int col) {
-        Rechnung rechnung = rechnungsVector.get(row);
+
+        Vector<Rechnung> getValue = new Vector<Rechnung>();
+
+        // Füllt den ArtikelVector getValue mit den Artikel aus der Hashmap
+        for (Rechnung elem : rechnungsHashMap.values()){
+            getValue.add(elem);
+        }
+
+        Rechnung rechnung = getValue.get(row);
 
 
         switch (col) {
