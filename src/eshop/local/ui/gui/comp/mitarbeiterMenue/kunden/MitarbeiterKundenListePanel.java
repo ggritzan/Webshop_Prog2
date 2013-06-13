@@ -2,12 +2,14 @@ package eshop.local.ui.gui.comp.mitarbeiterMenue.kunden;
 
 import eshop.local.ui.gui.comp.registrierung.KundenRegistrierungPanel;
 import eshop.local.ui.gui.comp.tableModels.KundenTableModel;
+import eshop.local.valueobjects.Kunde;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -26,7 +28,7 @@ public class MitarbeiterKundenListePanel extends JPanel{
     private KundenRegistrierungPanel addKundenRegistrierungPanel;
 
 
-    public MitarbeiterKundenListePanel(Vector alleKunden) {
+    public MitarbeiterKundenListePanel(HashMap<Integer, Kunde> alleKunden) {
         // Tabelle erzeugen und Eigenschaften setzen
         table = new JTable();
         tmodel = new KundenTableModel(alleKunden);
@@ -54,11 +56,14 @@ public class MitarbeiterKundenListePanel extends JPanel{
     }
 
 
-
-
-
     public void addMouseListener(MouseAdapter mA) {
         table.addMouseListener(mA);
     }
 
+//Getter
+
+    // Gibt das TableModel zurueck
+    public KundenTableModel getTmodel() {
+        return tmodel;
+    }
 }

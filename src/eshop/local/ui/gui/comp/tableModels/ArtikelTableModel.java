@@ -19,7 +19,7 @@ public class ArtikelTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -5473134880835886184L;
 
-    //private Vector<Artikel> artikelVector;
+
     private HashMap<Integer, Artikel> artikelHashMap;
 
     private String[] columnNames = {"ArtNr", "Bezeichnung", "Preis", "Bestand"};
@@ -67,7 +67,6 @@ public class ArtikelTableModel extends AbstractTableModel {
         // Füllt den ArtikelVector getValue mit den Artikel aus der Hashmap
         for (Artikel elem : artikelHashMap.values()){
             getValue.add(elem);
-
         }
 
         Artikel artikel = getValue.get(row);

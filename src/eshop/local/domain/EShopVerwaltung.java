@@ -75,7 +75,7 @@ public class EShopVerwaltung {
     /**
      * Methode gibt die HashMap zurueck die alle vorhandenen Artikeln enthaelt
      */
-    public HashMap<Integer,Artikel> giballeArtikelHashMapZurueckgeben() {
+    public HashMap<Integer,Artikel> gibAlleArtikelHashMapZurueckgeben() {
 
         return meineArtikel.alleArtikelHashMapZurueckgeben();
 
@@ -92,6 +92,14 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Gibt die HashMap mit allen Kunden zurueck
+     * @return
+     */
+    public HashMap<Integer,Kunde> gibAlleKundenHashMapZurueckgeben(){
+        return meineKunden.alleKundenHashMapZurueckgeben();
+    }
+
+    /**
      * Methode, die eine Liste aller im Bestand befindlichen Rechnungen zurückgibt Aufgabe wird an die Rechnungsverwaltung delegiert
      *
      * @return Vector Liste aller Rechnungen im Bestand des EShops als Vector
@@ -102,6 +110,14 @@ public class EShopVerwaltung {
     }
 
     /**
+     * Gibt die HashMap mit allen Rechnungen zurueck
+     * @return
+     */
+    public HashMap<Integer,Rechnung> gibAlleRechnungenHashMapZurueckgeben(){
+        return meineRechnungen.alleRechnungenHashMapZurueckgeben();
+    }
+
+    /**
      * Methode, die eine Liste aller im Bestand befindlichen Mitarbeiter zurückgibt Aufgabe wird an die Mitarbeiterverwaltung delegiert
      *
      * @return Vector Liste aller Mitarbeiter im Bestand des EShops als Vector
@@ -109,6 +125,14 @@ public class EShopVerwaltung {
     public Vector gibAlleMitarbeiter() {
         // delegiert an die Mitarbeiterverwaltung
         return meineMitarbeiter.alleMitarbeiterZurueckgeben();
+    }
+
+    /**
+     * Gibt die HashMap mit allen Mitarbeitern zurueck
+     * @return
+     */
+    public HashMap<Integer,Mitarbeiter> gibAlleMitarbeiterHashMapZurueckgeben(){
+        return meineMitarbeiter.alleMitarbeiterHashMapZurueckgeben();
     }
 
     /**

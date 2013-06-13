@@ -15,7 +15,6 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeit
 import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsPopup;
 import eshop.local.ui.gui.comp.registrierung.*;
-import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
 import eshop.local.valueobjects.Adresse;
 
 // Imports der von Java bereit gestellten Klassen
@@ -145,7 +144,7 @@ public class EShopClientGUI extends JFrame {
         addMitarbeiterPanel = new MitarbeiterPanel();
 
         // Erzeugt das ArtikellistePanel
-        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.giballeArtikelHashMapZurueckgeben());
+        addMitarbeiterArtikelListePanel = new MitarbeiterArtikelListePanel(eShopVerwaltung.gibAlleArtikelHashMapZurueckgeben());
 
         // Erzeugt ein Popup für das Artikelmenü
         addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
@@ -154,7 +153,7 @@ public class EShopClientGUI extends JFrame {
         addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
 
         // Erzeugt das KundenListenPanel
-        addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
+        addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKundenHashMapZurueckgeben());
 
         // Erzeugt das RechnungsListenPanel
         addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungen());
@@ -214,10 +213,13 @@ public class EShopClientGUI extends JFrame {
 
 
             case 'k':
+                //leert das SwitchPanel
                 switchPanel.removeAll();
-                addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());
-                switchPanelRepainter();
+                // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // aktualisiert die ArtikelListe
+                addMitarbeiterKundenListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das MitarbeiterKundenListePanel hinzu
                 switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
                 break;

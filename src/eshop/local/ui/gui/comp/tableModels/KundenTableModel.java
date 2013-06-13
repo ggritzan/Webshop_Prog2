@@ -3,6 +3,7 @@ package eshop.local.ui.gui.comp.tableModels;
 import eshop.local.valueobjects.Kunde;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -16,7 +17,7 @@ public class KundenTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -5473134880839576184L;
 
-    private Vector<Kunde> kundenVector;
+    private HashMap<Integer, Kunde> kundenHashMap;
 
     private String[] columnNames = {"KNr","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
 
@@ -26,8 +27,8 @@ public class KundenTableModel extends AbstractTableModel {
      * Konstruktor
      * @param alleAktuellenKunden
      */
-    public KundenTableModel(Vector<Kunde> alleAktuellenKunden) {
-        this.kundenVector = alleAktuellenKunden;
+    public KundenTableModel(HashMap<Integer, Kunde> alleAktuellenKunden) {
+        this.kundenHashMap = alleAktuellenKunden;
     }
 
     /**
@@ -36,7 +37,7 @@ public class KundenTableModel extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return kundenVector.size();
+        return kundenHashMap.size();
     }
 
     /**
@@ -56,7 +57,14 @@ public class KundenTableModel extends AbstractTableModel {
      */
     @Override
     public Object getValueAt(int row, int col) {
-        Kunde kunde = kundenVector.get(row);
+        Vector<Kunde> getValue = new Vector<Kunde>();
+
+        // Füllt den KundenVector getValue mit den Artikel aus der Hashmap
+        for (Kunde elem : kundenHashMap.values()){
+            getValue.add(elem);
+        }
+
+        Kunde kunde = getValue.get(row);
 
         switch (col) {
             case 0:

@@ -51,3 +51,9 @@ Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit de
 Do 2013.06.13 um 12:36:01 MESZ:
 Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Do 2013.06.13 um 15:45:09 MESZ:
+Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 15:45:15 MESZ:
+Der Kunde 'hmeyer' mit der Kundennummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
