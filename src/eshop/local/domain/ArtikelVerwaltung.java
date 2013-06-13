@@ -331,8 +331,8 @@ public class ArtikelVerwaltung {
      * @param menge Integer
      */
     public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException, BestellteMengeEntsprichtNichtderPackungsgroesseException {
-        if ((menge >= 0) & (artikelBestandNr.get(artikel.getNummer()).getBestand() >= menge)) {
-            artikelBestandNr.get(artikel.getNummer()).setBestellteMenge(menge);
+        if ((menge >= 0) & (artikel.getBestand() >= menge)) {
+            artikel.setBestellteMenge(menge);
 
         } else if (!(menge >= 0)) {
             throw new ArtikelBestellteMengeNegativException();

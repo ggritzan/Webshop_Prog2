@@ -91,6 +91,10 @@ public class Artikel implements Serializable {
             this.bestellteMenge = menge;
         }
 
+        public void setNummer(int nummer) {
+            this.nummer = nummer;
+        }
+
         public void setZaehler(int zaehler){
             this.zaehler = zaehler;
         }

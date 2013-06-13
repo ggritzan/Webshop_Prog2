@@ -178,3 +178,99 @@ Der Bestand des Artikels 'Jeans' mit der Artikelnummer 1000 wurde durch den Mita
 Mi 2013.06.12 um 19:13:44 MESZ:
 Der Bestand des Artikels 'Jeans' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 30.
 
+Mi 2013.06.12 um 15:46:59 MESZ:
+Der Bestand des Artikels '3' mit der Artikelnummer 1001 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 197.
+
+Mi 2013.06.12 um 15:46:59 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 180.
+
+Mi 2013.06.12 um 15:48:12 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 130.
+
+Mi 2013.06.12 um 15:48:26 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 80.
+
+Mi 2013.06.12 um 16:08:01 MESZ:
+Der Bestand des Artikels '3' mit der Artikelnummer 1001 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 174.
+
+Mi 2013.06.12 um 16:08:01 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 75.
+
+Mi 2013.06.12 um 16:08:57 MESZ:
+Der Bestand des Artikels '5' mit der Artikelnummer 1002 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 0.
+
+Mi 2013.06.12 um 16:19:05 MESZ:
+Der Bestand des Artikels 'Große Sieben' mit der Artikelnummer 1000 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 770.
+
+Do 2013.06.13 um 07:20:41 MESZ:
+Der Masengutartikel '7' mit der Artikelnummer 1004 und der Packungsgröße 7 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:20:59 MESZ:
+Der Bestand des Artikels '7' mit der Artikelnummer 1004 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 200.
+
+Do 2013.06.13 um 07:23:23 MESZ:
+Der Artikel '1' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:24:04 MESZ:
+Der Artikel 'Test' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 07:24:09 MESZ:
+Der Artikel 'Jeans' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 07:24:13 MESZ:
+Der Artikel '1' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 07:24:18 MESZ:
+Der Artikel '7' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 07:24:31 MESZ:
+Der Artikel '1' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:24:37 MESZ:
+Der Masengutartikel '7' mit der Artikelnummer 1007 und der Packungsgröße 7 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:24:56 MESZ:
+Der Artikel '7' mit der Artikelnummer 1007 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 07:25:06 MESZ:
+Der Artikel '1' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 07:26:11 MESZ:
+Der Masengutartikel '3' mit der Artikelnummer 1000 und der Packungsgröße 3 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:26:43 MESZ:
+Der Artikel '4' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:27:42 MESZ:
+Der Masengutartikel '7' mit der Artikelnummer 1002 und der Packungsgröße 7 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:28:19 MESZ:
+Der Masengutartikel '8' mit der Artikelnummer 1003 und der Packungsgröße 8 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:28:24 MESZ:
+Der Masengutartikel '2' mit der Artikelnummer 1004 und der Packungsgröße 2 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 07:28:59 MESZ:
+Der Bestand des Artikels '3' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Do 2013.06.13 um 07:29:06 MESZ:
+Der Bestand des Artikels '4' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Do 2013.06.13 um 07:29:11 MESZ:
+Der Bestand des Artikels '7' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Do 2013.06.13 um 07:29:20 MESZ:
+Der Bestand des Artikels '8' mit der Artikelnummer 1003 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Do 2013.06.13 um 07:29:34 MESZ:
+Der Bestand des Artikels '2' mit der Artikelnummer 1004 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Do 2013.06.13 um 07:30:55 MESZ:
+Der Bestand des Artikels '2' mit der Artikelnummer 1004 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 450.
+
+Do 2013.06.13 um 08:02:08 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 08:04:06 MESZ:
+Der Bestand des Artikels '2' mit der Artikelnummer 1004 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 0.
+

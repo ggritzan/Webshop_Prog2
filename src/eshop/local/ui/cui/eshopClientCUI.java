@@ -249,9 +249,27 @@ public class eshopClientCUI {
                         String menge = liesEingabe();
                         int mengeInt = Integer.parseInt(menge);
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
-
-                        eShopVerwaltung.setBestellteMenge(mengeInt, eShopVerwaltung.getArtikel(aNrInt));
-                        eShopVerwaltung.inWarenkorbLegen(a, kNr);
+                        if (a instanceof MassengutArtikel) {
+                            //anlegen einer Massengutartikelkopie, des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
+                            //sich verschiedene Bestellmengen überschreiben
+                            MassengutArtikel mA = new MassengutArtikel(a.getName(), a.getBeschreibung(), a.getPreis(), ((MassengutArtikel) a).getPackungsgroesse());
+                            System.out.println("Yay2");
+                            mA.setBestand(a.getBestand());
+                            mA.setNummer(a.getNummer());
+                            eShopVerwaltung.setBestellteMenge(mengeInt, mA);
+                            System.out.println("Yay3");
+                            eShopVerwaltung.inWarenkorbLegen(mA, kNr);
+                        } else {
+                            //anlegen einer Artikelkopie, des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
+                            //sich verschiedene Bestellmengen überschreiben
+                            Artikel art = new Artikel(a.getName(), a.getBeschreibung(), a.getPreis());
+                            System.out.println("Yay1");
+                            art.setBestand(a.getBestand());
+                            art.setNummer(a.getNummer());
+                            eShopVerwaltung.setBestellteMenge(mengeInt, art);
+                            System.out.println("Yay3");
+                            eShopVerwaltung.inWarenkorbLegen(art, kNr);
+                        }
 
                     } catch (NumberFormatException e) {
 
@@ -284,6 +302,7 @@ public class eshopClientCUI {
                         int aNrInt = Integer.parseInt(aNr);
                         if (eShopVerwaltung.getKunde(kNr).istImWarenkorb(aNrInt)) {
                             Artikel a = eShopVerwaltung.getArtikel(aNrInt);
+
                             eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
                         } else {
                             System.out.println("Artikel exestiert nicht!");
@@ -310,6 +329,7 @@ public class eshopClientCUI {
                     try {
 
                         Kunde kunde = eShopVerwaltung.getKunde(kNr);
+                        System.out.println("Warenkorb von " + kunde.getBenutzername());
 
                         if (kunde.getWarenkorb().size() > 0) {
 
@@ -329,7 +349,6 @@ public class eshopClientCUI {
                     // Erstellt für den aktuellen Warenkorb eines Nutzers eine Rechnung
                 } else if (var == 'b') {
 
-                    boolean ok = false;
                     boolean bestandFehler = false;
 
                     try {
@@ -338,7 +357,6 @@ public class eshopClientCUI {
                         Kunde kunde = eShopVerwaltung.getKunde(kNr);
 
                         if (kunde.getWarenkorb().size() > 0) {
-
 
                             Iterator iter = kunde.getWarenkorb().values().iterator();
                             while (iter.hasNext()) {
@@ -350,11 +368,12 @@ public class eshopClientCUI {
 
                                 } else {
                                     bestandFehler = true;
-                                    System.out.println("Der Bestand des Artikels " + a.getName() + " ist geringer als die bestellte Mnege");
-                                    System.out.println("Noch vorhandener Bestand: " + eShopVerwaltung.getArtikel(a.getNummer()).getBestand() + "Stueck !");
-                                    System.out.println("Die von Ihnen bestellte Menge: " + a.getBestellteMenge());
 
+                                        System.out.println("Der Bestand des Artikels " + a.getName() + " ist geringer als die bestellte Mnege");
+                                        System.out.println("Noch vorhandener Bestand: " + eShopVerwaltung.getArtikel(a.getNummer()).getBestand() + "Stueck !");
+                                        System.out.println("Die von Ihnen bestellte Menge: " + a.getBestellteMenge());
                                 }
+
                             }
 
 
@@ -362,6 +381,7 @@ public class eshopClientCUI {
 
                         if (!bestandFehler) {
                             eShopVerwaltung.fuegeRechnungEin(kunde);
+                            System.out.println("" + eShopVerwaltung.letzteKundenrechnungAusgeben(kNr));
 
                             kunde.resetWarenkorb();
                         }
@@ -377,13 +397,6 @@ public class eshopClientCUI {
                         System.err.println(ren.getMessage());
                     }
 
-                    if (ok) {
-                        System.out.println("Ihre Artikel wurden erfolgreich bestellt und eine Rechnung wurde erstellt !");
-                        System.out.println("" + eShopVerwaltung.letzteKundenrechnungAusgeben(kNr));
-                    } else {
-                        System.out.println("Bei der Bestellung und der Rechnungserstellung ist ein Fehler aufgetreten !!");
-                    }
-
                 }
 
             } catch (IOException e) {
@@ -393,8 +406,6 @@ public class eshopClientCUI {
                 System.err.println(kne.getMessage());
             } catch (LeereEingabeException le) {
                 System.err.println(le.getMessage());
-            } catch (RechnungExestiertNichtException ren) {
-                System.err.println(ren.getMessage());
             }
 
         }
