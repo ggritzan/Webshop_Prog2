@@ -192,12 +192,12 @@ public class EShopClientGUI extends JFrame {
                 switchPanel.removeAll();
                 // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // aktualisiert die ArtikelListe
+                addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
                 // fuegt das MitarbeiterArtikelListePanel hinzu
                 switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                 // setzt die JTextfields des MitarbeiterArtikelListePanel zurueck
                 addMitarbeiterArtikelListePanel.resetAllJTextfields();
-                // aktualisiert die ArtikelListe
-                addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
                 switchPanelRepainter();
                 break;
 
@@ -208,7 +208,6 @@ public class EShopClientGUI extends JFrame {
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                 switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
-                initListeners();
                 break;
 
 
@@ -219,7 +218,6 @@ public class EShopClientGUI extends JFrame {
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                 switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
-                initListeners();
                 break;
 
             case 'r':
@@ -229,7 +227,6 @@ public class EShopClientGUI extends JFrame {
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
                 switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
-                initListeners();
                 break;
 
             case 'd':
@@ -276,7 +273,7 @@ public class EShopClientGUI extends JFrame {
                         mitarbeiterPanelReloader('a');
                         switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
                         switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                        initListeners();
+
 
                       // Überprüft ob der Kunde exestier und wechselt bei einem positiven Ergebnis in das Kundenmenue
                     } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
@@ -593,14 +590,20 @@ public class EShopClientGUI extends JFrame {
                                 // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
                             } else if (source == addMitarbeiterArtikelPopup.getLoeschen()) {
 
+
                                 // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
                                 int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
+
                                 switch (result) {
+
+
                                     case JOptionPane.YES_OPTION:
 
                                         try {
+
                                             eShopVerwaltung.loescheArtikel(ausgewaehlterArtikel, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
                                             mitarbeiterPanelReloader('a');
+
 
                                         } catch (IOException e1) {
                                             e1.printStackTrace();
@@ -611,7 +614,6 @@ public class EShopClientGUI extends JFrame {
                                         }
 
 
-                                        ausgewaehlterArtikel = -1;
 
                                     case JOptionPane.NO_OPTION:
 
@@ -622,6 +624,7 @@ public class EShopClientGUI extends JFrame {
                             }
 
                         }
+
                     });
 
 
@@ -682,12 +685,14 @@ public class EShopClientGUI extends JFrame {
 
 
                                         ausgewaehlterMitarbeiter = -1;
-
+                                        break;
                                     case JOptionPane.NO_OPTION:
 
 
                                         ausgewaehlterMitarbeiter = -1;
+                                        break;
                                 }
+
 
                             }
 

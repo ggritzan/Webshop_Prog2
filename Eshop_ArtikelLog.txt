@@ -283,3 +283,153 @@ Der Bestand des Artikels '7' mit der Artikelnummer 1002 wurde durch den Kunden h
 Do 2013.06.13 um 08:56:15 MESZ:
 Der Bestand des Artikels '7' mit der Artikelnummer 1002 wurde durch den Kunden hmeyer mit der Kundennummer 1000 geändert und hat jetzt die Menge 472.
 
+Do 2013.06.13 um 11:37:34 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Do 2013.06.13 um 11:38:09 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:38:26 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:40:33 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:41:51 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:45:56 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:47:30 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:55:19 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:57:56 MESZ:
+Der Bestand des Artikels 'asdd' mit der Artikelnummer 1006 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 10.
+
+Do 2013.06.13 um 11:57:56 MESZ:
+Der Bestand des Artikels 'asdd' mit der Artikelnummer 1006 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 10.
+
+Do 2013.06.13 um 11:58:03 MESZ:
+Der Bestand des Artikels '2' mit der Artikelnummer 1004 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 20.
+
+Do 2013.06.13 um 11:58:03 MESZ:
+Der Bestand des Artikels '2' mit der Artikelnummer 1004 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 20.
+
+Do 2013.06.13 um 11:58:18 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:59:06 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:03:21 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:06:47 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:08:33 MESZ:
+Der Artikel '4' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:22:32 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:22:37 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:24:50 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:26:11 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:27:50 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:29:48 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:30:26 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:31:29 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:31:36 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:33:02 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:33:50 MESZ:
+Der Artikel 'asdd' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:39:25 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:39:43 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:39:52 MESZ:
+Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:48:19 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:53:22 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:53:59 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:56:33 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:57:09 MESZ:
+Der Artikel '3' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:58:19 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:59:06 MESZ:
+Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 13:02:38 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 13:06:18 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 13:10:25 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 13:15:38 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 13:22:53 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 13:44:37 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 14:03:45 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 14:15:47 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 14:20:21 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 14:21:20 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 14:21:34 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 14:24:05 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
