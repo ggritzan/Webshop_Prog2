@@ -45,7 +45,7 @@ public class RechnungsVerwaltung {
 
     private Log l = new Log();
 
-    // Konstruktor
+// Konstruktor
     public RechnungsVerwaltung() {
 
         // verknüpft die Rechungsnummern mit den Rechnungsobjekten
@@ -184,24 +184,26 @@ public class RechnungsVerwaltung {
     /**
      * Methode zum Hinzufuegen von Rechnungen durch den PersistenceManager
      *
-     * @param rechnung
+     * @param r
      */
-    public void rechnungHinzufuegen(Rechnung rechnung) {
+    public void rechnungHinzufuegen(Rechnung r) {
 
-        if (rechnungsBestandKundenNr.containsKey(rechnung.getkNr())) {
-            Rechnung r = new Rechnung(rechnung);
-            rechnungsBestandNr.put(rechnung.getrNr(), rechnung);
-            Vector<Integer> vI = rechnungsBestandKundenNr.get(rechnung.getkNr());
-            vI.add(rechnung.getrNr());
-            rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
-
+        if (rechnungsBestandKundenNr.containsKey(r.getkNr())) {
+            rechnungsBestandNr.put(r.getrNr(), r);
+            Vector<Integer> vI = rechnungsBestandKundenNr.get(r.getkNr());
+            vI.add(r.getrNr());
+            rechnungsBestandKundenNr.put(r.getkNr(), vI);
+            if (r.getZaehler() <= r.getrNr()) {
+                r.setZaehler(r.getrNr() + 1);
+            }
         } else {
-            // Erzeugt eine Rechnung mit seiner bisherigen Rechnungsnummer
-            Rechnung r = new Rechnung(rechnung);
             rechnungsBestandNr.put(r.getrNr(), r);
             Vector<Integer> vI = new Vector<Integer>();
-            vI.add(rechnung.getrNr());
-            rechnungsBestandKundenNr.put(rechnung.getkNr(), vI);
+            vI.add(r.getrNr());
+            rechnungsBestandKundenNr.put(r.getkNr(), vI);
+            if (r.getZaehler() <= r.getrNr()) {
+                r.setZaehler(r.getrNr() + 1);
+            }
         }
 
     }
@@ -254,6 +256,14 @@ public class RechnungsVerwaltung {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Methode gibt die HashMap zurueck die alle vorhandenen Rechnungen enthaelt
+     * @return
+     */
+    public HashMap<Integer, Rechnung> alleRechnungenHashMapZurueckgeben() {
+        return rechnungsBestandNr;
     }
 
     /**
@@ -325,6 +335,7 @@ public class RechnungsVerwaltung {
 
     }
 
+    //TODO @Noshaba Bitte kommentieren
     public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return l.printLog("Eshop_RechnungsLog.txt", daysInPast, rNr);
     }

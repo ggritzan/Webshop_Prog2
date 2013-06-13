@@ -37,21 +37,7 @@ public class Artikel implements Serializable {
             this.zaehler  ++;
 
          }
-      /*
-        // Konstruktor für das einlesen von Artikeln
-        public Artikel(Artikel artikel) {
-            this.name = artikel.getName();
-            this.beschreibung = artikel.getBeschreibung();
-            this.preis = artikel.getPreis();
-            this.nummer = artikel.getNummer();
-            this.bestand = artikel.getBestand();
-            this.bestellteMenge = artikel.getBestellteMenge();
-            if(artikel.getNummer() >= zaehler){
-            this.zaehler = (artikel.getNummer() +1);
-            }
 
-        }
-        */
 
 
 // Methoden

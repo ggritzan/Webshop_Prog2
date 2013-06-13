@@ -37,15 +37,6 @@ public class Kunde extends Person implements Serializable {
 
 
 
-    // Konstruktor für das einlesen von Kunden
-    public Kunde(Kunde kunde) {
-        super(kunde.getVorname(), kunde.getNachname(), kunde.getBenutzername(), kunde.getPasswort(), kunde.getEmail(), kunde.getTelefon(), kunde.getAdresse());
-        this.nummer = kunde.getNummer();
-        this.wk = kunde.getWarenkorb();
-        this.zaehler = (kunde.getNummer() +1);
-        this.wk = kunde.getWarenkorb();
-    }
-
 
 // Methoden
 
@@ -75,6 +66,14 @@ public class Kunde extends Person implements Serializable {
 
 // Setter
 
+    /**
+     * Setter für den Zaehler
+     * @param zaehler
+     */
+    public static void setZaehler(int zaehler) {
+        Kunde.zaehler = zaehler;
+    }
+
     public void setkNummer(int nummer) {
         this.nummer = nummer;
     }
@@ -86,6 +85,14 @@ public class Kunde extends Person implements Serializable {
     }
 
 // Getter
+
+    /**
+     * Getter für den Zaehler
+     * @return
+     */
+    public static int getZaehler() {
+        return zaehler;
+    }
 
     // Gibt die Kundennummer zurueck
     public int getNummer() {

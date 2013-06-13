@@ -24,13 +24,6 @@ public class Mitarbeiter extends Person implements Serializable {
         this.zaehler++;
     }
 
-    // Konstruktor für das einlesen von Mitarbeitern
-    public Mitarbeiter(Mitarbeiter mitarbeiter) {
-        super(mitarbeiter);
-        this.mNr = mitarbeiter.getmNr();
-        this.zaehler = (mitarbeiter.getmNr() + 1);
-
-    }
 
     //Methoden
 
@@ -60,12 +53,36 @@ public class Mitarbeiter extends Person implements Serializable {
 
     // Setter
 
+    /**
+     * Setter für den Zaehler
+     * @param zaehler
+     */
+    public static void setZaehler(int zaehler) {
+        Mitarbeiter.zaehler = zaehler;
+    }
+
+    /**
+     * Setter für MitarbeiterNr
+     * @param mNr
+     */
     public void setmNr(int mNr) {
         this.mNr = mNr;
     }
 
     // Getter
 
+    /**
+     * Getter für den Zaehler
+     * @return
+     */
+    public static int getZaehler() {
+        return zaehler;
+    }
+
+    /**
+     * Getter für die MitarbeiterNr
+     * @return
+     */
     public int getmNr() {
         return this.mNr;
     }

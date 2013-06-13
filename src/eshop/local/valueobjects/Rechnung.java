@@ -37,18 +37,7 @@ public class Rechnung implements Serializable {
         this.zaehler++;
     }
 
-    // Konstruktor für das einlesen von Rechnungen
-    public Rechnung(Rechnung r) {
-        this.kNr = r.getkNr();
-        this.rNr = r.getrNr();
-        this.bestellteArtikel = r.getBestellteArtikel();
-        this.gesamtPreis = r.getGesamtPreis();
-        if (r.getrNr() >= zaehler) {
-            this.zaehler = (r.getrNr() + 1);
-        }
-        this.dNow = r.getdNow();
 
-    }
 
     //Methoden
 
@@ -74,6 +63,14 @@ public class Rechnung implements Serializable {
 
     //Setter
 
+    /**
+     * Setter für den Zaehler
+     * @param zaehler
+     */
+    public static void setZaehler(int zaehler) {
+        Rechnung.zaehler = zaehler;
+    }
+
     public void setDate(Date dNow) {
         this.dNow = dNow;
     }
@@ -81,6 +78,14 @@ public class Rechnung implements Serializable {
 
 
     //Getter
+
+    /**
+     * Getter für den Zaehler
+     * @return
+     */
+    public static int getZaehler() {
+        return zaehler;
+    }
 
     public SimpleDateFormat getFt() {
         return this.ft;

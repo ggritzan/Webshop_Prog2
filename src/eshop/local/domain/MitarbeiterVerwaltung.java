@@ -55,7 +55,7 @@ public class MitarbeiterVerwaltung {
         mitarbeiterBestandName = new HashMap<String, Integer>();
     }
 
-    // Methoden
+// Methoden
 
     /**
      * Methode zum Einlesen der Mitarbeiterdaten aus einer Datei.
@@ -109,8 +109,18 @@ public class MitarbeiterVerwaltung {
         pm.close();
     }
 
+
     /**
      * Methode zum hinzufuegen von Mitarbeitern
+     * @param vorname
+     * @param nachname
+     * @param benutzername
+     * @param passwort
+     * @param email
+     * @param telefon
+     * @param adresse
+     * @throws IOException
+     * @throws MitarbeiterExistiertBereitsException
      */
     public void mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
 
@@ -131,21 +141,26 @@ public class MitarbeiterVerwaltung {
 
     /**
      * Methode zum hinzufuegen von Mitarbeitern durch den PersistenceManager
-     * @param mitarbeiter
+     * @param m
+     * @throws MitarbeiterExistiertBereitsException
      */
-    public void mitarbeiterHinzufuegen(Mitarbeiter mitarbeiter) throws MitarbeiterExistiertBereitsException{
+    public void mitarbeiterHinzufuegen(Mitarbeiter m) throws MitarbeiterExistiertBereitsException{
 
-        // Erzeugt Mitarbeiter mit ihrer bisherigen Mitarbeiternummer
-        Mitarbeiter m = new Mitarbeiter(mitarbeiter);
         mitarbeiterBestandNr.put(m.getmNr(), m);
-        mitarbeiterBestandName.put(mitarbeiter.getBenutzername(), m.getmNr());
+        mitarbeiterBestandName.put(m.getBenutzername(), m.getmNr());
+        if (m.getZaehler() <= m.getmNr()) {
+            m.setZaehler(m.getmNr() + 1);
+        }
+
 
     }
 
     /**
      * Methode zum löschen von Mitarbeitern
      * @param maNr
-     * @return boolean
+     * @param mitarbeiter
+     * @throws IOException
+     * @throws MitarbeiterExistiertNichtException
      */
     public void mitarbeiterLoeschen(int maNr, Mitarbeiter mitarbeiter) throws IOException, MitarbeiterExistiertNichtException{
 
@@ -166,6 +181,7 @@ public class MitarbeiterVerwaltung {
 
     /**
      * Methode gibt einen Vector zurueck der alle vorhandenen Mitarbeiter enthaelt
+     * @return
      */
     public Vector alleMitarbeiterZurueckgeben() {
 
@@ -178,6 +194,14 @@ public class MitarbeiterVerwaltung {
 
 
 
+    }
+
+    /**
+     * Methode gibt die HashMap zurueck die alle vorhandenen Mitarbeiter enthaelt
+     * @return
+     */
+    public HashMap<Integer, Mitarbeiter> alleMitarbeiterHashMapZurueckgeben() {
+        return mitarbeiterBestandNr;
     }
 
     /**
@@ -222,6 +246,13 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    /**
+     * Funktion für den Login wenn der Mitarbeiter mit der entsprechenden passwort vorhanden ist
+     * liefert die Funktion ein true zurueck ansonsten false
+     * @param benutzername
+     * @param passwort
+     * @return
+     */
     public boolean findeMitarbeiter(String benutzername, String passwort) {
         if (mitarbeiterBestandName.containsKey(benutzername)) {
             int mnr = mitarbeiterBestandName.get(benutzername);
@@ -237,6 +268,12 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    /**
+     * Sucht einen Mitarbeiter anhand des Benutzernamens
+     * @param bName
+     * @return
+     * @throws MitarbeiterExistiertNichtException
+     */
     public Mitarbeiter getMitarbeiter(String bName) throws MitarbeiterExistiertNichtException {
         Mitarbeiter m;
         if(mitarbeiterBestandName.containsKey(bName)){
@@ -261,6 +298,11 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    /**
+     * liefert ein Mitarbeiter Objekt wenn ein Mitarbeiter mit der MitarbeiterNummer exestiert
+     * @param mNr
+     * @return
+     */
     public Mitarbeiter getMitarbeiter(int mNr){
         if (mitarbeiterBestandNr.containsKey(mNr)) {
             return mitarbeiterBestandNr.get(mNr);
@@ -269,6 +311,7 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    //TODO @Noshaba Bitte kommentieren
     public Vector<String> printMitarbeiterLog(int daysInPast, String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_MitarbeiterLog.txt", daysInPast, mNr);
     }

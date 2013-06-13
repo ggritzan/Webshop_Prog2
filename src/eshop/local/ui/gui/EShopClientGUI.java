@@ -211,6 +211,8 @@ public class EShopClientGUI extends JFrame {
                 break;
 
 
+
+
             case 'k':
                 switchPanel.removeAll();
                 addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKunden());

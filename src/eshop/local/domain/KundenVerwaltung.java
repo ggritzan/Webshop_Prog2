@@ -26,6 +26,8 @@ import eshop.local.valueobjects.Mitarbeiter;
  * Time: 14:42
  * To change this template use File | Settings | File Templates.
  */
+
+
 public class KundenVerwaltung {
 
     // Dokument zum Speichern des Logs
@@ -46,8 +48,9 @@ public class KundenVerwaltung {
     private Log l = new Log();
 
 
-// Konstruktor
-
+    /**
+     * Konstruktor
+     */
     public KundenVerwaltung() {
 
         // verknüpft die Kundennummern mit den Kunden Objekten
@@ -153,14 +156,15 @@ public class KundenVerwaltung {
     /**
      * Methode zum hinzufuegen von Kunden durch den PersistenceManager
      *
-     * @param kunde
+     * @param k
      */
-    public void kundeHinzufuegen(Kunde kunde) {
+    public void kundeHinzufuegen(Kunde k) {
 
-        // Erzeugt einen Kunden mit seiner bisherigen Kundennummer
-        Kunde k = new Kunde(kunde);
         kundenBestandNr.put(k.getNummer(), k);
-        kundenBestandBenutzername.put(kunde.getBenutzername(), k.getNummer());
+        kundenBestandBenutzername.put(k.getBenutzername(), k.getNummer());
+        if (k.getZaehler() <= k.getNummer()) {
+            k.setZaehler(k.getNummer() + 1);
+        }
 
 
     }
@@ -204,6 +208,14 @@ public class KundenVerwaltung {
     }
 
     /**
+     * Methode gibt die HashMap zurueck die alle vorhandenen Kunden enthaelt
+     * @return
+     */
+    public HashMap<Integer, Kunde> alleKundenHashMapZurueckgeben() {
+        return kundenBestandNr;
+    }
+
+    /**
      * Methode durchsucht alle Rechnungen nach einer Rechnungsnummer
      *
      * @param kNr
@@ -233,6 +245,12 @@ public class KundenVerwaltung {
         }
     }
 
+    /**
+     * legt einen Artikel in den Warenkorb eines Kunden
+     * @param a
+     * @param kNr
+     * @throws KundenNummerExistiertNichtException
+     */
     public void inWarenkorbLegen(Artikel a, int kNr) throws KundenNummerExistiertNichtException {
         if(kundenBestandNr.containsKey(kNr) ){
             Kunde k = kundenBestandNr.get(kNr);
@@ -242,6 +260,12 @@ public class KundenVerwaltung {
         }
     }
 
+    /**
+     * entfernt einen Artikel aus dem Warenkorb eines Kunden
+     * @param a
+     * @param kNr
+     * @throws KundenNummerExistiertNichtException
+     */
     public void ausWarenkorbEtfernen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
 
         if(kundenBestandNr.containsKey(kNr)){
@@ -252,6 +276,11 @@ public class KundenVerwaltung {
         }
     }
 
+    /**
+     * setzt den Warenkorb eines Kunden komplett zureuck
+     * @param kNr
+     * @throws KundenNummerExistiertNichtException
+     */
     public void resetWarenkorb(int kNr) throws KundenNummerExistiertNichtException{
 
         if(kundenBestandNr.containsKey(kNr)){
@@ -262,13 +291,11 @@ public class KundenVerwaltung {
             throw new KundenNummerExistiertNichtException(kNr);
         }
     }
+
     /**
      * Methode durchsucht alle Kunden nach dem Parameter Nachname und gibt die entsprechenden Kunden in einem Vektor zurueck
      *
      * @param
-     */
-    /*
-
      */
     public boolean findeKunden(String benutzername, String passwort) {
         if (kundenBestandBenutzername.containsKey(benutzername)) {
@@ -286,6 +313,13 @@ public class KundenVerwaltung {
             return false;
         }
     }
+
+    /**
+     * Gibt ein Kundenobjekt zu einem Benutzernamen zurueck
+     * @param bName
+     * @return
+     * @throws BenutzernameExistiertNichtException
+     */
     public Kunde getKunden(String bName) throws BenutzernameExistiertNichtException{
         Kunde k;
         if(kundenBestandBenutzername.containsKey(bName)){
@@ -299,10 +333,18 @@ public class KundenVerwaltung {
         }
     }
 
+    /**
+     *
+     * @param k
+     * @param aNr
+     * @return
+     */
     public boolean istImWarenkorb(Kunde k, int aNr){
         return k.istImWarenkorb(aNr);
     }
 
+
+    //TODO @Noshaba Bitte kommentieren
     public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_KundenLog.txt", daysInPast, kNr);
     }

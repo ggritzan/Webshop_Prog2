@@ -300,7 +300,7 @@ public class FilePersistenceManager implements PersistenceManager {
 
         try {
 
-            Kunde k = new Kunde((Kunde) ois.readObject());
+            Kunde k = (Kunde) ois.readObject();
 
 
             return k;
@@ -324,7 +324,7 @@ public class FilePersistenceManager implements PersistenceManager {
      */
     private Mitarbeiter liesMitarbeiter(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         try {
-            Mitarbeiter m = new Mitarbeiter((Mitarbeiter) ois.readObject());
+            Mitarbeiter m = (Mitarbeiter) ois.readObject();
             return m;
         } catch (EOFException exc) {
             return null;
@@ -340,7 +340,7 @@ public class FilePersistenceManager implements PersistenceManager {
      */
     private Rechnung liesRechnung(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         try {
-            Rechnung r = new Rechnung((Rechnung) ois.readObject());
+            Rechnung r = (Rechnung) ois.readObject();
             return r;
         } catch (EOFException exc) {
             return null;
