@@ -2,6 +2,7 @@ package eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter;
 
 import eshop.local.ui.gui.comp.registrierung.MitarbeiterRegistrierungPanel;
 import eshop.local.ui.gui.comp.tableModels.MitarbeiterTableModel;
+import eshop.local.valueobjects.Mitarbeiter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,6 +10,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -26,7 +28,7 @@ public class MitarbeiterMitarbeiterListePanel extends JPanel {
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
 
 
-    public MitarbeiterMitarbeiterListePanel(Vector alleMitarbeiter) {
+    public MitarbeiterMitarbeiterListePanel(HashMap<Integer, Mitarbeiter> alleMitarbeiter) {
         // Tabelle erzeugen und Eigenschaften setzen
         table = new JTable();
         tmodel = new MitarbeiterTableModel(alleMitarbeiter);
@@ -56,7 +58,13 @@ public class MitarbeiterMitarbeiterListePanel extends JPanel {
         table.addMouseListener(mA);
     }
 
+// Getter
 
-
-
+    /**
+     * Getter fuer das TableModel
+     * @return
+     */
+    public MitarbeiterTableModel getTmodel() {
+        return tmodel;
+    }
 }

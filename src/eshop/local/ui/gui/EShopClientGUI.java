@@ -150,7 +150,7 @@ public class EShopClientGUI extends JFrame {
         addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
 
         // Erzeugt das MitarbeiterMitarbeiterListePanel
-        addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
+        addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiterHashMapZurueckgeben());
 
         // Erzeugt das KundenListenPanel
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKundenHashMapZurueckgeben());
@@ -202,12 +202,17 @@ public class EShopClientGUI extends JFrame {
 
 
             case 'm':
+                //leert das SwitchPanel
                 switchPanel.removeAll();
-                addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiter());
+                // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // aktualisiert die KundenListe
+                addMitarbeiterMitarbeiterListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das MitarbeiterMitarbeiterListePanel hinzu
                 switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
                 break;
+
 
 
 
@@ -217,7 +222,7 @@ public class EShopClientGUI extends JFrame {
                 switchPanel.removeAll();
                 // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                // aktualisiert die ArtikelListe
+                // aktualisiert die KundenListe
                 addMitarbeiterKundenListePanel.getTmodel().fireTableDataChanged();
                 // fuegt das MitarbeiterKundenListePanel hinzu
                 switchPanel.add(addMitarbeiterKundenListePanel, BorderLayout.CENTER);

@@ -3,6 +3,7 @@ package eshop.local.ui.gui.comp.tableModels;
 import eshop.local.valueobjects.Mitarbeiter;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -16,7 +17,7 @@ public class MitarbeiterTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -5473198412969576184L;
 
-    private Vector<Mitarbeiter> mitarbeiterVector;
+    private HashMap<Integer, Mitarbeiter> mitarbeiterHashMap;
 
     private String[] columnNames = {"MNr","Vorname", "Nachname", "Benutzername", "Passwort", "Email", "Telefon", "Straße", "PLZ", "Ort"};
 
@@ -26,8 +27,8 @@ public class MitarbeiterTableModel extends AbstractTableModel {
      * Konstruktor
      * @param alleAktuellenMitarbeiter
      */
-    public MitarbeiterTableModel(Vector<Mitarbeiter> alleAktuellenMitarbeiter) {
-        this.mitarbeiterVector = alleAktuellenMitarbeiter;
+    public MitarbeiterTableModel(HashMap<Integer, Mitarbeiter> alleAktuellenMitarbeiter) {
+        this.mitarbeiterHashMap = alleAktuellenMitarbeiter;
     }
 
     /**
@@ -36,7 +37,7 @@ public class MitarbeiterTableModel extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return mitarbeiterVector.size();
+        return mitarbeiterHashMap.size();
     }
 
     /**
@@ -56,7 +57,15 @@ public class MitarbeiterTableModel extends AbstractTableModel {
      */
     @Override
     public Object getValueAt(int row, int col) {
-        Mitarbeiter mitarbeiter = mitarbeiterVector.get(row);
+
+        Vector<Mitarbeiter> getValue = new Vector<Mitarbeiter>();
+
+        // Füllt den ArtikelVector getValue mit den Artikel aus der Hashmap
+        for (Mitarbeiter elem : mitarbeiterHashMap.values()){
+            getValue.add(elem);
+        }
+
+        Mitarbeiter mitarbeiter = getValue.get(row);
 
         switch (col) {
             case 0:
