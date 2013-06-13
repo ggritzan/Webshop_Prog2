@@ -324,7 +324,6 @@ public class ArtikelVerwaltung {
         }
     }
 
-    //TODO @Nina Hey hier ist beim mergen irgendwas daneben gegangen guck dir das Bitte nochmal an
     /**
      * Methode setzt den Wert wieviel Artikel bestellt werden sollen
      *
@@ -332,8 +331,15 @@ public class ArtikelVerwaltung {
      */
     public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException, BestellteMengeEntsprichtNichtderPackungsgroesseException {
         if ((menge >= 0) & (artikel.getBestand() >= menge)) {
-            artikel.setBestellteMenge(menge);
-
+            if (artikel instanceof  MassengutArtikel ){
+               if ((menge % ((MassengutArtikel) artikel).getPackungsgroesse() == 0)) {
+                    artikel.setBestellteMenge(menge);
+               } else {
+                    throw new BestellteMengeEntsprichtNichtderPackungsgroesseException((MassengutArtikel)artikel, menge);
+               }
+            } else {
+                artikel.setBestellteMenge(menge);
+            }
         } else if (!(menge >= 0)) {
             throw new ArtikelBestellteMengeNegativException();
 

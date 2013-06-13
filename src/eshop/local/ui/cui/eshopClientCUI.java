@@ -58,6 +58,11 @@ public class eshopClientCUI {
 
 // Menues
 
+    /**
+     * Methode gibt das Hauptmenue aus
+     *
+     * @throws IOException
+     */
     private void gibMainMenue() throws IOException {
         System.out.println("Willkommen im E-Shop!");
         System.out.print("Befehle: \n  Fortfahren zum Login: 'l'");
@@ -66,6 +71,12 @@ public class eshopClientCUI {
         System.out.print("         \n  Daten sichern:  's'");
         System.out.println("       \n  Programm beenden 'q'");
     }
+
+    /**
+     * Methode gibt das Mitarbeitermenue aus
+     *
+     * @throws IOException
+     */
 
     private void gibMitarbeiterMenueAus() {
         System.out.print("Mitarbeiter: \n     hinzufuegen: 'mh'");
@@ -95,6 +106,12 @@ public class eshopClientCUI {
         System.out.flush(); // ohne NL ausgeben
     }
 
+    /**
+     * Methode gibt das Kundenmenue aus
+     *
+     * @throws IOException
+     */
+
     private void gibKundenMenueAus() {
         System.out.print("         \n  Liste aller Artikel anzeigen:  'l'");
         System.out.print("         \n  Artikel in den Warenkorb legen:  'w'");
@@ -107,6 +124,13 @@ public class eshopClientCUI {
     }
 
 // Methoden
+
+    /**
+     * Methode verarbeitet die Eingabe der Tastatur
+     * @param line -> String mit der tastatureingabe
+     * @return char -> char Version des erhaltenen Strings
+     * @throws IOException
+     */
 
     private char verarbeiteMainEingabe(String line) throws IOException {
 
@@ -130,6 +154,12 @@ public class eshopClientCUI {
         return 'q';
 
     }
+
+    /**
+     * Methode verarbeitet das Login und schickt die Person ins passende Menue
+     * @throws IOException
+     * @throws LeereEingabeException
+     */
 
     private void verarbeiteLogin() throws IOException, LeereEingabeException {
         try {
@@ -159,6 +189,13 @@ public class eshopClientCUI {
             System.err.println(ben.getMessage());
         }
     }
+
+    /**
+     * Methode verarbeitet die Eingabe der Tastatur
+     * @param line -> String mit der Tastatureingabe
+     * @return char -> char Version des erhaltenen Strings
+     * @throws IOException
+     */
 
     private char verarbeiteKundenEingabe(String line) throws IOException {
         // Eingabe bearbeiten:
@@ -190,6 +227,14 @@ public class eshopClientCUI {
         return 'o';
     }
 
+    /**
+     * Methode verarbeitet die Eingabe der Tastatur
+     * @param kNr -> int Wert der Kundennummer, dadurch können sämtliche Aktionen dem eingeloggten Kunden zugewiesen werden
+     * @throws IOException
+     * @throws KundenNummerExistiertNichtException
+     * @throws LeereEingabeException
+     */
+
     private void KundenEingabe(int kNr) throws IOException, KundenNummerExistiertNichtException, LeereEingabeException {
         // Variable für Eingaben von der Konsole
         String input = "";
@@ -212,12 +257,13 @@ public class eshopClientCUI {
                         System.out.print("2) nach Artikelnummer sortiert  > ");
                         String sort = liesEingabe();
                         int sortInt = Integer.parseInt(sort);
-                        // nach Artikelnummer sortiert
+                        // nach Name sortiert
                         if (sortInt == 1) {
                             ArtikelNameComperator a = new ArtikelNameComperator();
                             Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
                             Collections.sort(artList, a);
                             System.out.println(artList);
+                        // nach Artikelnummer sortiert
                         } else if (sortInt == 2) {
                             ArtikelNumberComperator b = new ArtikelNumberComperator();
                             Vector<Artikel> artList = eShopVerwaltung.gibAlleArtikel();
@@ -248,26 +294,23 @@ public class eshopClientCUI {
                         System.out.print("Menge: > ");
                         String menge = liesEingabe();
                         int mengeInt = Integer.parseInt(menge);
+                        //holt den gewünschten Artikel aus der Hashmap
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
                         if (a instanceof MassengutArtikel) {
                             //anlegen einer Massengutartikelkopie, des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
                             //sich verschiedene Bestellmengen überschreiben
                             MassengutArtikel mA = new MassengutArtikel(a.getName(), a.getBeschreibung(), a.getPreis(), ((MassengutArtikel) a).getPackungsgroesse());
-                            System.out.println("Yay2");
                             mA.setBestand(a.getBestand());
                             mA.setNummer(a.getNummer());
                             eShopVerwaltung.setBestellteMenge(mengeInt, mA);
-                            System.out.println("Yay3");
                             eShopVerwaltung.inWarenkorbLegen(mA, kNr);
                         } else {
                             //anlegen einer Artikelkopie, des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
                             //sich verschiedene Bestellmengen überschreiben
                             Artikel art = new Artikel(a.getName(), a.getBeschreibung(), a.getPreis());
-                            System.out.println("Yay1");
                             art.setBestand(a.getBestand());
                             art.setNummer(a.getNummer());
                             eShopVerwaltung.setBestellteMenge(mengeInt, art);
-                            System.out.println("Yay3");
                             eShopVerwaltung.inWarenkorbLegen(art, kNr);
                         }
 
@@ -292,7 +335,6 @@ public class eshopClientCUI {
 
                     // Artikel aus dem Warenkorb löschen
                 } else if (var == 'e') {
-                    boolean ok = false;
 
                     try {
 
@@ -302,10 +344,7 @@ public class eshopClientCUI {
                         int aNrInt = Integer.parseInt(aNr);
                         if (eShopVerwaltung.getKunde(kNr).istImWarenkorb(aNrInt)) {
                             Artikel a = eShopVerwaltung.getArtikel(aNrInt);
-
                             eShopVerwaltung.ausWarenkorbEntfernen(a, kNr);
-                        } else {
-                            System.out.println("Artikel exestiert nicht!");
                         }
                     } catch (NumberFormatException e) {
 
@@ -315,16 +354,8 @@ public class eshopClientCUI {
                         System.err.println(le.getMessage());
                     }
 
-                    if (ok) {
-                        System.out.println("Artikel wurde aus den Warenkorb gelöscht !");
-                    } else {
-                        System.out.println("Beim löschen des Artikels aus dem Warenkorb ist ein Fehler aufgetreten !");
-                    }
-
-
-                    // Zeigt den Warenkorb eines eingeloggten Kunden an
+                // Zeigt den Warenkorb eines eingeloggten Kunden an
                 } else if (var == 'a') {
-                    boolean ok = false;
 
                     try {
 
@@ -346,45 +377,44 @@ public class eshopClientCUI {
                         System.err.println(kne.getMessage());
                     }
 
-                    // Erstellt für den aktuellen Warenkorb eines Nutzers eine Rechnung
+                // Erstellt für den aktuellen Warenkorb eines Nutzers eine Rechnung
                 } else if (var == 'b') {
 
                     boolean bestandFehler = false;
 
                     try {
 
-
                         Kunde kunde = eShopVerwaltung.getKunde(kNr);
-
+                        System.out.println("1");
                         if (kunde.getWarenkorb().size() > 0) {
-
+                            //wenn sich Artikel im Warenkorb befinden prüfen ob die gewünschten Artikel gekauft werden können
                             Iterator iter = kunde.getWarenkorb().values().iterator();
                             while (iter.hasNext()) {
                                 Artikel a = (Artikel) iter.next();
-                                Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
-                                int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
-                                if (eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge()) {
-                                    eShopVerwaltung.setBestand(a.getNummer(), neuerBestand, kunde);
-
-                                } else {
+                                if (!(eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge())) {
                                     bestandFehler = true;
-
-                                        System.out.println("Der Bestand des Artikels " + a.getName() + " ist geringer als die bestellte Mnege");
-                                        System.out.println("Noch vorhandener Bestand: " + eShopVerwaltung.getArtikel(a.getNummer()).getBestand() + "Stueck !");
-                                        System.out.println("Die von Ihnen bestellte Menge: " + a.getBestellteMenge());
+                                    System.out.println("2");
+                                    System.out.println("Der Bestand des Artikels " + a.getName() + " ist geringer als die bestellte Mnege");
+                                    System.out.println("Noch vorhandener Bestand: " + eShopVerwaltung.getArtikel(a.getNummer()).getBestand() + "Stueck !");
+                                    System.out.println("Die von Ihnen bestellte Menge: " + a.getBestellteMenge());
                                 }
-
                             }
-
-
+                            if (!bestandFehler) {
+                                Iterator iter2 = kunde.getWarenkorb().values().iterator();
+                                while(iter2.hasNext()) {
+                                    Artikel a = (Artikel) iter2.next();
+                                    Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
+                                    int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
+                                    eShopVerwaltung.setBestand(puffer.getNummer(), neuerBestand, kunde);
+                                }
+                                eShopVerwaltung.fuegeRechnungEin(kunde);
+                                System.out.println("" + eShopVerwaltung.letzteKundenrechnungAusgeben(kNr));
+                                //Warenkorb komplett leeren
+                                kunde.resetWarenkorb();
+                            }
                         }
 
-                        if (!bestandFehler) {
-                            eShopVerwaltung.fuegeRechnungEin(kunde);
-                            System.out.println("" + eShopVerwaltung.letzteKundenrechnungAusgeben(kNr));
 
-                            kunde.resetWarenkorb();
-                        }
                     } catch (NumberFormatException e) {
 
                     } catch (KundenNummerExistiertNichtException kne) {
@@ -415,6 +445,13 @@ public class eshopClientCUI {
 
     }
 
+    /**
+     * Methode verarbeitet die Eingabe der Tastatur
+     * @param mNr -> int Wert der Mitarbeiternummer, dadurch können sämtliche Aktionen dem eingeloggten Mitarbeiter zugewiesen werden
+     * @throws IOException
+     * @throws LeereEingabeException
+     */
+
     private void MitarbeiterEingabe(int mNr) throws IOException, LeereEingabeException {
         // Variable für Eingaben von der Konsole
         String input = "";
@@ -425,15 +462,12 @@ public class eshopClientCUI {
                 gibMitarbeiterMenueAus();
                 input = liesEingabe();
 
-
                 // Liste der Artikel ausgeben
                 if (input.equals("mh")) {
                     boolean ok = false;
 
                     try {
-
                         neuenMitarbeiterAnlegen();
-
 
                     } catch (NumberFormatException e) {
 
@@ -441,7 +475,7 @@ public class eshopClientCUI {
                         System.err.println(le.getMessage());
                     }
 
-                    // Mitarbeiter loeschen
+                // Mitarbeiter loeschen
                 } else if (input.equals("ml")) {
                     System.out.println("Bitte geben Sie die Nummer des Mitarbeiters an, der gelöscht werden soll.");
                     String mitNr = liesEingabe();
@@ -453,19 +487,16 @@ public class eshopClientCUI {
                     }
                     System.out.println("Der Mitarbeiter wurde erfolgreich gelöscht.");
 
-
-                    // Liste aller Mitarbeiter ausgeben
+                // Liste aller Mitarbeiter ausgeben
                 } else if (input.equals("ma")) {
                     System.out.println(eShopVerwaltung.gibAlleMitarbeiter());
 
-                    // Kunden hinzufuegen
+                // Kunden hinzufuegen
                 } else if (input.equals("kh")) {
                     neuenKundenAnlegen();
 
-                    // Kunden loeschen
+                // Kunden loeschen
                 } else if (input.equals("kl")) {
-
-                    boolean ok = false;
                     try {
                         System.out.println(eShopVerwaltung.gibAlleKunden());
                         System.out.print("Kundennummer: > ");
@@ -480,19 +511,13 @@ public class eshopClientCUI {
                         System.err.println(me.getMessage());
                     }
 
-                    if (ok)
-                        System.out.println("Kunde wurde geloescht !");
-                    else
-                        System.out.println("Beim löschen des Kunden ist ein Fehler aufgetreten !");
-
-                    // alle Kunden ausgeben
+                // alle Kunden ausgeben
                 } else if (input.equals("ka")) {
 
                     System.out.println(eShopVerwaltung.gibAlleKunden());
 
-                    // Artikel hinzufuegen
+                // Artikel hinzufuegen
                 } else if (input.equals("ah")) {
-
 
                     try {
                         System.out.print("Artikel Name > ");
@@ -503,20 +528,17 @@ public class eshopClientCUI {
                         String aPreisEingabe = liesEingabe();
                         double aPreis = Double.parseDouble(aPreisEingabe);
 
-
                         eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis, eShopVerwaltung.getMitarbeiter(mNr));
 
                     } catch (NumberFormatException e) {
-
                     } catch (ArtikelExestierBereitsException aeb) {
                         System.err.println(aeb.getMessage());
-
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (MitarbeiterExistiertNichtException me){
                         System.err.println(me.getMessage());
                     }
-
+                // Massengutartikel anlegen
                 } else if (input.equals("am")) {
                     try {
                         System.out.println("Artikelname: ");
@@ -531,7 +553,6 @@ public class eshopClientCUI {
                         int aPackung = Integer.parseInt(aPackungEingabe);
                         eShopVerwaltung.fuegeMassengutArtikelEin(aName, aBeschreibung, aPreis, aPackung, eShopVerwaltung.getMitarbeiter(mNr));
                     } catch(NumberFormatException e) {
-
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (MitarbeiterExistiertNichtException men) {
@@ -539,6 +560,7 @@ public class eshopClientCUI {
                     } catch (ArtikelExestierBereitsException aeb) {
                         System.err.println(aeb.getMessage());
                     }
+                //Artikelbestand ändern
                 } else if (input.equals("ab")) {
 
                     try {
@@ -552,7 +574,6 @@ public class eshopClientCUI {
                         eShopVerwaltung.setBestand(aNrInt, aBestandInt, eShopVerwaltung.getMitarbeiter(mNr));
 
                     } catch (NumberFormatException e) {
-
                     } catch (MitarbeiterExistiertNichtException men) {
                         System.err.println(men.getMessage());
                     } catch (LeereEingabeException le) {
@@ -563,9 +584,8 @@ public class eshopClientCUI {
                         System.err.println(abn.getMessage());
                     }
 
-                    // Artikel loeschen
+                // Artikel loeschen
                 } else if (input.equals("al")) {
-                    boolean ok = false;
                     try {
                         System.out.println(eShopVerwaltung.gibAlleArtikel());
                         System.out.print("Artikelnummer: > ");
@@ -573,7 +593,6 @@ public class eshopClientCUI {
                         int aNrInt = Integer.parseInt(aNr);
                         eShopVerwaltung.loescheArtikel(aNrInt, eShopVerwaltung.getMitarbeiter(mNr));
                     } catch (NumberFormatException e) {
-
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
                     } catch (ArtikelExestiertNichtException ane) {
@@ -582,12 +601,7 @@ public class eshopClientCUI {
                         System.err.println(me.getMessage());
                     }
 
-                    if (ok)
-                        System.out.println("Artikel wurde geloescht !");
-                    else
-                        System.out.println("Beim Löschen des Artikels ist ein Fehler aufgetreten !");
-
-                    // Alle Artikel ausgeben
+                // Alle Artikel ausgeben
                 } else if (input.equals("aa")) {
 
                     try {
@@ -620,16 +634,14 @@ public class eshopClientCUI {
                         System.err.println(le.getMessage());
                     }
 
-                    // Artikel suchen
+                // Artikel suchen
                 } else if (input.equals("af")) {
 
                     System.out.print("Artikelname:  > ");
                     String titel = liesEingabe();
                     System.out.println(eShopVerwaltung.sucheNachName(titel));
-
-
+                //Rechnung löschen
                 } else if (input.equals("rl")) {
-                    boolean ok = false;
                     try {
                         System.out.println(eShopVerwaltung.gibAlleRechnungen());
                         System.out.print("Rechnungsnummer: > ");
@@ -645,21 +657,14 @@ public class eshopClientCUI {
                     } catch (RechnungExestiertNichtException ren) {
                         System.err.println(ren.getMessage());
                     }
-
-                    if (ok)
-                        System.out.println("Rechnung wurde geloescht !");
-                    else
-                        System.out.println("Beim löschen der Rechnung ist ein Fehler aufgetreten !");
-
+                //Rechnung suchen
                 } else if (input.equals("ra")) {
-                    boolean ok = false;
                     try {
                         System.out.println(eShopVerwaltung.gibAlleRechnungen());
                         System.out.print("Rechnungsnummer: > ");
                         String rNr = liesEingabe();
                         int rNrInt = Integer.parseInt(rNr);
                         System.out.println(eShopVerwaltung.sucheNachRechnungsnummer(rNrInt));
-
 
                     } catch (NumberFormatException e) {
 
@@ -668,7 +673,7 @@ public class eshopClientCUI {
                     } catch (RechnungExestiertNichtException ren) {
                         System.err.println(ren.getMessage());
                     }
-
+                //Artikellogmenue
                 } else if (input.equals("la")){
                     try {
                         System.out.println("1) gesamten ArtikelLog anzeigen  > ");
@@ -715,6 +720,7 @@ public class eshopClientCUI {
                     } catch (KeineEintraegeVorhandenException kve){
                         System.err.println(kve.getMessage());
                     }
+                //Kundenlogmenue
                 } else if (input.equals("lk")){
                     try {
                         System.out.println("1) gesamten KundenLog anzeigen  > ");
@@ -761,6 +767,7 @@ public class eshopClientCUI {
                     } catch (KeineEintraegeVorhandenException kve){
                         System.err.println(kve.getMessage());
                     }
+                //Mitarbeiterlogmenue
                 } else if (input.equals("lm")){
                     try {
                         System.out.println("1) gesamten MitarbeiterLog anzeigen  > ");
@@ -807,6 +814,7 @@ public class eshopClientCUI {
                     } catch (KeineEintraegeVorhandenException kve){
                         System.err.println(kve.getMessage());
                     }
+                //Rechnungslogmenue
                 } else if (input.equals("lr")){
                     try {
                         System.out.println("1) gesamten RechnungsLog anzeigen  > ");
@@ -867,8 +875,12 @@ public class eshopClientCUI {
 
     }
 
-    private void neuenKundenAnlegen() throws IOException {
-        boolean ok = false;
+    /**
+     * Methode zum anlegen neuer Kunden
+     * @throws LeereEingabeException
+     */
+
+    private void neuenKundenAnlegen() throws IOException, LeereEingabeException {
         System.out.println("Willkommen bei der Kundenregistrierung.");
         System.out.println("Bitte geben sie ihre Daten ein.");
         try {
@@ -895,17 +907,16 @@ public class eshopClientCUI {
 
         } catch (NumberFormatException e) {
             System.out.println(e);
-        } catch (LeereEingabeException le) {
-            System.err.println(le.getMessage());
         } catch (BenutzernameExistiertBereitsException beb) {
             System.err.println(beb.getMessage());
         }
-        if (ok)
-            System.out.println("Einfügen ok");
-        else
-            System.out.println("Der Kunde konnte leider nicht angelegt werden !");
     }
 
+    /**
+     * Methode zum Anlegen neuer Mitarbeiter
+     * @throws IOException
+     * @throws LeereEingabeException
+     */
     private void neuenMitarbeiterAnlegen() throws IOException, LeereEingabeException {
 
         try {
