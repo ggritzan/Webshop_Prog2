@@ -10,6 +10,14 @@ import java.util.Comparator;
  * To change this template use File | Settings | File Templates.
  */
 public class ArtikelNumberComperator implements Comparator<Artikel> {
+    /**
+     * Methode um zwei Artikel nach Nummer zu vergleichen
+     *
+     * @param a1 -> Erster Artikel des Vergleichs
+     * @param a2 -> Zweiter Artikel des Vergleichs
+     *
+     * @return int
+     */
     public int compare(Artikel a1, Artikel a2) {
         String b1 = String.valueOf(a1.getNummer());
         String b2 = String.valueOf(a2.getNummer());

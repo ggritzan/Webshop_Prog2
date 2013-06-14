@@ -18,7 +18,12 @@ import eshop.local.exception.UnterEinerWocheException;
  */
 public class Lieferadresse extends Adresse{
 
+    // Konstruktor
+    public Lieferadresse(String vorname, String nachname, String straße, String plz, String ort) {
+        super(vorname, nachname, straße, plz, ort);
+    }
 
+    //Methode zum ändern des Lieferdatums
     public void anderesLieferdatum(int yyyy, int MM, int dd)throws MonatExistiertNichtException,
     DatumExistiertNichtException, DatumInVergangenheitException, UnterEinerWocheException{
         SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy");
@@ -43,8 +48,4 @@ public class Lieferadresse extends Adresse{
         }
     }
 
-
-    public Lieferadresse(String vorname, String nachname, String straße, String plz, String ort) {
-        super(vorname, nachname, straße, plz, ort);
-    }
 }

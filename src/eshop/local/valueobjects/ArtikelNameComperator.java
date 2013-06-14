@@ -10,6 +10,14 @@ import java.util.Comparator;
  * To change this template use File | Settings | File Templates.
  */
 public class ArtikelNameComperator implements Comparator<Artikel> {
+    /**
+     * Methode um zwei Artikelnamen zu vergleichen
+     *
+     * @param a1 -> Erster Artikel des Vergleichs
+     * @param a2 -> Zweiter Artikeld es vergleichs
+     *
+     * @return int
+     */
     public int compare(Artikel a1, Artikel a2) {
         if (a1.getName() == null && a2.getName() == null) {
             return 0;

@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 public class Mitarbeiter extends Person implements Serializable {
 
+    // SerialVersionUID zum speichern und einlesen
     private static final long serialVersionUID = 1169397538857810497L;
 
     // Attribute zur Beschreibung eines Mitarbeiters
@@ -18,12 +19,23 @@ public class Mitarbeiter extends Person implements Serializable {
     private static int zaehler = 1000;
 
     // Konstruktor
+
+    /**
+     * Methode zum anlegen eines neuen Personenobjekts
+     *
+     * @param vorname -> Voname der Person
+     * @param nachname -> Nachname der Person
+     * @param benutzername -> Benutzername der Person
+     * @param passwort -> Passwort der Person
+     * @param email -> Emailadresse der Person
+     * @param telefon -> Telefonnummer der Person
+     * @param adresse -> Adresse der Person
+     */
     public Mitarbeiter(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) {
         super(vorname, nachname, benutzername, passwort, email, telefon, adresse);
         this.mNr = this.zaehler;
         this.zaehler++;
     }
-
 
     //Methoden
 
@@ -32,24 +44,27 @@ public class Mitarbeiter extends Person implements Serializable {
         return string;
     }
 
-    //Setzt den Bestand des Artikels auf den gewünschten Wert
+    //Methoden
+
+    /**
+     * Setter um den Bestand um einen Beitrag zu erhöhen
+     *
+     * @param a -> Der Artikel dessen Bestand erhöht werden soll
+     * @param wert -> Der Wert um den der Bestand erhöht werden soll
+     */
     public void bestandErhoehen(Artikel a, int wert) {
         a.setBestand(wert);
     }
 
-    //Aendert den Preis des Artikels auf den neuen Preis
+    /**
+     * Setter um den Preis eines Artikels zu ändern
+     *
+     * @param a -> Der Artikel dessen Preis geändert werden soll
+     * @param wert -> Der neue Preis des Artikels
+     */
     public void preisAendern(Artikel a, double wert) {
         a.setPreis(wert);
     }
-
-    // Methoden der Klasse Mitarbeiter
-
-    /* Nicht mehr funktionierende/benötigte Funkion?)
-    public Artikel neuerArtikel(String bezeichnung, int nummer, double preis, int bestand) {
-        Artikel  x = new Artikel(bezeichnung,nummer,preis,bestand);
-        return x;
-    }
-    */
 
     // Setter
 

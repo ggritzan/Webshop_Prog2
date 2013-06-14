@@ -12,35 +12,57 @@ import java.io.Serializable;
 
 public class MassengutArtikel extends Artikel implements Serializable {
 
+    // SerialVersionUID die es möglich macht einen MassengutArtikel zu speichern und wieder einzulesen
     private static final long serialVersionUID = 2109398534357810497L;
 
     // Attribute zur Beschreibung eines MassengutArtikels
     private int packungsgroesse;
 
-    // Konstruktor für neue MassengutArtikel
+    /**
+     * Methode zum anlegen eines neuen MassengutArtikel Objekts
+     *
+     * @param name -> Der Name des Massengutartikels
+     * @param beschreibung -> Die Beschreibung des Massengutartikels
+     * @param preis -> Der Preis des Massengutartikels pro Stück
+     * @param packungsgroesse -> Die Packungsgroesse des MassengutArtikels
+     */
     public MassengutArtikel(String name, String beschreibung, double preis, int packungsgroesse ) {
-
-         super(name, beschreibung, preis);
-         this.packungsgroesse = packungsgroesse;
-
+        super(name, beschreibung, preis);
+        this.packungsgroesse = packungsgroesse;
     }
-    /*
-    public MassengutArtikel (MassengutArtikel artikel) {
-        super(artikel);
-        this.packungsgroesse = artikel.getPackungsgroesse();
-    }
-    */
+
+    /**
+     * Standard-Methode vom Object überschrieben.
+     * Methode wird immer automatisch aufgerufen, wenn ein Kunden-Objekt als String
+     * benutzt wird (z.B. in println(Kunde);)
+     *
+     * @see java.lang.Object#toString()
+     */
     public String toString() {
         String string = "\tNummer: " + getNummer()  + "\tName:  " + getName() + "\t\tBeschreibung: " + getBeschreibung() + "\t\tPreis: " + getPreis() +"\t\tPackungsgroesse : " + getPackungsgroesse() + "\t Bestand: " + getBestand() + "\n" + "\t BestellteMenge: " + getBestellteMenge() + "\n" ;
         return string;
     }
 
-    // Setter & Getter
+    // Setter
+
+    /**
+     * Methode ändert die Packungsgroesse eines Massengutartikels
+     *
+     * @param packungsgroesse -> Die neue Packunsggroesse
+     */
+    public void setPackungsgroesse(int packungsgroesse) {
+        this.packungsgroesse = packungsgroesse;
+    }
+
+    // Getter
+
+    /**
+     * Methode liefert die Packungsgroesse eines MassengutArtikels zurück
+     *
+     * @return int -> Die Packungsgroesse
+     */
     public int getPackungsgroesse() {
         return packungsgroesse;
     }
 
-    public void setPackungsgroesse(int packungsgroesse) {
-        this.packungsgroesse = packungsgroesse;
-    }
 }
