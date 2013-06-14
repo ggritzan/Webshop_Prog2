@@ -433,3 +433,6 @@ Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit de
 Do 2013.06.13 um 14:24:05 MESZ:
 Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Do 2013.06.13 um 16:32:40 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

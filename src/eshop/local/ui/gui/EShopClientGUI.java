@@ -282,10 +282,8 @@ public class EShopClientGUI extends JFrame {
                             System.err.println(mene.getMessage());
                         }
                         addLoginPanel.resetJTextfields();
-                        switchPanel.remove(addLoginPanel);
                         mitarbeiterPanelReloader('a');
-                        switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
-                        switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+
 
 
                       // Überprüft ob der Kunde exestier und wechselt bei einem positiven Ergebnis in das Kundenmenue
@@ -318,7 +316,7 @@ public class EShopClientGUI extends JFrame {
                     // Wird im Dialog Mitarbeiter ausgewählt wird der Nutzer zur Mitarbeiter Registrierung weiter geleitet
                     if (result == JOptionPane.YES_OPTION) {
 
-                        switchPanel.remove(addLoginPanel);
+                        switchPanel.removeAll();
                         switchPanelRepainter();
                         switchPanel.add(addMitarbeiterRegistrierungPanel, BorderLayout.CENTER);
 
@@ -326,7 +324,7 @@ public class EShopClientGUI extends JFrame {
                     } else if (result == JOptionPane.NO_OPTION) {
 
 
-                        switchPanel.remove(addLoginPanel);
+                        switchPanel.removeAll();
                         switchPanelRepainter();
                         switchPanel.add(addKundenRegistrierungPanel, BorderLayout.CENTER);
 
@@ -382,6 +380,8 @@ public class EShopClientGUI extends JFrame {
                             // leert das switchPanel
                             switchPanel.removeAll();
                             switchPanelRepainter();
+                            //setzt alle Felder des Logins zurueck
+                            addLoginPanel.resetJTextfields();
                             // fügt dem SwitchPanel das LoginPanel hinzu
                             switchPanel.add(addLoginPanel, BorderLayout.CENTER);
 
@@ -399,8 +399,9 @@ public class EShopClientGUI extends JFrame {
                     }
                   // BackToLoginButton - reagiert wenn der BackToLoginButton gedrueckt wird
                 } else if (source == addKundenRegistrierungPanel.getBackToLoginButton()) {
+                    // setzt alle Felder des Panel zurück
                     addKundenRegistrierungPanel.resetAllJTextfields();
-                    switchPanel.remove(addKundenRegistrierungPanel);
+                    switchPanel.removeAll();
                     switchPanelRepainter();
                     switchPanel.add(addLoginPanel, BorderLayout.CENTER);
                 }
@@ -447,7 +448,7 @@ public class EShopClientGUI extends JFrame {
 
                             addMitarbeiterRegistrierungPanel.resetAllJTextfields();
 
-                            switchPanel.remove(addMitarbeiterRegistrierungPanel);
+                            switchPanel.removeAll();
                             switchPanelRepainter();
                             switchPanel.add(addLoginPanel, BorderLayout.CENTER);
 
@@ -465,8 +466,9 @@ public class EShopClientGUI extends JFrame {
                     }
 
                 } else if (source == addMitarbeiterRegistrierungPanel.getBackToLoginButton()) {
+                    // setzt alle Felder des Panel zurück
                     addMitarbeiterRegistrierungPanel.resetAllJTextfields();
-                    switchPanel.remove(addMitarbeiterRegistrierungPanel);
+                    switchPanel.removeAll();
                     switchPanelRepainter();
                     switchPanel.add(addLoginPanel, BorderLayout.CENTER);
                 }
@@ -490,25 +492,14 @@ public class EShopClientGUI extends JFrame {
                 if (source == addMitarbeiterPanel.getArtikelButton()) {
                     mitarbeiterPanelReloader('a');
 
-
-
                 } else if (source == addMitarbeiterPanel.getMitarbeiterButton()) {
-                    switchPanel.removeAll();
-                    switchPanelRepainter();
                     mitarbeiterPanelReloader('m');
 
-
                 } else if (source == addMitarbeiterPanel.getKundenButton()) {
-                    switchPanel.removeAll();
-                    switchPanelRepainter();
                     mitarbeiterPanelReloader('k');
 
-
                 } else if (source == addMitarbeiterPanel.getRechnungenButton()) {
-                    switchPanel.removeAll();
-                    switchPanelRepainter();
                     mitarbeiterPanelReloader('r');
-
 
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
                     aktuellerMitarbeiter = 0;
@@ -538,7 +529,6 @@ public class EShopClientGUI extends JFrame {
                         double aPreis = addMitarbeiterArtikelListePanel.getArtikelPreis();
 
                         eShopVerwaltung.fuegeArtikelEin(aName, aBeschreibung, aPreis, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
-                        System.out.println("Der Artikel wurde hinzugefügt!");
 
                         mitarbeiterPanelReloader('a');
 
