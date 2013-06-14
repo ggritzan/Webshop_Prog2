@@ -19,15 +19,23 @@ public class MitarbeiterPanel extends JPanel {
     private JButton bestandsDiagramButton;
     private JButton logoutButton;
 
-
+    /**
+     * Konstruktor
+     */
     public MitarbeiterPanel() {
         super();
 
+        // erzeugt einen neuen artikelButton
         artikelButton = new JButton("Artikel");
+        // erzeugt einen neuen mitarbeiterButtoon
         mitarbeiterButton = new JButton("Mitarbeiter");
+        // erzeugt einen neuen kundenButton
         kundenButton = new JButton("Kunden");
+        // erzeugt einen neuen rechnungenButton
         rechnungenButton = new JButton("Rechnungen");
+        // erzeugt einen neuen bestandsDiagramButton
         bestandsDiagramButton = new JButton("Bestand-Diagram");
+        // erzeugt einen neuen logoutButton
         logoutButton = new JButton("Logout");
 
 
@@ -61,36 +69,64 @@ public class MitarbeiterPanel extends JPanel {
 
 
 
-        // Hinzufügen der Elemente für die Ebene 0
+        // Hinzufuegen der Elemente für die Ebene 0
         this.add(new JPanel());
         this.add(frameEbene1);
 
     }
 
+    /**
+     * Getter fuer den ArtikelButton
+     * @return
+     */
     public JButton getArtikelButton() {
         return artikelButton;
     }
 
+    /**
+     * Getter fuer MitarbeiterButton
+     * @return
+     */
     public JButton getMitarbeiterButton() {
         return mitarbeiterButton;
     }
 
+    /**
+     * Getter fuer den KundenButton
+     * @return
+     */
     public JButton getKundenButton() {
         return kundenButton;
     }
 
+    /**
+     * Getter fuer den RechnungenButton
+     * @return
+     */
     public JButton getRechnungenButton() {
         return rechnungenButton;
     }
 
+    /**
+     * Getter fuer den BestandsDiagramButton
+     * @return
+     */
     public JButton getBestandsDiagramButton() {
         return bestandsDiagramButton;
     }
 
+    /**
+     * Getter fuer den LogoutButton
+     * @return
+     */
     public JButton getLogoutButton() {
         return logoutButton;
     }
 
+    /**
+     * Fuegt allen Buttons einen Actionlistener hinzu
+     * @param a
+     */
     public void addActionListener(ActionListener a) {
         artikelButton.addActionListener(a);
         mitarbeiterButton.addActionListener(a);

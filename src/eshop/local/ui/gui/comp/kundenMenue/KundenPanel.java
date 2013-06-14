@@ -21,10 +21,8 @@ import java.awt.event.ActionListener;
  */
 public class KundenPanel extends JPanel {
     private JButton artikelButton;
-    private JButton mitarbeiterButton;
-    private JButton kundenButton;
+    private JButton warenkorbButton;
     private JButton rechnungenButton;
-    private JButton bestandsDiagramButton;
     private JButton logoutButton;
 
 
@@ -32,10 +30,8 @@ public class KundenPanel extends JPanel {
         super();
 
         artikelButton = new JButton("Artikel");
-        mitarbeiterButton = new JButton("Mitarbeiter");
-        kundenButton = new JButton("Kunden");
+        warenkorbButton = new JButton("Warenkorb");
         rechnungenButton = new JButton("Rechnungen");
-        bestandsDiagramButton = new JButton("Bestand-Diagram");
         logoutButton = new JButton("Logout");
 
 
@@ -55,13 +51,13 @@ public class KundenPanel extends JPanel {
         frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
         frameEbene1.add(artikelButton);
-        frameEbene1.add(mitarbeiterButton);
-        frameEbene1.add(kundenButton);
+        frameEbene1.add(warenkorbButton);
         frameEbene1.add(rechnungenButton);
-        frameEbene1.add(bestandsDiagramButton);
         frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
         frameEbene1.add(logoutButton);
+        frameEbene1.add(new JPanel());
+        frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
         frameEbene1.add(new JPanel());
@@ -79,12 +75,8 @@ public class KundenPanel extends JPanel {
         return artikelButton;
     }
 
-    public JButton getMitarbeiterButton() {
-        return mitarbeiterButton;
-    }
-
-    public JButton getKundenButton() {
-        return kundenButton;
+    public JButton getWarenkorbButton() {
+        return warenkorbButton;
     }
 
     public JButton getRechnungenButton() {
