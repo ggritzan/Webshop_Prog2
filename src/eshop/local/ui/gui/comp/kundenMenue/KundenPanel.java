@@ -83,9 +83,7 @@ public class KundenPanel extends JPanel {
         return rechnungenButton;
     }
 
-    public JButton getBestandsDiagramButton() {
-        return bestandsDiagramButton;
-    }
+
 
     public JButton getLogoutButton() {
         return logoutButton;
@@ -93,10 +91,9 @@ public class KundenPanel extends JPanel {
 
     public void addActionListener(ActionListener a) {
         artikelButton.addActionListener(a);
-        mitarbeiterButton.addActionListener(a);
-        kundenButton.addActionListener(a);
+
         rechnungenButton.addActionListener(a);
-        bestandsDiagramButton.addActionListener(a);
+
         logoutButton.addActionListener(a);
     }
 
