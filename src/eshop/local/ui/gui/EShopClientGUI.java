@@ -6,6 +6,7 @@ import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.kundenMenue.KundenPanel;
 import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelListePanel;
+import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestandAendernDialog;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
@@ -56,6 +57,7 @@ public class EShopClientGUI extends JFrame {
     // KundenPanel
     private KundenPanel addKundenPanel;
     private KundenArtikelListePanel addKundenArtikelListePanel;
+    private KundenWarenkorbListePanel addKundenWarenkorbListePanel;
     // <== Ende der Panels und Popups
 
 
@@ -175,6 +177,7 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt das ArtikellistePanel
         addKundenArtikelListePanel = new KundenArtikelListePanel(eShopVerwaltung.gibAlleArtikelHashMapZurueckgeben());
 
+
     }
 
     /**
@@ -278,7 +281,7 @@ public class EShopClientGUI extends JFrame {
             case 'a':
                 //leert das SwitchPanel
                 switchPanel.removeAll();
-                // fuegt das MitarbeiterPanel hinzu
+                // fuegt das KundenPanel hinzu
                 switchPanel.add(addKundenPanel, BorderLayout.WEST);
                 // aktualisiert die ArtikelListe
                 addKundenArtikelListePanel.getTmodel().fireTableDataChanged();
@@ -291,19 +294,41 @@ public class EShopClientGUI extends JFrame {
 
 
             case 'w':
-                //leert das SwitchPanel
-                switchPanel.removeAll();
-                // fuegt das MitarbeiterPanel hinzu
-                switchPanel.add(addKundenPanel, BorderLayout.WEST);
-                // aktualisiert die KundenListe
-                //addMitarbeiterMitarbeiterListePanel.getTmodel().fireTableDataChanged();
-                // fuegt das MitarbeiterMitarbeiterListePanel hinzu
-                //switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
-                switchPanelRepainter();
+
+                if(addKundenWarenkorbListePanel == null ){
+
+                // Erzeugt KundenWarenkorbListePanel
+                try {
+                    //leert das SwitchPanel
+                    switchPanel.removeAll();
+                    // fuegt das KundenPanel hinzu
+                    switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                    // erzeugt ein neues KundenWarenkorbListePanel
+                    addKundenWarenkorbListePanel = new KundenWarenkorbListePanel(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb());
+
+                } catch (KundenNummerExistiertNichtException knene) {
+                    System.err.println(knene.getMessage());
+                }
+                    // fuegt das KundenWarenkorbListePanel hinzu
+                    switchPanel.add(addKundenWarenkorbListePanel, BorderLayout.CENTER);
+                    switchPanelRepainter();
+
+                    //TODO Eventlistener muss hier eingerichtet werden
+
+                } else {
+
+                    //leert das SwitchPanel
+                    switchPanel.removeAll();
+                    // fuegt das KundenPanel hinzu
+                    switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                    // aktualisiert die KundenWarenkorbListePanel
+                    addKundenWarenkorbListePanel.getTmodel().fireTableDataChanged();
+                    // fuegt das KundenWarenkorbListePanel hinzu
+                    switchPanel.add(addKundenWarenkorbListePanel, BorderLayout.CENTER);
+                    switchPanelRepainter();
+
+                }
                 break;
-
-
-
 
 
             case 'r':
@@ -973,6 +998,38 @@ public class EShopClientGUI extends JFrame {
         });
 
 // Kunden
+
+        /**
+         * ActionListener für das KundenPanel
+         */
+        addKundenPanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                if (source == addKundenPanel.getArtikelButton()) {
+                    kundenPanelReloader('a');
+
+                } else if (source == addKundenPanel.getWarenkorbButton()) {
+                    kundenPanelReloader('w');
+
+                } else if (source == addKundenPanel.getRechnungenButton()) {
+                    kundenPanelReloader('k');
+
+                } else if (source == addKundenPanel.getLogoutButton()) {
+                    aktuellerKunde = 0;
+                    switchPanel.removeAll();
+                    addKundenWarenkorbListePanel = null;
+                    switchPanelRepainter();
+                    switchPanel.add(addLoginPanel, BorderLayout.CENTER);
+
+
+                }
+
+            }
+        });
+
 
 
         /**
