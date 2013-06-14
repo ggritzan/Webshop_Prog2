@@ -4,6 +4,7 @@ package eshop.local.ui.gui;
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
+import eshop.local.ui.gui.comp.kundenMenue.KundenPanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestandAendernDialog;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
@@ -40,6 +41,7 @@ public class EShopClientGUI extends JFrame {
     private LoginPanel addLoginPanel;
     private KundenRegistrierungPanel addKundenRegistrierungPanel;
     private MitarbeiterRegistrierungPanel addMitarbeiterRegistrierungPanel;
+    // MitarbeiterPanel
     private MitarbeiterPanel addMitarbeiterPanel;
     private MitarbeiterArtikelListePanel addMitarbeiterArtikelListePanel;
     private MitarbeiterArtikelPopup addMitarbeiterArtikelPopup;
@@ -50,6 +52,8 @@ public class EShopClientGUI extends JFrame {
     private MitarbeiterRechnungsListePanel addMitarbeiterRechnungsListePanel;
     private MitarbeiterRechnungsPopup addMitarbeiterRechnungsPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
+    // KundenPanel
+    private KundenPanel addKundenPanel;
     // <== Ende der Panels und Popups
 
 
@@ -140,6 +144,7 @@ public class EShopClientGUI extends JFrame {
         addLoginPanel = new LoginPanel();
         switchPanel.add(addLoginPanel, BorderLayout.CENTER);
 
+// MitarbeiterPanel
         // Erzeugt das MitarbeiterPanel
         addMitarbeiterPanel = new MitarbeiterPanel();
 
@@ -161,6 +166,10 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
 
+// KundenPanel
+        // Erzeugt das MitarbeiterPanel
+        addKundenPanel = new KundenPanel();
+
 
     }
 
@@ -174,8 +183,8 @@ public class EShopClientGUI extends JFrame {
 
 
     /**
-     * Dient zum neu Laden der jeweiligen Listen Panels
-     * als Paramter muss ein char übergeben werden damit die Funktion weiß welche Listen Panels aktulasiert werden sollen
+     * Dient zum neu Laden der jeweiligen Panels des Mitarbeiter
+     * als Paramter muss ein char übergeben werden damit die Funktion weiß welche Panels aktualsiert werden sollen
      * 'a' für das ArtikelListePanel
      * 'm' für das MitarbeiterListePanel
      * 'k' für das KundenListePanel
@@ -250,11 +259,75 @@ public class EShopClientGUI extends JFrame {
 
 
     /**
+     * Dient zum neu Laden der jeweiligen Panels des Kunden
+     * als Paramter muss ein char übergeben werden damit die Funktion weiß welche Panels aktualsiert werden sollen
+     * 'a' für das ArtikelListePanel
+     * 'w' für das WarenkorbListePanel
+     * 'r' für das RechnungListePanel
+     *
+     * @param param
+     */
+    public void kundenPanelReloader(char param) {
+        switch (param) {
+
+
+            case 'a':
+                //leert das SwitchPanel
+                switchPanel.removeAll();
+                // fuegt das MitarbeiterPanel hinzu
+                switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                // aktualisiert die ArtikelListe
+                //addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das MitarbeiterArtikelListePanel hinzu
+                //switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
+                // setzt die JTextfields des MitarbeiterArtikelListePanel zurueck
+                //addMitarbeiterArtikelListePanel.resetAllJTextfields();
+                switchPanelRepainter();
+                break;
+
+
+            case 'w':
+                //leert das SwitchPanel
+                switchPanel.removeAll();
+                // fuegt das MitarbeiterPanel hinzu
+                switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                // aktualisiert die KundenListe
+                //addMitarbeiterMitarbeiterListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das MitarbeiterMitarbeiterListePanel hinzu
+                //switchPanel.add(addMitarbeiterMitarbeiterListePanel, BorderLayout.CENTER);
+                switchPanelRepainter();
+                break;
+
+
+
+
+
+            case 'r':
+                //leert das SwitchPanel
+                switchPanel.removeAll();
+                // fuegt das MitarbeiterPanel hinzu
+                switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                // aktualisiert die RechnungsListe
+                //addMitarbeiterRechnungsListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das MitarbeiterRechnungsListePanel hinzu
+                //switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
+                switchPanelRepainter();
+                break;
+
+
+
+        }
+    }
+
+
+    /**
      * Intialisiert die Listener für die verschiedenen Action & Mouse-Events
      */
     private void initListeners() {
         // Finale Selbstreferenz (damit GUI-Referenz "this" auch im ActionListener-Kontext verfuegbar ist)
         final EShopClientGUI eShopClientGUI = this;
+
+// LOGIN
 
         /**
          *  Actionlistener - LoginPanel
@@ -290,6 +363,14 @@ public class EShopClientGUI extends JFrame {
                     } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                         System.out.println("Ihr Login war erfolgreich.");
                         System.out.println("Willkommen Kunde");
+                        try {
+                            aktuellerKunde = eShopVerwaltung.getKnr(addLoginPanel.getLoginName());
+                        }catch (BenutzernameExistiertNichtException bene) {
+                            System.err.println(bene.getMessage());
+                        }
+                        addLoginPanel.resetJTextfields();
+                        kundenPanelReloader('a');
+
 
                         // Wenn kein Kunde & kein Mitarbeiter mit dem Benutzernamen exestiert dann erfolgt diese Ausgabe
                     } else {
@@ -336,6 +417,7 @@ public class EShopClientGUI extends JFrame {
             }
         });
 
+// Registrierung
         /**
          * Actionlistener - KundenRegistrierungPanel
          */
@@ -480,6 +562,7 @@ public class EShopClientGUI extends JFrame {
         });
 
 
+//  Mitarbeiter
         /**
          * ActionListener für das MitarbeiterPanel
          */
@@ -884,6 +967,8 @@ public class EShopClientGUI extends JFrame {
 
 
         });
+
+// Kunden
 
 
         /**

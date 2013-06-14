@@ -71,29 +71,46 @@ public class KundenPanel extends JPanel {
 
     }
 
+    /**
+     * Getter fuer den ArtikelButton
+     * @return
+     */
     public JButton getArtikelButton() {
         return artikelButton;
     }
 
+    /**
+     * Getter fuer den WarenkorbButton
+     * @return
+     */
     public JButton getWarenkorbButton() {
         return warenkorbButton;
     }
 
+    /**
+     * Getter fuer den RechnungenButton
+     * @return
+     */
     public JButton getRechnungenButton() {
         return rechnungenButton;
     }
 
-
-
+    /**
+     * Getter fuer den LogoutButton
+     * @return
+     */
     public JButton getLogoutButton() {
         return logoutButton;
     }
 
+    /**
+     * Fuegt allen Buttons einen Actionlistener hinzu
+     * @param a
+     */
     public void addActionListener(ActionListener a) {
         artikelButton.addActionListener(a);
-
+        warenkorbButton.addActionListener(a);
         rechnungenButton.addActionListener(a);
-
         logoutButton.addActionListener(a);
     }
 
