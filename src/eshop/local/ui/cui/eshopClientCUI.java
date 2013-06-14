@@ -297,7 +297,7 @@ public class eshopClientCUI {
                         //holt den gewünschten Artikel aus der Hashmap
                         Artikel a = eShopVerwaltung.getArtikel(aNrInt);
                         if (a instanceof MassengutArtikel) {
-                            //anlegen einer Massengutartikelkopie, des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
+                            //anlegen einer Massengutartikelkopie des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
                             //sich verschiedene Bestellmengen überschreiben
                             MassengutArtikel mA = new MassengutArtikel(a.getName(), a.getBeschreibung(), a.getPreis(), ((MassengutArtikel) a).getPackungsgroesse());
                             mA.setBestand(a.getBestand());
@@ -305,7 +305,7 @@ public class eshopClientCUI {
                             eShopVerwaltung.setBestellteMenge(mengeInt, mA);
                             eShopVerwaltung.inWarenkorbLegen(mA, kNr);
                         } else {
-                            //anlegen einer Artikelkopie, des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
+                            //anlegen einer Artikelkopie des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
                             //sich verschiedene Bestellmengen überschreiben
                             Artikel art = new Artikel(a.getName(), a.getBeschreibung(), a.getPreis());
                             art.setBestand(a.getBestand());

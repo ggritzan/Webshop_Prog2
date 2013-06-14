@@ -436,3 +436,6 @@ Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit
 Do 2013.06.13 um 16:32:40 MESZ:
 Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Fr 2013.06.14 um 13:32:30 MESZ:
+Der Bestand des Artikels '8' mit der Artikelnummer 1003 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 476.
+
