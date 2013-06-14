@@ -6,7 +6,9 @@ import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.kundenMenue.KundenPanel;
 import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelListePanel;
+import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbBestellteMengeAendern;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbListePanel;
+import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestandAendernDialog;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
@@ -58,6 +60,8 @@ public class EShopClientGUI extends JFrame {
     private KundenPanel addKundenPanel;
     private KundenArtikelListePanel addKundenArtikelListePanel;
     private KundenWarenkorbListePanel addKundenWarenkorbListePanel;
+    private KundenWarenkorbPopup addKundenWarenkorbPopup;
+    private KundenWarenkorbBestellteMengeAendern addKundenWarenkorbBestellteMengeAendern;
     // <== Ende der Panels und Popups
 
 
@@ -177,6 +181,11 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt das ArtikellistePanel
         addKundenArtikelListePanel = new KundenArtikelListePanel(eShopVerwaltung.gibAlleArtikelHashMapZurueckgeben());
 
+        // Erzeugt ein Popup ffuer die KundenWarenkorbListe
+        addKundenWarenkorbPopup = new KundenWarenkorbPopup();
+
+        // Erzeugt ein KundenBestellteMengeAendernDialog
+        addKundenWarenkorbBestellteMengeAendern = new KundenWarenkorbBestellteMengeAendern();
 
     }
 
@@ -305,7 +314,8 @@ public class EShopClientGUI extends JFrame {
                     switchPanel.add(addKundenPanel, BorderLayout.WEST);
                     // erzeugt ein neues KundenWarenkorbListePanel
                     addKundenWarenkorbListePanel = new KundenWarenkorbListePanel(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb());
-
+                    // fuegt die Action & Mouselistener hinzu
+                    initWarenkorbListener();
                 } catch (KundenNummerExistiertNichtException knene) {
                     System.err.println(knene.getMessage());
                 }
@@ -313,7 +323,7 @@ public class EShopClientGUI extends JFrame {
                     switchPanel.add(addKundenWarenkorbListePanel, BorderLayout.CENTER);
                     switchPanelRepainter();
 
-                    //TODO Eventlistener muss hier eingerichtet werden
+
 
                 } else {
 
@@ -347,6 +357,8 @@ public class EShopClientGUI extends JFrame {
 
         }
     }
+
+
 
 
     /**
@@ -1076,6 +1088,95 @@ public class EShopClientGUI extends JFrame {
             }
         });
 
+
+    }
+
+    /**
+     * Intialisiert die Listener für den Warenkorb eines Kunden
+     */
+    private void initWarenkorbListener() {
+
+        /**
+         * MouseListener für KundenWarenkorbListePanel erzeugt ein Popup bei Rechtsklick
+         */
+        addKundenWarenkorbListePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                if (e.isPopupTrigger()) {
+                    JTable source = (JTable) e.getSource();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+
+                    // Artikelnummer des ausgewählten Artikels des Warenkorbs
+                    ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addKundenWarenkorbPopup.show(e.getComponent(), e.getX(), e.getY());
+
+                    /**
+                     * ActionListener für KundenWarenkorbPopup
+                     */
+                    addKundenWarenkorbPopup.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+
+
+                            Object source = ae.getSource();
+                            // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
+                            if (source == addKundenWarenkorbPopup.getBestellteMengeAendern()) {
+
+
+                                // setzt das Popup Menue an die Position des MouseEvents
+                                addKundenWarenkorbBestellteMengeAendern.setLocation(aktuellePositionX, aktuellePositionY);
+
+                                // macht den JDialog sichtbar
+                                addKundenWarenkorbBestellteMengeAendern.setVisible(true);
+
+
+                                // Löscht den entsprechenden Artikel aus dem Warenkorb wenn im Popupmenue löschen ausgewählt wird
+                            } else if (source == addKundenWarenkorbPopup.getLoeschen()) {
+
+
+                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich aus ihrem Warenkorb löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
+
+                                switch (result) {
+
+
+                                    case JOptionPane.YES_OPTION:
+
+                                        try {
+
+                                            eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel),aktuellerKunde);
+                                            kundenPanelReloader('w');
+
+
+                                        } catch (ArtikelExestiertNichtException aen) {
+                                            System.err.println(aen.getMessage());
+                                        } catch (KundenNummerExistiertNichtException knene) {
+                                            System.err.println(knene.getMessage());
+                                        }
+
+
+                                    case JOptionPane.NO_OPTION:
+
+
+                                        ausgewaehlterArtikel = -1;
+                                }
+
+                            }
+
+                        }
+
+                    });
+
+
+                }
+            }
+        });
 
     }
 

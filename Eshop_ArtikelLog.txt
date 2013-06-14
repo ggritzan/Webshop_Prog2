@@ -439,3 +439,21 @@ Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit
 Fr 2013.06.14 um 13:32:30 MESZ:
 Der Bestand des Artikels '8' mit der Artikelnummer 1003 wurde durch den Kunden test mit der Kundennummer 1001 geändert und hat jetzt die Menge 476.
 
+Fr 2013.06.14 um 18:23:22 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:23:24 MESZ:
+Der Artikel '3' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:23:31 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:26:43 MESZ:
+Der Bestand des Artikels 'test' mit der Artikelnummer 1005 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 12.
+
+Fr 2013.06.14 um 18:26:47 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:26:55 MESZ:
+Der Artikel '3' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

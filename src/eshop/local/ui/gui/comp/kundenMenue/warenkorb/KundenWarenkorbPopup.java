@@ -1,4 +1,4 @@
-package eshop.local.ui.gui.comp.mitarbeiterMenue.artikel;
+package eshop.local.ui.gui.comp.kundenMenue.warenkorb;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -6,35 +6,36 @@ import java.awt.event.ActionListener;
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
- * Date: 07.06.13
- * Time: 11:39
+ * Date: 14.06.13
+ * Time: 17:17
  * To change this template use File | Settings | File Templates.
  */
-public class MitarbeiterArtikelPopup extends JPopupMenu {
+public class KundenWarenkorbPopup extends JPopupMenu {
 
-    private JMenuItem bestandAendern;
+    private JMenuItem bestellteMengeAendern;
     private JMenuItem loeschen;
 
     /**
      *  Konstruktor
      */
-    public MitarbeiterArtikelPopup() {
+    public KundenWarenkorbPopup() {
         super();
 
-        bestandAendern = new JMenuItem("Bestand ändern");
+        bestellteMengeAendern = new JMenuItem("bestellte Menge anpassen");
         loeschen = new JMenuItem("löschen");
 
-        this.add(bestandAendern);
+        this.add(bestellteMengeAendern);
         this.add(loeschen);
     }
 
 // Gettter
+
     /**
-     * Getter fuer das JMenuItem bestandAendern
+     * Getter fuer das JMenuItem bestellteMengeAendern
      * @return
      */
-    public JMenuItem getBestandAendern() {
-        return bestandAendern;
+    public JMenuItem getBestellteMengeAendern() {
+        return bestellteMengeAendern;
     }
 
     /**
@@ -47,11 +48,11 @@ public class MitarbeiterArtikelPopup extends JPopupMenu {
 
 // Actionlistener
     /**
-     * Fügt den JMenuItems bestandAendern & loeschen einen Actionlistener hinzu
+     * Fügt den JMenuItems bestellteMengeAendern & loeschen einen Actionlistener hinzu
      * @param a
      */
     public void addActionListener(ActionListener a) {
-        bestandAendern.addActionListener(a);
+        bestellteMengeAendern.addActionListener(a);
         loeschen.addActionListener(a);
     }
 
