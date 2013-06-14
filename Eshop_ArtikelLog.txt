@@ -457,3 +457,42 @@ Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit de
 Fr 2013.06.14 um 18:26:55 MESZ:
 Der Artikel '3' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Fr 2013.06.14 um 18:31:13 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:31:21 MESZ:
+Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:36:38 MESZ:
+Der Bestand des Artikels '8' mit der Artikelnummer 1003 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 300.
+
+Fr 2013.06.14 um 18:36:44 MESZ:
+Der Bestand des Artikels '2' mit der Artikelnummer 1004 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 400.
+
+Fr 2013.06.14 um 18:36:51 MESZ:
+Der Bestand des Artikels '7' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 1400.
+
+Fr 2013.06.14 um 18:39:28 MESZ:
+Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:39:30 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:39:32 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:39:35 MESZ:
+Der Artikel '3' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:46:59 MESZ:
+Der Artikel '4' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:47:01 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:47:04 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:59:30 MESZ:
+Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

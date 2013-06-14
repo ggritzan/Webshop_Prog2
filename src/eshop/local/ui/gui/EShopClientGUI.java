@@ -162,14 +162,23 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt ein Popup für das Artikelmenü
         addMitarbeiterArtikelPopup = new MitarbeiterArtikelPopup();
 
+        // Erzeugt ein Popup für das Mitarbeitermenü
+        addMitarbeiterMitarbeiterPopup = new MitarbeiterMitarbeiterPopup();
+
         // Erzeugt das MitarbeiterMitarbeiterListePanel
         addMitarbeiterMitarbeiterListePanel = new MitarbeiterMitarbeiterListePanel(eShopVerwaltung.gibAlleMitarbeiterHashMapZurueckgeben());
 
         // Erzeugt das KundenListenPanel
         addMitarbeiterKundenListePanel = new MitarbeiterKundenListePanel(eShopVerwaltung.gibAlleKundenHashMapZurueckgeben());
 
+        // Erzeugt ein Popup für das Kundenmenü
+        addMitarbeiterKundenPopup = new MitarbeiterKundenPopup();
+
         // Erzeugt das RechnungsListenPanel
         addMitarbeiterRechnungsListePanel = new MitarbeiterRechnungsListePanel(eShopVerwaltung.gibAlleRechnungenHashMapZurueckgeben());
+
+        // Erzeugt ein Popup für das Rechnungsmenü
+        addMitarbeiterRechnungsPopup = new MitarbeiterRechnungsPopup();
 
         // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
@@ -694,69 +703,71 @@ public class EShopClientGUI extends JFrame {
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
 
-                    /**
-                     * ActionListener für MitarbeiterArtikelPopup
-                     */
-                    addMitarbeiterArtikelPopup.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
 
-
-                            Object source = ae.getSource();
-                            // Ändert den Bestand des entsprechenden Artikels im E-Shop
-                            if (source == addMitarbeiterArtikelPopup.getBestandAendern()) {
-
-
-                                // setzt das Popup Menue an die Position des MouseEvents
-                                addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuellePositionX, aktuellePositionY);
-
-                                // macht das Popup Menue sichtbar
-                                addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
-
-
-                                // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
-                            } else if (source == addMitarbeiterArtikelPopup.getLoeschen()) {
-
-
-                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
-
-                                switch (result) {
-
-
-                                    case JOptionPane.YES_OPTION:
-
-                                        try {
-
-                                            eShopVerwaltung.loescheArtikel(ausgewaehlterArtikel, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
-                                            mitarbeiterPanelReloader('a');
-
-
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        } catch (ArtikelExestiertNichtException aen) {
-                                            System.err.println(aen.getMessage());
-                                        } catch (MitarbeiterExistiertNichtException men) {
-                                            System.err.println(men.getMessage());
-                                        }
-
-
-
-                                    case JOptionPane.NO_OPTION:
-
-
-                                        ausgewaehlterArtikel = -1;
-                                }
-
-                            }
-
-                        }
-
-                    });
 
 
                 }
             }
+        });
+
+        /**
+         * ActionListener für MitarbeiterArtikelPopup
+         */
+        addMitarbeiterArtikelPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Ändert den Bestand des entsprechenden Artikels im E-Shop
+                if (source == addMitarbeiterArtikelPopup.getBestandAendern()) {
+
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addMitarbeiterArtikelBestandAendernDialog.setLocation(aktuellePositionX, aktuellePositionY);
+
+                    // macht das Popup Menue sichtbar
+                    addMitarbeiterArtikelBestandAendernDialog.setVisible(true);
+
+
+                    // Löscht den entsprechenden Artikel aus dem E-Shop wenn im Popupmenue löschen ausgewählt wird
+                } else if (source == addMitarbeiterArtikelPopup.getLoeschen()) {
+
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
+
+                    switch (result) {
+
+
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+
+                                eShopVerwaltung.loescheArtikel(ausgewaehlterArtikel, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                                mitarbeiterPanelReloader('a');
+
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (ArtikelExestiertNichtException aen) {
+                                System.err.println(aen.getMessage());
+                            } catch (MitarbeiterExistiertNichtException men) {
+                                System.err.println(men.getMessage());
+                            }
+
+
+
+                        case JOptionPane.NO_OPTION:
+
+
+                            ausgewaehlterArtikel = -1;
+                    }
+
+                }
+
+            }
+
         });
 
 
@@ -776,60 +787,59 @@ public class EShopClientGUI extends JFrame {
                     // Mitarbeiternummer des ausgewählten Artikels
                     ausgewaehlterMitarbeiter = (Integer) source.getValueAt(row, 0);
 
-
-                    // Erzeugt ein Popup für das Mitarbeitermenü
-                    addMitarbeiterMitarbeiterPopup = new MitarbeiterMitarbeiterPopup();
-
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterMitarbeiterPopup.show(e.getComponent(), e.getX(), e.getY());
 
-                    /**
-                     * ActionListener für MitarbeiterMitarbeiterPopup
-                     */
-                    addMitarbeiterMitarbeiterPopup.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-
-
-                            Object source = ae.getSource();
-                            // Wenn der loeschen Menueintrag ausgewaehlt wird
-                            if (source == addMitarbeiterMitarbeiterPopup.getLoeschen()) {
-
-                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Mitarbeiter wirklich löschen", "Mitarbeiter löschen", JOptionPane.YES_NO_OPTION);
-                                switch (result) {
-                                    case JOptionPane.YES_OPTION:
-
-                                        try {
-                                            eShopVerwaltung.loescheMitarbeiter(ausgewaehlterMitarbeiter, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
-                                            mitarbeiterPanelReloader('m');
-
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        } catch (MitarbeiterExistiertNichtException men) {
-                                            System.err.println(men.getMessage());
-                                        }
-
-
-                                        ausgewaehlterMitarbeiter = -1;
-                                        break;
-                                    case JOptionPane.NO_OPTION:
-
-
-                                        ausgewaehlterMitarbeiter = -1;
-                                        break;
-                                }
-
-
-                            }
-
-                        }
-                    });
 
 
                 }
             }
         });
+
+
+        /**
+         * ActionListener für MitarbeiterMitarbeiterPopup
+         */
+        addMitarbeiterMitarbeiterPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Wenn der loeschen Menueintrag ausgewaehlt wird
+                if (source == addMitarbeiterMitarbeiterPopup.getLoeschen()) {
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Mitarbeiter wirklich löschen", "Mitarbeiter löschen", JOptionPane.YES_NO_OPTION);
+                    switch (result) {
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+                                eShopVerwaltung.loescheMitarbeiter(ausgewaehlterMitarbeiter, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                                mitarbeiterPanelReloader('m');
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (MitarbeiterExistiertNichtException men) {
+                                System.err.println(men.getMessage());
+                            }
+
+
+                            ausgewaehlterMitarbeiter = -1;
+                            break;
+                        case JOptionPane.NO_OPTION:
+
+
+                            ausgewaehlterMitarbeiter = -1;
+                            break;
+                    }
+
+
+                }
+
+            }
+        });
+
 
 
         /**
@@ -848,60 +858,59 @@ public class EShopClientGUI extends JFrame {
                     // Kundennummer des ausgewählten Kunden
                     ausgewaehlterKunde = (Integer) source.getValueAt(row, 0);
 
-
-                    // Erzeugt ein Popup für das Kundenmenü
-                    addMitarbeiterKundenPopup = new MitarbeiterKundenPopup();
-
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterKundenPopup.show(e.getComponent(), e.getX(), e.getY());
 
-                    /**
-                     * ActionListener für MitarbeiterKundenPopup
-                     */
-                    addMitarbeiterKundenPopup.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-
-
-                            Object source = ae.getSource();
-                            // Wenn der loeschen Menueintrag ausgewaehlt wird
-                            if (source == addMitarbeiterKundenPopup.getLoeschen()) {
-
-                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Kunden wirklich löschen", "Kunden löschen", JOptionPane.YES_NO_OPTION);
-                                switch (result) {
-                                    case JOptionPane.YES_OPTION:
-
-                                        try {
-                                            eShopVerwaltung.loescheKunde(ausgewaehlterKunde, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
-                                            mitarbeiterPanelReloader('k');
-
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        } catch (MitarbeiterExistiertNichtException men) {
-                                            System.err.println(men.getMessage());
-                                        } catch (KundenNummerExistiertNichtException knene) {
-                                            System.err.println(knene.getMessage());
-                                        }
-
-
-                                        ausgewaehlterKunde = -1;
-
-                                    case JOptionPane.NO_OPTION:
-
-
-                                        ausgewaehlterKunde = -1;
-                                }
-
-                            }
-
-                        }
-                    });
 
 
                 }
             }
         });
+
+
+        /**
+         * ActionListener für MitarbeiterKundenPopup
+         */
+        addMitarbeiterKundenPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Wenn der loeschen Menueintrag ausgewaehlt wird
+                if (source == addMitarbeiterKundenPopup.getLoeschen()) {
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Kunden wirklich löschen", "Kunden löschen", JOptionPane.YES_NO_OPTION);
+                    switch (result) {
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+                                eShopVerwaltung.loescheKunde(ausgewaehlterKunde, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                                mitarbeiterPanelReloader('k');
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (MitarbeiterExistiertNichtException men) {
+                                System.err.println(men.getMessage());
+                            } catch (KundenNummerExistiertNichtException knene) {
+                                System.err.println(knene.getMessage());
+                            }
+
+
+                            ausgewaehlterKunde = -1;
+
+                        case JOptionPane.NO_OPTION:
+
+
+                            ausgewaehlterKunde = -1;
+                    }
+
+                }
+
+            }
+        });
+
 
 
         /**
@@ -920,58 +929,58 @@ public class EShopClientGUI extends JFrame {
                     // Rechnungsnummer des ausgewählten Rechnung
                     ausgewaehlteRechnung = (Integer) source.getValueAt(row, 0);
 
-
-                    // Erzeugt ein Popup für das Rechnungsmenü
-                    addMitarbeiterRechnungsPopup = new MitarbeiterRechnungsPopup();
-
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterRechnungsPopup.show(e.getComponent(), e.getX(), e.getY());
 
-                    /**
-                     * ActionListener für MitarbeiterRechnungsPopup
-                     */
-                    addMitarbeiterRechnungsPopup.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
 
-
-                            Object source = ae.getSource();
-                            // Wenn der loeschen Menueintrag ausgewaehlt wird                               sa
-                            if (source == addMitarbeiterRechnungsPopup.getLoeschen()) {
-
-                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                                int result = JOptionPane.showConfirmDialog(null, "Wollen die Rechnung wirklich löschen", "Rechnung löschen", JOptionPane.YES_NO_OPTION);
-                                switch (result) {
-                                    case JOptionPane.YES_OPTION:
-
-                                        try {
-                                            eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung));
-                                            mitarbeiterPanelReloader('r');
-
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        } catch (RechnungExestiertNichtException rene) {
-                                            System.err.println(rene.getMessage());
-                                        }
-
-
-                                        ausgewaehlteRechnung = -1;
-
-                                    case JOptionPane.NO_OPTION:
-
-
-                                        ausgewaehlteRechnung = -1;
-                                }
-
-                            }
-
-                        }
-                    });
 
 
                 }
             }
         });
+
+
+        /**
+         * ActionListener für MitarbeiterRechnungsPopup
+         */
+        addMitarbeiterRechnungsPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Wenn der loeschen Menueintrag ausgewaehlt wird                               sa
+                if (source == addMitarbeiterRechnungsPopup.getLoeschen()) {
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen die Rechnung wirklich löschen", "Rechnung löschen", JOptionPane.YES_NO_OPTION);
+                    switch (result) {
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+                                eShopVerwaltung.loescheRechnung(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung));
+                                mitarbeiterPanelReloader('r');
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (RechnungExestiertNichtException rene) {
+                                System.err.println(rene.getMessage());
+                            }
+
+
+                            ausgewaehlteRechnung = -1;
+
+                        case JOptionPane.NO_OPTION:
+
+
+                            ausgewaehlteRechnung = -1;
+                    }
+
+                }
+
+            }
+        });
+
 
 
         /**
@@ -1061,7 +1070,7 @@ public class EShopClientGUI extends JFrame {
 
 
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
+
                     e.printStackTrace();
 
                 }
@@ -1116,68 +1125,68 @@ public class EShopClientGUI extends JFrame {
                     // setzt das Popup Menue an die Position des MouseEvents
                     addKundenWarenkorbPopup.show(e.getComponent(), e.getX(), e.getY());
 
-                    /**
-                     * ActionListener für KundenWarenkorbPopup
-                     */
-                    addKundenWarenkorbPopup.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
 
-
-                            Object source = ae.getSource();
-                            // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
-                            if (source == addKundenWarenkorbPopup.getBestellteMengeAendern()) {
-
-
-                                // setzt das Popup Menue an die Position des MouseEvents
-                                addKundenWarenkorbBestellteMengeAendern.setLocation(aktuellePositionX, aktuellePositionY);
-
-                                // macht den JDialog sichtbar
-                                addKundenWarenkorbBestellteMengeAendern.setVisible(true);
-
-
-                                // Löscht den entsprechenden Artikel aus dem Warenkorb wenn im Popupmenue löschen ausgewählt wird
-                            } else if (source == addKundenWarenkorbPopup.getLoeschen()) {
-
-
-                                // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                                int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich aus ihrem Warenkorb löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
-
-                                switch (result) {
-
-
-                                    case JOptionPane.YES_OPTION:
-
-                                        try {
-
-                                            eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel),aktuellerKunde);
-                                            kundenPanelReloader('w');
-
-
-                                        } catch (ArtikelExestiertNichtException aen) {
-                                            System.err.println(aen.getMessage());
-                                        } catch (KundenNummerExistiertNichtException knene) {
-                                            System.err.println(knene.getMessage());
-                                        }
-
-
-                                    case JOptionPane.NO_OPTION:
-
-
-                                        ausgewaehlterArtikel = -1;
-                                }
-
-                            }
-
-                        }
-
-                    });
 
 
                 }
             }
         });
+        /**
+         * ActionListener für KundenWarenkorbPopup
+         */
+        addKundenWarenkorbPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
 
+
+                Object source = ae.getSource();
+                // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
+                if (source == addKundenWarenkorbPopup.getBestellteMengeAendern()) {
+
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addKundenWarenkorbBestellteMengeAendern.setLocation(aktuellePositionX, aktuellePositionY);
+
+                    // macht den JDialog sichtbar
+                    addKundenWarenkorbBestellteMengeAendern.setVisible(true);
+
+
+                    // Löscht den entsprechenden Artikel aus dem Warenkorb wenn im Popupmenue löschen ausgewählt wird
+                } else if (source == addKundenWarenkorbPopup.getLoeschen()) {
+
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich aus ihrem Warenkorb löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
+
+                    switch (result) {
+
+
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+
+                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel),aktuellerKunde);
+                                kundenPanelReloader('w');
+
+
+                            } catch (ArtikelExestiertNichtException aen) {
+                                System.err.println(aen.getMessage());
+                            } catch (KundenNummerExistiertNichtException knene) {
+                                System.err.println(knene.getMessage());
+                            }
+
+
+                        case JOptionPane.NO_OPTION:
+
+
+                            ausgewaehlterArtikel = -1;
+                    }
+
+                }
+
+            }
+
+        });
     }
 
 
