@@ -88,6 +88,7 @@ public class eshopClientCUI {
         System.out.println("              \n     Kunden ausgeben:  'ka'");
 
         System.out.print("Artikel:    \n  hinzufuegen: 'ah'");
+        System.out.print("              \n  MassengutArtikel hinzufuegen: 'am'");
         System.out.print("              \n  Bestand ändern: 'ab'");
         System.out.print("              \n  löschen: al");
         System.out.print("              \n  ausgeben:  'aa'");
