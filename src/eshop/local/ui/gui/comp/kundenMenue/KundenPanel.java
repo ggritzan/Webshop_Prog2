@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  * User: Giacomo
  * Date: 31.05.13
  * Time: 17:16
- * To change this template use File | Settings | File Templates.
+ * To change this template us File | Settings | File Templates.
  */
 public class KundenPanel extends JPanel {
     private JButton artikelButton;

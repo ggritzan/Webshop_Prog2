@@ -5,6 +5,7 @@ import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.kundenMenue.KundenPanel;
+import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestandAendernDialog;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
@@ -54,6 +55,7 @@ public class EShopClientGUI extends JFrame {
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
     // KundenPanel
     private KundenPanel addKundenPanel;
+    private KundenArtikelListePanel addKundenArtikelListePanel;
     // <== Ende der Panels und Popups
 
 
@@ -170,6 +172,8 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt das MitarbeiterPanel
         addKundenPanel = new KundenPanel();
 
+        // Erzeugt das ArtikellistePanel
+        addKundenArtikelListePanel = new KundenArtikelListePanel(eShopVerwaltung.gibAlleArtikelHashMapZurueckgeben());
 
     }
 
@@ -277,10 +281,10 @@ public class EShopClientGUI extends JFrame {
                 // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addKundenPanel, BorderLayout.WEST);
                 // aktualisiert die ArtikelListe
-                //addMitarbeiterArtikelListePanel.getTmodel().fireTableDataChanged();
-                // fuegt das MitarbeiterArtikelListePanel hinzu
-                //switchPanel.add(addMitarbeiterArtikelListePanel, BorderLayout.CENTER);
-                // setzt die JTextfields des MitarbeiterArtikelListePanel zurueck
+                addKundenArtikelListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das KundenArtikelListePanel hinzu
+                switchPanel.add(addKundenArtikelListePanel, BorderLayout.CENTER);
+                // setzt die JTextfields des KundenArtikelListePanel zurueck
                 //addMitarbeiterArtikelListePanel.resetAllJTextfields();
                 switchPanelRepainter();
                 break;
