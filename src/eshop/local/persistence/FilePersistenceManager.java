@@ -14,12 +14,11 @@ import eshop.local.valueobjects.*;
  */
 public class FilePersistenceManager implements PersistenceManager {
 
-
     private PrintWriter writer = null;
     private ObjectOutputStream oos = null;
     private ObjectInputStream ois = null;
 
-// Methoden
+    // Methoden
 
     /**
      * Methode oeffnet einen FileInputStream.
@@ -85,22 +84,12 @@ public class FilePersistenceManager implements PersistenceManager {
      * @throws IOException,ClassNotFoundException
      *
      */
-
     public Artikel ladeArtikel() throws IOException, ClassNotFoundException {
 
         Artikel artikel = liesArtikel(ois); //liesArtikel(ois);
 
         return artikel;
     }
-
-    /*
-    public HashMap<Integer,Artikel> ladeArtikel() throws IOException, ClassNotFoundException {
-
-        HashMap<Integer,Artikel> artikelHashMap = liesArtikel(ois);
-        return  artikelHashMap;
-
-    }
-     */
 
     /**
      * Methode zum Einlesen der Kundendaten aus einer externen Datenquelle.
@@ -163,24 +152,15 @@ public class FilePersistenceManager implements PersistenceManager {
             return false;
         }
 
-
     }
 
-    /*
-    public boolean speichereArtikel (HashMap<Integer,Artikel> artikelHashMap) throws IOException {
-        try {
-
-            oos.writeObject(artikelHashMap);
-
-            return true;
-
-        } catch (IOException e) {
-
-            return false;
-        }
-    }
-    */
-
+    /**
+     * Methode zum Speichern der MassengutArtikeldaten in eine externe Datenquelle.
+     *
+     * @param a MassengutArtikel-Objekt, das gespeichert werden soll
+     * @return boolean, wenn Schreibvorgang erfolgreich true, ansonsten false
+     * @throws IOException
+     */
     public boolean speichereMassengutArtikel(MassengutArtikel a) throws IOException {
 
         try {
@@ -193,7 +173,6 @@ public class FilePersistenceManager implements PersistenceManager {
 
             return false;
         }
-
 
     }
 
@@ -216,7 +195,6 @@ public class FilePersistenceManager implements PersistenceManager {
 
             return false;
         }
-
 
     }
 
@@ -260,8 +238,6 @@ public class FilePersistenceManager implements PersistenceManager {
      * @return Artikel, wenn sich noch ein Artikel Objekt im ObjectInputstream befindet.
      * @throws IOException,ClassNotFoundException
      */
-
-
     private Artikel liesArtikel(ObjectInputStream ois) throws IOException, ClassNotFoundException {
 
         try {
@@ -272,22 +248,7 @@ public class FilePersistenceManager implements PersistenceManager {
             return null;
         }
 
-
     }
-
-
-    /*
-    private HashMap<Integer,Artikel> liesArtikel(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        try {
-
-            HashMap<Integer,Artikel> artikelHashMap = new HashMap<Integer, Artikel>((HashMap<Integer,Artikel>)ois.readObject());
-            return artikelHashMap;
-
-        } catch (EOFException exc){
-            return null;
-        }
-    }
-    */
 
     /**
      * Methode zum auslesen von Kunden Objekten aus einem uebergebenden ObjectInputStream.
@@ -310,10 +271,7 @@ public class FilePersistenceManager implements PersistenceManager {
             return null;
         }
 
-
     }
-
-
 
     /**
      * Methode zum auslesen von Mitarbeiter Objekten aus einem uebergebenden ObjectInputStream.
