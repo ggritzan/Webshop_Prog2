@@ -526,3 +526,6 @@ Der Artikel 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde
 Sa 2013.06.15 um 13:45:58 MESZ:
 Der Artikel 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+Sa 2013.06.15 um 14:07:42 MESZ:
+Der Artikel 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

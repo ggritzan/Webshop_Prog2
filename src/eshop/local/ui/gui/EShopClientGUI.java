@@ -1137,7 +1137,6 @@ public class EShopClientGUI extends JFrame {
         });
 
 
-
         /**
          * ActionListener für das Speichern des EShops
          */
@@ -1215,7 +1214,35 @@ public class EShopClientGUI extends JFrame {
 
                 }
             }
+            @Override
+            public void mouseClicked(MouseEvent emc) {
+
+
+                JTable source = (JTable) emc.getSource();
+                aktuellePositionX = emc.getXOnScreen();
+                aktuellePositionY = emc.getYOnScreen();
+                int row = source.rowAtPoint(emc.getPoint());
+                int column = source.columnAtPoint(emc.getPoint());
+
+                // Artikelnummer des ausgewählten Artikels
+                ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
+
+                // Updatet die KundenArtikelDetails
+                try {
+                    addKundenWarenkorbListePanel.updateKundenArtikelDetailsPanel(eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getBeschreibung());
+                    kundenPanelReloader('w');
+                } catch (ArtikelExestiertNichtException aene) {
+                    System.err.print(aene.getMessage());
+                }
+
+
+            }
+
+
         });
+
+
+
         /**
          * ActionListener für KundenWarenkorbPopup
          */
@@ -1270,6 +1297,38 @@ public class EShopClientGUI extends JFrame {
             }
 
         });
+
+
+        /**
+         * ActionListener für KundenWarenkorbBestellteMengeAendern
+         */
+        addKundenWarenkorbBestellteMengeAendern.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
+                if (source == addKundenWarenkorbBestellteMengeAendern.getBestellteMengeAendern()) {
+
+                    try {
+                        eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel).setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge());
+                        addKundenWarenkorbBestellteMengeAendern.setVisible(false);
+                        addKundenWarenkorbBestellteMengeAendern.resetAllJTextfields();
+                        kundenPanelReloader('w');
+                    } catch (KundenNummerExistiertNichtException knene) {
+                        System.err.println(knene.getMessage());
+                    }
+
+
+                }
+
+            }
+
+        });
+
+
+
     }
 
 

@@ -36,7 +36,7 @@ public class KundenWarenkorbBestellteMengeAendern extends JDialog {
 
 
         // Hinzufuegen der Komponenten (von oben links nach unten rechts)
-        this.add(new JLabel("neuer Bestand"));
+        this.add(new JLabel("neue Bestellmenge"));
         this.add(new JPanel());
         this.add(neuebetellteMenge);
         this.add(bestellteMengeAendern);
@@ -65,8 +65,12 @@ public class KundenWarenkorbBestellteMengeAendern extends JDialog {
      * Getter für das JTextfield neuebetellteMenge
      * @return
      */
-    public JTextField getNeuebetellteMenge() {
-        return neuebetellteMenge;
+    public Integer getNeuebetellteMenge() {
+        return Integer.parseInt(neuebetellteMenge.getText());
+    }
+
+    public void resetAllJTextfields() {
+        neuebetellteMenge.setText("");
     }
 
 }
