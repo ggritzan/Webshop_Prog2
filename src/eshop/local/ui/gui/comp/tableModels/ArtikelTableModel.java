@@ -1,11 +1,10 @@
 package eshop.local.ui.gui.comp.tableModels;
 
 import eshop.local.valueobjects.Artikel;
-import eshop.local.valueobjects.MassengutArtikel;
+
 
 import javax.swing.table.AbstractTableModel;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Vector;
 
 /**
@@ -22,7 +21,7 @@ public class ArtikelTableModel extends AbstractTableModel {
 
     private HashMap<Integer, Artikel> artikelHashMap;
 
-    private String[] columnNames = {"ArtNr", "Bezeichnung", "Preis", "Bestand"};
+    private String[] columnNames = {"ArtNr", "Name", "Preis", "Bestand"};
 
     private Class<?>[] columnClass = {Integer.class, String.class, Float.class, Integer.class};
 

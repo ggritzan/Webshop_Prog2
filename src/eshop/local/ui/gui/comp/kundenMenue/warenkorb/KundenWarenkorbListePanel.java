@@ -38,7 +38,7 @@ public class KundenWarenkorbListePanel extends JPanel {
 
 
         // Rahmen außen
-        Border ba = BorderFactory.createTitledBorder("Kundenmenü");
+        Border ba = BorderFactory.createTitledBorder("Warenkorb");
         this.setBorder(ba);
 
         // Layout Ebene 0
@@ -46,7 +46,7 @@ public class KundenWarenkorbListePanel extends JPanel {
         this.setLayout(layoutEbene0);
 
         // Hinzufügen der Elemente für die Ebene 0
-        this.add(new JScrollPane(table), BorderLayout.CENTER);
+        this.add(new JScrollPane(new JScrollPane(table)), BorderLayout.CENTER);
 
 
     }

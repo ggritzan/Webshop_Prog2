@@ -496,3 +496,33 @@ Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit de
 Fr 2013.06.14 um 18:59:30 MESZ:
 Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Sa 2013.06.15 um 12:45:42 MESZ:
+Der Artikel 'Hose' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Sa 2013.06.15 um 13:43:47 MESZ:
+Der Artikel '4' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:43:50 MESZ:
+Der Artikel '3' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:43:52 MESZ:
+Der Artikel '8' mit der Artikelnummer 1003 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:43:54 MESZ:
+Der Artikel '7' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:43:56 MESZ:
+Der Artikel 'test' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:43:59 MESZ:
+Der Artikel '2' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:44:01 MESZ:
+Der Artikel 'Hose' mit der Artikelnummer 1006 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Sa 2013.06.15 um 13:45:03 MESZ:
+Der Artikel 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Sa 2013.06.15 um 13:45:58 MESZ:
+Der Artikel 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+

@@ -6,6 +6,7 @@ import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.kundenMenue.KundenPanel;
 import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelListePanel;
+import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelPopup;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbBestellteMengeAendern;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbListePanel;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbPopup;
@@ -59,6 +60,7 @@ public class EShopClientGUI extends JFrame {
     // KundenPanel
     private KundenPanel addKundenPanel;
     private KundenArtikelListePanel addKundenArtikelListePanel;
+    private KundenArtikelPopup addKundenArtikelPopup;
     private KundenWarenkorbListePanel addKundenWarenkorbListePanel;
     private KundenWarenkorbPopup addKundenWarenkorbPopup;
     private KundenWarenkorbBestellteMengeAendern addKundenWarenkorbBestellteMengeAendern;
@@ -195,6 +197,9 @@ public class EShopClientGUI extends JFrame {
 
         // Erzeugt ein KundenBestellteMengeAendernDialog
         addKundenWarenkorbBestellteMengeAendern = new KundenWarenkorbBestellteMengeAendern();
+
+        // Erzeugt ein KundenArtikelPopup
+        addKundenArtikelPopup  = new KundenArtikelPopup();
 
     }
 
@@ -1052,6 +1057,86 @@ public class EShopClientGUI extends JFrame {
         });
 
 
+        /**
+         * MouseListener für KundenArtikelListePanel erzeugt ein Popup bei Rechtsklick
+         */
+        addKundenArtikelListePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                if (e.isPopupTrigger()) {
+                    JTable source = (JTable) e.getSource();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+
+                    // Artikelnummer des ausgewählten Artikels
+                    ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addKundenArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
+
+
+
+
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent emc) {
+
+
+                    JTable source = (JTable) emc.getSource();
+                    aktuellePositionX = emc.getXOnScreen();
+                    aktuellePositionY = emc.getYOnScreen();
+                    int row = source.rowAtPoint(emc.getPoint());
+                    int column = source.columnAtPoint(emc.getPoint());
+
+                    // Artikelnummer des ausgewählten Artikels
+                    ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
+
+                    // Updatet die KundenArtikelDetails
+                    try {
+                        addKundenArtikelListePanel.updateKundenArtikelDetailsPanel(eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getBeschreibung());
+                        kundenPanelReloader('a');
+                    } catch (ArtikelExestiertNichtException aene) {
+                        System.err.print(aene.getMessage());
+                    }
+
+
+                }
+
+        });
+
+
+
+
+        /**
+         * ActionListener für das KundenArtikelPopup
+         */
+        addKundenArtikelPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Object source = ae.getSource();
+                if (source == addKundenArtikelPopup.getdemWarenkorbHinzufuegen()) {
+
+                    try {
+                        eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel), aktuellerKunde);
+                    } catch (KundenNummerExistiertNichtException knene) {
+                        System.err.println(knene.getMessage());
+                    } catch (ArtikelExestiertNichtException aene) {
+                        System.err.println(aene.getMessage());
+                    }
+
+                }
+
+
+
+            }
+        });
+
+
 
         /**
          * ActionListener für das Speichern des EShops
@@ -1165,12 +1250,10 @@ public class EShopClientGUI extends JFrame {
 
                             try {
 
-                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel),aktuellerKunde);
+                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel),aktuellerKunde);
                                 kundenPanelReloader('w');
 
 
-                            } catch (ArtikelExestiertNichtException aen) {
-                                System.err.println(aen.getMessage());
                             } catch (KundenNummerExistiertNichtException knene) {
                                 System.err.println(knene.getMessage());
                             }

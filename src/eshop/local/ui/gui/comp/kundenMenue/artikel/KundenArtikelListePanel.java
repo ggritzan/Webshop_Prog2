@@ -26,10 +26,13 @@ public class KundenArtikelListePanel extends JPanel {
     private JTable table;
     private ArtikelTableModel tmodel;            // TableModel fuer die Artikel-Tabelle
     private RowSorter<ArtikelTableModel> sorter;
-    //private MitarbeiterArtikelHinzufuegenPanel addMitarbeiterArtikelHinzufuegenPanel;
-    //private MitarbeiterMassengutartikelHinzufuegenPanel addMitarbeiterMassengutartikelHinzufuegenPanel;
+    private KundenArtikelDetailsPanel addKundenArtikelDetailsPanel;
 
     public KundenArtikelListePanel(HashMap<Integer,Artikel> alleArtikel) {
+
+        // Initialisierung eines KundenArtikelDetailsPanel
+        addKundenArtikelDetailsPanel   = new KundenArtikelDetailsPanel("");
+
         // Tabelle erzeugen und Eigenschaften setzen
         table = new JTable();
         tmodel = new ArtikelTableModel(alleArtikel);
@@ -46,69 +49,30 @@ public class KundenArtikelListePanel extends JPanel {
         GridLayout layoutEbene0 = new GridLayout(2, 1);
         this.setLayout(layoutEbene0);    // 2 Zeilen, 1 Spalte
 
-        // Layoout Ebene 1
-        JPanel frameEbene1 = new JPanel();
-        GridLayout layoutEbene1 = new GridLayout(5, 1);
-        frameEbene1.setLayout(layoutEbene1);    // 5 Zeilen, 1 Spalte
-
-
-
-
-        // Initialisierung eines addMitarbeiterArtikelHinzufuegenPanel
-        //addMitarbeiterArtikelHinzufuegenPanel   = new MitarbeiterArtikelHinzufuegenPanel();
-
-        // Initialisierung eines addMitarbeiterMassengutartikelHinzufuegenPanel
-        //addMitarbeiterMassengutartikelHinzufuegenPanel   = new MitarbeiterMassengutartikelHinzufuegenPanel();
-
-        // Hinzufügen der Elemente für die Ebene 1
-        frameEbene1.add(new JPanel());
-        frameEbene1.add(new JPanel());
-        frameEbene1.add(new JPanel());
-        frameEbene1.add(new JPanel());
-        frameEbene1.add(new JPanel());
-
         // Hinzufügen der Elemente für die Ebene 0
         this.add(new JScrollPane(table));
-        this.add(frameEbene1);
+        this.add(addKundenArtikelDetailsPanel);
 
 
     }
 
-
-
-    public void addActionListener(ActionListener aL) {
-        //addMitarbeiterArtikelHinzufuegenPanel.addActionListener(aL);
-        //addMitarbeiterMassengutartikelHinzufuegenPanel.addActionListener(aL);
-    }
 
     public void addMouseListener(MouseAdapter mA) {
         table.addMouseListener(mA);
     }
 
+
+//Setter
+    public void updateKundenArtikelDetailsPanel(String artikelDetails){
+          addKundenArtikelDetailsPanel.updateKundenArtikelDetailsPanel(artikelDetails);
+          this.removeAll();
+          this.add(new JScrollPane(table));
+          this.add(addKundenArtikelDetailsPanel);
+    }
+
+// Getter
     public ArtikelTableModel getTmodel() {
         return tmodel;
     }
-    /*
-    public String getArtikelName() {
-        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelName();
-    }
 
-    public String getArtikelBeschreibung() {
-        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelBeschreibung();
-    }
-
-    public double getArtikelPreis() {
-        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelPreis();
-    }
-
-    public JButton getArtikelHinzufuegenButton() {
-        return addMitarbeiterArtikelHinzufuegenPanel.getArtikelHinzufuegenButton();
-    }
-
-    // Setzt alle JTextfield des Artikel hinzufügen Panels zurück
-    public void resetAllJTextfields(){
-        addMitarbeiterArtikelHinzufuegenPanel.resetAllJTextfields();
-        addMitarbeiterMassengutartikelHinzufuegenPanel.resetAllJTextfields();
-    }
-    */
 }

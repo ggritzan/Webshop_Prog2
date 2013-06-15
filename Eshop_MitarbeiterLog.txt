@@ -43,3 +43,6 @@ Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter gg
 Fr 2013.06.14 um 18:47:11 MESZ:
 Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Fr 2013.06.14 um 21:42:36 MESZ:
+Der Mitarbeiter 'ncheema' mit der Mitarbeiternummer 1002 wurde hinzugefügt.
+
