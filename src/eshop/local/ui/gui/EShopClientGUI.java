@@ -1138,6 +1138,92 @@ public class EShopClientGUI extends JFrame {
 
 
         /**
+         * ActionListener für KundenWarenkorbPopup
+         */
+        addKundenWarenkorbPopup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
+                if (source == addKundenWarenkorbPopup.getBestellteMengeAendern()) {
+
+
+                    // setzt das Popup Menue an die Position des MouseEvents
+                    addKundenWarenkorbBestellteMengeAendern.setLocation(aktuellePositionX, aktuellePositionY);
+
+                    // macht den JDialog sichtbar
+                    addKundenWarenkorbBestellteMengeAendern.setVisible(true);
+
+
+                    // Löscht den entsprechenden Artikel aus dem Warenkorb wenn im Popupmenue löschen ausgewählt wird
+                } else if (source == addKundenWarenkorbPopup.getLoeschen()) {
+
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich aus ihrem Warenkorb löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
+
+                    switch (result) {
+
+
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+
+                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel),aktuellerKunde);
+                                kundenPanelReloader('w');
+
+
+                            } catch (KundenNummerExistiertNichtException knene) {
+                                System.err.println(knene.getMessage());
+                            }
+
+
+                        case JOptionPane.NO_OPTION:
+
+
+                            ausgewaehlterArtikel = -1;
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        /**
+         * ActionListener für KundenWarenkorbBestellteMengeAendern
+         */
+        addKundenWarenkorbBestellteMengeAendern.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+
+                Object source = ae.getSource();
+                // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
+                if (source == addKundenWarenkorbBestellteMengeAendern.getBestellteMengeAendern()) {
+
+                    try {
+                        eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel).setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge());
+                        addKundenWarenkorbBestellteMengeAendern.setVisible(false);
+                        addKundenWarenkorbBestellteMengeAendern.resetAllJTextfields();
+                        kundenPanelReloader('w');
+                    } catch (KundenNummerExistiertNichtException knene) {
+                        System.err.println(knene.getMessage());
+                    }
+
+
+                }
+
+            }
+
+        });
+
+
+
+        /**
          * ActionListener für das Speichern des EShops
          */
         menuDateiSpeichern.addActionListener(new ActionListener() {
@@ -1243,89 +1329,6 @@ public class EShopClientGUI extends JFrame {
 
 
 
-        /**
-         * ActionListener für KundenWarenkorbPopup
-         */
-        addKundenWarenkorbPopup.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-
-
-                Object source = ae.getSource();
-                // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
-                if (source == addKundenWarenkorbPopup.getBestellteMengeAendern()) {
-
-
-                    // setzt das Popup Menue an die Position des MouseEvents
-                    addKundenWarenkorbBestellteMengeAendern.setLocation(aktuellePositionX, aktuellePositionY);
-
-                    // macht den JDialog sichtbar
-                    addKundenWarenkorbBestellteMengeAendern.setVisible(true);
-
-
-                    // Löscht den entsprechenden Artikel aus dem Warenkorb wenn im Popupmenue löschen ausgewählt wird
-                } else if (source == addKundenWarenkorbPopup.getLoeschen()) {
-
-
-                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich aus ihrem Warenkorb löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
-
-                    switch (result) {
-
-
-                        case JOptionPane.YES_OPTION:
-
-                            try {
-
-                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel),aktuellerKunde);
-                                kundenPanelReloader('w');
-
-
-                            } catch (KundenNummerExistiertNichtException knene) {
-                                System.err.println(knene.getMessage());
-                            }
-
-
-                        case JOptionPane.NO_OPTION:
-
-
-                            ausgewaehlterArtikel = -1;
-                    }
-
-                }
-
-            }
-
-        });
-
-
-        /**
-         * ActionListener für KundenWarenkorbBestellteMengeAendern
-         */
-        addKundenWarenkorbBestellteMengeAendern.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-
-
-                Object source = ae.getSource();
-                // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
-                if (source == addKundenWarenkorbBestellteMengeAendern.getBestellteMengeAendern()) {
-
-                    try {
-                        eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel).setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge());
-                        addKundenWarenkorbBestellteMengeAendern.setVisible(false);
-                        addKundenWarenkorbBestellteMengeAendern.resetAllJTextfields();
-                        kundenPanelReloader('w');
-                    } catch (KundenNummerExistiertNichtException knene) {
-                        System.err.println(knene.getMessage());
-                    }
-
-
-                }
-
-            }
-
-        });
 
 
 
