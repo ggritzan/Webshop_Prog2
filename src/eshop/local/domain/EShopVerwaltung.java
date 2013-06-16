@@ -270,8 +270,8 @@ public class EShopVerwaltung {
     /**
      * Methode zum ändern der Bestellmenge
      *
-     * @param menge    Menge die vom Artikel bestellt werden soll
-     * @return boolean
+     * @param menge -> Menge die vom Artikel bestellt werden soll
+     * @param artikel -> Artikel der bestellt wird
      *
      * @throws BestellteMengeEntsprichtNichtderPackungsgroesseException
      * @throws ArtikelBestandZuNiedrigException
@@ -284,15 +284,15 @@ public class EShopVerwaltung {
     /**
      * Methode zum Einfügen eines neuen Artikels in den Bestand.
      *
-     * @param name,beschreibung,preis         Name des Artikels, Beschreibung des Artikels, Preis des Artikels
+     * @param name -> Name des Artikels
+     * @param beschreibung -> Beschreibung des Artikels
+     * @param preis -> Preis des Artikels
      *
      * @throws IOException
      * @throws ArtikelExestierBereitsException
      */
     public void fuegeArtikelEin(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
-
         meineArtikel.artikelHinzufuegen(name, beschreibung, preis, m);
-
     }
 
     /**
@@ -314,12 +314,13 @@ public class EShopVerwaltung {
     /**
      * Methode zum Einfügen eines neuen Kunden in den Bestand.
      *
-     * @param vorname
-     * @param nachname
-     * @param benutzername
-     * @param passwort
-     * @param email
-     * @param telefon
+     * @param vorname -> Vorname des Kunden
+     * @param nachname -> Nachname des Kunden
+     * @param benutzername -> Benutzername des Kunden
+     * @param passwort -> Passwort des Kunden
+     * @param email -> Emailadresse des Kunden
+     * @param telefon -> Telefonnummer des Kunden
+     * @param adresse -> Adresse des Kunden
      *
      * @throws IOException
      * @throws BenutzernameExistiertBereitsException
@@ -332,12 +333,13 @@ public class EShopVerwaltung {
     /**
      * Methode zum Einfügen eines neuen Mitarbeiters in den Bestand.
      *
-     * @param vorname
-     * @param nachname
-     * @param benutzername
-     * @param passwort
-     * @param email
-     * @param telefon
+     * @param vorname -> Vorname des Mitarbeiters
+     * @param nachname -> Nachname des Mitarbeiters
+     * @param benutzername -> Benutzername des Mitarbeiters
+     * @param passwort -> Passwort des Mitarbeiters
+     * @param email -> Emailadresse des Mitarbeiters
+     * @param telefon -> Telefonnummer des Mitarbeiters
+     * @param adresse -> Adresse des Mitarbeiters
      *
      * @throws IOException
      * @throws MitarbeiterExistiertBereitsException
@@ -356,54 +358,57 @@ public class EShopVerwaltung {
      */
     public void fuegeRechnungEin(Kunde kunde) throws IOException, RechnungExestiertNichtException{
         meineRechnungen.rechnungHinzufuegen(kunde);
-
     }
 
     /**
      * Methode zum loeschen eines  Artikels aus dem  Bestand.
      *
-     * @param artNr         Nummer des Artikels des Artikel der geloescht werden soll.
+     * @param artNr -> Nummer des Artikels des Artikel der geloescht werden soll
+     * @param m -> Mitarbeiter der den Artikel löschen will
      *
-     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Artikel nicht gelöscht werden konnte)
+     * @throws IOException
+     * @throws ArtikelExestiertNichtException
      */
     public void loescheArtikel(int artNr, Mitarbeiter m) throws IOException, ArtikelExestiertNichtException {
         meineArtikel.artikelLoeschen(artNr, m);
-
     }
 
     /**
      * Methode zum loeschen eines  Kunden aus dem  Bestand.
      *
-     * @param kunNr         Nummer des Kunden der geloescht werden soll.
+     * @param kunNr -> Nummer des Kunden der geloescht werden soll
+     * @param m -> Mitarbeiter der den Kunden löschen will
      *
-     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Kunde nicht gelöscht werden konnte)
+     * @throws IOException
+     * @throws KundenNummerExistiertNichtException
      */
     public void loescheKunde(int kunNr,  Mitarbeiter m) throws IOException, KundenNummerExistiertNichtException{
         meineKunden.kundenLoeschen(kunNr, m);
-
     }
 
     /**
      * Methode zum loeschen eines Mitarbeiters aus dem  Bestand.
      *
-     * @param mNr Nummer des Mitarbeiters der geloescht werden soll.
+     * @param mNr -> Nummer des Mitarbeiters der geloescht werden soll
+     * @param m -> Mitarbeiter der den Mitarbeiter löschen will
      *
-     * @return boolean wenn loeschen erfolgreich true, ansonsten false (wenn der Mitarbeiter nicht gelöscht werden konnte)
+     * @throws IOException
+     * @throws MitarbeiterExistiertNichtException
      */
     public void loescheMitarbeiter(int mNr, Mitarbeiter m) throws IOException, MitarbeiterExistiertNichtException{
         meineMitarbeiter.mitarbeiterLoeschen(mNr, m);
-
     }
 
     /**
      * Methode zum loeschen einer  Rechnung aus dem  Bestand.
      *
-     * @param rechnung         Nummer des Kunden der geloescht werden soll.
+     * @param rechnung -> Rechnung die gelöscht wrden soll
      *
+     * @throws IOException
+     * @throws RechnungExestiertNichtException
      */
     public void loescheRechnung(Rechnung rechnung) throws IOException, RechnungExestiertNichtException{
         meineRechnungen.rechnungLoeschen(rechnung);
-
     }
 
     /**
@@ -412,7 +417,6 @@ public class EShopVerwaltung {
      * @throws IOException
      */
     public void schreibeArtikel() throws IOException {
-
         meineArtikel.schreibeDaten(datei + "_Artikel.ser");
     }
 
@@ -422,7 +426,6 @@ public class EShopVerwaltung {
      * @throws IOException
      */
     public void schreibeKunden() throws IOException {
-
         meineKunden.schreibeDaten(datei + "_Kunden.ser");
     }
 
@@ -432,17 +435,20 @@ public class EShopVerwaltung {
      * @throws IOException
      */
     public void schreibeRechung() throws IOException {
-
         meineRechnungen.schreibeDaten(datei + "_Rechnungen.ser");
     }
 
     /**
-     * Methode zum Speichern des Rechnungsbestanden in einer Datei.
+     * Methode zum Ausgeben der letzten Rechnung eines Kunden
+     *
+     * @param  kNr -> Nummer des Kunden dessen Rechnung ausgegebn werden soll
      *
      * @throws IOException
+     * @throws RechnungExestiertNichtException
+     *
+     * @return Rechnung -> Die letzte Rechnung des Kunden
      */
     public Rechnung letzteKundenrechnungAusgeben(int kNr) throws IOException, RechnungExestiertNichtException {
-
         return meineRechnungen.letzteKundenrechnungAusgeben(kNr);
     }
 
@@ -452,96 +458,135 @@ public class EShopVerwaltung {
      * @throws IOException
      */
     public void schreibeMitarbeiter() throws IOException {
-
         meineMitarbeiter.schreibeDaten(datei + "_Mitarbeiter.ser");
     }
 
+    /**
+     * Methode zum finden eines Kunden über die Kundennummer
+     *
+     * @param  kNr -> Kundennummer des gesuchten Kunden
+     *
+     * @throws KundenNummerExistiertNichtException
+     *
+     * @return Der zur Kundennummer passende Kunde
+     */
     public Kunde getKunde(int kNr) throws KundenNummerExistiertNichtException{
         return meineKunden.getKunde(kNr);
     }
 
+    /**
+     * Methode zum finden eines Kunden über den Benutzernamen
+     *
+     * @param  bName -> Benutzername des gesuchten Kunden
+     *
+     * @throws BenutzernameExistiertNichtException
+     *
+     * @return der zum Benutzernamen passende Kunde
+     */
     public int getKnr(String bName) throws BenutzernameExistiertNichtException{
         return meineKunden.getKnr(bName);
     }
 
+    /**
+     * Methode zum finden eines Mitarbeiters über den Benutzernamen
+     *
+     * @param  bName -> Benutzername des gesuchten Mitarbeiters
+     *
+     * @return der zum Benutzernamen passende Mitarbeiters
+     */
     public int getMnr(String bName) {
         return meineMitarbeiter.getMnr(bName);
     }
 
-    public Mitarbeiter rufeMitarbeiter(String bName) throws MitarbeiterExistiertNichtException{
-        return meineMitarbeiter.getMitarbeiter(bName);
-    }
-
+    /**
+     * Methode zum finden eines Mitarbeiters über die Mitarbeiternummer
+     *
+     * @param  mNr -> Mitarbeiternummer des gesuchten Mitarbeiters
+     *
+     * @throws MitarbeiterExistiertNichtException
+     *
+     * @return der zum Mitarbeiternummer passende Mitarbeiter
+     */
     public Mitarbeiter getMitarbeiter(int mNr) throws MitarbeiterExistiertNichtException{
         return meineMitarbeiter.getMitarbeiter(mNr);
     }
 
-
-    public Kunde rufeKunden(String bName) throws BenutzernameExistiertNichtException{
-        return meineKunden.getKunden(bName);
-    }
-
-
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineArtikel.printArtikelLog(daysInPast, aNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineArtikel.printArtikelLog(daysInPast);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineArtikel.printArtikelLog(aNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineArtikel.printArtikelLog();
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineKunden.printKundenLog(daysInPast, kNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printKundenLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineKunden.printKundenLog(daysInPast);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printKundenLog(String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineKunden.printKundenLog(kNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public String printKundenLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineKunden.printKundenLog();
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printMitarbeiterLog(int daysInPast, String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineMitarbeiter.printMitarbeiterLog(daysInPast, mNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printMitarbeiterLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineMitarbeiter.printMitarbeiterLog(daysInPast);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printMitarbeiterLog(String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineMitarbeiter.printMitarbeiterLog(mNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public String printMitarbeiterLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineMitarbeiter.printMitarbeiterLog();
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineRechnungen.printRechnungsLog(daysInPast, rNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineRechnungen.printRechnungsLog(daysInPast);
     }
 
+    //@ TODO Javadoc-Kommentar
     public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineRechnungen.printRechnungsLog(rNr);
     }
 
+    //@ TODO Javadoc-Kommentar
     public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineRechnungen.printRechnungsLog();
     }
