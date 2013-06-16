@@ -360,6 +360,35 @@ public class KundenVerwaltung {
         }
     }
 
+    public void vornameAendern(Kunde k, String name) {
+        k.setVorname(name);
+        k.getAdresse().setVorname(name);
+    }
+
+    public void nachnameAendern(Kunde k, String name) {
+        k.setNachname(name);
+        k.getAdresse().setNachname(name);
+    }
+
+    public void telefonAendern(Kunde k, String nummer) {
+        k.setTelefon(nummer);
+    }
+
+    public void emailAendern(Kunde k, String mail) {
+        k.setEmail(mail);
+    }
+
+    public void ortAendern(Kunde k, String ort) {
+        k.getAdresse().setOrt(ort);
+    }
+
+    public void plzAendern(Kunde k, String plz) {
+        k.getAdresse().setPlz(plz);
+    }
+
+    public void straßeAendern(Kunde k, String straße) {
+        k.getAdresse().setStraße(straße);
+    }
 
     //TODO @Noshaba Bitte kommentieren
     public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {

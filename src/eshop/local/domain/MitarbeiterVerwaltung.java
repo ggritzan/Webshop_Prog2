@@ -344,5 +344,35 @@ public class MitarbeiterVerwaltung {
             throw new NeuesPasswortFehlerhaftException();
         }
     }
+
+    public void vornameAendern(Mitarbeiter m, String name) {
+        m.setVorname(name);
+        m.getAdresse().setVorname(name);
+    }
+
+    public void nachnameAendern(Mitarbeiter m, String name) {
+        m.setNachname(name);
+        m.getAdresse().setNachname(name);
+    }
+
+    public void telefonAendern(Mitarbeiter m, String nummer) {
+        m.setTelefon(nummer);
+    }
+
+    public void emailAendern(Mitarbeiter m, String mail) {
+        m.setEmail(mail);
+    }
+
+    public void ortAendern(Mitarbeiter m, String ort) {
+        m.getAdresse().setOrt(ort);
+    }
+
+    public void plzAendern(Mitarbeiter m, String plz) {
+        m.getAdresse().setPlz(plz);
+    }
+
+    public void straßeAendern(Mitarbeiter m, String straße) {
+        m.getAdresse().setStraße(straße);
+    }
 }
 

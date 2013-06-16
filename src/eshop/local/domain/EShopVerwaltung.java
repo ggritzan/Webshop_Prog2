@@ -508,6 +508,62 @@ public class EShopVerwaltung {
             meineMitarbeiter.passwortAendern((Mitarbeiter)p, p1, p2);
         }
     }
+
+    public void vornamenAendern(Person p, String vorname) {
+        if (p instanceof Kunde) {
+            meineKunden.vornameAendern((Kunde)p, vorname);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.vornameAendern((Mitarbeiter)p, vorname);
+        }
+    }
+
+    public void nachnamenAendern(Person p, String nachname) {
+        if (p instanceof Kunde) {
+            meineKunden.nachnameAendern((Kunde)p, nachname);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.nachnameAendern((Mitarbeiter)p, nachname);
+        }
+    }
+
+    public void telefonnummerAendern(Person p, String telefon) {
+        if (p instanceof Kunde) {
+            meineKunden.telefonAendern((Kunde)p, telefon);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.telefonAendern((Mitarbeiter)p, telefon);
+        }
+    }
+
+    public void emailAdresseAendern(Person p, String email) {
+        if (p instanceof Kunde) {
+            meineKunden.emailAendern((Kunde)p, email);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.emailAendern((Mitarbeiter)p, email);
+        }
+    }
+
+    public void straßeAendern(Person p, String straße) {
+        if (p instanceof Kunde) {
+            meineKunden.straßeAendern((Kunde)p, straße);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.straßeAendern((Mitarbeiter)p, straße);
+        }
+    }
+
+    public void wohnortAendern(Person p, String ort) {
+        if (p instanceof Kunde) {
+            meineKunden.ortAendern((Kunde)p, ort);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.ortAendern((Mitarbeiter)p, ort);
+        }
+    }
+
+    public void plzAendern(Person p, String plz) {
+        if (p instanceof Kunde) {
+            meineKunden.plzAendern((Kunde)p, plz);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.plzAendern((Mitarbeiter)p, plz);
+        }
+    }
 }
 
 

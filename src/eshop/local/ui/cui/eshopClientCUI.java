@@ -450,11 +450,18 @@ public class eshopClientCUI {
 
                 } else if (var == 'k') {
                     gibDatenMenueAus();
+                    Kunde k = eShopVerwaltung.getKunde(kNr);
                     input = liesEingabe();
                     if (input.equals("v")) {
                         System.out.println("Ihr bisheriger Vorname " + eShopVerwaltung.getKunde(kNr).getVorname());
+                        System.out.println("Bitte geben Sie ihren neuen Vornamen ein");
+                        String vn = liesEingabe();
+                        eShopVerwaltung.vornamenAendern(k, vn);
                     } else if (input.equals("n")) {
                         System.out.println("Ihr bisheriger Nachname " + eShopVerwaltung.getKunde(kNr).getNachname());
+                        System.out.println("Bitte geben Sie ihren neuen Nachnamen ein");
+                        String nn = liesEingabe();
+                        eShopVerwaltung.nachnamenAendern(k, nn);
                     } else if (input.equals("p")) {
                         System.out.println("Sie möchten ihr Passwort ändern.");
                         System.out.println("Bitte geben sie ihr altes Passwort ein");
@@ -464,21 +471,35 @@ public class eshopClientCUI {
                             String neuesP = liesEingabe();
                             System.out.println("Bitte wiederholen Sie ihr neues Passwort");
                             String kontrollP = liesEingabe();
-                            Kunde k = eShopVerwaltung.getKunde(kNr);
                             eShopVerwaltung.passwortAendern(k, neuesP, kontrollP);
                         } else {
                             System.out.println("Das ist leider nicht ihr Passwort");
                         }
                     } else if (input.equals("e")) {
                         System.out.println("Ihre bisheriger Emailadresse " + eShopVerwaltung.getKunde(kNr).getEmail());
+                        System.out.println("Bitte geben Sie ihre neue Emailadresse ein");
+                        String e = liesEingabe();
+                        eShopVerwaltung.emailAdresseAendern(k, e);
                     } else if (input.equals("t")) {
                         System.out.println("Ihre bisheriger Telefonnummer " + eShopVerwaltung.getKunde(kNr).getTelefon());
+                        System.out.println("Bitte geben Sie ihre neue Telefonnummer ein");
+                        String t = liesEingabe();
+                        eShopVerwaltung.telefonnummerAendern(k, t);
                     } else if (input.equals("s")) {
                         System.out.println("Ihre bisheriger Straße " + eShopVerwaltung.getKunde(kNr).getAdresse().getStraße());
+                        System.out.println("Bitte geben Sie ihre neue Straße ein");
+                        String s = liesEingabe();
+                        eShopVerwaltung.straßeAendern(k, s);
                     } else if (input.equals("w")) {
                         System.out.println("Ihr bisheriger Wohnort " + eShopVerwaltung.getKunde(kNr).getAdresse().getOrt());
+                        System.out.println("Bitte geben Sie ihren neuen Wohnort ein");
+                        String o = liesEingabe();
+                        eShopVerwaltung.wohnortAendern(k, o);
                     } else if (input.equals("z")) {
                         System.out.println("Ihre bisherige Plz " + eShopVerwaltung.getKunde(kNr).getAdresse().getPlz());
+                        System.out.println("Bitte geben Sie ihre neue Postleihzahl ein");
+                        String plz = liesEingabe();
+                        eShopVerwaltung.plzAendern(k, plz);
                     }
                 }
 
@@ -549,10 +570,17 @@ public class eshopClientCUI {
                     gibDatenMenueAus();
                     try {
                         input = liesEingabe();
+                        Mitarbeiter m = eShopVerwaltung.getMitarbeiter(mNr);
                         if (input.equals("v")) {
                             System.out.println("Ihr bisheriger Vorname " + eShopVerwaltung.getMitarbeiter(mNr).getVorname());
+                            System.out.println("Bitte geben Sie ihren neuen Vornamen ein: ");
+                            String vn = liesEingabe();
+                            eShopVerwaltung.vornamenAendern(m, vn);
                         } else if (input.equals("n")) {
                             System.out.println("Ihr bisheriger Nachname " + eShopVerwaltung.getMitarbeiter(mNr).getNachname());
+                            System.out.println("Bitte geben Sie ihren neuen Nachnamen ein: ");
+                            String nn = liesEingabe();
+                            eShopVerwaltung.nachnamenAendern(m, nn);
                         } else if (input.equals("p")) {
                             System.out.println("Sie möchten ihr Passwort ändern.");
                             System.out.println("Bitte geben sie ihr altes Passwort ein");
@@ -562,21 +590,35 @@ public class eshopClientCUI {
                                 String neuesP = liesEingabe();
                                 System.out.println("Bitte wiederholen Sie ihr neues Passwort");
                                 String kontrollP = liesEingabe();
-                                Mitarbeiter m = eShopVerwaltung.getMitarbeiter(mNr);
                                 eShopVerwaltung.passwortAendern(m, neuesP, kontrollP);
                             } else {
                                 System.out.println("Das ist leider nicht ihr Passwort");
                             }
                         } else if (input.equals("e")) {
                             System.out.println("Ihre bisheriger Emailadresse " + eShopVerwaltung.getMitarbeiter(mNr).getEmail());
+                            System.out.println("Bitte geben Sie ihre neue Emailadresse ein: ");
+                            String e = liesEingabe();
+                            eShopVerwaltung.emailAdresseAendern(m, e);
                         } else if (input.equals("t")) {
                             System.out.println("Ihre bisheriger Telefonnummer " + eShopVerwaltung.getMitarbeiter(mNr).getTelefon());
+                            System.out.println("Bitte geben Sie ihre neue Telefonnummer ein: ");
+                            String t = liesEingabe();
+                            eShopVerwaltung.telefonnummerAendern(m, t);
                         } else if (input.equals("s")) {
                             System.out.println("Ihre bisheriger Straße " + eShopVerwaltung.getMitarbeiter(mNr).getAdresse().getStraße());
+                            System.out.println("Bitte geben Sie ihre neue Straße ein: ");
+                            String s = liesEingabe();
+                            eShopVerwaltung.straßeAendern(m, s);
                         } else if (input.equals("w")) {
                             System.out.println("Ihr bisheriger Wohnort " + eShopVerwaltung.getMitarbeiter(mNr).getAdresse().getOrt());
+                            System.out.println("Bitte geben Sie ihren neuen Wohnort an: ");
+                            String o = liesEingabe();
+                            eShopVerwaltung.wohnortAendern(m, o);
                         } else if (input.equals("z")) {
                             System.out.println("Ihre bisherige Plz " + eShopVerwaltung.getMitarbeiter(mNr).getAdresse().getPlz());
+                            System.out.println("Bitte geben Sie ihre neue Postleihzahl ein: ");
+                            String plz = liesEingabe();
+                            eShopVerwaltung.plzAendern(m, plz);
                         }
                     } catch (MitarbeiterExistiertNichtException men) {
                         System.err.println(men.getMessage());
