@@ -68,17 +68,16 @@ public class EShopVerwaltung {
      * @return Vector Liste aller Artikel im Bestand des EShops als Vector
      */
     public Vector gibAlleArtikel() {
-        // delegiert an die Artikelverwaltung
         return meineArtikel.alleArtikelZurueckgeben();
     }
 
     /**
      * Methode gibt die HashMap zurueck die alle vorhandenen Artikeln enthaelt
+     *
+     * @return HashMap<Integer,Artikel> die alle Artikel beinhaltet
      */
     public HashMap<Integer,Artikel> gibAlleArtikelHashMapZurueckgeben() {
-
         return meineArtikel.alleArtikelHashMapZurueckgeben();
-
     }
 
     /**
@@ -87,13 +86,13 @@ public class EShopVerwaltung {
      * @return Vector Liste aller Kunden im Bestand des EShops als Vector
      */
     public Vector gibAlleKunden() {
-        // delegiert an die Kundenverwaltung
         return meineKunden.alleKundenZurueckgeben();
     }
 
     /**
      * Gibt die HashMap mit allen Kunden zurueck
-     * @return
+     *
+     * @return HashMap<Integer,Kunde> HasMap mit allen Kunden
      */
     public HashMap<Integer,Kunde> gibAlleKundenHashMapZurueckgeben(){
         return meineKunden.alleKundenHashMapZurueckgeben();
@@ -105,13 +104,13 @@ public class EShopVerwaltung {
      * @return Vector Liste aller Rechnungen im Bestand des EShops als Vector
      */
     public Vector gibAlleRechnungen()  {
-        // delegiert an die Rechnungsverwaltung
         return meineRechnungen.alleRechnungenZurueckgeben();
     }
 
     /**
      * Gibt die HashMap mit allen Rechnungen zurueck
-     * @return
+     *
+     * @return HashMap<Integer,Rechnung> HashMap mit allen Rechnungen
      */
     public HashMap<Integer,Rechnung> gibAlleRechnungenHashMapZurueckgeben(){
         return meineRechnungen.alleRechnungenHashMapZurueckgeben();
@@ -123,13 +122,13 @@ public class EShopVerwaltung {
      * @return Vector Liste aller Mitarbeiter im Bestand des EShops als Vector
      */
     public Vector gibAlleMitarbeiter() {
-        // delegiert an die Mitarbeiterverwaltung
         return meineMitarbeiter.alleMitarbeiterZurueckgeben();
     }
 
     /**
      * Gibt die HashMap mit allen Mitarbeitern zurueck
-     * @return
+     *
+     * @return HashMap<Integer,Mitarbeiter> HashMap mit allen Mitarbeitern
      */
     public HashMap<Integer,Mitarbeiter> gibAlleMitarbeiterHashMapZurueckgeben(){
         return meineMitarbeiter.alleMitarbeiterHashMapZurueckgeben();
@@ -138,8 +137,10 @@ public class EShopVerwaltung {
     /**
      * Methode zum Suchen von Mitarbeitern anhand des Benutzernamens
      *
-     * @param bName Benutzername des gesuchten Mitarbeiters
-     * @return Vector Rückgabe eines Vectors mit dem gefundenen Mitarbeiter
+     * @param bName -> Benutzername des gesuchten Mitarbeiters
+     * @param bPasswort -> Passwort, welches der Mitarbeiter eingegeben hat
+     *
+     * @return boolean, true wenn der Mitarbeiter gefunden wurde und das Passwort korrekt ist, ansonsten false
      */
     public boolean findeMitarbeiter(String bName, String bPasswort)  {
         return meineMitarbeiter.findeMitarbeiter(bName, bPasswort);
@@ -147,18 +148,22 @@ public class EShopVerwaltung {
 
     /**
      * Gibt die entsprechende MitarbeiterNr zu einem Benutzernamen zurück
-     * @return
+     *
+     * @throws MitarbeiterExistiertNichtException
+     *
+     * @return int -> Die zum Benutzernamen passende Mitarbeiternummer
      */
     public int getMitarbeiterNr(String benutzername) throws MitarbeiterExistiertNichtException{
-
        return meineMitarbeiter.getMitarbeiterNr(benutzername);
     }
 
     /**
-     * Methode zum Suchen von Mitarbeitern anhand des Benutzernamens
+     * Methode zum Suchen von Kunden anhand des Benutzernamens
      *
-     * @param bName Benutzername des gesuchten Mitarbeiters
-     * @return Vector Rückgabe eines Vectors mit dem gefundenen Mitarbeiter
+     * @param bName -> Benutzername des gesuchten Kunden
+     * @param bPasswort -> Passwort, welches von dem Kunden eingegeben wurde
+     *
+     * @return boolean -> true, wenn der Kunde existiert und das Passwort korrekt ist, ansonsten false
      */
     public boolean findeKunden(String bName, String bPasswort) {
         return meineKunden.findeKunden(bName, bPasswort);
@@ -168,56 +173,80 @@ public class EShopVerwaltung {
      * Methode zum Suchen von Artikel anhand des Namens
      *
      * @param name Name des gesuchten Artikels
+     *
      * @return Vector Rückgabe eines Vectors mit dem gefundenen Artikel
      */
     public Vector sucheNachName(String name) {
-
         return meineArtikel.sucheArtikel(name);
     }
 
     /**
      * Methode zum Suchen von Rechnungen anhand des Rechnungsnummer
      *
-     * @param rNr Rechnungsnummer der gesuchten Rechnung
-     * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
+     * @param rNr -> Rechnungsnummer der gesuchten Rechnung
+     *
+     * @throws RechnungExestiertNichtException
+     *
+     * @return Rechnung -> Die gesuchte zur Rechnungsnummer passende Rechnung
      */
     public Rechnung sucheNachRechnungsnummer(int rNr) throws RechnungExestiertNichtException {
-
         return meineRechnungen.sucheRechnung(rNr);
     }
 
     /**
      * Methode zum Suchen von Artikeln anhand der Artikelnummer
      *
-     * @param aNr Artikelnummer des gesuchten Artikels
-     * @return Vector Rückgabe eines Vectors mit der gefundenen Rechnung
+     * @param aNr -> Artikelnummer des gesuchten Artikels
+     *
+     * @throws ArtikelExestiertNichtException
+     *
+     * @return Artikel -> Der zur gesuchten Nummer passende Artikel
      */
     public Artikel getArtikel(int aNr) throws ArtikelExestiertNichtException {
-
         return meineArtikel.getArtikel(aNr);
     }
 
+    //@ TODO ungenutzte Methode?
     public boolean existiertArtikel(int aNr) {
         return meineArtikel.existiertArtikel(aNr);
     }
 
+    //@ TODO ungenutzte Methode?
     public boolean istImWarenkorb(Kunde k, int aNr){
         return meineKunden.istImWarenkorb(k,aNr);
     }
 
+    /**
+     * Methode um Artikel in den Warenkorb zu legen
+     *
+     * @param a -> Artikel der in den warenkorb gelegt werden soll
+     * @param kNr -> Kundennummer des Kunden, der den Artikel in den Warenkorb legen will
+     *
+     * @throws KundenNummerExistiertNichtException
+     */
     public void inWarenkorbLegen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
         meineKunden.inWarenkorbLegen(a, kNr);
     }
 
+    /**
+     * Methode um Artikel aus dem Warenkorb zu entfernen
+     *
+     * @param a -> Artikel der aus dem Warenkorb entfernt werden soll
+     * @param kNr -> Kundennummer des Kunden, dem der Warenkorb gehört
+     *
+     * @throws KundenNummerExistiertNichtException
+     */
     public void ausWarenkorbEntfernen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
         meineKunden.ausWarenkorbEtfernen(a, kNr);
     }
 
+    //@TODO ungenutzte Methode?
     /**
-     * Methode zum zuruecksetzen des Warenkorbes eines Kunden
+     * Methode zum zuruecksetzen(vollständigem Leeren) des Warenkorbes eines Kunden
      *
-     * @param kNr Kundennummer
-     * @return boolean ob der Warenkorb zurück gestzt wurde oder nicht
+     * @param kNr -> Kundennummer des Kunden, dessen Warenkorb geleert werden soll
+     *
+     * @throws KundenNummerExistiertNichtException
      */
     public void resetWarenkorb(int kNr) throws KundenNummerExistiertNichtException{
         meineKunden.resetWarenkorb(kNr);
@@ -226,8 +255,13 @@ public class EShopVerwaltung {
     /**
      * Methode zum ändern des Bestands eines Artikels
      *
-     * @param artNr,wert    Artikelnummer, Neuer Wert für Bestand des Artikels
-     * @return boolean
+     * @param artNr -> Artikelnummer des Artikels, dessen Bestand geändert werden soll
+     * @param wert -> neuer Wert des Bestands des Artikels
+     * @param p -> Person die die Änderung am Bestand durchfuehrt
+     *
+     * @throws IOException
+     * @throws ArtikelBestandNegativException
+     * @throws ArtikelExestiertNichtException
      */
     public void setBestand(int artNr, int wert, Person p) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
         meineArtikel.setBestand(artNr, wert, p);
@@ -238,6 +272,10 @@ public class EShopVerwaltung {
      *
      * @param menge    Menge die vom Artikel bestellt werden soll
      * @return boolean
+     *
+     * @throws BestellteMengeEntsprichtNichtderPackungsgroesseException
+     * @throws ArtikelBestandZuNiedrigException
+     * @throws ArtikelBestellteMengeNegativException
      */
     public void setBestellteMenge(int menge,Artikel artikel) throws BestellteMengeEntsprichtNichtderPackungsgroesseException, ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException {
         meineArtikel.setBestellteMenge(menge, artikel);
@@ -248,7 +286,8 @@ public class EShopVerwaltung {
      *
      * @param name,beschreibung,preis         Name des Artikels, Beschreibung des Artikels, Preis des Artikels
      *
-     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
+     * @throws IOException
+     * @throws ArtikelExestierBereitsException
      */
     public void fuegeArtikelEin(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
@@ -256,6 +295,18 @@ public class EShopVerwaltung {
 
     }
 
+    /**
+     * Methode zum Einfügen eines neuen MassengutArtikels in den Bestand.
+     *
+     * @param name -> Name des MassengutArtikels
+     * @param beschreibung -> Beschreibung des Massengutartikels
+     * @param preis -> Preis des MassengutArtikels
+     * @param packung -> Packungssgroesse des MassengutArtikels
+     * @param m -> Mitarbeiter der den Massengutartikel anlegt
+     *
+     * @throws IOException
+     * @throws ArtikelExestierBereitsException
+     */
     public void fuegeMassengutArtikelEin(String name, String beschreibung, double preis, int packung, Mitarbeiter m ) throws IOException, ArtikelExestierBereitsException {
         meineArtikel.massengutartikelHinzufuegen(name, beschreibung, preis, packung, m);
     }
@@ -270,7 +321,8 @@ public class EShopVerwaltung {
      * @param email
      * @param telefon
      *
-     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
+     * @throws IOException
+     * @throws BenutzernameExistiertBereitsException
      */
     public void fuegeKundeEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, BenutzernameExistiertBereitsException{
         meineKunden.kundeHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
@@ -287,18 +339,20 @@ public class EShopVerwaltung {
      * @param email
      * @param telefon
      *
-     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Mitarbeiter schon vorhanden ist)
+     * @throws IOException
+     * @throws MitarbeiterExistiertBereitsException
      */
     public void fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
         meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
     }
 
     /**
-     * Methode zum Einfügen eines neuen Kunden in den Bestand.
+     * Methode zum Einfügen einer neuen Rechnung
      *
-     * @param kunde
+     * @param kunde -> Kunde der die Rechnung ausgestellt bekommt
      *
-     * @return boolean wenn Einfügen erfolgreich true, ansonsten false (wenn Artikel schon vorhanden ist)
+     * @throws IOException
+     * @throws RechnungExestiertNichtException
      */
     public void fuegeRechnungEin(Kunde kunde) throws IOException, RechnungExestiertNichtException{
         meineRechnungen.rechnungHinzufuegen(kunde);
@@ -509,6 +563,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum Vornamen ändern, leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param vorname -> Der neue Vorname
+     */
     public void vornamenAendern(Person p, String vorname) {
         if (p instanceof Kunde) {
             meineKunden.vornameAendern((Kunde)p, vorname);
@@ -517,6 +577,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum Nachnamen ändern, leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param nachname -> Der neue Nachname
+     */
     public void nachnamenAendern(Person p, String nachname) {
         if (p instanceof Kunde) {
             meineKunden.nachnameAendern((Kunde)p, nachname);
@@ -525,6 +591,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum ändern der Telefonnummer, leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param telefon -> Die neue Telefonnummer
+     */
     public void telefonnummerAendern(Person p, String telefon) {
         if (p instanceof Kunde) {
             meineKunden.telefonAendern((Kunde)p, telefon);
@@ -533,6 +605,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum ändern der Emailadresse, leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param email -> Die neue Emailadresse
+     */
     public void emailAdresseAendern(Person p, String email) {
         if (p instanceof Kunde) {
             meineKunden.emailAendern((Kunde)p, email);
@@ -541,6 +619,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum ändern der Straße, leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param straße -> Die neue Straße
+     */
     public void straßeAendern(Person p, String straße) {
         if (p instanceof Kunde) {
             meineKunden.straßeAendern((Kunde)p, straße);
@@ -549,6 +633,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum ändern des Wohnorts leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param ort -> Der neue Wohnort
+     */
     public void wohnortAendern(Person p, String ort) {
         if (p instanceof Kunde) {
             meineKunden.ortAendern((Kunde)p, ort);
@@ -557,6 +647,12 @@ public class EShopVerwaltung {
         }
     }
 
+    /**
+     * Methode zum ändern der Postleihzahl, leitet Mitarbeiter und Kunden an die jeweils passend Methode weiter
+     *
+     * @param p -> Person die die Aenderung durchfuehren moechte
+     * @param plz -> Die neue Postleihzahl
+     */
     public void plzAendern(Person p, String plz) {
         if (p instanceof Kunde) {
             meineKunden.plzAendern((Kunde)p, plz);
