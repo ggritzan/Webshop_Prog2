@@ -1,6 +1,8 @@
 package eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung;
 
+import eshop.local.ui.gui.comp.tableModels.RechnungsArtikelTableModel;
 import eshop.local.ui.gui.comp.tableModels.RechnungsTableModel;
+import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.Rechnung;
 
 import javax.swing.*;
@@ -24,9 +26,16 @@ public class MitarbeiterRechnungsListePanel extends JPanel {
     private JTable table;
     private RechnungsTableModel tmodel;            // TableModel fuer die Rechnungs-Tabelle
     private RowSorter<RechnungsTableModel> sorter;
+    private MitarbeiterRechnungsArtikelListePanel addMitarbeiterRechnungsArtikelListePanel;
 
-
+    /**
+     * Konstruktor
+     * @param alleRechnungen
+     */
     public MitarbeiterRechnungsListePanel(HashMap<Integer,Rechnung> alleRechnungen) {
+
+
+
         // Tabelle erzeugen und Eigenschaften setzen
         table = new JTable();
         tmodel = new RechnungsTableModel(alleRechnungen);
@@ -40,11 +49,13 @@ public class MitarbeiterRechnungsListePanel extends JPanel {
         this.setBorder(ba);
 
         // Layout Ebene 0
-        BorderLayout layoutEbene0 = new BorderLayout();
-        this.setLayout(layoutEbene0);
+        GridLayout layoutEbene0 = new GridLayout(2, 1);
+        this.setLayout(layoutEbene0);    // 2 Zeilen, 1 Spalte
+
 
         // Hinzufügen der Elemente für die Ebene 0
-        this.add(new JScrollPane(table), BorderLayout.CENTER);
+        this.add(new JScrollPane(table));
+        this.add(new JPanel());
 
 
 
@@ -52,10 +63,44 @@ public class MitarbeiterRechnungsListePanel extends JPanel {
 
     }
 
-
+    /**
+     * Initialisiert den Mouselistener
+     * @param mA
+     */
     public void addMouseListener(MouseAdapter mA) {
         table.addMouseListener(mA);
     }
+
+
+// Setter
+    /**
+     * Erzeugt entweder ein neues MitarbeiterRechnungsArtikelListePanel mit den RechnungsArtikel oder
+     * aktualisiert die im MitarbeiterRechnungsArtikelListePanel angezeigten RechnungsArtikel
+     */
+    public void updateTableData(Vector<Artikel> rechnungsArtikel) {
+
+        if(addMitarbeiterRechnungsArtikelListePanel == null){
+            addMitarbeiterRechnungsArtikelListePanel = new MitarbeiterRechnungsArtikelListePanel(rechnungsArtikel);
+            // entfernt alle Komponenten vom Panel
+            this.removeAll();
+            // Hinzufügen der Elemente für die Ebene 0
+            this.add(new JScrollPane(table));
+            this.add(new JScrollPane(addMitarbeiterRechnungsArtikelListePanel));
+        } else {
+            this.addMitarbeiterRechnungsArtikelListePanel.updateTableData(rechnungsArtikel);
+            this.addMitarbeiterRechnungsArtikelListePanel.getTmodel().fireTableDataChanged();
+            // entfernt alle Komponenten vom Panel
+            this.removeAll();
+            // Hinzufügen der Elemente für die Ebene 0
+            this.add(new JScrollPane(table));
+            this.add(new JScrollPane(addMitarbeiterRechnungsArtikelListePanel));
+
+        }
+
+
+
+    }
+
 
 // Getter
 
@@ -65,5 +110,13 @@ public class MitarbeiterRechnungsListePanel extends JPanel {
      */
     public RechnungsTableModel getTmodel() {
         return tmodel;
+    }
+
+    /**
+     * Getter fuer der TableModel des MitarbeiterRechnungsArtikelListePanel
+     * @return
+     */
+    public RechnungsArtikelTableModel getRechnungArtikelTmodel() {
+        return addMitarbeiterRechnungsArtikelListePanel.getTmodel();
     }
 }

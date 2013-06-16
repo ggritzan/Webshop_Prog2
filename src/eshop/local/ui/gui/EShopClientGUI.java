@@ -1,6 +1,7 @@
 package eshop.local.ui.gui;
 
 // Imports der eigenen Klassen
+
 import eshop.local.domain.EShopVerwaltung;
 import eshop.local.exception.*;
 import eshop.local.ui.gui.comp.*;
@@ -199,7 +200,7 @@ public class EShopClientGUI extends JFrame {
         addKundenWarenkorbBestellteMengeAendern = new KundenWarenkorbBestellteMengeAendern();
 
         // Erzeugt ein KundenArtikelPopup
-        addKundenArtikelPopup  = new KundenArtikelPopup();
+        addKundenArtikelPopup = new KundenArtikelPopup();
 
     }
 
@@ -318,25 +319,24 @@ public class EShopClientGUI extends JFrame {
 
             case 'w':
 
-                if(addKundenWarenkorbListePanel == null ){
+                if (addKundenWarenkorbListePanel == null) {
 
-                // Erzeugt KundenWarenkorbListePanel
-                try {
-                    //leert das SwitchPanel
-                    switchPanel.removeAll();
-                    // fuegt das KundenPanel hinzu
-                    switchPanel.add(addKundenPanel, BorderLayout.WEST);
-                    // erzeugt ein neues KundenWarenkorbListePanel
-                    addKundenWarenkorbListePanel = new KundenWarenkorbListePanel(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb());
-                    // fuegt die Action & Mouselistener hinzu
-                    initWarenkorbListener();
-                } catch (KundenNummerExistiertNichtException knene) {
-                    System.err.println(knene.getMessage());
-                }
+                    // Erzeugt KundenWarenkorbListePanel
+                    try {
+                        //leert das SwitchPanel
+                        switchPanel.removeAll();
+                        // fuegt das KundenPanel hinzu
+                        switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                        // erzeugt ein neues KundenWarenkorbListePanel
+                        addKundenWarenkorbListePanel = new KundenWarenkorbListePanel(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb());
+                        // fuegt die Mouselistener hinzu
+                        initWarenkorbListener();
+                    } catch (KundenNummerExistiertNichtException knene) {
+                        System.err.println(knene.getMessage());
+                    }
                     // fuegt das KundenWarenkorbListePanel hinzu
                     switchPanel.add(addKundenWarenkorbListePanel, BorderLayout.CENTER);
                     switchPanelRepainter();
-
 
 
                 } else {
@@ -361,18 +361,15 @@ public class EShopClientGUI extends JFrame {
                 // fuegt das MitarbeiterPanel hinzu
                 switchPanel.add(addKundenPanel, BorderLayout.WEST);
                 // aktualisiert die RechnungsListe
-                //addMitarbeiterRechnungsListePanel.getTmodel().fireTableDataChanged();
+                addMitarbeiterRechnungsListePanel.getTmodel().fireTableDataChanged();
                 // fuegt das MitarbeiterRechnungsListePanel hinzu
-                //switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
+                switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
                 break;
 
 
-
         }
     }
-
-
 
 
     /**
@@ -386,7 +383,7 @@ public class EShopClientGUI extends JFrame {
 
         /**
          *  Actionlistener - LoginPanel
-          */
+         */
         addLoginPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -400,7 +397,7 @@ public class EShopClientGUI extends JFrame {
                     String bName = addLoginPanel.getLoginName();
                     String bPasswort = addLoginPanel.getLoginPassword();
 
-                        // Überprüft ob der Mitarbeiter exestier und wechselt bei einem positiven Ergebnis in das Mitarbeitermenue
+                    // Überprüft ob der Mitarbeiter exestier und wechselt bei einem positiven Ergebnis in das Mitarbeitermenue
                     if (eShopVerwaltung.findeMitarbeiter(bName, bPasswort)) {
                         System.out.println("Ihr Login war erfolgreich.");
                         System.out.println("Willkommen Mitarbeiter");
@@ -413,14 +410,13 @@ public class EShopClientGUI extends JFrame {
                         mitarbeiterPanelReloader('a');
 
 
-
-                      // Überprüft ob der Kunde exestier und wechselt bei einem positiven Ergebnis in das Kundenmenue
+                        // Überprüft ob der Kunde exestier und wechselt bei einem positiven Ergebnis in das Kundenmenue
                     } else if (eShopVerwaltung.findeKunden(bName, bPasswort)) {
                         System.out.println("Ihr Login war erfolgreich.");
                         System.out.println("Willkommen Kunde");
                         try {
                             aktuellerKunde = eShopVerwaltung.getKnr(addLoginPanel.getLoginName());
-                        }catch (BenutzernameExistiertNichtException bene) {
+                        } catch (BenutzernameExistiertNichtException bene) {
                             System.err.println(bene.getMessage());
                         }
                         addLoginPanel.resetJTextfields();
@@ -435,7 +431,7 @@ public class EShopClientGUI extends JFrame {
 
                     }
 
-                  // RegisterButton - reagiert wenn der RegisterButton gedrueckt wird
+                    // RegisterButton - reagiert wenn der RegisterButton gedrueckt wird
                 } else if (source == addLoginPanel.getRegisterButton()) {
 
                     // Der Nutzer hat nun die Möglichkeit sich in einem Dialog für die Kunden oder Mitarbeiterregistrierung zu entscheiden
@@ -456,7 +452,7 @@ public class EShopClientGUI extends JFrame {
                         switchPanelRepainter();
                         switchPanel.add(addMitarbeiterRegistrierungPanel, BorderLayout.CENTER);
 
-                      // Wird im Dialog Kunde ausgewählt wird der Nutzer zur Kunden Registrierung weiter geleitet
+                        // Wird im Dialog Kunde ausgewählt wird der Nutzer zur Kunden Registrierung weiter geleitet
                     } else if (result == JOptionPane.NO_OPTION) {
 
 
@@ -534,7 +530,7 @@ public class EShopClientGUI extends JFrame {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                  // BackToLoginButton - reagiert wenn der BackToLoginButton gedrueckt wird
+                    // BackToLoginButton - reagiert wenn der BackToLoginButton gedrueckt wird
                 } else if (source == addKundenRegistrierungPanel.getBackToLoginButton()) {
                     // setzt alle Felder des Panel zurück
                     addKundenRegistrierungPanel.resetAllJTextfields();
@@ -709,8 +705,6 @@ public class EShopClientGUI extends JFrame {
                     addMitarbeiterArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
 
 
-
-
                 }
             }
         });
@@ -762,7 +756,6 @@ public class EShopClientGUI extends JFrame {
                             }
 
 
-
                         case JOptionPane.NO_OPTION:
 
 
@@ -794,7 +787,6 @@ public class EShopClientGUI extends JFrame {
 
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterMitarbeiterPopup.show(e.getComponent(), e.getX(), e.getY());
-
 
 
                 }
@@ -846,7 +838,6 @@ public class EShopClientGUI extends JFrame {
         });
 
 
-
         /**
          * MouseListener für MitarbeiterKundenListePanel erzeugt ein Popup bei Rechtsklick
          */
@@ -865,7 +856,6 @@ public class EShopClientGUI extends JFrame {
 
                     // setzt das Popup Menue an die Position des MouseEvents
                     addMitarbeiterKundenPopup.show(e.getComponent(), e.getX(), e.getY());
-
 
 
                 }
@@ -917,7 +907,6 @@ public class EShopClientGUI extends JFrame {
         });
 
 
-
         /**
          * MouseListener für MitarbeiterRechnungsListePanel erzeugt ein Popup bei Rechtsklick
          */
@@ -938,9 +927,35 @@ public class EShopClientGUI extends JFrame {
                     addMitarbeiterRechnungsPopup.show(e.getComponent(), e.getX(), e.getY());
 
 
-
-
                 }
+            }
+
+            /**
+             * MouseListener für MitarbeiterRechnungsListePanel erzeugt die Artikelliste zu der jeweiligen Rechnung
+             */
+            @Override
+            public void mouseClicked(MouseEvent emc) {
+
+
+                    JTable source = (JTable) emc.getSource();
+                    aktuellePositionX = emc.getXOnScreen();
+                    aktuellePositionY = emc.getYOnScreen();
+                    int row = source.rowAtPoint(emc.getPoint());
+                    int column = source.columnAtPoint(emc.getPoint());
+                    // Rechnungsnummer des ausgewählten Rechnung
+                    ausgewaehlteRechnung = (Integer) source.getValueAt(row, 0);
+
+                    // erzeugt die Artikelliste zu der jeweiligen Rechnung
+                    try {
+                        System.out.println("TestClick");
+                        addMitarbeiterRechnungsListePanel.updateTableData(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung).getBestellteArtikel());
+                        mitarbeiterPanelReloader('r');
+                    } catch (RechnungExestiertNichtException rene) {
+                        System.err.println(rene.getMessage());
+                    }
+
+
+
             }
         });
 
@@ -985,7 +1000,6 @@ public class EShopClientGUI extends JFrame {
 
             }
         });
-
 
 
         /**
@@ -1078,8 +1092,6 @@ public class EShopClientGUI extends JFrame {
                     addKundenArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
 
 
-
-
                 }
             }
 
@@ -1087,29 +1099,27 @@ public class EShopClientGUI extends JFrame {
             public void mouseClicked(MouseEvent emc) {
 
 
-                    JTable source = (JTable) emc.getSource();
-                    aktuellePositionX = emc.getXOnScreen();
-                    aktuellePositionY = emc.getYOnScreen();
-                    int row = source.rowAtPoint(emc.getPoint());
-                    int column = source.columnAtPoint(emc.getPoint());
+                JTable source = (JTable) emc.getSource();
+                aktuellePositionX = emc.getXOnScreen();
+                aktuellePositionY = emc.getYOnScreen();
+                int row = source.rowAtPoint(emc.getPoint());
+                int column = source.columnAtPoint(emc.getPoint());
 
-                    // Artikelnummer des ausgewählten Artikels
-                    ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
+                // Artikelnummer des ausgewählten Artikels
+                ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
 
-                    // Updatet die KundenArtikelDetails
-                    try {
-                        addKundenArtikelListePanel.updateKundenArtikelDetailsPanel(eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getBeschreibung());
-                        kundenPanelReloader('a');
-                    } catch (ArtikelExestiertNichtException aene) {
-                        System.err.print(aene.getMessage());
-                    }
-
-
+                // Updatet die KundenArtikelDetails
+                try {
+                    addKundenArtikelListePanel.updateKundenArtikelDetailsPanel(eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getBeschreibung());
+                    kundenPanelReloader('a');
+                } catch (ArtikelExestiertNichtException aene) {
+                    System.err.print(aene.getMessage());
                 }
 
+
+            }
+
         });
-
-
 
 
         /**
@@ -1130,7 +1140,6 @@ public class EShopClientGUI extends JFrame {
                     }
 
                 }
-
 
 
             }
@@ -1171,7 +1180,7 @@ public class EShopClientGUI extends JFrame {
 
                             try {
 
-                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel),aktuellerKunde);
+                                eShopVerwaltung.ausWarenkorbEntfernen(eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel), aktuellerKunde);
                                 kundenPanelReloader('w');
 
 
@@ -1220,7 +1229,6 @@ public class EShopClientGUI extends JFrame {
             }
 
         });
-
 
 
         /**
@@ -1296,10 +1304,9 @@ public class EShopClientGUI extends JFrame {
                     addKundenWarenkorbPopup.show(e.getComponent(), e.getX(), e.getY());
 
 
-
-
                 }
             }
+
             @Override
             public void mouseClicked(MouseEvent emc) {
 
@@ -1326,10 +1333,6 @@ public class EShopClientGUI extends JFrame {
 
 
         });
-
-
-
-
 
 
     }

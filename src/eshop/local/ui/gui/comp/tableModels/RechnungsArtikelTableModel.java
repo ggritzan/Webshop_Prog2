@@ -2,26 +2,26 @@ package eshop.local.ui.gui.comp.tableModels;
 
 import eshop.local.valueobjects.Artikel;
 
-
 import javax.swing.table.AbstractTableModel;
-import java.util.HashMap;
 import java.util.Vector;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
- * Date: 05.06.13
- * Time: 11:36
+ * Date: 15.06.13
+ * Time: 21:16
  * To change this template use File | Settings | File Templates.
  */
-public class ArtikelTableModel extends AbstractTableModel {
-
-    private static final long serialVersionUID = -5473134880835886184L;
 
 
-    private HashMap<Integer, Artikel> artikelHashMap;
+public class RechnungsArtikelTableModel extends AbstractTableModel {
 
-    private String[] columnNames = {"ArtNr", "Name", "Preis", "Bestand"};
+    private static final long serialVersionUID = -5473134131233586184L;
+
+
+    private Vector<Artikel> artikelVector;
+
+    private String[] columnNames = {"ArtNr", "Name", "Preis", "bestellte Menge"};
 
     private Class<?>[] columnClass = {Integer.class, String.class, Double.class, Integer.class};
 
@@ -29,8 +29,8 @@ public class ArtikelTableModel extends AbstractTableModel {
      * Konstruktor
      * @param alleAktuellenArtikel
      */
-    public ArtikelTableModel(HashMap<Integer,Artikel> alleAktuellenArtikel) {
-        this.artikelHashMap = alleAktuellenArtikel;
+    public RechnungsArtikelTableModel(Vector<Artikel> alleAktuellenArtikel) {
+        this.artikelVector = alleAktuellenArtikel;
 
     }
 
@@ -40,7 +40,7 @@ public class ArtikelTableModel extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return artikelHashMap.size();
+        return artikelVector.size();
     }
 
     /**
@@ -61,14 +61,9 @@ public class ArtikelTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col) {
 
-        Vector<Artikel> getValue = new Vector<Artikel>();
 
-        // Füllt den ArtikelVector getValue mit den Artikel aus der Hashmap
-        for (Artikel elem : artikelHashMap.values()){
-            getValue.add(elem);
-        }
 
-        Artikel artikel = getValue.get(row);
+        Artikel artikel = artikelVector.get(row);
 
 
 
@@ -80,7 +75,7 @@ public class ArtikelTableModel extends AbstractTableModel {
             case 2:
                 return artikel.getPreis();
             case 3:
-                return artikel.getBestand();
+                return artikel.getBestellteMenge();
             default:
                 return null;
         }
@@ -106,5 +101,4 @@ public class ArtikelTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int col) {
         return columnClass[col];
     }
-
 }
