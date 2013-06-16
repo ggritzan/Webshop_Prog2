@@ -45,12 +45,13 @@ public class MitarbeiterVerwaltung {
 
 
 // Konstruktor
-
+    /**
+     * Konstruktor zum erstellen eines neuen MitarbeiterVerwaltung-Objekts
+     *
+     */
     public MitarbeiterVerwaltung() {
-
         // verknüpft die Mitarbeiternummern mit den Mitarbeiter Objekten
         mitarbeiterBestandNr = new HashMap<Integer, Mitarbeiter>();
-
         // verknüpft Mitarbeiternamen mit den Mitarbeiternummern
         mitarbeiterBestandName = new HashMap<String, Integer>();
     }
@@ -61,23 +62,21 @@ public class MitarbeiterVerwaltung {
      * Methode zum Einlesen der Mitarbeiterdaten aus einer Datei.
      *
      * @param datei Datei, die den einzulesenden Artikelbestand enthaelt
-     * @throws IOException,ClassNotFoundException
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
      *
      */
     public void liesDaten(String datei) throws IOException, ClassNotFoundException {
-
         // Erstellung eines Artikel Objekts
         Mitarbeiter einMitarbeiter;
-
         try {
             pm.openForReading(datei);
             do {
                 einMitarbeiter = pm.ladeMitarbeiter();
                 if (einMitarbeiter != null) {
                     mitarbeiterHinzufuegen(einMitarbeiter);
-
                 }
-
             }
             while (einMitarbeiter != null);
         } catch (IOException e) {
@@ -92,7 +91,9 @@ public class MitarbeiterVerwaltung {
 
     /**
      * Methode zum Schreiben der Mitarbeiterdaten in eine Datei.
-     * @param datei Datei, in die der Mitarbeiterbestand geschrieben werden soll
+     *
+     * @param datei -> Datei, in die der Mitarbeiterbestand geschrieben werden soll
+     *
      * @throws IOException
      */
     public void schreibeDaten(String datei) throws IOException {
@@ -112,18 +113,19 @@ public class MitarbeiterVerwaltung {
 
     /**
      * Methode zum hinzufuegen von Mitarbeitern
-     * @param vorname
-     * @param nachname
-     * @param benutzername
-     * @param passwort
-     * @param email
-     * @param telefon
-     * @param adresse
+     *
+     * @param vorname -> Vorname des Mitarbeiters
+     * @param nachname -> Nachname des Mitarbeiters
+     * @param benutzername -> Benutzername des Mitarbeiters
+     * @param passwort -> Passwort des Mitarbeiters
+     * @param email -> Emailadresse des Mitarbeiters
+     * @param telefon -> Telefonnummer des Mitarbeiters
+     * @param adresse -> Adresse des Mitarbeiters
+     *
      * @throws IOException
      * @throws MitarbeiterExistiertBereitsException
      */
     public void mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
-
         if(mitarbeiterBestandName.containsKey(benutzername)){
             throw new MitarbeiterExistiertBereitsException(benutzername);
         } else {
@@ -134,124 +136,116 @@ public class MitarbeiterVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Mitarbeiter '" + benutzername + "' mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " wurde hinzugefügt.";
             l.writeLog(dateiName, text);
-
         }
-
     }
 
     /**
      * Methode zum hinzufuegen von Mitarbeitern durch den PersistenceManager
-     * @param m
+     *
+     * @param m -> Mitarbeiter der hinzugefügt werden soll
+     *
      * @throws MitarbeiterExistiertBereitsException
      */
     public void mitarbeiterHinzufuegen(Mitarbeiter m) throws MitarbeiterExistiertBereitsException{
-
         mitarbeiterBestandNr.put(m.getmNr(), m);
         mitarbeiterBestandName.put(m.getBenutzername(), m.getmNr());
         if (m.getZaehler() <= m.getmNr()) {
             m.setZaehler(m.getmNr() + 1);
         }
-
-
     }
 
     /**
      * Methode zum löschen von Mitarbeitern
-     * @param maNr
-     * @param mitarbeiter
+     *
+     * @param maNr -> Nummer des Mitarbeiters der gelöscht werden soll
+     * @param mitarbeiter -> Mitarbeiter der die Löschung durchführt
+     *
      * @throws IOException
      * @throws MitarbeiterExistiertNichtException
      */
     public void mitarbeiterLoeschen(int maNr, Mitarbeiter mitarbeiter) throws IOException, MitarbeiterExistiertNichtException{
-
         if (mitarbeiterBestandNr.containsKey(maNr)) {
-
             Mitarbeiter m = mitarbeiterBestandNr.get(maNr);
             mitarbeiterBestandNr.remove(maNr);
             mitarbeiterBestandName.remove(m.getBenutzername());
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Mitarbeiter '" + m.getBenutzername() + "' mit der Mitarbeiternummer " + maNr + " wurde vom Mitarbeiter " + mitarbeiter.getBenutzername() + " mit der Mitarbeiternummer " + mitarbeiter.getmNr() + " gelöscht.";
             l.writeLog(dateiName, text);
-
         } else {
             throw new MitarbeiterExistiertNichtException();
         }
-
     }
 
     /**
-     * Methode gibt einen Vector zurueck der alle vorhandenen Mitarbeiter enthaelt
-     * @return
+     * Methode gibt alle vorhandenen Mitarbeiter zurück
+     *
+     * @return Vector -> Enthält alle vorhandenen Mitarbeiter
      */
     public Vector alleMitarbeiterZurueckgeben() {
-
         Vector<Mitarbeiter> ergebnis = new Vector<Mitarbeiter>();
-
         for (Mitarbeiter elem : mitarbeiterBestandNr.values())
             ergebnis.add(elem);
-
         return ergebnis;
-
-
-
     }
 
     /**
      * Methode gibt die HashMap zurueck die alle vorhandenen Mitarbeiter enthaelt
-     * @return
+     *
+     * @return HashMap<Integer, Mitarbeiter> -> alle vorhandene Mitarbeiter
      */
     public HashMap<Integer, Mitarbeiter> alleMitarbeiterHashMapZurueckgeben() {
         return mitarbeiterBestandNr;
     }
 
+    //@TODO ungenutzte Methode?
     /**
-     * Methode durchsucht alle Mitarbeiter nach dem Parameter Bentzername und gibt den entsprechenden Mitarbeiter in einem Vektor zurueck
+     * Methode durchsucht alle Mitarbeiter nach dem Parameter Benutzername und gibt den entsprechenden Mitarbeiter in einem Vektor zurueck
      *
-     * @param benutzername
+     * @param benutzername -> Der gesuchte Mitarbeiter
+     *
+     * @return Vector -> Enthält den gesuchten Mitarbeiter
      */
     public Vector sucheMitarbeiter(String benutzername) {
         int nummer = 0;
         Vector<Mitarbeiter> ergebnis = new Vector<Mitarbeiter>();
-
         if (mitarbeiterBestandName.containsKey(benutzername)) {
             nummer = mitarbeiterBestandName.get(benutzername);
             ergebnis.add(mitarbeiterBestandNr.get(nummer));
-
             return ergebnis;
-
         } else {
             Vector<String> error = new Vector<String>();
             error.add("Der Mitarbeiter "+benutzername+ " ist nicht vorhanden !");
-
             return error;
         }
-
     }
 
     /**
-     * Gibt die entsprechende MitarbeiterNr zu einem Benutzernamen zurück
-     * @return
+     * Findet Mitarbeiter übdre den Benutzernamen
+     *
+     * @param benutzername -> Benutzername des gesuchten Mitarbeiters
+     *
+     * @throws MitarbeiterExistiertNichtException
+     *
+     * @return int -> Mitarbeiternummer die zum gesuchten Benutzernamen passt
      */
     public int getMitarbeiterNr(String benutzername) throws MitarbeiterExistiertNichtException{
-
         if (mitarbeiterBestandName.containsKey(benutzername)) {
             int mnr = mitarbeiterBestandName.get(benutzername);
             Mitarbeiter m = mitarbeiterBestandNr.get(mnr);
 
             return m.getmNr();
-
         } else {
-
             throw new MitarbeiterExistiertNichtException();
         }
     }
 
     /**
-     * Funktion für den Login wenn der Mitarbeiter mit der entsprechenden passwort vorhanden ist
-     * liefert die Funktion ein true zurueck ansonsten false
-     * @param benutzername
-     * @param passwort
-     * @return
+     * Methode fürs einloggen
+     *
+     * @param benutzername -> Benutzername der sich versucht einzuloggen
+     * @param passwort -> Das eingegebene Passwort
+     *
+     * @return boolean ->true, wenn der Benutzername existiert und das Passwort korrekt ist, ansonsten false
      */
     public boolean findeMitarbeiter(String benutzername, String passwort) {
         if (mitarbeiterBestandName.containsKey(benutzername)) {
@@ -268,6 +262,8 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+
+    //@TODO ungenutzte Methode?
     /**
      * Sucht einen Mitarbeiter anhand des Benutzernamens
      * @param bName
@@ -285,6 +281,7 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    //@TODO identisch mit der Methode getMitarbeiterNr -> Für eine davon entscheiden?
     /**
      * Methode durchsucht alle Mitarbeiter nach dem Benutzernamen und gibt die Mitarbeiternummer zurück
      *
@@ -299,9 +296,11 @@ public class MitarbeiterVerwaltung {
     }
 
     /**
-     * liefert ein Mitarbeiter Objekt wenn ein Mitarbeiter mit der MitarbeiterNummer exestiert
-     * @param mNr
-     * @return
+     * Sucht Mitarbeiter mit Hilfe der Mitarbeiternummer
+     *
+     * @param mNr -> Die Mitarbeiternummer des gesuchten Mitarbeiters
+     *
+     * @return Mitarbeiter -> Der zur Mitarbeiternummer passende Mitarbeiter
      */
     public Mitarbeiter getMitarbeiter(int mNr){
         if (mitarbeiterBestandNr.containsKey(mNr)) {
@@ -329,7 +328,7 @@ public class MitarbeiterVerwaltung {
     }
 
     /**
-     * Methode zum Passwortaendern für Mirarbeiter
+     * Methode zum Passwortaendern für Mitarbeiter
      *
      * @param m -> Mitarbeiter der sein Passwort ändern möchte
      * @param p1 -> das neue Passwort
@@ -345,32 +344,81 @@ public class MitarbeiterVerwaltung {
         }
     }
 
+    /**
+     * Methode zum ändern des Vornamens eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seinen Vornamen ändern möchte
+     * @param name -> Der neue Vorname des Mitarbeiters
+     *
+     */
     public void vornameAendern(Mitarbeiter m, String name) {
         m.setVorname(name);
         m.getAdresse().setVorname(name);
     }
 
+    /**
+     * Methode zum ändern des Nachnamens eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seinen Nachnamen ändern möchte
+     * @param name -> Der neue Nachame des Mitarbeiters
+     *
+     */
     public void nachnameAendern(Mitarbeiter m, String name) {
         m.setNachname(name);
         m.getAdresse().setNachname(name);
     }
 
+    /**
+     * Methode zum ändern der Telefonnummer eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seine Telefonnummer ändern möchte
+     * @param nummer -> Die neue Telefonnummer des Mitarbeiters
+     *
+     */
     public void telefonAendern(Mitarbeiter m, String nummer) {
         m.setTelefon(nummer);
     }
 
+    /**
+     * Methode zum ändern der Emailadresse eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seine Emailadresse ändern möchte
+     * @param mail -> Die neue Emailadresse des Mitarbeiters
+     *
+     */
     public void emailAendern(Mitarbeiter m, String mail) {
         m.setEmail(mail);
     }
 
+    /**
+     * Methode zum ändern des Wohnorts eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seinen Wohnort ändern möchte
+     * @param ort -> Der neue Wohnort des Mitarbeiters
+     *
+     */
     public void ortAendern(Mitarbeiter m, String ort) {
         m.getAdresse().setOrt(ort);
     }
 
+    /**
+     * Methode zum ändern der Postleihzahl eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seine Postleihzahl ändern möchte
+     * @param plz -> Die neue Postleihzahl des Mitarbeiters
+     *
+     */
     public void plzAendern(Mitarbeiter m, String plz) {
         m.getAdresse().setPlz(plz);
     }
 
+    /**
+     * Methode zum ändern der Straße eines Mitarbeiters
+     *
+     * @param m -> Mitarbeiter der seine Straße ändern möchte
+     * @param straße -> Die neue Straße des Mitarbeiters
+     *
+     */
     public void straßeAendern(Mitarbeiter m, String straße) {
         m.getAdresse().setStraße(straße);
     }
