@@ -328,6 +328,21 @@ public class MitarbeiterVerwaltung {
         return l.printLog("Eshop_MitarbeiterLog.txt");
     }
 
-
+    /**
+     * Methode zum Passwortaendern für Mirarbeiter
+     *
+     * @param m -> Mitarbeiter der sein Passwort ändern möchte
+     * @param p1 -> das neue Passwort
+     * @param p2 -> Kontrollpasswort
+     *
+     * @throws NeuesPasswortFehlerhaftException
+     */
+    public void passwortAendern(Mitarbeiter m, String p1, String p2) throws NeuesPasswortFehlerhaftException{
+        if (p1.equals(p2)) {
+            m.setPasswort(p1);
+        } else {
+            throw new NeuesPasswortFehlerhaftException();
+        }
+    }
 }
 

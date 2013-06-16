@@ -343,6 +343,23 @@ public class KundenVerwaltung {
         return k.istImWarenkorb(aNr);
     }
 
+    /**
+     * Methode zum Passwortaendern für Kunden
+     *
+     * @param k -> Kunde der sein Passwort ändern möchte
+     * @param p1 -> das neue Passwort
+     * @param p2 -> Kontrollpasswort
+     *
+     * @throws NeuesPasswortFehlerhaftException
+     */
+    public void passwortAendern(Kunde k, String p1, String p2) throws NeuesPasswortFehlerhaftException{
+        if (p1.equals(p2)) {
+            k.setPasswort(p1);
+        } else {
+            throw new NeuesPasswortFehlerhaftException();
+        }
+    }
+
 
     //TODO @Noshaba Bitte kommentieren
     public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {

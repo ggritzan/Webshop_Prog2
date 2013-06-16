@@ -82,6 +82,7 @@ public class eshopClientCUI {
         System.out.print("Mitarbeiter: \n     hinzufuegen: 'mh'");
         System.out.print("               \n     löschen: 'ml");
         System.out.println("               \n     ausgeben:  'ma'");
+        System.out.println("               \n     Daten bearbeiten:  'mb'");
 
         System.out.print("Kunden:     \n     hinzufuegen: 'kh'");
         System.out.print("              \n     Kunde löschen: 'kl");
@@ -112,16 +113,32 @@ public class eshopClientCUI {
      *
      * @throws IOException
      */
-
     private void gibKundenMenueAus() {
         System.out.print("         \n  Liste aller Artikel anzeigen:  'l'");
         System.out.print("         \n  Artikel in den Warenkorb legen:  'w'");
         System.out.print("         \n  Artikel aus dem Warenkorb löschen:  'e'");
         System.out.print("         \n  Warenkorb anzeigen lassen:  'a'");
         System.out.print("         \n  Artikel aus dem Warenkorb bestellen & Rechnung erstellen :  'b'");
+        System.out.print("         \n  Persönliche Daten bearbeiten: 'k'");
         System.out.print("         \n  zurück ins Hauptmenue: 'o'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
+    }
+
+    /**
+     * Methode gibt das Menue mit den Optionen zum Datenändern aus
+     *
+     * @throws IOException
+     */
+    private void gibDatenMenueAus() {
+        System.out.print("         \n  Vornamen ändern:  'v'");
+        System.out.print("         \n  Nachnamen ändern:  'n'");
+        System.out.print("         \n  Passwort ändern:  'p'");
+        System.out.print("         \n  Email-Adresse ändern:  'e'");
+        System.out.print("         \n  Telefonnummer ändern:  't'");
+        System.out.print("         \n  Straßennamen ändern:  's'");
+        System.out.print("         \n  Wohnort ändern:  'w'");
+        System.out.print("         \n  Plz ändern:  'z'");
     }
 
 // Methoden
@@ -223,6 +240,9 @@ public class eshopClientCUI {
         } else if (line.equals("o")) {
             //Ausloggen
             return 'o';
+        } else if (line.equals("k")) {
+            //Eigene Daten bearbeiten
+            return 'k';
         }
 
         return 'o';
@@ -428,6 +448,38 @@ public class eshopClientCUI {
                         System.err.println(ren.getMessage());
                     }
 
+                } else if (var == 'k') {
+                    gibDatenMenueAus();
+                    input = liesEingabe();
+                    if (input.equals("v")) {
+                        System.out.println("Ihr bisheriger Vorname " + eShopVerwaltung.getKunde(kNr).getVorname());
+                    } else if (input.equals("n")) {
+                        System.out.println("Ihr bisheriger Nachname " + eShopVerwaltung.getKunde(kNr).getNachname());
+                    } else if (input.equals("p")) {
+                        System.out.println("Sie möchten ihr Passwort ändern.");
+                        System.out.println("Bitte geben sie ihr altes Passwort ein");
+                        String ap = liesEingabe();
+                        if (ap.equals(eShopVerwaltung.getKunde(kNr).getPasswort())) {
+                            System.out.println("Bitte geben Sie ihr neues Wunschpasswort ein ");
+                            String neuesP = liesEingabe();
+                            System.out.println("Bitte wiederholen Sie ihr neues Passwort");
+                            String kontrollP = liesEingabe();
+                            Kunde k = eShopVerwaltung.getKunde(kNr);
+                            eShopVerwaltung.passwortAendern(k, neuesP, kontrollP);
+                        } else {
+                            System.out.println("Das ist leider nicht ihr Passwort");
+                        }
+                    } else if (input.equals("e")) {
+                        System.out.println("Ihre bisheriger Emailadresse " + eShopVerwaltung.getKunde(kNr).getEmail());
+                    } else if (input.equals("t")) {
+                        System.out.println("Ihre bisheriger Telefonnummer " + eShopVerwaltung.getKunde(kNr).getTelefon());
+                    } else if (input.equals("s")) {
+                        System.out.println("Ihre bisheriger Straße " + eShopVerwaltung.getKunde(kNr).getAdresse().getStraße());
+                    } else if (input.equals("w")) {
+                        System.out.println("Ihr bisheriger Wohnort " + eShopVerwaltung.getKunde(kNr).getAdresse().getOrt());
+                    } else if (input.equals("z")) {
+                        System.out.println("Ihre bisherige Plz " + eShopVerwaltung.getKunde(kNr).getAdresse().getPlz());
+                    }
                 }
 
             } catch (IOException e) {
@@ -437,6 +489,8 @@ public class eshopClientCUI {
                 System.err.println(kne.getMessage());
             } catch (LeereEingabeException le) {
                 System.err.println(le.getMessage());
+            } catch (NeuesPasswortFehlerhaftException npf) {
+                System.err.println(npf.getMessage());
             }
 
         }
@@ -491,7 +545,44 @@ public class eshopClientCUI {
                 // Liste aller Mitarbeiter ausgeben
                 } else if (input.equals("ma")) {
                     System.out.println(eShopVerwaltung.gibAlleMitarbeiter());
-
+                } else if (input.equals("mb")) {
+                    gibDatenMenueAus();
+                    try {
+                        input = liesEingabe();
+                        if (input.equals("v")) {
+                            System.out.println("Ihr bisheriger Vorname " + eShopVerwaltung.getMitarbeiter(mNr).getVorname());
+                        } else if (input.equals("n")) {
+                            System.out.println("Ihr bisheriger Nachname " + eShopVerwaltung.getMitarbeiter(mNr).getNachname());
+                        } else if (input.equals("p")) {
+                            System.out.println("Sie möchten ihr Passwort ändern.");
+                            System.out.println("Bitte geben sie ihr altes Passwort ein");
+                            String ap = liesEingabe();
+                            if (ap.equals(eShopVerwaltung.getMitarbeiter(mNr).getPasswort())) {
+                                System.out.println("Bitte geben Sie ihr neues Wunschpasswort ein ");
+                                String neuesP = liesEingabe();
+                                System.out.println("Bitte wiederholen Sie ihr neues Passwort");
+                                String kontrollP = liesEingabe();
+                                Mitarbeiter m = eShopVerwaltung.getMitarbeiter(mNr);
+                                eShopVerwaltung.passwortAendern(m, neuesP, kontrollP);
+                            } else {
+                                System.out.println("Das ist leider nicht ihr Passwort");
+                            }
+                        } else if (input.equals("e")) {
+                            System.out.println("Ihre bisheriger Emailadresse " + eShopVerwaltung.getMitarbeiter(mNr).getEmail());
+                        } else if (input.equals("t")) {
+                            System.out.println("Ihre bisheriger Telefonnummer " + eShopVerwaltung.getMitarbeiter(mNr).getTelefon());
+                        } else if (input.equals("s")) {
+                            System.out.println("Ihre bisheriger Straße " + eShopVerwaltung.getMitarbeiter(mNr).getAdresse().getStraße());
+                        } else if (input.equals("w")) {
+                            System.out.println("Ihr bisheriger Wohnort " + eShopVerwaltung.getMitarbeiter(mNr).getAdresse().getOrt());
+                        } else if (input.equals("z")) {
+                            System.out.println("Ihre bisherige Plz " + eShopVerwaltung.getMitarbeiter(mNr).getAdresse().getPlz());
+                        }
+                    } catch (MitarbeiterExistiertNichtException men) {
+                        System.err.println(men.getMessage());
+                    } catch (NeuesPasswortFehlerhaftException npf) {
+                        System.err.println(npf.getMessage());
+                    }
                 // Kunden hinzufuegen
                 } else if (input.equals("kh")) {
                     neuenKundenAnlegen();

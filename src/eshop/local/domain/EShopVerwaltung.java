@@ -492,6 +492,22 @@ public class EShopVerwaltung {
         return meineRechnungen.printRechnungsLog();
     }
 
+    /**
+     * Methode zum Aendern der Passwörter, findet heraus ob ein Kunde oder ein Mitarbeiter sein Passwort ändern möchte und leitet dementsprechend weiter
+     *
+     * @param p -> Person die ihr Passwort ändern möchte
+     * @param p1 -> das neue Passwort
+     * @param p2 -> Kontrollpasswort
+     *
+     * @throws NeuesPasswortFehlerhaftException
+     */
+    public void passwortAendern(Person p, String p1, String p2) throws NeuesPasswortFehlerhaftException{
+        if ( p instanceof Kunde ) {
+            meineKunden.passwortAendern((Kunde)p, p1, p2);
+        } else if (p instanceof Mitarbeiter) {
+            meineMitarbeiter.passwortAendern((Mitarbeiter)p, p1, p2);
+        }
+    }
 }
 
 
