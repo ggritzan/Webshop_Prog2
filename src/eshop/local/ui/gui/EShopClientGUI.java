@@ -680,8 +680,22 @@ public class EShopClientGUI extends JFrame {
 
                     switchPanel.removeAll();
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                    /*
+                    try {
+
+                        addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(5, "1001"));
+                    } catch (FileNotFoundException fnfe) {
+                          System.err.println(fnfe.getMessage());
+                    } catch (ParseException pe) {
+                        System.err.println(pe.getMessage());
+                    } catch (KennNummerExistiertNichtException knene) {
+                        System.err.println(knene.getMessage());
+                    }
+                    */
+
                     switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
                     switchPanelRepainter();
+
                     /**
                      *   Eventlistener
                      */
@@ -693,7 +707,18 @@ public class EShopClientGUI extends JFrame {
 
                             if (source == addMitarbeiterBestandsDiagramPanel.getRepaintButton()) {
                                 System.out.println("Repaint Click");
-                                addMitarbeiterBestandsDiagramPanel.neuLaden();
+
+                                try {
+
+                                    addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(3, "1000"));
+                                } catch (FileNotFoundException fnfe) {
+                                    System.err.println(fnfe.getMessage());
+                                } catch (ParseException pe) {
+                                    System.err.println(pe.getMessage());
+                                } catch (KennNummerExistiertNichtException knene) {
+                                    System.err.println(knene.getMessage());
+                                }
+
 
                             }
                         }

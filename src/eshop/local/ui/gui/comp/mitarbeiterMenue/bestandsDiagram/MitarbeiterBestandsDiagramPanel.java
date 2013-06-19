@@ -19,6 +19,7 @@ import java.util.Vector;
 
 public class MitarbeiterBestandsDiagramPanel extends JPanel {
 
+
     private MitarbeiterBestandsDiagram addMitarbeiterBestandsDiagram;
     private JButton repaintButton;
 
@@ -40,45 +41,23 @@ public class MitarbeiterBestandsDiagramPanel extends JPanel {
 
         this.add(addMitarbeiterBestandsDiagram);
         this.add(repaintButton);
+
     }
 
     public JButton getRepaintButton() {
         return repaintButton;
     }
 
-    public void neuLaden() {
-        Vector<Integer> test = new Vector<Integer>();
-        test.add(50);
-        test.add(50);
-        test.add(100);
-        test.add(50);
-        test.add(50);
-        test.add(100);
-        test.add(50);
-        test.add(50);
-        test.add(150);
-        test.add(22);
-        test.add(50);
-        test.add(50);
-        test.add(100);
-        test.add(50);
-        test.add(50);
-        test.add(100);
-        test.add(50);
-        test.add(50);
-        test.add(150);
-        test.add(22);
-        test.add(50);
-        test.add(50);
-        test.add(100);
-        test.add(50);
-        test.add(50);
-        test.add(100);
-        test.add(50);
-        test.add(50);
-        test.add(150);
-        test.add(22);
-        addMitarbeiterBestandsDiagram.artikelBestandGraphenzeichnen(test);
+    public void artikelBestandGraphenzeichnen(Vector<ArtikelBestandsGraph> artikelBestandObjekte) {
+        Vector<Integer> intGraph = new Vector<Integer>();
+
+        for (int i = 0; i < artikelBestandObjekte.size(); i++) {
+           intGraph.add(artikelBestandObjekte.get(i).getBestand());
+
+        }
+
+        addMitarbeiterBestandsDiagram.artikelBestandGraphenzeichnen(intGraph);
+
     }
 
     public void addMouseListener(MouseAdapter mA) {

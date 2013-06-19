@@ -13,9 +13,13 @@ import java.util.Vector;
  */
 public class MitarbeiterBestandsDiagram extends JPanel {
 
+    // OffsetWert fuer die X Achse
     private int offsetx;
+    // OffsetWert fuer die Y Achse
     private int offsety;
+    // Vector in dem die Positionen auf der X Achse eingefuegt werden
     private Vector<Integer> xAbstandswerte;
+    // Vector in dem die Bestandsdaten eines Artikel gespeichert werden
     private Vector<Integer> yBestandswerte;
 
     /**
@@ -31,42 +35,71 @@ public class MitarbeiterBestandsDiagram extends JPanel {
 
     }
 
+    /**
+     * Methode zum zeichnen eines Bestandsgraphen
+     * @param g
+     */
     protected void paintGraph( Graphics g )
     {
-        System.out.println("bis hier funktioniere ich noch 1");
         super.paintComponent( g );
+        // Werte der Bedingungen fuer die do while Schleife
         int arrayGroesse = yBestandswerte.size();
         int aktuellePosition = 0;
-        System.out.println("bis hier funktioniere ich noch 2");
+
         do {
+            //  zeichnet die Linie zwischen dem jeweiligen Start & Endpunkt
             g.drawLine(xAbstandswerte.get(aktuellePosition) + offsetx, offsety - yBestandswerte.get(aktuellePosition), xAbstandswerte.get((aktuellePosition)+1) + offsetx, offsety - yBestandswerte.get((aktuellePosition)+1));
+            // jedes mal nach dem die Line gezeichnet wurde wird der Bestand als String an der aktuellen Position ausgegeben
             g.drawString(yBestandswerte.get(aktuellePosition).toString(), xAbstandswerte.get(aktuellePosition) + offsetx, offsety - yBestandswerte.get(aktuellePosition) );
+
             aktuellePosition++;
 
         } while (aktuellePosition < arrayGroesse-1 );
+
+        // zeichnet den letzen Bestand in das Diagram
         g.drawString(yBestandswerte.get(aktuellePosition).toString(), xAbstandswerte.get(aktuellePosition) + offsetx, offsety - yBestandswerte.get(aktuellePosition) );
-        System.out.println("bis hier funktioniere ich noch 3");
+
+    }
+
+    /**
+            * Methode zum zeichnen eines Bestandsgraphen
+    * @param g
+    */
+    protected void paintBestand( Graphics g )
+    {
+        super.paintComponent( g );
+        g.drawString("Ein Bestandsgraph kann nicht angezeigt werden da im gewählten Zeitraum nicht genügend Werte exestieren !",50,50);
+
+
     }
 
 
 
 
     public void artikelBestandGraphenzeichnen(Vector<Integer> yBestandVector) {
+        if (yBestandVector.size() >= 2){
         // speicher die gesamtgroesse des Panels in der Variable d
         Dimension d = this.getSize();
+        System.out.println("getSize: " + d);
         // Versatz auf der X Achse
-        offsetx = (20) ;
-        System.out.println("" + offsetx);
-        // Versatz auf der Y AChse
-        offsety =  (int) d.getHeight() -20;
-        System.out.println("" + offsety);
+        offsetx = 20 ;
+        // Versatz auf der Y Achse
+        offsety = (int) (d.getHeight() -20);
+        // speichert den uebergebenden yBestandsvektor in den lokalen Vektor yBestandswerte
         this.yBestandswerte = yBestandVector;
-        int abstand = (this.getWidth() -20) / yBestandswerte.size() ;
-
+        // definiert je nach Anzahl der Werte den Abstand zwischen den einzelnen Punkten
+        System.err.println("Width: " + d.getWidth() + " -20");
+        System.err.println("yBestandVector.size" +  yBestandVector.size() );
+        int abstand = ( ((int) d.getWidth() -20 ) / yBestandVector.size()) ;
+        // fuellt den xAbstandswerte Vector
         for (int i = 0; i < yBestandswerte.size(); i++) {
             this.xAbstandswerte.add(abstand*i);
         }
         paintGraph(this.getGraphics());
+
+        }else if(yBestandVector.size() <= 1){
+            paintBestand(this.getGraphics());
+        }
     }
 
 
