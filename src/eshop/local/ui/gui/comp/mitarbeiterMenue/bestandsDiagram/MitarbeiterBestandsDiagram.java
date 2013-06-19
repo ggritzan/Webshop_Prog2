@@ -84,7 +84,8 @@ public class MitarbeiterBestandsDiagram extends JPanel {
 
         // zeichnet den letzen Bestand in das Diagram
         g.drawString(yBestandswerte.get(aktuellePosition).toString(), xAbstandswerte.get(aktuellePosition) + offsetx, offsety - yBestandswerte.get(aktuellePosition));
-
+        this.yBestandswerte.clear();
+        this.xAbstandswerte.clear();
     }
 
     /**

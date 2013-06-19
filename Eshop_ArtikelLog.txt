@@ -547,3 +547,33 @@ Der Artikel 'Plastiklöffel' mit der Artikelnummer 1002 wurde vom Mitarbeiter gg
 Do 2013.06.20 um 00:01:09 MESZ:
 Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 10.
 
+Do 2013.06.20 um 00:07:47 MESZ:
+Der Bestand des Artikels 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 2.
+
+Do 2013.06.20 um 00:07:53 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 6.
+
+Do 2013.06.20 um 00:07:58 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 20.
+
+Do 2013.06.20 um 00:16:17 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 100.
+
+Do 2013.06.20 um 00:16:46 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 50.
+
+Do 2013.06.20 um 00:17:55 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 30.
+
+Do 2013.06.20 um 00:18:03 MESZ:
+Der Bestand des Artikels 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 10.
+
+Do 2013.06.20 um 00:27:28 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 100.
+
+Do 2013.06.20 um 00:33:19 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 10.
+
+Do 2013.06.20 um 00:33:35 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 300.
+
