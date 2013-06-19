@@ -12,18 +12,20 @@ import java.awt.event.ActionListener;
  */
 public class KundenWarenkorbPopup extends JPopupMenu {
 
+    private JMenuItem warenkorbBestellen;
     private JMenuItem bestellteMengeAendern;
     private JMenuItem loeschen;
 
     /**
-     *  Konstruktor
+     * Konstruktor
      */
     public KundenWarenkorbPopup() {
         super();
-
+        warenkorbBestellen = new JMenuItem("Warenkorb bestellen");
         bestellteMengeAendern = new JMenuItem("bestellte Menge anpassen");
         loeschen = new JMenuItem("löschen");
 
+        this.add(warenkorbBestellen);
         this.add(bestellteMengeAendern);
         this.add(loeschen);
     }
@@ -31,7 +33,17 @@ public class KundenWarenkorbPopup extends JPopupMenu {
 // Gettter
 
     /**
+     * Getter fuer das JMenuItem WarenkorbBestellen
+     *
+     * @return
+     */
+    public JMenuItem getWarenkorbBestellen() {
+        return warenkorbBestellen;
+    }
+
+    /**
      * Getter fuer das JMenuItem bestellteMengeAendern
+     *
      * @return
      */
     public JMenuItem getBestellteMengeAendern() {
@@ -40,18 +52,23 @@ public class KundenWarenkorbPopup extends JPopupMenu {
 
     /**
      * Getter fuer das JMenueItem loeschen
+     *
      * @return
      */
     public JMenuItem getLoeschen() {
         return loeschen;
     }
 
+
 // Actionlistener
+
     /**
      * Fügt den JMenuItems bestellteMengeAendern & loeschen einen Actionlistener hinzu
+     *
      * @param a
      */
     public void addActionListener(ActionListener a) {
+        warenkorbBestellen.addActionListener(a);
         bestellteMengeAendern.addActionListener(a);
         loeschen.addActionListener(a);
     }
