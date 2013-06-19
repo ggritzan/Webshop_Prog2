@@ -1,11 +1,15 @@
 package eshop.local.ui.gui.comp.mitarbeiterMenue.bestandsDiagram;
 
+import eshop.local.ui.gui.comp.tableModels.ArtikelTableModel;
+import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.ArtikelBestandsGraph;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -21,13 +25,17 @@ public class MitarbeiterBestandsDiagramPanel extends JPanel {
 
 
     private MitarbeiterBestandsDiagram addMitarbeiterBestandsDiagram;
-    private JButton repaintButton;
+    private MitarbeiterBestandsDiagramArtikelListePanel addMitarbeiterBestandsDiagramArtikelListePanel;
 
-    public MitarbeiterBestandsDiagramPanel() {
+    /**
+     * Konstruktor
+     * @param artikelHashMap
+     */
+    public MitarbeiterBestandsDiagramPanel(HashMap<Integer,Artikel> artikelHashMap ) {
         super();
 
         addMitarbeiterBestandsDiagram = new MitarbeiterBestandsDiagram();
-        repaintButton = new JButton("Repaint");
+        addMitarbeiterBestandsDiagramArtikelListePanel = new MitarbeiterBestandsDiagramArtikelListePanel(artikelHashMap);
 
         // Rahmen außen
         Border ba = BorderFactory.createTitledBorder("Bestandsdiagramm");
@@ -40,14 +48,15 @@ public class MitarbeiterBestandsDiagramPanel extends JPanel {
         // Hinzufügen der Elemente für die Ebene 0
 
         this.add(addMitarbeiterBestandsDiagram);
-        this.add(repaintButton);
+        this.add(addMitarbeiterBestandsDiagramArtikelListePanel);
 
     }
 
-    public JButton getRepaintButton() {
-        return repaintButton;
-    }
 
+    /**
+     * Zeichnet einen Artikelbestandsgraphen
+     * @param artikelBestandObjekte
+     */
     public void artikelBestandGraphenzeichnen(Vector<ArtikelBestandsGraph> artikelBestandObjekte) {
         Vector<Integer> intGraph = new Vector<Integer>();
 
@@ -60,8 +69,18 @@ public class MitarbeiterBestandsDiagramPanel extends JPanel {
 
     }
 
+    /**
+     * Fuegt dem MitarbeiterBestandsDiagramArtikelListePanel einen MouseListener hinzu
+     * @param mA
+     */
     public void addMouseListener(MouseAdapter mA) {
-        repaintButton.addMouseListener(mA);
+        addMitarbeiterBestandsDiagramArtikelListePanel.addMouseListener(mA);
     }
+
+    public ArtikelTableModel getTModel() {
+        return addMitarbeiterBestandsDiagramArtikelListePanel.getTmodel();
+    }
+
+
 }
 

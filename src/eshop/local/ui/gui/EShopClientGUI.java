@@ -17,6 +17,7 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestan
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.bestandsDiagram.MitarbeiterBestandsDiagramPanel;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.bestandsDiagram.MitarbeiterBestandsDiagramWieVieleTageDialog;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterListePanel;
@@ -63,6 +64,7 @@ public class EShopClientGUI extends JFrame {
     private MitarbeiterRechnungsPopup addMitarbeiterRechnungsPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
     private MitarbeiterBestandsDiagramPanel addMitarbeiterBestandsDiagramPanel;
+    private MitarbeiterBestandsDiagramWieVieleTageDialog addMitarbeiterBestandsDiagramWieVieleTageDialog;
     // KundenPanel
     private KundenPanel addKundenPanel;
     private KundenArtikelListePanel addKundenArtikelListePanel;
@@ -193,7 +195,9 @@ public class EShopClientGUI extends JFrame {
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
 
         // Erzeugt ein MitarbeiterBestandsDiagramPanel
-        addMitarbeiterBestandsDiagramPanel = new MitarbeiterBestandsDiagramPanel();
+        addMitarbeiterBestandsDiagramPanel = new MitarbeiterBestandsDiagramPanel(eShopVerwaltung.gibAlleArtikelHashMapZurueckgeben());
+        // Erzeugt einen MitarbeiterBestandsDiagramWieVieleTageDialog
+        addMitarbeiterBestandsDiagramWieVieleTageDialog = new MitarbeiterBestandsDiagramWieVieleTageDialog();
 
 // KundenPanel
         // Erzeugt das MitarbeiterPanel
@@ -294,14 +298,13 @@ public class EShopClientGUI extends JFrame {
 
             case 'd':
                 //leert das SwitchPanel
-                //switchPanel.removeAll();
+                switchPanel.removeAll();
                 // fuegt das MitarbeiterPanel hinzu
-                //switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                // aktualisiert das BestandsDiagram
-                //TODO wichtig momentan nur für einen Artikel
-                //addMitarbeiterBestandsDiagramPanel.drawBestandsDiagram(eShopVerwaltung.printArtikelLog(5,"1001"));
-                // fuegt das MitarbeiterRechnungsListePanel hinzu
-                //switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
+                switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // aktualisiert die ArtikelListe auf dem MitarbeiterBestandsDiagramPanel
+                addMitarbeiterBestandsDiagramPanel.getTModel().fireTableDataChanged();
+                // fuegt das MitarbeiterBestandsDiagramPanel hinzu
+                switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
                 switchPanelRepainter();
                 break;
 
@@ -680,7 +683,8 @@ public class EShopClientGUI extends JFrame {
 
                     switchPanel.removeAll();
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                    /*
+                    switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
+
                     try {
 
                         addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(5, "1001"));
@@ -691,38 +695,11 @@ public class EShopClientGUI extends JFrame {
                     } catch (KennNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());
                     }
-                    */
 
-                    switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
+
+
                     switchPanelRepainter();
 
-                    /**
-                     *   Eventlistener
-                     */
-                    addMitarbeiterBestandsDiagramPanel.addMouseListener(new MouseAdapter() {
-
-                        @Override
-                        public void mouseClicked(MouseEvent emc) {
-                            Object source = emc.getSource();
-
-                            if (source == addMitarbeiterBestandsDiagramPanel.getRepaintButton()) {
-                                System.out.println("Repaint Click");
-
-                                try {
-
-                                    addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(3, "1000"));
-                                } catch (FileNotFoundException fnfe) {
-                                    System.err.println(fnfe.getMessage());
-                                } catch (ParseException pe) {
-                                    System.err.println(pe.getMessage());
-                                } catch (KennNummerExistiertNichtException knene) {
-                                    System.err.println(knene.getMessage());
-                                }
-
-
-                            }
-                        }
-                    });
 
 
 
@@ -1166,6 +1143,77 @@ public class EShopClientGUI extends JFrame {
 
 
         });
+
+        /**
+         * MouseListener für MitarbeiterBestandsDiagramWieVieleTageDialog JDialog
+         */
+        addMitarbeiterBestandsDiagramPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+
+                    JTable source = (JTable) e.getSource();
+                    aktuellePositionX = e.getXOnScreen();
+                    aktuellePositionY = e.getYOnScreen();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+
+                    // Artikelnummer des ausgewählten Artikels
+                    ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
+
+
+                    // setzt den Dialog an die Position des MouseEvents
+                    addMitarbeiterBestandsDiagramWieVieleTageDialog.setLocation(aktuellePositionX, aktuellePositionY);
+
+                    // macht den Dialog sichtbar
+                    addMitarbeiterBestandsDiagramWieVieleTageDialog.setVisible(true);
+
+
+
+            }
+        });
+
+
+        /**
+         * ActionListener für das MitarbeiterBestandsDiagramWieVieleTageDialog
+         */
+        addMitarbeiterBestandsDiagramWieVieleTageDialog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                Object source = ae.getSource();
+                // Waehlt den anzuzeigenden Artikel für den Bestandsgraphen mit den eigegebenden Tagen aus
+                if (source == addMitarbeiterBestandsDiagramWieVieleTageDialog.getbestandsGraphenAnzeigenButton()) {
+
+
+
+                        int anzuzeigendeTage = addMitarbeiterBestandsDiagramWieVieleTageDialog.getanzuzeigendeTage();
+
+                    try {
+
+                            addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(anzuzeigendeTage,String.valueOf(ausgewaehlterArtikel)));
+
+                        } catch (FileNotFoundException fnfe) {
+                            System.err.println(fnfe.getMessage());
+                        } catch (ParseException pe) {
+                            System.err.println(pe.getMessage());
+                        } catch (KennNummerExistiertNichtException knene) {
+                            System.err.println(knene.getMessage());
+                        }
+                        addMitarbeiterBestandsDiagramWieVieleTageDialog.resetJTextfield();
+                        addMitarbeiterBestandsDiagramWieVieleTageDialog.setVisible(false);
+                        ausgewaehlterArtikel = -1;
+
+
+
+
+                }
+
+            }
+
+
+        });
+
 
 // Kunden
 
