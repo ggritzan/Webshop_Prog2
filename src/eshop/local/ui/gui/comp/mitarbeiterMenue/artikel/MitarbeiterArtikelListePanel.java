@@ -88,6 +88,7 @@ public class MitarbeiterArtikelListePanel extends JPanel {
         return tmodel;
     }
 
+    // Fuer normale Artikel
     public String getArtikelName() {
         return addMitarbeiterArtikelHinzufuegenPanel.getArtikelName();
     }
@@ -103,6 +104,30 @@ public class MitarbeiterArtikelListePanel extends JPanel {
     public JButton getArtikelHinzufuegenButton() {
         return addMitarbeiterArtikelHinzufuegenPanel.getArtikelHinzufuegenButton();
     }
+
+
+    // Fuer Massengutartikel
+    public String getMassengutArtikelName() {
+        return addMitarbeiterMassengutartikelHinzufuegenPanel.getMassengutartikelName();
+    }
+
+    public String getMassengutArtikelBeschreibung() {
+        return addMitarbeiterMassengutartikelHinzufuegenPanel.getMassengutartikelBeschreibung();
+    }
+
+    public double getMassengutartikelPreis() {
+        return addMitarbeiterMassengutartikelHinzufuegenPanel.getMassengutartikelPreis();
+    }
+
+    public int getMassengutartikelPackungsgroesse() {
+        return addMitarbeiterMassengutartikelHinzufuegenPanel.getMassengutartikelPackungsgroesse();
+    }
+
+    public JButton getMassengutartikelHinzufuegenButton() {
+        return addMitarbeiterMassengutartikelHinzufuegenPanel.getMassengutArtikelHinzufuegenButton();
+    }
+
+
 
     // Setzt alle JTextfield des Artikel hinzufügen Panels zurück
     public void resetAllJTextfields(){

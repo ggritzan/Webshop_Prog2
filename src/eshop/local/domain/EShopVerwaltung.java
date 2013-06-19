@@ -8,6 +8,7 @@ import java.util.Vector;
 
 //import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
 import eshop.local.exception.*;
+import eshop.local.persistence.Log;
 import eshop.local.valueobjects.*;
 
 /**
@@ -30,6 +31,7 @@ public class EShopVerwaltung {
     private RechnungsVerwaltung meineRechnungen;
     // Erzeugt eine Mitarbeuterverwaltung
     private MitarbeiterVerwaltung meineMitarbeiter;
+
 
 // Konstruktor
 
@@ -80,6 +82,8 @@ public class EShopVerwaltung {
         return meineArtikel.alleArtikelHashMapZurueckgeben();
     }
 
+
+
     /**
      * Methode, die eine Liste aller im Bestand befindlichen Kunden zurückgibt Aufgabe wird an die Kundenverwaltung delegiert
      *
@@ -114,6 +118,17 @@ public class EShopVerwaltung {
      */
     public HashMap<Integer,Rechnung> gibAlleRechnungenHashMapZurueckgeben(){
         return meineRechnungen.alleRechnungenHashMapZurueckgeben();
+    }
+
+    /**
+     * Methode gibt einen Vector zurueck der alle Rechnungen eines Kunden enthaelt
+     *
+     * @return
+     * @throws RechnungKeineVorhandenException
+     *
+     */
+    public Vector giballeRechnungenEinesKundenZurueckgeben(int kNr) {
+        return meineRechnungen.alleRechnungenEinesKundenZurueckgeben(kNr);
     }
 
     /**

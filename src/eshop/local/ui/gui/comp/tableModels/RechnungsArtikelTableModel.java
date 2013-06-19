@@ -101,4 +101,13 @@ public class RechnungsArtikelTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int col) {
         return columnClass[col];
     }
+
+// Setter
+    /**
+     * Aktualisiert den artikelVector
+     */
+    public void updateTableData(Vector<Artikel> rechnungsArtikel) {
+        this.artikelVector = rechnungsArtikel;
+
+    }
 }

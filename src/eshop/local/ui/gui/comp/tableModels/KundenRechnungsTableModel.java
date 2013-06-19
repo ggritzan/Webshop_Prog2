@@ -10,14 +10,14 @@ import java.util.Vector;
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
- * Date: 07.06.13
- * Time: 21:18
+ * Date: 17.06.13
+ * Time: 17:29
  * To change this template use File | Settings | File Templates.
  */
-public class RechnungsTableModel extends AbstractTableModel {
+public class KundenRechnungsTableModel extends AbstractTableModel {
     private static final long serialVersionUID = -937113488035886184L;
 
-    private HashMap<Integer, Rechnung> rechnungsHashMap;
+    private Vector<Rechnung> rechnungsVector;
 
 
     private String[] columnNames = {"ReNr", "KNr", "gesamt Preis"};
@@ -28,8 +28,8 @@ public class RechnungsTableModel extends AbstractTableModel {
      * Konstruktor
      * @param alleAktuellenRechnungen
      */
-    public RechnungsTableModel(HashMap<Integer, Rechnung> alleAktuellenRechnungen) {
-        this.rechnungsHashMap = alleAktuellenRechnungen;
+    public KundenRechnungsTableModel(Vector<Rechnung> alleAktuellenRechnungen) {
+        this.rechnungsVector = alleAktuellenRechnungen;
     }
 
 
@@ -40,7 +40,7 @@ public class RechnungsTableModel extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return rechnungsHashMap.size();
+        return rechnungsVector.size();
     }
 
     /**
@@ -61,14 +61,7 @@ public class RechnungsTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col) {
 
-        Vector<Rechnung> getValue = new Vector<Rechnung>();
-
-        // Füllt den ArtikelVector getValue mit den Artikel aus der Hashmap
-        for (Rechnung elem : rechnungsHashMap.values()){
-            getValue.add(elem);
-        }
-
-        Rechnung rechnung = getValue.get(row);
+        Rechnung rechnung = rechnungsVector.get(row);
 
 
         switch (col) {
@@ -104,3 +97,4 @@ public class RechnungsTableModel extends AbstractTableModel {
     }
 
 }
+

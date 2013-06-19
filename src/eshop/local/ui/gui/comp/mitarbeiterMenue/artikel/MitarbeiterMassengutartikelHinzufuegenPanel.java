@@ -20,7 +20,7 @@ public class MitarbeiterMassengutartikelHinzufuegenPanel extends JPanel {
     private JTextField artikelBeschreibung;    // Textfeld fuer die Beschreibung
     private JTextField artikelPreis;           // Textfeld fuer den Preis
     private JTextField artikelPackungsgroesse;        // Textfeld fuer die Packungsgröße
-    private JButton artikelHinzufuegenButton;                // Button zum Erzeugen eines Artikels
+    private JButton MassengutartikelHinzufuegenButton;                // Button zum Erzeugen eines Artikels
 
     /**
      * Konstruktor
@@ -32,7 +32,7 @@ public class MitarbeiterMassengutartikelHinzufuegenPanel extends JPanel {
         artikelBeschreibung = new JTextField();
         artikelPreis = new JTextField();
         artikelPackungsgroesse = new JTextField();
-        artikelHinzufuegenButton = new JButton("Hinzufügen");
+        MassengutartikelHinzufuegenButton = new JButton("Hinzufügen");
 
 
 
@@ -57,7 +57,7 @@ public class MitarbeiterMassengutartikelHinzufuegenPanel extends JPanel {
         this.add(artikelBeschreibung);
         this.add(artikelPreis);
         this.add(artikelPackungsgroesse);
-        this.add(artikelHinzufuegenButton);
+        this.add(MassengutartikelHinzufuegenButton);
 
 
 
@@ -69,32 +69,32 @@ public class MitarbeiterMassengutartikelHinzufuegenPanel extends JPanel {
      *
      * @return
      */
-    public JButton getArtikelHinzufuegenButton() {
-        return artikelHinzufuegenButton;
+    public JButton getMassengutArtikelHinzufuegenButton() {
+        return MassengutartikelHinzufuegenButton;
     }
 
-    public String getArtikelName() {
+    public String getMassengutartikelName() {
         return artikelName.getText();
     }
 
-    public String getArtikelBeschreibung() {
+    public String getMassengutartikelBeschreibung() {
         return artikelBeschreibung.getText();
     }
 
-    public double getArtikelPreis() {
+    public double getMassengutartikelPreis() {
         String puffer = artikelPreis.getText();
         double puffer2 = Double.parseDouble(puffer);
         return puffer2;
     }
 
-    public int getArtikelPackungsgroesse() {
+    public int getMassengutartikelPackungsgroesse() {
         String puffer = artikelPackungsgroesse.getText();
         int puffer2 = Integer.parseInt(puffer);
         return puffer2;
     }
 
     public void addActionListener(ActionListener a) {
-        artikelHinzufuegenButton.addActionListener(a);
+        MassengutartikelHinzufuegenButton.addActionListener(a);
     }
 
     public void resetAllJTextfields(){

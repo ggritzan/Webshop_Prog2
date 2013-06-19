@@ -45,7 +45,7 @@ public class RechnungsVerwaltung {
 
     private Log l = new Log();
 
-// Konstruktor
+    // Konstruktor
     public RechnungsVerwaltung() {
 
         // verknüpft die Rechungsnummern mit den Rechnungsobjekten
@@ -244,7 +244,7 @@ public class RechnungsVerwaltung {
      * @throws RechnungKeineVorhandenException
      *
      */
-    public Vector alleRechnungenZurueckgeben()  {
+    public Vector alleRechnungenZurueckgeben() {
 
         if ((!rechnungsBestandNr.values().isEmpty())) {
             Vector<Rechnung> ergebnis = new Vector<Rechnung>();
@@ -259,21 +259,55 @@ public class RechnungsVerwaltung {
     }
 
     /**
-     * Methode gibt die HashMap zurueck die alle vorhandenen Rechnungen enthaelt
+     * Methode gibt einen Vector zurueck der alle Rechnungen eines Kunden enthaelt
+     *
      * @return
+     * @throws RechnungKeineVorhandenException
+     *
      */
-    public HashMap<Integer, Rechnung> alleRechnungenHashMapZurueckgeben() {
-        return rechnungsBestandNr;
+    public Vector alleRechnungenEinesKundenZurueckgeben(int kNr) {
+
+        // wenn Rechnungen für den Kunden mit der Kundennummer exestieren
+        if (rechnungsBestandKundenNr.containsKey(kNr)) {
+
+            // Erzeugt eine int Vector der die Nummer aller Rechnungen des Kunden speichert
+            Vector<Integer> kundenRechnungen = rechnungsBestandKundenNr.get(kNr);
+            // Erzeugt einen Vector in dem alle Rechnungsobjekte eine Kundne am Ende zurueck gegeben werden
+            Vector<Rechnung> alleRechnungenEinesKunden = new Vector<Rechnung>();
+
+            // Die For Schleife packt alle Rechnungen eines Kunden in den alleRechnungenEinesKunden Vector
+            for (int i = 0; i < kundenRechnungen.size(); i++)
+            {   int zaehler = kundenRechnungen.get(i);
+                Rechnung rechnung = rechnungsBestandNr.get(zaehler);
+                alleRechnungenEinesKunden.add(rechnung);
+            }
+
+            // gibt alle Rechnungen eines Kunden zurueck
+            return alleRechnungenEinesKunden;
+
+
+        } else {
+            return null;
+        }
     }
 
-    /**
-     * Methode gibt ein Rechnungobject zurück
-     *
-     * @param kNr
-     * @return
-     * @throws RechnungExestiertNichtException
-     *
-     */
+        /**
+         * Methode gibt die HashMap zurueck die alle vorhandenen Rechnungen enthaelt
+         * @return
+         */
+        public HashMap<Integer, Rechnung> alleRechnungenHashMapZurueckgeben() {
+            return rechnungsBestandNr;
+        }
+
+        /**
+         * Methode gibt ein Rechnungobject zurück
+         *
+         * @param kNr
+         * @return
+         * @throws RechnungExestiertNichtException
+         *
+         */
+
     public Rechnung letzteKundenrechnungAusgeben(int kNr) throws RechnungExestiertNichtException {
 
         if (rechnungsBestandKundenNr.containsKey(kNr)) {
@@ -328,27 +362,26 @@ public class RechnungsVerwaltung {
             rechnungsBestandNr.put(rNr, r);
 
 
-
         } else if (!rechnungsBestandNr.containsKey(rNr)) {
-          throw new RechnungExestiertNichtException(rNr);
+            throw new RechnungExestiertNichtException(rNr);
         }
 
     }
 
     //TODO @Noshaba Bitte kommentieren
-    public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+    public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_RechnungsLog.txt", daysInPast, rNr);
     }
 
-    public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
+    public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException {
         return l.printLog("Eshop_RechnungsLog.txt", daysInPast);
     }
 
-    public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+    public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_RechnungsLog.txt", rNr);
     }
 
-    public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
+    public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException {
         return l.printLog("Eshop_RechnungsLog.txt");
     }
 

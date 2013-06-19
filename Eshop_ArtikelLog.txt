@@ -529,3 +529,18 @@ Der Artikel 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde vom Mit
 Sa 2013.06.15 um 14:07:42 MESZ:
 Der Artikel 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
+Di 2013.06.18 um 15:39:56 MESZ:
+Der Masengutartikel 'Plastiklöffel' mit der Artikelnummer 1002 und der Packungsgröße 500 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Di 2013.06.18 um 15:59:54 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Di 2013.06.18 um 15:59:58 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Di 2013.06.18 um 16:00:03 MESZ:
+Der Bestand des Artikels 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 500.
+
+Di 2013.06.18 um 16:10:50 MESZ:
+Der Artikel 'Plastiklöffel' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

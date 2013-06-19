@@ -1,4 +1,4 @@
-package eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung;
+package eshop.local.ui.gui.comp.kundenMenue.rechnung;
 
 import eshop.local.ui.gui.comp.tableModels.RechnungsArtikelTableModel;
 import eshop.local.valueobjects.Artikel;
@@ -12,11 +12,11 @@ import java.util.Vector;
 /**
  * Created with IntelliJ IDEA.
  * User: Giacomo
- * Date: 15.06.13
- * Time: 22:13
+ * Date: 16.06.13
+ * Time: 20:50
  * To change this template use File | Settings | File Templates.
  */
-public class MitarbeiterRechnungsArtikelListePanel extends JPanel {
+public class KundenRechnungsArtikelListePanel extends JPanel {
 
     // Objekte fuer die korrekte Darstellung der Tabellenansicht
     private JTable table;
@@ -28,7 +28,7 @@ public class MitarbeiterRechnungsArtikelListePanel extends JPanel {
      * Konstruktor
      * @param alleRechnungsArtikel
      */
-    public MitarbeiterRechnungsArtikelListePanel(Vector<Artikel> alleRechnungsArtikel) {
+    public KundenRechnungsArtikelListePanel(Vector<Artikel> alleRechnungsArtikel) {
 
         // überschreibt den lokalen alleRechnungsArtikel Vektor mit den dem Konstruktor übergebenden Artikeln
         this.alleRechnungsArtikel = alleRechnungsArtikel;

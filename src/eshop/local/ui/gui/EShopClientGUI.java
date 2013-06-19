@@ -8,6 +8,7 @@ import eshop.local.ui.gui.comp.*;
 import eshop.local.ui.gui.comp.kundenMenue.KundenPanel;
 import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelListePanel;
 import eshop.local.ui.gui.comp.kundenMenue.artikel.KundenArtikelPopup;
+import eshop.local.ui.gui.comp.kundenMenue.rechnung.KundenRechnungsListePanel;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbBestellteMengeAendern;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbListePanel;
 import eshop.local.ui.gui.comp.kundenMenue.warenkorb.KundenWarenkorbPopup;
@@ -15,6 +16,7 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.*;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelBestandAendernDialog;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.artikel.MitarbeiterArtikelPopup;
+import eshop.local.ui.gui.comp.mitarbeiterMenue.bestandsDiagram.MitarbeiterBestandsDiagramPanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenListePanel;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.kunden.MitarbeiterKundenPopup;
 import eshop.local.ui.gui.comp.mitarbeiterMenue.mitarbeiter.MitarbeiterMitarbeiterListePanel;
@@ -31,7 +33,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * GUI des E-Shops
@@ -58,6 +62,7 @@ public class EShopClientGUI extends JFrame {
     private MitarbeiterRechnungsListePanel addMitarbeiterRechnungsListePanel;
     private MitarbeiterRechnungsPopup addMitarbeiterRechnungsPopup;
     private MitarbeiterArtikelBestandAendernDialog addMitarbeiterArtikelBestandAendernDialog;
+    private MitarbeiterBestandsDiagramPanel addMitarbeiterBestandsDiagramPanel;
     // KundenPanel
     private KundenPanel addKundenPanel;
     private KundenArtikelListePanel addKundenArtikelListePanel;
@@ -65,6 +70,7 @@ public class EShopClientGUI extends JFrame {
     private KundenWarenkorbListePanel addKundenWarenkorbListePanel;
     private KundenWarenkorbPopup addKundenWarenkorbPopup;
     private KundenWarenkorbBestellteMengeAendern addKundenWarenkorbBestellteMengeAendern;
+    private KundenRechnungsListePanel addKundenRechnungsListePanel;
     // <== Ende der Panels und Popups
 
 
@@ -186,6 +192,9 @@ public class EShopClientGUI extends JFrame {
         // Erzeugt ein MitarbeiterArtieklBestandAndernDialog
         addMitarbeiterArtikelBestandAendernDialog = new MitarbeiterArtikelBestandAendernDialog();
 
+        // Erzeugt ein MitarbeiterBestandsDiagramPanel
+        addMitarbeiterBestandsDiagramPanel = new MitarbeiterBestandsDiagramPanel();
+
 // KundenPanel
         // Erzeugt das MitarbeiterPanel
         addKundenPanel = new KundenPanel();
@@ -201,6 +210,8 @@ public class EShopClientGUI extends JFrame {
 
         // Erzeugt ein KundenArtikelPopup
         addKundenArtikelPopup = new KundenArtikelPopup();
+
+
 
     }
 
@@ -283,6 +294,16 @@ public class EShopClientGUI extends JFrame {
 
 
             case 'd':
+                //leert das SwitchPanel
+                //switchPanel.removeAll();
+                // fuegt das MitarbeiterPanel hinzu
+                //switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                // aktualisiert das BestandsDiagram
+                //TODO wichtig momentan nur für einen Artikel
+                //addMitarbeiterBestandsDiagramPanel.drawBestandsDiagram(eShopVerwaltung.printArtikelLog(5,"1001"));
+                // fuegt das MitarbeiterRechnungsListePanel hinzu
+                //switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
+                switchPanelRepainter();
                 break;
 
         }
@@ -356,16 +377,38 @@ public class EShopClientGUI extends JFrame {
 
 
             case 'r':
+
+            if (addKundenRechnungsListePanel == null) {
+
+                // Erzeugt KundenRechnungsListePanel
+
+                    //leert das SwitchPanel
+                    switchPanel.removeAll();
+                    // fuegt das KundenPanel hinzu
+                    switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                    // Erzeugt ein KundenRechnungsListePanel
+                    addKundenRechnungsListePanel = new KundenRechnungsListePanel(eShopVerwaltung.giballeRechnungenEinesKundenZurueckgeben(aktuellerKunde));
+                    initKundenRechnungenListener();
+                    switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
+                    switchPanelRepainter();
+
+
+
+
+            } else {
+
                 //leert das SwitchPanel
                 switchPanel.removeAll();
-                // fuegt das MitarbeiterPanel hinzu
+                // fuegt das KundenPanel hinzu
                 switchPanel.add(addKundenPanel, BorderLayout.WEST);
-                // aktualisiert die RechnungsListe
-                addMitarbeiterRechnungsListePanel.getTmodel().fireTableDataChanged();
-                // fuegt das MitarbeiterRechnungsListePanel hinzu
-                switchPanel.add(addMitarbeiterRechnungsListePanel, BorderLayout.CENTER);
+                // aktualisiert die KundenWarenkorbListePanel
+                addKundenRechnungsListePanel.getTmodel().fireTableDataChanged();
+                // fuegt das KundenWarenkorbListePanel hinzu
+                switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
                 switchPanelRepainter();
-                break;
+
+            }
+            break;
 
 
         }
@@ -635,6 +678,21 @@ public class EShopClientGUI extends JFrame {
                 } else if (source == addMitarbeiterPanel.getRechnungenButton()) {
                     mitarbeiterPanelReloader('r');
 
+                } else if (source == addMitarbeiterPanel.getBestandsDiagramButton()) {
+                    //TODO @Giacomo
+                   /* switchPanel.removeAll();
+
+                    try {
+                        System.out.println(eShopVerwaltung.gibArtikelBestandGraph(10,"1003"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    } catch (ParseException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+                    switchPanel.add(addMitarbeiterBestandsDiagramPanel);
+                    switchPanelRepainter();
+                    */
+
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
                     aktuellerMitarbeiter = 0;
                     switchPanel.removeAll();
@@ -647,7 +705,7 @@ public class EShopClientGUI extends JFrame {
         });
 
         /**
-         * ActionListener für MitarbeiterArtikelListePanel
+         * ActionListener für MitarbeiterArtikelListePanel - ArtikelHinzufuegen
          */
         addMitarbeiterArtikelListePanel.addActionListener(new ActionListener() {
             @Override
@@ -683,6 +741,48 @@ public class EShopClientGUI extends JFrame {
 
             }
         });
+
+
+        /**
+         * ActionListener für MitarbeiterArtikelListePanel - MassengutArtikelHinzufuegen
+         */
+        addMitarbeiterArtikelListePanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                // MassengutArtikel hinzufügen
+                Object source = ae.getSource();
+                if (source == addMitarbeiterArtikelListePanel.getMassengutartikelHinzufuegenButton()) {
+                    try {
+
+                        String aName = addMitarbeiterArtikelListePanel.getMassengutArtikelName();
+                        String aBeschreibung = addMitarbeiterArtikelListePanel.getMassengutArtikelBeschreibung();
+                        double aPreis = addMitarbeiterArtikelListePanel.getMassengutartikelPreis();
+                        int aPackungsgroesse = addMitarbeiterArtikelListePanel.getMassengutartikelPackungsgroesse();
+
+                        eShopVerwaltung.fuegeMassengutArtikelEin(aName,aBeschreibung,aPreis,aPackungsgroesse,eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+
+                        mitarbeiterPanelReloader('a');
+
+
+                    } catch (NumberFormatException e) {
+
+                    } catch (ArtikelExestierBereitsException aeb) {
+                        System.err.println(aeb.getMessage());
+
+                    } catch (MitarbeiterExistiertNichtException me) {
+                        System.err.println(me.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+            }
+        });
+
+
 
         /**
          * MouseListener für MitarbeiterArtikelListePanel erzeugt ein Popup bei Rechtsklick
@@ -947,7 +1047,6 @@ public class EShopClientGUI extends JFrame {
 
                     // erzeugt die Artikelliste zu der jeweiligen Rechnung
                     try {
-                        System.out.println("TestClick");
                         addMitarbeiterRechnungsListePanel.updateTableData(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung).getBestellteArtikel());
                         mitarbeiterPanelReloader('r');
                     } catch (RechnungExestiertNichtException rene) {
@@ -1055,7 +1154,7 @@ public class EShopClientGUI extends JFrame {
                     kundenPanelReloader('w');
 
                 } else if (source == addKundenPanel.getRechnungenButton()) {
-                    kundenPanelReloader('k');
+                    kundenPanelReloader('r');
 
                 } else if (source == addKundenPanel.getLogoutButton()) {
                     aktuellerKunde = 0;
@@ -1336,6 +1435,47 @@ public class EShopClientGUI extends JFrame {
 
 
     }
+
+    /**
+     * Intialisiert die Listener für den Warenkorb eines Kunden
+     */
+    private void initKundenRechnungenListener() {
+
+        /**
+         * MouseListener für KundenRechnungsListePanel erzeugt ein Popup bei Rechtsklick
+         */
+        addKundenRechnungsListePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent emc) {
+
+
+                JTable source = (JTable) emc.getSource();
+                aktuellePositionX = emc.getXOnScreen();
+                aktuellePositionY = emc.getYOnScreen();
+                int row = source.rowAtPoint(emc.getPoint());
+                int column = source.columnAtPoint(emc.getPoint());
+
+                // Artikelnummer des ausgewählten Artikels
+                ausgewaehlteRechnung = (Integer) source.getValueAt(row, 0);
+
+                // Updatet die KundenArtikelDetails
+                try {
+                    addKundenRechnungsListePanel.updateTableData(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung).getBestellteArtikel());
+                    kundenPanelReloader('r');
+                } catch (RechnungExestiertNichtException rene) {
+                    System.err.println(rene.getMessage());
+                }
+
+
+            }
+
+
+        });
+
+
+    }
+
+
 
 
     /**
