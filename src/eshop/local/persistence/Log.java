@@ -33,7 +33,7 @@ public class Log {
         schreibeStrom.close();
     }
 
-    public Vector<ArtikelBestandsGraph> printArtikelGraph(int daysInPast, String kennNr) throws FileNotFoundException, ParseException{
+    public Vector<ArtikelBestandsGraph> getArtikelGraph(String fileName, int daysInPast, String kennNr) throws FileNotFoundException, ParseException{
         SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'um' HH:mm:ss zzz':'");
         Calendar cal = new GregorianCalendar();
         Date today = new Date();

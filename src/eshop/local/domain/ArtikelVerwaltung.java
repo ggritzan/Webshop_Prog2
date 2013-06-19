@@ -330,7 +330,7 @@ public class ArtikelVerwaltung {
      * @param menge Integer
      */
     public void setBestellteMenge(int menge, Artikel artikel) throws ArtikelBestellteMengeNegativException, ArtikelBestandZuNiedrigException, BestellteMengeEntsprichtNichtderPackungsgroesseException {
-        if ((menge >= 0) & (artikel.getBestand() >= menge)) {
+        if ((menge >= 0) && (artikel.getBestand() >= menge)) {
             if (artikel instanceof  MassengutArtikel ){
                if ((menge % ((MassengutArtikel) artikel).getPackungsgroesse() == 0)) {
                     artikel.setBestellteMenge(menge);
@@ -383,6 +383,10 @@ public class ArtikelVerwaltung {
     // TODO @Noshaba Kommentieren Bitte !!!
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
+    }
+
+    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
+        return l.getArtikelGraph("Eshop_BestandsGraph.txt", daysInPast, aNr);
     }
 
     public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException {

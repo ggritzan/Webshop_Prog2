@@ -531,6 +531,10 @@ public class EShopVerwaltung {
         return meineArtikel.printArtikelLog(daysInPast, aNr);
     }
 
+    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
+        return meineArtikel.getArtikelGraph(daysInPast, aNr);
+    }
+
     //@ TODO Javadoc-Kommentar
     public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineArtikel.printArtikelLog(daysInPast);
