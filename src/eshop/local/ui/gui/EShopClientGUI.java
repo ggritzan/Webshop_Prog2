@@ -212,7 +212,6 @@ public class EShopClientGUI extends JFrame {
         addKundenArtikelPopup = new KundenArtikelPopup();
 
 
-
     }
 
     /**
@@ -378,9 +377,9 @@ public class EShopClientGUI extends JFrame {
 
             case 'r':
 
-            if (addKundenRechnungsListePanel == null) {
+                if (addKundenRechnungsListePanel == null) {
 
-                // Erzeugt KundenRechnungsListePanel
+                    // Erzeugt KundenRechnungsListePanel
 
                     //leert das SwitchPanel
                     switchPanel.removeAll();
@@ -393,22 +392,20 @@ public class EShopClientGUI extends JFrame {
                     switchPanelRepainter();
 
 
+                } else {
 
+                    //leert das SwitchPanel
+                    switchPanel.removeAll();
+                    // fuegt das KundenPanel hinzu
+                    switchPanel.add(addKundenPanel, BorderLayout.WEST);
+                    // aktualisiert die KundenWarenkorbListePanel
+                    addKundenRechnungsListePanel.getTmodel().fireTableDataChanged();
+                    // fuegt das KundenWarenkorbListePanel hinzu
+                    switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
+                    switchPanelRepainter();
 
-            } else {
-
-                //leert das SwitchPanel
-                switchPanel.removeAll();
-                // fuegt das KundenPanel hinzu
-                switchPanel.add(addKundenPanel, BorderLayout.WEST);
-                // aktualisiert die KundenWarenkorbListePanel
-                addKundenRechnungsListePanel.getTmodel().fireTableDataChanged();
-                // fuegt das KundenWarenkorbListePanel hinzu
-                switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
-                switchPanelRepainter();
-
-            }
-            break;
+                }
+                break;
 
 
         }
@@ -680,18 +677,29 @@ public class EShopClientGUI extends JFrame {
 
                 } else if (source == addMitarbeiterPanel.getBestandsDiagramButton()) {
                     //TODO @Giacomo
-                   /* switchPanel.removeAll();
 
-                    try {
-                        System.out.println(eShopVerwaltung.gibArtikelBestandGraph(10,"1003"));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    } catch (ParseException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    }
-                    switchPanel.add(addMitarbeiterBestandsDiagramPanel);
+                    switchPanel.removeAll();
+                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
+                    switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
                     switchPanelRepainter();
-                    */
+                    /**
+                     *   Eventlistener
+                     */
+                    addMitarbeiterBestandsDiagramPanel.addMouseListener(new MouseAdapter() {
+
+                        @Override
+                        public void mouseClicked(MouseEvent emc) {
+                            Object source = emc.getSource();
+
+                            if (source == addMitarbeiterBestandsDiagramPanel.getRepaintButton()) {
+                                System.out.println("Repaint Click");
+                                addMitarbeiterBestandsDiagramPanel.neuLaden();
+
+                            }
+                        }
+                    });
+
+
 
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
                     aktuellerMitarbeiter = 0;
@@ -760,7 +768,7 @@ public class EShopClientGUI extends JFrame {
                         double aPreis = addMitarbeiterArtikelListePanel.getMassengutartikelPreis();
                         int aPackungsgroesse = addMitarbeiterArtikelListePanel.getMassengutartikelPackungsgroesse();
 
-                        eShopVerwaltung.fuegeMassengutArtikelEin(aName,aBeschreibung,aPreis,aPackungsgroesse,eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
+                        eShopVerwaltung.fuegeMassengutArtikelEin(aName, aBeschreibung, aPreis, aPackungsgroesse, eShopVerwaltung.getMitarbeiter(aktuellerMitarbeiter));
 
                         mitarbeiterPanelReloader('a');
 
@@ -781,7 +789,6 @@ public class EShopClientGUI extends JFrame {
 
             }
         });
-
 
 
         /**
@@ -1037,22 +1044,21 @@ public class EShopClientGUI extends JFrame {
             public void mouseClicked(MouseEvent emc) {
 
 
-                    JTable source = (JTable) emc.getSource();
-                    aktuellePositionX = emc.getXOnScreen();
-                    aktuellePositionY = emc.getYOnScreen();
-                    int row = source.rowAtPoint(emc.getPoint());
-                    int column = source.columnAtPoint(emc.getPoint());
-                    // Rechnungsnummer des ausgewählten Rechnung
-                    ausgewaehlteRechnung = (Integer) source.getValueAt(row, 0);
+                JTable source = (JTable) emc.getSource();
+                aktuellePositionX = emc.getXOnScreen();
+                aktuellePositionY = emc.getYOnScreen();
+                int row = source.rowAtPoint(emc.getPoint());
+                int column = source.columnAtPoint(emc.getPoint());
+                // Rechnungsnummer des ausgewählten Rechnung
+                ausgewaehlteRechnung = (Integer) source.getValueAt(row, 0);
 
-                    // erzeugt die Artikelliste zu der jeweiligen Rechnung
-                    try {
-                        addMitarbeiterRechnungsListePanel.updateTableData(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung).getBestellteArtikel());
-                        mitarbeiterPanelReloader('r');
-                    } catch (RechnungExestiertNichtException rene) {
-                        System.err.println(rene.getMessage());
-                    }
-
+                // erzeugt die Artikelliste zu der jeweiligen Rechnung
+                try {
+                    addMitarbeiterRechnungsListePanel.updateTableData(eShopVerwaltung.sucheNachRechnungsnummer(ausgewaehlteRechnung).getBestellteArtikel());
+                    mitarbeiterPanelReloader('r');
+                } catch (RechnungExestiertNichtException rene) {
+                    System.err.println(rene.getMessage());
+                }
 
 
             }
@@ -1219,6 +1225,9 @@ public class EShopClientGUI extends JFrame {
             }
 
         });
+
+
+
 
 
         /**
@@ -1474,8 +1483,6 @@ public class EShopClientGUI extends JFrame {
 
 
     }
-
-
 
 
     /**

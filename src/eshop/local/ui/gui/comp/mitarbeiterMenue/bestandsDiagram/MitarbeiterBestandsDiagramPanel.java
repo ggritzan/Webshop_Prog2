@@ -5,6 +5,7 @@ import eshop.local.valueobjects.ArtikelBestandsGraph;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.util.Vector;
 
 /**
@@ -18,61 +19,70 @@ import java.util.Vector;
 
 public class MitarbeiterBestandsDiagramPanel extends JPanel {
 
-    // Erstellung eines Integer Vektor für die Bestandswerte des Artikels
-    Vector<Integer> yBestandswerte = new Vector<Integer>();
-    Vector<Integer> xAbstandswerte = new Vector<Integer>();
-
+    private MitarbeiterBestandsDiagram addMitarbeiterBestandsDiagram;
+    private JButton repaintButton;
 
     public MitarbeiterBestandsDiagramPanel() {
+        super();
+
+        addMitarbeiterBestandsDiagram = new MitarbeiterBestandsDiagram();
+        repaintButton = new JButton("Repaint");
 
         // Rahmen außen
         Border ba = BorderFactory.createTitledBorder("Bestandsdiagramm");
         this.setBorder(ba);
 
         // Layout Ebene 0
-        BorderLayout layoutEbene0 = new BorderLayout();
-        this.setLayout(layoutEbene0);
+        GridLayout layoutEbene0 = new GridLayout(2, 1);
+        this.setLayout(layoutEbene0);	// 2 Zeilen, 1 Spalte
 
-     }
+        // Hinzufügen der Elemente für die Ebene 0
 
-
-
-    public void drawBestandsDiagram(Vector<ArtikelBestandsGraph> artikelLog, int abstandswert){
-        // erzeugt den Vector fuer die Bestandwerte
-        yBestandswerte = new Vector<Integer>();
-
-        // erzeugt einen Vector fuer die Abstandswerte
-        xAbstandswerte = new Vector<Integer>();
-        // Füllt den Vector mit den Abstaenden
-        int abstandsPuffer = abstandswert;
-        for (int i = 0; i < artikelLog.size(); i++) {
-            xAbstandswerte.add(abstandsPuffer);
-            abstandsPuffer = abstandsPuffer + abstandswert;
-        }
-
-        // Für alle übergebenen ArtikelBestandsGraph Objekte wird der Int wert des Bestands ausgelesen
-        for (int i = 0; i < artikelLog.size(); i++) {
-            int bestand = ((ArtikelBestandsGraph) artikelLog.elementAt(i)).getBestand();
-            yBestandswerte.add(bestand);
-        };
-
-
-
+        this.add(addMitarbeiterBestandsDiagram);
+        this.add(repaintButton);
     }
 
-    public void paintComponent(Graphics g){
-        Dimension d = this.getSize();
-        int width = (int) d.getWidth();
-        int height = (int) d.getHeight();
-        g.drawLine(0,0,90,90);
-
+    public JButton getRepaintButton() {
+        return repaintButton;
     }
 
+    public void neuLaden() {
+        Vector<Integer> test = new Vector<Integer>();
+        test.add(50);
+        test.add(50);
+        test.add(100);
+        test.add(50);
+        test.add(50);
+        test.add(100);
+        test.add(50);
+        test.add(50);
+        test.add(150);
+        test.add(22);
+        test.add(50);
+        test.add(50);
+        test.add(100);
+        test.add(50);
+        test.add(50);
+        test.add(100);
+        test.add(50);
+        test.add(50);
+        test.add(150);
+        test.add(22);
+        test.add(50);
+        test.add(50);
+        test.add(100);
+        test.add(50);
+        test.add(50);
+        test.add(100);
+        test.add(50);
+        test.add(50);
+        test.add(150);
+        test.add(22);
+        addMitarbeiterBestandsDiagram.artikelBestandGraphenzeichnen(test);
+    }
 
-
-
-
+    public void addMouseListener(MouseAdapter mA) {
+        repaintButton.addMouseListener(mA);
+    }
 }
-
-
 
