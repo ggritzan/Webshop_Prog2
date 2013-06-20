@@ -616,3 +616,6 @@ Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnumm
 Do 2013.06.20 um 13:49:13 MESZ:
 Der Bestand des Artikels 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 43.
 
+Do 2013.06.20 um 18:05:41 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 248.
+

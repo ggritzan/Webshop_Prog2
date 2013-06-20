@@ -110,7 +110,15 @@ public class RechnungsVerwaltung {
     }
 
     /**
-     * Methode dient zum sicheren Einkauf eines Warenkorbes
+     * Methode ermöglich das sichere Bestellen eines Warenkorbes
+     * @param eShopVerwaltung
+     * @param aktuellerKunde
+     * @throws IOException
+     * @throws KundenNummerExistiertNichtException
+     * @throws ArtikelBestandNegativException
+     * @throws ArtikelBestandZuNiedrigException
+     * @throws ArtikelExestiertNichtException
+     * @throws RechnungExestiertNichtException
      */
     public synchronized void rechnungsBestandCheckKaufen(EShopVerwaltung eShopVerwaltung, int aktuellerKunde) throws IOException, KundenNummerExistiertNichtException, ArtikelBestandNegativException, ArtikelBestandZuNiedrigException, ArtikelExestiertNichtException, RechnungExestiertNichtException {
 
@@ -140,6 +148,7 @@ public class RechnungsVerwaltung {
 
             }
 
+            // wenn der bestandCheck nicht auf false gesetzt wurde werden die Bestände angepasst ,die Rechnung erstellt und der Warenkorb geleert
             if (bestandsCheck) {
 
                 for (int i = 0; i < artikelNr.size(); i++) {
