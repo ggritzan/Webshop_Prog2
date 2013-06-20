@@ -278,7 +278,7 @@ public class RechnungsVerwaltung {
             vI.removeElement(r.getrNr());
             rechnungsBestandKundenNr.put(r.getkNr(), vI);
             Date dNow = new Date();
-            String text = ft.format(dNow) + ": Die Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde gelöscht.";
+            String text = ft.format(dNow) + "\nDie Rechnung mit der Rechnungsnummer " + rechnung.getrNr() + " wurde gelöscht.";
             l.writeLog(dateiName, text);
 
         } else if ((!(rechnungsBestandNr.containsKey(r.getrNr()))) & (!(vI.contains(r.getrNr())))) {
