@@ -149,7 +149,7 @@ public class ArtikelVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Artikel '" + name + "' mit der Artikelnummer " + artikel.getNummer() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
             l.writeLog(dateiName, text);
-            String graphData = ft.format(dNow) + "%'" + name + "'%" + artikel.getNummer() + "%" + 0 + "%";
+            String graphData = ft.format(dNow) + "%" + name + "%" + artikel.getNummer() + "%" + 0 + "%";
             l.writeGraphData(dateiFuerGraph, graphData);
 
         }
@@ -181,7 +181,7 @@ public class ArtikelVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + massengutArtikel.getNummer() + " und der Packungsgröße " + massengutArtikel.getPackungsgroesse() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
             l.writeLog(dateiName, text);
-            String graphData = ft.format(dNow) + "%'" + name + "'%" + massengutArtikel.getNummer() + "%" + 0 + "%";
+            String graphData = ft.format(dNow) + "%" + name + "%" + massengutArtikel.getNummer() + "%" + 0 + "%";
             l.writeGraphData(dateiFuerGraph, graphData);
 
         }
@@ -221,7 +221,7 @@ public class ArtikelVerwaltung {
             Date dNow = new Date();
             String text = ft.format(dNow) + "\nDer Artikel '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " gelöscht.";
             l.writeLog(dateiName, text);
-            String graphData = ft.format(dNow) + "%'" + a.getName() + "'%" + artNr + "%" + 0 + "%";
+            String graphData = ft.format(dNow) + "%" + a.getName() + "%" + artNr + "%" + 0 + "%";
             l.writeGraphData(dateiFuerGraph, graphData);
 
 
@@ -300,13 +300,13 @@ public class ArtikelVerwaltung {
             if (person instanceof Kunde) {
                 String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Kunden " + person.getBenutzername() + " mit der Kundennummer " + ((Kunde) person).getNummer() + " geändert und hat jetzt die Menge " + menge + ".";
                 l.writeLog(dateiName, text);
-                String graphData = ft.format(dNow) + "%'" + a.getName() + "'%" + artNr + "%" + menge + "%";
+                String graphData = ft.format(dNow) + "%" + a.getName() + "%" + artNr + "%" + menge + "%";
                 l.writeGraphData(dateiFuerGraph, graphData);
 
             } else if (person instanceof Mitarbeiter) {
                 String text = ft.format(dNow) + "\nDer Bestand des Artikels '" + a.getName() + "' mit der Artikelnummer " + artNr + " wurde durch den Mitarbeiter " + person.getBenutzername() + " mit der Mitarbeiternummer " + ((Mitarbeiter) person).getmNr() + " geändert und hat jetzt die Menge " + menge + ".";
                 l.writeLog(dateiName, text);
-                String graphData = ft.format(dNow) + "%'" + a.getName() + "'%" + artNr + "%" + menge + "%";
+                String graphData = ft.format(dNow) + "%" + a.getName() + "%" + artNr + "%" + menge + "%";
                 l.writeGraphData(dateiFuerGraph, graphData);
 
             }
@@ -387,6 +387,10 @@ public class ArtikelVerwaltung {
 
     public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.getArtikelGraph("Eshop_BestandsGraph.txt", daysInPast, aNr);
+    }
+
+    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr, String name) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
+        return l.getArtikelGraph("Eshop_BestandsGraph.txt", daysInPast, aNr, name);
     }
 
     public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException {
