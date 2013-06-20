@@ -78,7 +78,6 @@ public class RechnungsVerwaltung {
             } while (rechnung != null);
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
         } catch (IOException e) {
-            System.out.println("Fehler beim einlesen der Rechnungsdaten !");
             e.printStackTrace();
         } finally {
             pm.close();

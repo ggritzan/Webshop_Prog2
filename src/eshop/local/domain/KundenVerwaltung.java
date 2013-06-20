@@ -85,7 +85,6 @@ public class KundenVerwaltung {
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
         } catch (IOException e) {
-            System.out.println("Fehler beim einlesen der Kundendaten !");
             e.printStackTrace();
         }
     }

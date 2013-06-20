@@ -89,7 +89,7 @@ public class ArtikelVerwaltung {
             // PersistenzManager für Lesevorgänge wird wieder geschlossen
             pm.close();
         } catch (IOException e) {
-            System.out.println("Fehler beim einlesen der Artikeldaten !");
+            e.printStackTrace();
         } finally {
             pm.close();
         }

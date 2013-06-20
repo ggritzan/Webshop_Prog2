@@ -80,9 +80,7 @@ public class MitarbeiterVerwaltung {
             }
             while (einMitarbeiter != null);
         } catch (IOException e) {
-            System.out.println("Der Datenbestand ist leer");
-        } catch (MitarbeiterExistiertBereitsException meb) {
-            System.err.println(meb.getMessage());
+            e.printStackTrace();
         }
         finally {
             pm.close();
@@ -146,7 +144,7 @@ public class MitarbeiterVerwaltung {
      *
      * @throws MitarbeiterExistiertBereitsException
      */
-    public void mitarbeiterHinzufuegen(Mitarbeiter m) throws MitarbeiterExistiertBereitsException{
+    public void mitarbeiterHinzufuegen(Mitarbeiter m){
         mitarbeiterBestandNr.put(m.getmNr(), m);
         mitarbeiterBestandName.put(m.getBenutzername(), m.getmNr());
         if (m.getZaehler() <= m.getmNr()) {
