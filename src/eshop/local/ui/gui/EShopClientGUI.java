@@ -680,29 +680,7 @@ public class EShopClientGUI extends JFrame {
                     mitarbeiterPanelReloader('r');
 
                 } else if (source == addMitarbeiterPanel.getBestandsDiagramButton()) {
-
-
-                    switchPanel.removeAll();
-                    switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
-                    switchPanel.add(addMitarbeiterBestandsDiagramPanel, BorderLayout.CENTER);
-
-                    try {
-
-                        addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(5, "1001"));
-                    } catch (FileNotFoundException fnfe) {
-                          System.err.println(fnfe.getMessage());
-                    } catch (ParseException pe) {
-                        System.err.println(pe.getMessage());
-                    } catch (KennNummerExistiertNichtException knene) {
-                        System.err.println(knene.getMessage());
-                    }
-
-
-
-                    switchPanelRepainter();
-
-
-
+                   mitarbeiterPanelReloader('d');
 
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
                     aktuellerMitarbeiter = 0;
@@ -1192,7 +1170,7 @@ public class EShopClientGUI extends JFrame {
 
                     try {
 
-                            addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(anzuzeigendeTage,String.valueOf(ausgewaehlterArtikel)));
+                            addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(anzuzeigendeTage,String.valueOf(ausgewaehlterArtikel),eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getName()));
 
                         } catch (FileNotFoundException fnfe) {
                             System.err.println(fnfe.getMessage());
@@ -1200,8 +1178,10 @@ public class EShopClientGUI extends JFrame {
                             System.err.println(pe.getMessage());
                         } catch (KennNummerExistiertNichtException knene) {
                             System.err.println(knene.getMessage());
-                        }
-                        addMitarbeiterBestandsDiagramWieVieleTageDialog.resetJTextfield();
+                        } catch (ArtikelExestiertNichtException aene) {
+                            System.err.println(aene.getMessage());
+                    }
+                    addMitarbeiterBestandsDiagramWieVieleTageDialog.resetJTextfield();
                         addMitarbeiterBestandsDiagramWieVieleTageDialog.setVisible(false);
                         ausgewaehlterArtikel = -1;
 
