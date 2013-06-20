@@ -395,8 +395,8 @@ public class EShopClientGUI extends JFrame {
                     switchPanelRepainter();
 
 
-                } else {
-
+               } else {
+                    System.out.println("funtzt");
                     //leert das SwitchPanel
                     switchPanel.removeAll();
                     // fuegt das KundenPanel hinzu
@@ -409,6 +409,7 @@ public class EShopClientGUI extends JFrame {
 
                 }
                 break;
+
 
 
         }
@@ -679,7 +680,7 @@ public class EShopClientGUI extends JFrame {
                     mitarbeiterPanelReloader('r');
 
                 } else if (source == addMitarbeiterPanel.getBestandsDiagramButton()) {
-                    //TODO @Giacomo
+
 
                     switchPanel.removeAll();
                     switchPanel.add(addMitarbeiterPanel, BorderLayout.WEST);
@@ -1376,6 +1377,43 @@ public class EShopClientGUI extends JFrame {
                             ausgewaehlterArtikel = -1;
                     }
 
+                    // bestellt den entsprechenden Warenkorb und erstellt dazu eine Rechnung
+                } else if (source == addKundenWarenkorbPopup.getWarenkorbBestellen()) {
+
+
+                    // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Warenkorb wirklich bestellen ?", "Warenkorb bestellen", JOptionPane.YES_NO_OPTION);
+
+                    switch (result) {
+
+
+                        case JOptionPane.YES_OPTION:
+
+                            try {
+                                eShopVerwaltung.rechnungsBestandCheckKaufen(eShopVerwaltung,aktuellerKunde);
+                                kundenPanelReloader('w');
+                                addKundenRechnungsListePanel = null;
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (KundenNummerExistiertNichtException knene) {
+                                 System.err.println(knene.getMessage());
+                            } catch (ArtikelBestandNegativException abne) {
+                                System.err.println(abne.getMessage());
+                            } catch (ArtikelBestandZuNiedrigException abzne) {
+                                System.err.println(abzne.getMessage());
+                            } catch (ArtikelExestiertNichtException aene) {
+                                System.err.println(aene.getMessage());
+                            } catch (RechnungExestiertNichtException rene) {
+                                System.err.println(rene.getMessage());
+                            }
+                            break;
+
+                        case JOptionPane.NO_OPTION:
+                            ausgewaehlterArtikel = -1;
+                            break;
+                    }
+
                 }
 
             }
@@ -1519,7 +1557,7 @@ public class EShopClientGUI extends JFrame {
     }
 
     /**
-     * Intialisiert die Listener für den Warenkorb eines Kunden
+     * Intialisiert die Listener KundenRechnungsListePanel
      */
     private void initKundenRechnungenListener() {
 

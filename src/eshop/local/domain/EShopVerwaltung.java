@@ -278,7 +278,7 @@ public class EShopVerwaltung {
      * @throws ArtikelBestandNegativException
      * @throws ArtikelExestiertNichtException
      */
-    public void setBestand(int artNr, int wert, Person p) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+    public synchronized void setBestand(int artNr, int wert, Person p) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
         meineArtikel.setBestand(artNr, wert, p);
     }
 
@@ -361,6 +361,10 @@ public class EShopVerwaltung {
      */
     public void fuegeMitarbeiterEin(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
         meineMitarbeiter.mitarbeiterHinzufuegen(vorname, nachname, benutzername, passwort, email, telefon, adresse);
+    }
+
+    public synchronized void rechnungsBestandCheckKaufen(EShopVerwaltung eShopVerwaltung, int aktuellerKunde) throws IOException, KundenNummerExistiertNichtException, ArtikelBestandNegativException, ArtikelBestandZuNiedrigException, ArtikelExestiertNichtException, RechnungExestiertNichtException {
+        meineRechnungen.rechnungsBestandCheckKaufen(eShopVerwaltung, aktuellerKunde);
     }
 
     /**

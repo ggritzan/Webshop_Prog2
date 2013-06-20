@@ -1,9 +1,6 @@
 package eshop.local.domain;
 
-import eshop.local.exception.KeineEintraegeVorhandenException;
-import eshop.local.exception.KennNummerExistiertNichtException;
-import eshop.local.exception.RechnungExestiertNichtException;
-import eshop.local.exception.RechnungKeineVorhandenException;
+import eshop.local.exception.*;
 import eshop.local.persistence.FilePersistenceManager;
 import eshop.local.persistence.Log;
 import eshop.local.persistence.PersistenceManager;
@@ -111,6 +108,51 @@ public class RechnungsVerwaltung {
         //Persistenz-Schnittstelle wieder schließen
         pm.close();
     }
+
+    /**
+     * Methode dient zum sicheren Einkauf eines Warenkorbes
+     */
+    public synchronized void rechnungsBestandCheckKaufen(EShopVerwaltung eShopVerwaltung, int aktuellerKunde) throws IOException, KundenNummerExistiertNichtException, ArtikelBestandNegativException, ArtikelBestandZuNiedrigException, ArtikelExestiertNichtException, RechnungExestiertNichtException {
+
+
+        if (eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().size() > 0) {
+
+            //wenn sich Artikel im Warenkorb befinden prüfen ob die gewünschten Artikel gekauft werden können
+            Iterator iter = eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().values().iterator();
+            boolean bestandsCheck = true;
+            Vector<Integer>  artikelNr = new Vector<Integer>();
+            Vector<Integer>  neuerBestand = new Vector<Integer>();
+            while (iter.hasNext()) {
+                Artikel bestandCheckArtikel = (Artikel) iter.next();
+
+
+                if ((eShopVerwaltung.getArtikel(bestandCheckArtikel.getNummer()).getBestand() < bestandCheckArtikel.getBestellteMenge())) {
+
+                    bestandsCheck = false;
+                    throw new ArtikelBestandZuNiedrigException(bestandCheckArtikel);
+                } else {
+                    Artikel a = (Artikel) iter.next();
+                    Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
+                    neuerBestand.add(puffer.getBestand() - a.getBestellteMenge());
+                    artikelNr.add(puffer.getNummer());
+                }
+
+
+            }
+
+            if (bestandsCheck) {
+
+                for (int i = 0; i < artikelNr.size(); i++) {
+                eShopVerwaltung.setBestand(artikelNr.get(i), neuerBestand.get(i), eShopVerwaltung.getKunde(aktuellerKunde));
+                }
+                eShopVerwaltung.fuegeRechnungEin(eShopVerwaltung.getKunde(aktuellerKunde));
+                eShopVerwaltung.getKunde(aktuellerKunde).resetWarenkorb();
+
+
+            }
+        }
+    }
+
 
     /**
      * Methode zum Hinzufuegen von Rechnungen
@@ -276,8 +318,8 @@ public class RechnungsVerwaltung {
             Vector<Rechnung> alleRechnungenEinesKunden = new Vector<Rechnung>();
 
             // Die For Schleife packt alle Rechnungen eines Kunden in den alleRechnungenEinesKunden Vector
-            for (int i = 0; i < kundenRechnungen.size(); i++)
-            {   int zaehler = kundenRechnungen.get(i);
+            for (int i = 0; i < kundenRechnungen.size(); i++) {
+                int zaehler = kundenRechnungen.get(i);
                 Rechnung rechnung = rechnungsBestandNr.get(zaehler);
                 alleRechnungenEinesKunden.add(rechnung);
             }
@@ -291,22 +333,23 @@ public class RechnungsVerwaltung {
         }
     }
 
-        /**
-         * Methode gibt die HashMap zurueck die alle vorhandenen Rechnungen enthaelt
-         * @return
-         */
-        public HashMap<Integer, Rechnung> alleRechnungenHashMapZurueckgeben() {
-            return rechnungsBestandNr;
-        }
+    /**
+     * Methode gibt die HashMap zurueck die alle vorhandenen Rechnungen enthaelt
+     *
+     * @return
+     */
+    public HashMap<Integer, Rechnung> alleRechnungenHashMapZurueckgeben() {
+        return rechnungsBestandNr;
+    }
 
-        /**
-         * Methode gibt ein Rechnungobject zurück
-         *
-         * @param kNr
-         * @return
-         * @throws RechnungExestiertNichtException
-         *
-         */
+    /**
+     * Methode gibt ein Rechnungobject zurück
+     *
+     * @param kNr
+     * @return
+     * @throws RechnungExestiertNichtException
+     *
+     */
 
     public Rechnung letzteKundenrechnungAusgeben(int kNr) throws RechnungExestiertNichtException {
 
