@@ -43,22 +43,18 @@ public class Log {
         Vector<String[]> eintraege = new Vector<String[]>();
         // alle Datumseinträge als Datum geparst
         Vector<Date> convertedDate = new Vector<Date>();
-        // alle geparsten Datumseinträge als Tg des Jahres
+        // alle geparsten Datumseinträge als Tag des Jahres
         Vector<Integer> daysOfYear = new Vector<Integer>();
-        // alle Bestände als Integer geparst
-        Vector<Integer> convertedValues = new Vector<Integer>();
-        // der letzte Zeit/Datums Eintrag am jeweiligen Tag
+        // alle Einträge mit der gewünschten Artikelnummer und dem gewünschten Artikelnamen
+        Vector<String[]> neededEntries = new Vector<String[]>();
+        // alle Tage des Jahres in dem was mit dem gewünschten Artikel gemacht wurde
+        Vector<Integer> neededDaysOfYear = new Vector<Integer>();
+        // der letzte Zeit/Datums Eintrag am jeweiligen Tag von den 'neededDaysOfYear'
         Vector<Date> lastDateEntryOfDay = new Vector<Date>();
-        // die letzte Bestandsänderung am jeweiligen Tag
-        Vector<Integer> lastValueEntryOfDay = new Vector<Integer>();
-        // Artikelnummer mit der letzten Änderung des Tages
-        Vector<String> neededNumbers = new Vector<String>();
-        //Artikelname mit der letzten Änderung des Tages
-        Vector<String> neededNames = new Vector<String>();
         // fertige ArtikelGraphobjekte aus den gewünschten Daten
         Vector<ArtikelBestandsGraph> abgObjects = new Vector<ArtikelBestandsGraph>();
 
-        cal.setTime(today);
+        //cal.setTime(today);
 
         Scanner filescan = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream("Eshop_BestandsGraph.txt")))).useDelimiter("\n");
 
@@ -77,38 +73,14 @@ public class Log {
 
         for (int i = 0; i < eintraege.size(); i++){
             convertedDate.add(formatter.parse(eintraege.elementAt(i)[0].toString()));
-        }
-
-        // alle Datumseinträge als Tag des Jahres
-
-        for (int i = 0; i < convertedDate.size(); i++){
+            // alle Datums-Objekte als Tag des Jahres
             cal.setTime(convertedDate.elementAt(i));
             daysOfYear.add(cal.get(Calendar.DAY_OF_YEAR));
         }
 
-        // alle Bestände als Integer
-
-        for (int i = 0; i < eintraege.size(); i++){
-            convertedValues.add(Integer.parseInt(eintraege.elementAt(i)[3].toString()));
-        }
-
-        // die letzten Einträge des jeweiligen Tages
-
-        for (int i = 0; i < daysOfYear.size(); i++){
-            if(i < daysOfYear.size() - 1 && !daysOfYear.elementAt(i).equals(daysOfYear.elementAt(i+1))){
-                lastDateEntryOfDay.add(convertedDate.elementAt(i));
-                lastValueEntryOfDay.add(convertedValues.elementAt(i));
-                neededNames.add(eintraege.elementAt(i)[1]);
-                neededNumbers.add(eintraege.elementAt(i)[2]);
-            } else if(i == daysOfYear.size() - 1){
-                lastDateEntryOfDay.add(convertedDate.elementAt(i));
-                lastValueEntryOfDay.add(convertedValues.elementAt(i));
-                neededNames.add(eintraege.elementAt(i)[1]);
-                neededNumbers.add(eintraege.elementAt(i)[2]);
-            }
-        }
-
         // wie viele Tage zurück liegen sollen
+
+        cal.setTime(today);
 
         if(daysInPast > 0){
             cal.add(Calendar.DAY_OF_YEAR, -daysInPast);
@@ -116,12 +88,31 @@ public class Log {
             cal.add(Calendar.DAY_OF_YEAR, daysInPast);
         }
 
-        // wenn Einträge nach oder am selben Tag wie das eingegebene zurückiegende Datum liegen, sollen sie in einem
-        // ArtikelBestandsGraphen gespeichert werden
+        /*
+        *  wenn Einträge nach oder am selben Tag wie das eingegebene zurückiegende Datum liegen und den gewünschten
+        *  Artikelnamen und Artikelnumemr haben, sollen diese Einträge und deren Datums und die jeweiligen Tage des
+        *  Jahres in jeweils einen Vektor gespeichert werden
+        */
 
-        for (int i = 0; i < neededNumbers.size(); i++){
-            if(neededNumbers.elementAt(i).equals(kennNr) && neededNames. elementAt(i).equals(name) && lastDateEntryOfDay.elementAt(i).after(cal.getTime()) || neededNumbers.elementAt(i).equals(kennNr) && neededNames. elementAt(i).equals(name) && lastDateEntryOfDay.elementAt(i).equals(cal.getTime())){
-                ArtikelBestandsGraph abg = new ArtikelBestandsGraph(neededNames.elementAt(i), Integer.parseInt(kennNr), lastDateEntryOfDay.elementAt(i), lastValueEntryOfDay.elementAt(i));
+        // alle benötigten Einträge, Datums und Tage des Jares
+
+        for (int i = 0; i < eintraege.size(); i++){
+            if(eintraege.elementAt(i)[2].equals(kennNr) && eintraege.elementAt(i)[1].equals(name) && convertedDate.elementAt(i).after(cal.getTime()) || eintraege.elementAt(i)[2].equals(kennNr) && eintraege.elementAt(i)[1].equals(name) && convertedDate.elementAt(i).equals(cal.getTime())){
+                neededDaysOfYear.add(daysOfYear.elementAt(i));
+                neededEntries.add(eintraege.elementAt(i));
+                lastDateEntryOfDay.add(convertedDate.elementAt(i));
+
+            }
+        }
+
+        /*
+        * der jeweils letzte Eintrag des Tges des jeweiligen Artikels, soll in ein ArtikelBestandsGraph-Objekt
+        * gespeichert werden
+        */
+
+        for (int i = 0; i < neededDaysOfYear.size(); i++){
+            if(i < neededDaysOfYear.size() - 1 && !neededDaysOfYear.elementAt(i).equals(neededDaysOfYear.elementAt(i+1)) || i == neededDaysOfYear.size() - 1){
+                ArtikelBestandsGraph abg = new ArtikelBestandsGraph(neededEntries.elementAt(i)[1], Integer.parseInt(kennNr), lastDateEntryOfDay.elementAt(i), Integer.parseInt(neededEntries.elementAt(i)[3].toString()));
                 abgObjects.add(abg);
             }
         }
