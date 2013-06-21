@@ -26,6 +26,7 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsLis
 import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsPopup;
 import eshop.local.ui.gui.comp.registrierung.*;
 import eshop.local.valueobjects.Adresse;
+import eshop.local.valueobjects.ArtikelBestandsGraph;
 
 // Imports der von Java bereit gestellten Klassen
 import javax.swing.*;
@@ -37,6 +38,7 @@ import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Vector;
 
 /**
  * GUI des E-Shops
@@ -1169,8 +1171,9 @@ public class EShopClientGUI extends JFrame {
                         int anzuzeigendeTage = addMitarbeiterBestandsDiagramWieVieleTageDialog.getanzuzeigendeTage();
 
                     try {
-
+                            //TODO hier gucken
                             addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(anzuzeigendeTage,String.valueOf(ausgewaehlterArtikel),eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getName()));
+
 
                         } catch (FileNotFoundException fnfe) {
                             System.err.println(fnfe.getMessage());
