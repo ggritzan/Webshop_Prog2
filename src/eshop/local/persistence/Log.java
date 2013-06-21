@@ -54,7 +54,6 @@ public class Log {
         // fertige ArtikelGraphobjekte aus den gewünschten Daten
         Vector<ArtikelBestandsGraph> abgObjects = new Vector<ArtikelBestandsGraph>();
 
-        //cal.setTime(today);
 
         Scanner filescan = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream("Eshop_BestandsGraph.txt")))).useDelimiter("\n");
 
