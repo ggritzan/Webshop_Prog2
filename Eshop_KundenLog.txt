@@ -1,64 +1,8 @@
 Di 2013.05.14 um 14:14:28 MESZ:
 Der Kunde 'hmeyer' mit der Kundennummer 1000 wurde hinzugefügt.
 
-Di 2013.05.14 um 14:15:09 MESZ:
-Der Kunde 'ssorglos' mit der Kundennummer 1001 wurde hinzugefügt.
-
 Mi 2013.05.29 um 12:03:19 MESZ:
 Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Mi 2013.05.29 um 12:03:31 MESZ:
-Der Kunde 'wqd' mit der Kundennummer 1002 wurde hinzugefügt.
-
-Mi 2013.05.29 um 12:11:58 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Sa 2013.06.01 um 12:40:22 MESZ:
-Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Sa 2013.06.01 um 12:46:18 MESZ:
-Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Sa 2013.06.01 um 12:46:53 MESZ:
-Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Sa 2013.06.01 um 12:47:26 MESZ:
-Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Sa 2013.06.01 um 13:02:46 MESZ:
-Der Kunde '' mit der Kundennummer 1001 wurde hinzugefügt.
-
-Sa 2013.06.01 um 13:28:06 MESZ:
-Der Kunde 'mmustermann' mit der Kundennummer 1001 wurde hinzugefügt.
-Fr 2013.06.07 um 23:31:56 MESZ:
-Der Kunde 'skeks' mit der Kundennummer 1001 wurde hinzugefügt.
-
-So 2013.06.09 um 14:08:56 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-So 2013.06.09 um 14:42:28 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
-
-So 2013.06.09 um 15:06:28 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-So 2013.06.09 um 20:53:42 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-Mo 2013.06.10 um 14:53:52 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-Do 2013.06.13 um 12:36:01 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-Do 2013.06.13 um 15:45:09 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-Do 2013.06.13 um 15:45:15 MESZ:
-Der Kunde 'hmeyer' mit der Kundennummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-Do 2013.06.13 um 16:32:48 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
 Fr 2013.06.14 um 18:47:45 MESZ:
 Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.

@@ -54,7 +54,7 @@ public class Kunde extends Person implements Serializable {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        String string = "Kundennummer: " + getNummer() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t Telefon: " +getTelefon() + "\n" + getAdresse() + "\n" + getWarenkorb() ;
+        String string = "Kundennummer: " + getNummer() +  "\tVorname: " + getVorname()  + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " +getEmail() + "\t Telefon: " +getTelefon() + "\n" + getAdresse() + "\n" + getWarenkorb() + "\n\n";
         return string;
     }
 

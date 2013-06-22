@@ -179,7 +179,7 @@ public class ArtikelVerwaltung {
             artikelBestandNr.put(massengutArtikel.getNummer(), massengutArtikel);
             artikelBestandName.put(name, massengutArtikel.getNummer());
             Date dNow = new Date();
-            String text = ft.format(dNow) + "\nDer Masengutartikel '" + name + "' mit der Artikelnummer " + massengutArtikel.getNummer() + " und der Packungsgröße " + massengutArtikel.getPackungsgroesse() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
+            String text = ft.format(dNow) + "\nDer Artikel '" + name + "' mit der Artikelnummer " + massengutArtikel.getNummer() + " und der Packungsgröße " + massengutArtikel.getPackungsgroesse() + " wurde vom Mitarbeiter " + m.getBenutzername() + " mit der Mitarbeiternummer " + m.getmNr() + " hinzugefügt.";
             l.writeLog(dateiName, text);
             String graphData = ft.format(dNow) + "%" + name + "%" + massengutArtikel.getNummer() + "%" + 0 + "%";
             l.writeGraphData(dateiFuerGraph, graphData);
@@ -383,10 +383,6 @@ public class ArtikelVerwaltung {
     // TODO @Noshaba Kommentieren Bitte !!!
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
-    }
-
-    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
-        return l.getArtikelGraph("Eshop_BestandsGraph.txt", daysInPast, aNr);
     }
 
     public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr, String name) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {

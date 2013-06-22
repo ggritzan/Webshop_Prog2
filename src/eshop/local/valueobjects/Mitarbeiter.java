@@ -40,7 +40,7 @@ public class Mitarbeiter extends Person implements Serializable {
     //Methoden
 
     public String toString() {
-        String string = "Mitarbeiternummer: " + getmNr() + "\tVorname: " + getVorname() + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " + getEmail() + "\t E-mail: " + getTelefon() + "\n" + getAdresse();
+        String string = "Mitarbeiternummer: " + getmNr() + "\tVorname: " + getVorname() + "\tNachname:  " + getNachname() + "\t\tBenutzername: " + getBenutzername() + "\t\tPasswort: " + getPasswort() + "\t E-mail: " + getEmail() + "\t E-mail: " + getTelefon() + "\n" + getAdresse()+"\n\n";
         return string;
     }
 

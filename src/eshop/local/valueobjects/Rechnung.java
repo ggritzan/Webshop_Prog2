@@ -53,7 +53,7 @@ public class Rechnung implements Serializable {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        String string = "\tRechnungsnummer: " + getrNr() + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() + " Gesamtpreis: " + getGesamtPreis() + "\tDatum und Zeit als die Rechnung erstellt wurde: " + getFt().format(getdNow())  + "\n";
+        String string = "\tRechnungsnummer: " + getrNr() + "\tKunde:  " + getkNr() + "\tBestellte Artikel:  " + getBestellteArtikel() + " Gesamtpreis: " + getGesamtPreis() + "\tDatum und Zeit als die Rechnung erstellt wurde: " + getFt().format(getdNow())  + "\n\n";
         return string;
     }
 

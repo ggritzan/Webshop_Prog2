@@ -842,9 +842,6 @@ public class eshopClientCUI {
                             for(int i = 0; i < this.eShopVerwaltung.printArtikelLog(days, aNr).size(); i++){
                                 System.out.println(this.eShopVerwaltung.printArtikelLog(days, aNr).elementAt(i));
                             }
-                            for(int i = 0; i < this.eShopVerwaltung.getArtikelGraph(days, aNr).size(); i++){
-                                System.out.println(this.eShopVerwaltung.getArtikelGraph(days, aNr).elementAt(i));
-                            }
                         } else {
                             System.out.println("Unbekannte Eingabe!");
                         }
