@@ -398,7 +398,7 @@ public class EShopClientGUI extends JFrame {
 
 
                } else {
-                    System.out.println("funtzt");
+
                     //leert das SwitchPanel
                     switchPanel.removeAll();
                     // fuegt das KundenPanel hinzu

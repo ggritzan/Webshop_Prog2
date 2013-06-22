@@ -121,43 +121,47 @@ public class RechnungsVerwaltung {
      */
     public synchronized void rechnungsBestandCheckKaufen(EShopVerwaltung eShopVerwaltung, int aktuellerKunde) throws IOException, KundenNummerExistiertNichtException, ArtikelBestandNegativException, ArtikelBestandZuNiedrigException, ArtikelExestiertNichtException, RechnungExestiertNichtException {
 
+        boolean bestandFehler = false;
 
-        if (eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().size() > 0) {
+        try {
 
-            //wenn sich Artikel im Warenkorb befinden prüfen ob die gewünschten Artikel gekauft werden können
-            Iterator iter = eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().values().iterator();
-            boolean bestandsCheck = true;
-            Vector<Integer>  artikelNr = new Vector<Integer>();
-            Vector<Integer>  neuerBestand = new Vector<Integer>();
-            while (iter.hasNext()) {
-                Artikel bestandCheckArtikel = (Artikel) iter.next();
+            Kunde kunde = eShopVerwaltung.getKunde(aktuellerKunde);
 
-
-                if ((eShopVerwaltung.getArtikel(bestandCheckArtikel.getNummer()).getBestand() < bestandCheckArtikel.getBestellteMenge())) {
-
-                    bestandsCheck = false;
-                    throw new ArtikelBestandZuNiedrigException(bestandCheckArtikel);
-                } else {
+            if (kunde.getWarenkorb().size() > 0) {
+                //wenn sich Artikel im Warenkorb befinden prüfen ob die gewünschten Artikel gekauft werden können
+                Iterator iter = kunde.getWarenkorb().values().iterator();
+                while (iter.hasNext()) {
                     Artikel a = (Artikel) iter.next();
-                    Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
-                    neuerBestand.add(puffer.getBestand() - a.getBestellteMenge());
-                    artikelNr.add(puffer.getNummer());
+                    if (!(eShopVerwaltung.getArtikel(a.getNummer()).getBestand() >= a.getBestellteMenge())) {
+                        bestandFehler = true;
+                        throw new ArtikelBestandZuNiedrigException(eShopVerwaltung.getArtikel(a.getNummer()));
+                    }
                 }
-
-
+                if (!bestandFehler) {
+                    Iterator iter2 = kunde.getWarenkorb().values().iterator();
+                    while(iter2.hasNext()) {
+                        Artikel a = (Artikel) iter2.next();
+                        Artikel puffer = eShopVerwaltung.getArtikel(a.getNummer());
+                        int neuerBestand = puffer.getBestand() - a.getBestellteMenge();
+                        eShopVerwaltung.setBestand(puffer.getNummer(), neuerBestand, kunde);
+                    }
+                    eShopVerwaltung.fuegeRechnungEin(kunde);
+                    //Warenkorb komplett leeren
+                    kunde.resetWarenkorb();
+                }
             }
 
-            // wenn der bestandCheck nicht auf false gesetzt wurde werden die Bestände angepasst ,die Rechnung erstellt und der Warenkorb geleert
-            if (bestandsCheck) {
 
-                for (int i = 0; i < artikelNr.size(); i++) {
-                eShopVerwaltung.setBestand(artikelNr.get(i), neuerBestand.get(i), eShopVerwaltung.getKunde(aktuellerKunde));
-                }
-                eShopVerwaltung.fuegeRechnungEin(eShopVerwaltung.getKunde(aktuellerKunde));
-                eShopVerwaltung.getKunde(aktuellerKunde).resetWarenkorb();
+        } catch (NumberFormatException e) {
 
-
-            }
+        } catch (KundenNummerExistiertNichtException kne) {
+            System.err.println(kne.getMessage());
+        } catch (ArtikelExestiertNichtException aen) {
+            System.err.println(aen.getMessage());
+        } catch (ArtikelBestandNegativException abn) {
+            System.err.println(abn.getMessage());
+        } catch (RechnungExestiertNichtException ren) {
+            System.err.println(ren.getMessage());
         }
     }
 
