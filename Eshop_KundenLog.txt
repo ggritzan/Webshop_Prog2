@@ -4,12 +4,6 @@ Der Kunde 'hmeyer' mit der Kundennummer 1000 wurde hinzugefügt.
 Mi 2013.05.29 um 12:03:19 MESZ:
 Der Kunde 'test' mit der Kundennummer 1001 wurde hinzugefügt.
 
-Fr 2013.06.14 um 18:47:45 MESZ:
-Der Kunde 'test' mit der Kundennummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
-Fr 2013.06.14 um 18:47:47 MESZ:
-Der Kunde 'hmeyer' mit der Kundennummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
-
 Do 2013.06.20 um 18:05:04 MESZ:
 Der Kunde 'ssorglos' mit der Kundennummer 1002 wurde hinzugefügt.
 
