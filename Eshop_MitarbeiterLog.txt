@@ -1,8 +1,47 @@
+Sa 2013.06.08 um 20:18:51 MESZ:
+Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
+
 Sa 2013.06.08 um 20:22:53 MESZ:
 Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde hinzugefügt.
 
 Sa 2013.06.08 um 20:25:39 MESZ:
 Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde hinzugefügt.
+
+So 2013.06.09 um 13:47:27 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+So 2013.06.09 um 15:06:23 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+So 2013.06.09 um 20:53:36 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Mo 2013.06.10 um 14:53:47 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 11:55:09 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 12:35:51 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Do 2013.06.13 um 16:32:44 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:25:22 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:25:25 MESZ:
+Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:36:56 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:47:07 MESZ:
+Der Mitarbeiter 'ndoege' mit der Mitarbeiternummer 1001 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Fr 2013.06.14 um 18:47:11 MESZ:
+Der Mitarbeiter 'ggritzan' mit der Mitarbeiternummer 1000 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
 
 Fr 2013.06.14 um 21:42:36 MESZ:
 Der Mitarbeiter 'ncheema' mit der Mitarbeiternummer 1002 wurde hinzugefügt.
