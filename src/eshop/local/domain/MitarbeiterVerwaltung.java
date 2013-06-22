@@ -279,10 +279,11 @@ public class MitarbeiterVerwaltung {
         }
     }
 
-    //@TODO identisch mit der Methode getMitarbeiterNr -> Für eine davon entscheiden?
+
     /**
      * Methode durchsucht alle Mitarbeiter nach dem Benutzernamen und gibt die Mitarbeiternummer zurück
-     *
+     * wirft keine MitarbeiterExestier nicht Exception da si nur benutz werden darf wenn sicher ist das der
+     * Mitarbeiter Exestiert
      * @param bName
      */
     public int getMnr(String bName) {

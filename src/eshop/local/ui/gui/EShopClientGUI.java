@@ -398,7 +398,7 @@ public class EShopClientGUI extends JFrame {
 
 
                } else {
-
+                    System.out.println("funtzt");
                     //leert das SwitchPanel
                     switchPanel.removeAll();
                     // fuegt das KundenPanel hinzu
@@ -1171,7 +1171,7 @@ public class EShopClientGUI extends JFrame {
                         int anzuzeigendeTage = addMitarbeiterBestandsDiagramWieVieleTageDialog.getanzuzeigendeTage();
 
                     try {
-                            //TODO hier gucken
+                            //zeichnet den ArtikelBestandsGraphen
                             addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(anzuzeigendeTage,String.valueOf(ausgewaehlterArtikel),eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getName()));
 
 
@@ -1297,6 +1297,7 @@ public class EShopClientGUI extends JFrame {
                 if (source == addKundenArtikelPopup.getdemWarenkorbHinzufuegen()) {
 
                     try {
+                        //TODO es muss ein neuer Artikel angelegt werden (Massengutlogik aus der CUI
                         eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel), aktuellerKunde);
                     } catch (KundenNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());

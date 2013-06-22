@@ -56,7 +56,7 @@ public class FilePersistenceManager implements PersistenceManager {
             try {
                 oos.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
 
                 return false;
@@ -67,7 +67,7 @@ public class FilePersistenceManager implements PersistenceManager {
             try {
                 ois.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
 
                 return false;
