@@ -631,3 +631,18 @@ Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch
 Fr 2013.06.21 um 19:36:32 MESZ:
 Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 150.
 
+Sa 2013.06.22 um 13:31:40 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 222.
+
+Sa 2013.06.22 um 13:34:46 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 5000.
+
+Sa 2013.06.22 um 13:35:16 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 222.
+
+Sa 2013.06.22 um 13:35:31 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 600.
+
+Sa 2013.06.22 um 13:36:18 MESZ:
+Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnummer 1000 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 222.
+

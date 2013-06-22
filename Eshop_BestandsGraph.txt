@@ -249,3 +249,8 @@ Do 2013.06.20 um 18:05:41 MESZ:%Plastiklöffel%1002%248%
 Do 2013.06.20 um 20:12:04 MESZ:%Logitech R400 Presenter schnurlos%1000%2%
 Fr 2013.06.21 um 19:35:30 MESZ:%Plastiklöffel%1002%500%
 Fr 2013.06.21 um 19:36:32 MESZ:%Plastiklöffel%1002%150%
+Sa 2013.06.22 um 13:31:40 MESZ:%Logitech R400 Presenter schnurlos%1000%222%
+Sa 2013.06.22 um 13:34:46 MESZ:%Logitech R400 Presenter schnurlos%1000%5000%
+Sa 2013.06.22 um 13:35:16 MESZ:%Logitech R400 Presenter schnurlos%1000%222%
+Sa 2013.06.22 um 13:35:31 MESZ:%Logitech R400 Presenter schnurlos%1000%600%
+Sa 2013.06.22 um 13:36:18 MESZ:%Logitech R400 Presenter schnurlos%1000%222%
