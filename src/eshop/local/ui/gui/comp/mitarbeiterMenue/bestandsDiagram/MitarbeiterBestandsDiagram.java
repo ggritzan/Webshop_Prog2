@@ -54,8 +54,9 @@ public class MitarbeiterBestandsDiagram extends JPanel {
                     //  zeichnet die Linie zwischen dem jeweiligen Start & Endpunkt
                     g.drawLine(xAbstandswerte.get(aktuellePosition) + offsetx, offsety - yBestandswerte.get(aktuellePosition), xAbstandswerte.get((aktuellePosition) + 1) + offsetx, 10);
                     // jedes mal nach dem die Line gezeichnet wurde wird der Bestand als String an der aktuellen Position ausgegeben
-                    g.drawString(yBestandswerte.get(aktuellePosition).toString(), xAbstandswerte.get(aktuellePosition) + offsetx, 20);
+                    g.drawString(yBestandswerte.get(aktuellePosition).toString(), xAbstandswerte.get(aktuellePosition) + offsetx, offsety - yBestandswerte.get(aktuellePosition));
                     aktuellePosition++;
+
                 } else if ((yBestandswerte.get(aktuellePosition) >= (this.getHeight() - 30)) && (yBestandswerte.get((aktuellePosition) + 1) < (this.getHeight() - 30))) {
 
                     //  zeichnet die Linie zwischen dem jeweiligen Start & Endpunkt
@@ -63,6 +64,7 @@ public class MitarbeiterBestandsDiagram extends JPanel {
                     // jedes mal nach dem die Line gezeichnet wurde wird der Bestand als String an der aktuellen Position ausgegeben
                     g.drawString(yBestandswerte.get(aktuellePosition).toString(), xAbstandswerte.get(aktuellePosition) + offsetx,20);
                     aktuellePosition++;
+
                 } else if ((yBestandswerte.get(aktuellePosition) >= (this.getHeight() - 30)) && (yBestandswerte.get((aktuellePosition) + 1) >= (this.getHeight() - 30))) {
 
                     //  zeichnet die Linie zwischen dem jeweiligen Start & Endpunkt
