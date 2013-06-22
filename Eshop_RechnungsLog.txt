@@ -52,3 +52,6 @@ Die Rechnung mit der Rechnungsnummer 1002 wurde gelöscht.
 Do 2013.06.20 um 18:05:41 MESZ:
 Die Rechnung mit der Rechnungsnummer 1004 wurde hinzugefügt.
 
+Sa 2013.06.22 um 16:03:31 MESZ:
+Die Rechnung mit der Rechnungsnummer 1005 wurde hinzugefügt.
+
