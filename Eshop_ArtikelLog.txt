@@ -649,3 +649,27 @@ Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnumm
 Sa 2013.06.22 um 13:49:32 MESZ:
 Der Bestand des Artikels 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 1002.
 
+Mo 2013.06.24 um 10:27:36 MESZ:
+Der Bestand des Artikels 'Verbatim DVD-R 16x Speed ' mit der Artikelnummer 1001 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 10.
+
+Mo 2013.06.24 um 10:27:36 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1002 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 128.
+
+Mo 2013.06.24 um 10:37:49 MESZ:
+Der Artikel 'Plastiklöffel' mit der Artikelnummer 1002 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+Mo 2013.06.24 um 10:38:18 MESZ:
+Der Artikel 'Plastiklöffel' mit der Artikelnummer 1003 und der Packungsgröße 500 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+Mo 2013.06.24 um 10:39:24 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1003 wurde durch den Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 geändert und hat jetzt die Menge 3000.
+
+Mo 2013.06.24 um 10:39:40 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1003 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 2000.
+
+Mo 2013.06.24 um 10:40:08 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1003 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 1978.
+
+Mo 2013.06.24 um 10:59:15 MESZ:
+Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1003 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 2500.
+

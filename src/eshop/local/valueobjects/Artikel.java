@@ -101,6 +101,7 @@ public class Artikel implements Serializable {
     * @param menge -> Anzahl der bestellten Artikel
     */
     public void setBestellteMenge(int menge){
+
         this.bestellteMenge = menge;
     }
 

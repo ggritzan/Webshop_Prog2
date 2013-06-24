@@ -255,3 +255,11 @@ Sa 2013.06.22 um 13:35:16 MESZ:%Logitech R400 Presenter schnurlos%1000%222%
 Sa 2013.06.22 um 13:35:31 MESZ:%Logitech R400 Presenter schnurlos%1000%600%
 Sa 2013.06.22 um 13:36:18 MESZ:%Logitech R400 Presenter schnurlos%1000%222%
 Sa 2013.06.22 um 13:49:32 MESZ:%Verbatim DVD-R 16x Speed %1001%1002%
+Mo 2013.06.24 um 10:27:36 MESZ:%Verbatim DVD-R 16x Speed %1001%10%
+Mo 2013.06.24 um 10:27:36 MESZ:%Plastiklöffel%1002%128%
+Mo 2013.06.24 um 10:37:49 MESZ:%Plastiklöffel%1002%0%
+Mo 2013.06.24 um 10:38:18 MESZ:%Plastiklöffel%1003%0%
+Mo 2013.06.24 um 10:39:24 MESZ:%Plastiklöffel%1003%3000%
+Mo 2013.06.24 um 10:39:40 MESZ:%Plastiklöffel%1003%2000%
+Mo 2013.06.24 um 10:40:08 MESZ:%Plastiklöffel%1003%1978%
+Mo 2013.06.24 um 10:59:15 MESZ:%Plastiklöffel%1003%2500%

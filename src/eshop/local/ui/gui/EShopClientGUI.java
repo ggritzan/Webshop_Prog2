@@ -26,7 +26,9 @@ import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsLis
 import eshop.local.ui.gui.comp.mitarbeiterMenue.rechnung.MitarbeiterRechnungsPopup;
 import eshop.local.ui.gui.comp.registrierung.*;
 import eshop.local.valueobjects.Adresse;
+import eshop.local.valueobjects.Artikel;
 import eshop.local.valueobjects.ArtikelBestandsGraph;
+import eshop.local.valueobjects.MassengutArtikel;
 
 // Imports der von Java bereit gestellten Klassen
 import javax.swing.*;
@@ -398,7 +400,6 @@ public class EShopClientGUI extends JFrame {
 
 
                } else {
-                    System.out.println("funtzt");
                     //leert das SwitchPanel
                     switchPanel.removeAll();
                     // fuegt das KundenPanel hinzu
@@ -1296,14 +1297,46 @@ public class EShopClientGUI extends JFrame {
                 Object source = ae.getSource();
                 if (source == addKundenArtikelPopup.getdemWarenkorbHinzufuegen()) {
 
+
+
                     try {
-                        //TODO es muss ein neuer Artikel angelegt werden (Massengutlogik aus der CUI
-                        eShopVerwaltung.inWarenkorbLegen(eShopVerwaltung.getArtikel(ausgewaehlterArtikel), aktuellerKunde);
-                    } catch (KundenNummerExistiertNichtException knene) {
+
+
+
+                        Artikel a = eShopVerwaltung.getArtikel(ausgewaehlterArtikel);
+                        if (a instanceof MassengutArtikel) {
+                            //anlegen einer Massengutartikelkopie des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
+                            //sich verschiedene Bestellmengen überschreiben
+                            MassengutArtikel mA = new MassengutArtikel(a.getName(), a.getBeschreibung(), a.getPreis(), ((MassengutArtikel) a).getPackungsgroesse());
+                            mA.setBestand(a.getBestand());
+                            mA.setNummer(a.getNummer());
+                            eShopVerwaltung.setBestellteMenge(mA.getBestellteMenge(), mA);
+                            eShopVerwaltung.inWarenkorbLegen(mA, aktuellerKunde);
+                        } else {
+                            //anlegen einer Artikelkopie des echten Artikels für den Warenkorb, dadurch wird vermieden, dass
+                            //sich verschiedene Bestellmengen überschreiben
+                            Artikel art = new Artikel(a.getName(), a.getBeschreibung(), a.getPreis());
+                            art.setBestand(a.getBestand());
+                            art.setNummer(a.getNummer());
+                            eShopVerwaltung.setBestellteMenge(art.getBestellteMenge(), art);
+                            eShopVerwaltung.inWarenkorbLegen(art, aktuellerKunde);
+                        }
+
+                    } catch (NumberFormatException e) {
+
+                    } catch (ArtikelExestiertNichtException aen) {
+                        System.err.println(aen.getMessage());
+
+                    }  catch (KundenNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());
-                    } catch (ArtikelExestiertNichtException aene) {
-                        System.err.println(aene.getMessage());
+                    } catch (ArtikelBestellteMengeNegativException abmne) {
+                        System.err.println(abmne.getMessage());
+                    } catch (ArtikelBestandZuNiedrigException abzne ) {
+                        System.err.println(abzne.getMessage());
+                    } catch (BestellteMengeEntsprichtNichtderPackungsgroesseException bmendpe) {
+                        System.err.println(bmendpe.getMessage());
                     }
+
 
                 }
 
@@ -1417,13 +1450,22 @@ public class EShopClientGUI extends JFrame {
                 // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
                 if (source == addKundenWarenkorbBestellteMengeAendern.getBestellteMengeAendern()) {
 
+
                     try {
-                        eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel).setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge());
+
+                        //eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel).setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge());
+                        eShopVerwaltung.setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge(), eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel));
                         addKundenWarenkorbBestellteMengeAendern.setVisible(false);
                         addKundenWarenkorbBestellteMengeAendern.resetAllJTextfields();
                         kundenPanelReloader('w');
                     } catch (KundenNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());
+                    } catch (BestellteMengeEntsprichtNichtderPackungsgroesseException bmendpe) {
+                        System.err.println(bmendpe.getMessage());
+                    } catch (ArtikelBestellteMengeNegativException abmne) {
+                        System.err.println(abmne.getMessage());
+                    } catch (ArtikelBestandZuNiedrigException abzne) {
+                        System.err.println(abzne.getMessage());
                     }
 
 
