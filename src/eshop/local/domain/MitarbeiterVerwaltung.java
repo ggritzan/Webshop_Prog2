@@ -309,18 +309,56 @@ public class MitarbeiterVerwaltung {
         }
     }
 
-    //TODO @Noshaba Bitte kommentieren
+    /**
+     * Methode, die einen lesbaren Mitarbeiter-Log eines bestimmten Mitarbeiters ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param mNr - Mitarbeiternummer nach der der Mitarbeiter gesucht werden soll
+     * @return - die gewünschten Teile des Mitarbeiter-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printMitarbeiterLog(int daysInPast, String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_MitarbeiterLog.txt", daysInPast, mNr);
     }
+
+    /**
+     * Methode, die einen lesbaren Mitarbeiter-Log aller Mitarbeiter ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Mitarbeiter-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
 
     public Vector<String> printMitarbeiterLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
         return l.printLog("Eshop_MitarbeiterLog.txt", daysInPast);
     }
 
+    /**
+     * Methode, die einen lesbaren Mitarbeiter-Log eines bestimmten Mitarbeiters mit allen Einträgen aus der
+     * Vergangenheit ausgibt.
+     *
+     * @param mNr - Mitarbeiternummer nach der der Mitarbeiter gesucht werden soll
+     * @return - die gewünschten Teile des Mitarbeiter-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printMitarbeiterLog(String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return l.printLog("Eshop_MitarbeiterLog.txt", mNr);
     }
+
+    /**
+     * Methode, die den gesamten Mitarbeiter-Log lesbar wiedergibt.
+     *
+     * @return - Mitarbeiter-Log als String
+     * @throws FileNotFoundException
+     */
 
     public String printMitarbeiterLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return l.printLog("Eshop_MitarbeiterLog.txt");

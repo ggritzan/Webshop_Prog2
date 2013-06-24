@@ -380,22 +380,72 @@ public class ArtikelVerwaltung {
         }
     }
 
-    // TODO @Noshaba Kommentieren Bitte !!!
+    /**
+     * Methode, die dazu dient Log-Objekte für den Artikel-Bestands-Graphen eines bestimmten Artikels ab einem
+     * bestimmten Datum zu erzeugen.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param aNr - Artikelnummer nach der der Artikel gesucht werden soll
+     * @param name - Artikelname nach der der Artikel gesucht werden soll
+     * @return - einen Vector aus ArtikelBestandsGraph-Objekten
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+
+    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr, String name) throws FileNotFoundException, ParseException {
+        return l.getArtikelGraph("Eshop_BestandsGraph.txt", daysInPast, aNr, name);
+    }
+
+    /**
+     * Methode, die einen lesbaren Artikel-Log eines bestimmten Artikels ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param aNr - Artikelnummer nach der der Artikel gesucht werden soll
+     * @return - die gewünschten Teile des Artikel-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast, aNr);
     }
 
-    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr, String name) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
-        return l.getArtikelGraph("Eshop_BestandsGraph.txt", daysInPast, aNr, name);
-    }
+    /**
+     * Methode, die einen lesbaren Artikel-Log aller Artikel ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Artikel-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
 
     public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException {
         return l.printLog("Eshop_ArtikelLog.txt", daysInPast);
     }
 
+    /**
+     * Methode, die einen lesbaren Artikel-Log eines bestimmten Artikels mit allen Einträgen aus der Vergangenheit
+     * ausgibt.
+     *
+     * @param aNr - Artikelnummer nach der der Artikel gesucht werden soll
+     * @return - die gewünschten Teile des Artikel-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_ArtikelLog.txt", aNr);
     }
+
+    /**
+     * Methode, die den gesamten Artikel-Log lesbar wiedergibt.
+     *
+     * @return - Artikel-Log als String
+     * @throws FileNotFoundException
+     */
 
     public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException {
         return l.printLog("Eshop_ArtikelLog.txt");

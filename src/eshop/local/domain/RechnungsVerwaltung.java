@@ -423,18 +423,56 @@ public class RechnungsVerwaltung {
 
     }
 
-    //TODO @Noshaba Bitte kommentieren
+    /**
+     * Methode, die einen lesbaren Rechnungs-Log einer bestimmten Rechnung ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param rNr - Rechnungsnummer nach der die Rechnung gesucht werden soll
+     * @return - die gewünschten Teile des Rechnungs-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_RechnungsLog.txt", daysInPast, rNr);
     }
+
+    /**
+     * Methode, die einen lesbaren Rechnungs-Log aller Rechnungen ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Rechnungs-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
 
     public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException {
         return l.printLog("Eshop_RechnungsLog.txt", daysInPast);
     }
 
+    /**
+     * Methode, die einen lesbaren Rechnungs-Log einer bestimmten Rechnung mit allen Einträgen aus der Vergangenheit
+     * ausgibt.
+     *
+     * @param rNr - Rechungsnummer nach der die Rechnung gesucht werden soll
+     * @return - die gewünschten Teile des Rechungs-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_RechnungsLog.txt", rNr);
     }
+
+    /**
+     * Methode, die den gesamten Rechnungs-Log lesbar wiedergibt.
+     *
+     * @return - Rechungs-Log als String
+     * @throws FileNotFoundException
+     */
 
     public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException {
         return l.printLog("Eshop_RechnungsLog.txt");

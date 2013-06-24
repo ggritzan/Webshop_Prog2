@@ -441,18 +441,55 @@ public class KundenVerwaltung {
         k.getAdresse().setStraße(straße);
     }
 
-    //TODO @Noshaba Bitte kommentieren
+    /**
+     * Methode, die einen lesbaren Kunden-Log eines bestimmten Kunden ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param kNr - Kundennummer nach der der Kunde gesucht werden soll
+     * @return - die gewünschten Teile des Kunden-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException {
         return l.printLog("Eshop_KundenLog.txt", daysInPast, kNr);
     }
+
+    /**
+     * Methode, die einen lesbaren Kunden-Log aller Kunden ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Kunden-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
 
     public Vector<String> printKundenLog(int daysInPast) throws FileNotFoundException, KeineEintraegeVorhandenException, ParseException{
         return l.printLog("Eshop_KundenLog.txt", daysInPast);
     }
 
+    /**
+     * Methode, die einen lesbaren Kunden-Log eines bestimmten Kunden mit allen Einträgen aus der Vergangenheit ausgibt.
+     *
+     * @param kNr - Kundennummer nach der der Kunde gesucht werden soll
+     * @return - die gewünschten Teile des Kunden-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printKundenLog(String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return l.printLog("Eshop_KundenLog.txt", kNr);
     }
+
+    /**
+     * Methode, die den gesamten Kunden-Log lesbar wiedergibt.
+     *
+     * @return - Kunden-Log als String
+     * @throws FileNotFoundException
+     */
 
     public String printKundenLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return l.printLog("Eshop_KundenLog.txt");

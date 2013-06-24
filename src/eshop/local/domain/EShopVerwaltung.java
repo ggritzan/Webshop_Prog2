@@ -530,86 +530,237 @@ public class EShopVerwaltung {
         return meineMitarbeiter.getMitarbeiter(mNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die dazu dient Log-Objekte für den Artikel-Bestands-Graphen eines bestimmten Artikels ab einem
+     * bestimmten Datum zu erzeugen.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param aNr - Artikelnummer nach der der Artikel gesucht werden soll
+     * @param name - Artikelname nach der der Artikel gesucht werden soll
+     * @return - einen Vector aus ArtikelBestandsGraph-Objekten
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+
+    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr, String name) throws FileNotFoundException, ParseException{
+        return meineArtikel.getArtikelGraph(daysInPast, aNr, name);
+    }
+
+    /**
+     * Methode, die einen lesbaren Artikel-Log eines bestimmten Artikels ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param aNr - Artikelnummer nach der der Artikel gesucht werden soll
+     * @return - die gewünschten Teile des Artikel-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printArtikelLog(int daysInPast, String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineArtikel.printArtikelLog(daysInPast, aNr);
     }
 
-    public Vector<ArtikelBestandsGraph> getArtikelGraph(int daysInPast, String aNr, String name) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
-        return meineArtikel.getArtikelGraph(daysInPast, aNr, name);
-    }
+    /**
+     * Methode, die einen lesbaren Artikel-Log aller Artikel ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Artikel-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
 
-    //@ TODO Javadoc-Kommentar
     public Vector<String> printArtikelLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineArtikel.printArtikelLog(daysInPast);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Artikel-Log eines bestimmten Artikels mit allen Einträgen aus der Vergangenheit
+     * ausgibt.
+     *
+     * @param aNr - Artikelnummer nach der der Artikel gesucht werden soll
+     * @return - die gewünschten Teile des Artikel-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printArtikelLog(String aNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineArtikel.printArtikelLog(aNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die den gesamten Artikel-Log lesbar wiedergibt.
+     *
+     * @return - Artikel-Log als String
+     * @throws FileNotFoundException
+     */
+
     public String printArtikelLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineArtikel.printArtikelLog();
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Kunden-Log eines bestimmten Kunden ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param kNr - Kundennummer nach der der Kunde gesucht werden soll
+     * @return - die gewünschten Teile des Kunden-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printKundenLog(int daysInPast, String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineKunden.printKundenLog(daysInPast, kNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Kunden-Log aller Kunden ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Kunden-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
+
     public Vector<String> printKundenLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineKunden.printKundenLog(daysInPast);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Kunden-Log eines bestimmten Kunden mit allen Einträgen aus der Vergangenheit ausgibt.
+     *
+     * @param kNr - Kundennummer nach der der Kunde gesucht werden soll
+     * @return - die gewünschten Teile des Kunden-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printKundenLog(String kNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineKunden.printKundenLog(kNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die den gesamten Kunden-Log lesbar wiedergibt.
+     *
+     * @return - Kunden-Log als String
+     * @throws FileNotFoundException
+     */
+
     public String printKundenLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineKunden.printKundenLog();
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Mitarbeiter-Log eines bestimmten Mitarbeiters ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param mNr - Mitarbeiternummer nach der der Mitarbeiter gesucht werden soll
+     * @return - die gewünschten Teile des Mitarbeiter-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printMitarbeiterLog(int daysInPast, String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineMitarbeiter.printMitarbeiterLog(daysInPast, mNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Mitarbeiter-Log aller Mitarbeiter ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Mitarbeiter-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
+
     public Vector<String> printMitarbeiterLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineMitarbeiter.printMitarbeiterLog(daysInPast);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Mitarbeiter-Log eines bestimmten Mitarbeiters mit allen Einträgen aus der
+     * Vergangenheit ausgibt.
+     *
+     * @param mNr - Mitarbeiternummer nach der der Mitarbeiter gesucht werden soll
+     * @return - die gewünschten Teile des Mitarbeiter-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printMitarbeiterLog(String mNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineMitarbeiter.printMitarbeiterLog(mNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die den gesamten Mitarbeiter-Log lesbar wiedergibt.
+     *
+     * @return - Mitarbeiter-Log als String
+     * @throws FileNotFoundException
+     */
+
     public String printMitarbeiterLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineMitarbeiter.printMitarbeiterLog();
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Rechnungs-Log einer bestimmten Rechnung ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @param rNr - Rechnungsnummer nach der die Rechnung gesucht werden soll
+     * @return - die gewünschten Teile des Rechnungs-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printRechnungsLog(int daysInPast, String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineRechnungen.printRechnungsLog(daysInPast, rNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Rechnungs-Log aller Rechnungen ab einem bestimmten Datum ausgibt.
+     *
+     * @param daysInPast - Tage, die der Log zurückliegen soll
+     * @return - die gewünschten Teile des Rechnungs-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KeineEintraegeVorhandenException
+     */
+
     public Vector<String> printRechnungsLog(int daysInPast) throws FileNotFoundException, ParseException, KeineEintraegeVorhandenException{
         return meineRechnungen.printRechnungsLog(daysInPast);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die einen lesbaren Rechnungs-Log einer bestimmten Rechnung mit allen Einträgen aus der Vergangenheit
+     * ausgibt.
+     *
+     * @param rNr - Rechungsnummer nach der die Rechnung gesucht werden soll
+     * @return - die gewünschten Teile des Rechungs-Logs als String-Vector
+     * @throws FileNotFoundException
+     * @throws ParseException
+     * @throws KennNummerExistiertNichtException
+     */
+
     public Vector<String> printRechnungsLog(String rNr) throws FileNotFoundException, ParseException, KennNummerExistiertNichtException{
         return meineRechnungen.printRechnungsLog(rNr);
     }
 
-    //@ TODO Javadoc-Kommentar
+    /**
+     * Methode, die den gesamten Rechnungs-Log lesbar wiedergibt.
+     *
+     * @return - Rechungs-Log als String
+     * @throws FileNotFoundException
+     */
+
     public String printRechnungsLog() throws FileNotFoundException, KeineEintraegeVorhandenException{
         return meineRechnungen.printRechnungsLog();
     }
