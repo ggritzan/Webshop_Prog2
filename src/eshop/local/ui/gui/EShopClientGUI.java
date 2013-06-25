@@ -393,7 +393,11 @@ public class EShopClientGUI extends JFrame {
                     // fuegt das KundenPanel hinzu
                     switchPanel.add(addKundenPanel, BorderLayout.WEST);
                     // Erzeugt ein KundenRechnungsListePanel
-                    addKundenRechnungsListePanel = new KundenRechnungsListePanel(eShopVerwaltung.giballeRechnungenEinesKundenZurueckgeben(aktuellerKunde));
+                    try {
+                        addKundenRechnungsListePanel = new KundenRechnungsListePanel(eShopVerwaltung.giballeRechnungenEinesKundenZurueckgeben(aktuellerKunde));
+                    } catch (RechnungKeineVorhandenException rkve) {
+                             System.err.println(rkve.getMessage());
+                    }
                     initKundenRechnungenListener();
                     switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
                     switchPanelRepainter();
@@ -1180,8 +1184,6 @@ public class EShopClientGUI extends JFrame {
                             System.err.println(fnfe.getMessage());
                         } catch (ParseException pe) {
                             System.err.println(pe.getMessage());
-                        } catch (KennNummerExistiertNichtException knene) {
-                            System.err.println(knene.getMessage());
                         } catch (ArtikelExestiertNichtException aene) {
                             System.err.println(aene.getMessage());
                     }

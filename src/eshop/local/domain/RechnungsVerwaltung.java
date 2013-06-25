@@ -319,7 +319,7 @@ public class RechnungsVerwaltung {
      * @throws RechnungKeineVorhandenException
      *
      */
-    public Vector alleRechnungenEinesKundenZurueckgeben(int kNr) {
+    public Vector alleRechnungenEinesKundenZurueckgeben(int kNr) throws RechnungKeineVorhandenException{
 
         // wenn Rechnungen für den Kunden mit der Kundennummer exestieren
         if (rechnungsBestandKundenNr.containsKey(kNr)) {
@@ -341,7 +341,7 @@ public class RechnungsVerwaltung {
 
 
         } else {
-            return null;
+            throw new RechnungKeineVorhandenException();
         }
     }
 

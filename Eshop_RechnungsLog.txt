@@ -160,3 +160,6 @@ Die Rechnung mit der Rechnungsnummer 1006 wurde hinzugefügt.
 Mo 2013.06.24 um 10:59:15 MESZ:
 Die Rechnung mit der Rechnungsnummer 1005 wurde hinzugefügt.
 
+Di 2013.06.25 um 12:12:03 MESZ:
+Die Rechnung mit der Rechnungsnummer 1006 wurde hinzugefügt.
+

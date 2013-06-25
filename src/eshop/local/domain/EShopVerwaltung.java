@@ -127,7 +127,7 @@ public class EShopVerwaltung {
      * @throws RechnungKeineVorhandenException
      *
      */
-    public Vector giballeRechnungenEinesKundenZurueckgeben(int kNr) {
+    public Vector giballeRechnungenEinesKundenZurueckgeben(int kNr) throws RechnungKeineVorhandenException{
         return meineRechnungen.alleRechnungenEinesKundenZurueckgeben(kNr);
     }
 
