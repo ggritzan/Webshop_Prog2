@@ -395,12 +395,13 @@ public class EShopClientGUI extends JFrame {
                     // Erzeugt ein KundenRechnungsListePanel
                     try {
                         addKundenRechnungsListePanel = new KundenRechnungsListePanel(eShopVerwaltung.giballeRechnungenEinesKundenZurueckgeben(aktuellerKunde));
+                        initKundenRechnungenListener();
+                        switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
+                        switchPanelRepainter();
                     } catch (RechnungKeineVorhandenException rkve) {
                              System.err.println(rkve.getMessage());
                     }
-                    initKundenRechnungenListener();
-                    switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
-                    switchPanelRepainter();
+
 
 
                } else {
