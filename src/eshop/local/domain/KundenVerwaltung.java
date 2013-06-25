@@ -125,7 +125,7 @@ public class KundenVerwaltung {
      * @throws IOException
      * @throws BenutzernameExistiertBereitsException
      */
-    public void kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, BenutzernameExistiertBereitsException {
+    public synchronized void kundeHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, BenutzernameExistiertBereitsException {
         // Wenn der Benutzername eines Kunden bereits vorhanden ist wird false zurück gegeben und kein neuer Kunde angelegt
         if (kundenBestandBenutzername.containsKey(benutzername)) {
             throw new BenutzernameExistiertBereitsException(benutzername);
@@ -145,7 +145,7 @@ public class KundenVerwaltung {
      *
      * @param k -> Der Kund der hinzugefuegt werden soll
      */
-    public void kundeHinzufuegen(Kunde k) {
+    public synchronized void kundeHinzufuegen(Kunde k) {
         kundenBestandNr.put(k.getNummer(), k);
         kundenBestandBenutzername.put(k.getBenutzername(), k.getNummer());
         if (k.getZaehler() <= k.getNummer()) {
@@ -162,7 +162,7 @@ public class KundenVerwaltung {
      * @throws IOException
      * @throws  KundenNummerExistiertNichtException
      */
-    public void kundenLoeschen(int kundenNr, Mitarbeiter m) throws IOException, KundenNummerExistiertNichtException{
+    public synchronized void kundenLoeschen(int kundenNr, Mitarbeiter m) throws IOException, KundenNummerExistiertNichtException{
         if (kundenBestandNr.containsKey(kundenNr)) {
             Kunde k = kundenBestandNr.get(kundenNr);
             kundenBestandNr.remove(kundenNr);
@@ -310,8 +310,8 @@ public class KundenVerwaltung {
         }
     }
 
-    //@TODO ungenutzte Methode?
     /**
+     * Wurde in der Programmentwickung zum Testen benutz daher noch vorhanden
      * Gibt ein Kundenobjekt zu einem Benutzernamen zurueck
      * @param bName -> Benutzername des gesuchten Kunden
      *
@@ -332,9 +332,9 @@ public class KundenVerwaltung {
         }
     }
 
-    //@TODO ungenutzte Methode?
     /**
-     * Methode um zu überprüfen ob ein Artikel bereits im warenkorb ist
+     * Wird momentan nicht mehr genutzt könnte bei Erweiterung des E-Shops aber noch von Nutzen sein
+     * Gib zurueck ob ein Artikel in dem Warenkorb eines Kunden vorhanden ist
      *
      * @param k -> Kunde dessen Warenkorb geprüft wird
      * @param aNr -> Der gesuchte Artikel

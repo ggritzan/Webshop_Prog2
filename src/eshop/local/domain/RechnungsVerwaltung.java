@@ -174,7 +174,7 @@ public class RechnungsVerwaltung {
      * @throws RechnungExestiertNichtException
      *
      */
-    public void rechnungHinzufuegen(Kunde kunde) throws IOException, RechnungExestiertNichtException {
+    public synchronized void rechnungHinzufuegen(Kunde kunde) throws IOException, RechnungExestiertNichtException {
 
         // sollte irgendwann schon einmal eine Rechnung für den Kundne erstellt worden sein
         if (rechnungsBestandKundenNr.containsKey(kunde.getNummer())) {
@@ -240,7 +240,7 @@ public class RechnungsVerwaltung {
      *
      * @param r
      */
-    public void rechnungHinzufuegen(Rechnung r) {
+    public synchronized void rechnungHinzufuegen(Rechnung r) {
 
         if (rechnungsBestandKundenNr.containsKey(r.getkNr())) {
             rechnungsBestandNr.put(r.getrNr(), r);
@@ -270,7 +270,7 @@ public class RechnungsVerwaltung {
      * @throws RechnungExestiertNichtException
      *
      */
-    public void rechnungLoeschen(Rechnung rechnung) throws IOException, RechnungExestiertNichtException {
+    public synchronized void rechnungLoeschen(Rechnung rechnung) throws IOException, RechnungExestiertNichtException {
 
         Rechnung r = rechnung;
         Vector<Integer> vI = rechnungsBestandKundenNr.get(r.getkNr());

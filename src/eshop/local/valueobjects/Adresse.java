@@ -21,7 +21,6 @@ public class Adresse implements Serializable {
     private String plz;
     private String ort;
 
-    // @TODO eventuell müsste noch eine Hausnummer implementiert werden
 
 // Konstruktor
 

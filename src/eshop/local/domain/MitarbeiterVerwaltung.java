@@ -123,7 +123,7 @@ public class MitarbeiterVerwaltung {
      * @throws IOException
      * @throws MitarbeiterExistiertBereitsException
      */
-    public void mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
+    public synchronized void mitarbeiterHinzufuegen(String vorname, String nachname, String benutzername, String passwort, String email, String telefon, Adresse adresse) throws IOException, MitarbeiterExistiertBereitsException{
         if(mitarbeiterBestandName.containsKey(benutzername)){
             throw new MitarbeiterExistiertBereitsException(benutzername);
         } else {
@@ -144,7 +144,7 @@ public class MitarbeiterVerwaltung {
      *
      * @throws MitarbeiterExistiertBereitsException
      */
-    public void mitarbeiterHinzufuegen(Mitarbeiter m){
+    public synchronized void mitarbeiterHinzufuegen(Mitarbeiter m){
         mitarbeiterBestandNr.put(m.getmNr(), m);
         mitarbeiterBestandName.put(m.getBenutzername(), m.getmNr());
         if (m.getZaehler() <= m.getmNr()) {
@@ -161,7 +161,7 @@ public class MitarbeiterVerwaltung {
      * @throws IOException
      * @throws MitarbeiterExistiertNichtException
      */
-    public void mitarbeiterLoeschen(int maNr, Mitarbeiter mitarbeiter) throws IOException, MitarbeiterExistiertNichtException{
+    public synchronized void mitarbeiterLoeschen(int maNr, Mitarbeiter mitarbeiter) throws IOException, MitarbeiterExistiertNichtException{
         if (mitarbeiterBestandNr.containsKey(maNr)) {
             Mitarbeiter m = mitarbeiterBestandNr.get(maNr);
             mitarbeiterBestandNr.remove(maNr);
@@ -193,28 +193,6 @@ public class MitarbeiterVerwaltung {
      */
     public HashMap<Integer, Mitarbeiter> alleMitarbeiterHashMapZurueckgeben() {
         return mitarbeiterBestandNr;
-    }
-
-    //@TODO ungenutzte Methode?
-    /**
-     * Methode durchsucht alle Mitarbeiter nach dem Parameter Benutzername und gibt den entsprechenden Mitarbeiter in einem Vektor zurueck
-     *
-     * @param benutzername -> Der gesuchte Mitarbeiter
-     *
-     * @return Vector -> Enthält den gesuchten Mitarbeiter
-     */
-    public Vector sucheMitarbeiter(String benutzername) {
-        int nummer = 0;
-        Vector<Mitarbeiter> ergebnis = new Vector<Mitarbeiter>();
-        if (mitarbeiterBestandName.containsKey(benutzername)) {
-            nummer = mitarbeiterBestandName.get(benutzername);
-            ergebnis.add(mitarbeiterBestandNr.get(nummer));
-            return ergebnis;
-        } else {
-            Vector<String> error = new Vector<String>();
-            error.add("Der Mitarbeiter "+benutzername+ " ist nicht vorhanden !");
-            return error;
-        }
     }
 
     /**
@@ -260,9 +238,8 @@ public class MitarbeiterVerwaltung {
         }
     }
 
-
-    //@TODO ungenutzte Methode?
     /**
+     * Wurde in der Entwicklung zu Testzwecken verwendet ist daher noch vorhanden
      * Sucht einen Mitarbeiter anhand des Benutzernamens
      * @param bName
      * @return

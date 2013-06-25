@@ -221,12 +221,22 @@ public class EShopVerwaltung {
         return meineArtikel.getArtikel(aNr);
     }
 
-    //@ TODO ungenutzte Methode?
+    /**
+     * Wird momentan nicht mehr genutzt könnte bei Erweiterung des E-Shops aber noch von Nutzen sein
+     * @param aNr
+     * @return
+     */
     public boolean existiertArtikel(int aNr) {
         return meineArtikel.existiertArtikel(aNr);
     }
 
-    //@ TODO ungenutzte Methode?
+    /**
+     * Wird momentan nicht mehr genutzt könnte bei Erweiterung des E-Shops aber noch von Nutzen sein
+     * Gib zurueck ob ein Artikel in dem Warenkorb eines Kunden vorhanden ist
+     * @param k
+     * @param aNr
+     * @return
+     */
     public boolean istImWarenkorb(Kunde k, int aNr){
         return meineKunden.istImWarenkorb(k,aNr);
     }
@@ -253,18 +263,6 @@ public class EShopVerwaltung {
      */
     public void ausWarenkorbEntfernen(Artikel a, int kNr) throws KundenNummerExistiertNichtException{
         meineKunden.ausWarenkorbEtfernen(a, kNr);
-    }
-
-    //@TODO ungenutzte Methode?
-    /**
-     * Methode zum zuruecksetzen(vollständigem Leeren) des Warenkorbes eines Kunden
-     *
-     * @param kNr -> Kundennummer des Kunden, dessen Warenkorb geleert werden soll
-     *
-     * @throws KundenNummerExistiertNichtException
-     */
-    public void resetWarenkorb(int kNr) throws KundenNummerExistiertNichtException{
-        meineKunden.resetWarenkorb(kNr);
     }
 
     /**

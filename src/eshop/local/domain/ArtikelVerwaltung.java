@@ -132,7 +132,7 @@ public class ArtikelVerwaltung {
      * @param beschreibung
      * @param preis
      */
-    public void artikelHinzufuegen(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
+    public synchronized void artikelHinzufuegen(String name, String beschreibung, double preis, Mitarbeiter m) throws IOException, ArtikelExestierBereitsException {
 
         // Wenn der Name eines Artikels bereits vorhanden ist wird false zurück gegeben und kein neuer Artikel angelegt
         if (artikelBestandName.containsKey(name)) {
@@ -168,7 +168,7 @@ public class ArtikelVerwaltung {
      *
      * @throws IOException
      */
-    public void massengutartikelHinzufuegen(String name, String beschreibung, double preis, int packung, Mitarbeiter m) throws ArtikelExestierBereitsException, IOException {
+    public synchronized void massengutartikelHinzufuegen(String name, String beschreibung, double preis, int packung, Mitarbeiter m) throws ArtikelExestierBereitsException, IOException {
         if (artikelBestandName.containsKey(name)) {
             throw new ArtikelExestierBereitsException(name);
 
@@ -192,7 +192,7 @@ public class ArtikelVerwaltung {
      *
      * @param a
      */
-    public void artikelHinzufuegen(Artikel a) {
+    public synchronized void artikelHinzufuegen(Artikel a) {
         artikelBestandNr.put(a.getNummer(), a);
         artikelBestandName.put(a.getName(), a.getNummer());
         if (a.getZaehler() <= a.getNummer()) {
@@ -206,7 +206,7 @@ public class ArtikelVerwaltung {
      * @param artNr
      * @return boolean
      */
-    public void artikelLoeschen(int artNr, Mitarbeiter m) throws IOException, ArtikelExestiertNichtException {
+    public synchronized void artikelLoeschen(int artNr, Mitarbeiter m) throws IOException, ArtikelExestiertNichtException {
 
         if (!artikelBestandNr.containsKey(artNr)) {
 
@@ -236,13 +236,13 @@ public class ArtikelVerwaltung {
     public Vector alleArtikelZurueckgeben() {
 
         Vector<Artikel> ergebnis = new Vector<Artikel>();
-        //TODO Systemout noch entfernen @NINA (wenn du sie nicht mehr bruachst)
+
         for (Artikel elem : artikelBestandNr.values())
             if (elem instanceof MassengutArtikel) {
-                System.out.println("MG");
+
                 ergebnis.add(elem);
             } else {
-                System.out.println("A");
+
                 ergebnis.add(elem);
             }
 
@@ -288,7 +288,7 @@ public class ArtikelVerwaltung {
      *
      * @param artNr,wert
      */
-    public void setBestand(int artNr, int menge, Person person) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
+    public synchronized void setBestand(int artNr, int menge, Person person) throws IOException, ArtikelBestandNegativException, ArtikelExestiertNichtException {
 
         // Wenn die Artikelnummer exestiert und der neue Bestand nicht ins negative geht wird der Bestand angepasst
         if (artikelBestandNr.containsKey(artNr) && menge >= 0) {
@@ -368,6 +368,7 @@ public class ArtikelVerwaltung {
     }
 
     /**
+     * Wird momentan nicht mehr genutzt könnte bei Erweiterung des E-Shops aber noch von Nutzen sein
      * Gibt true zurück wenn der Artikel exestiert, false wenn er nicht exestiert
      * @param aNr
      * @return

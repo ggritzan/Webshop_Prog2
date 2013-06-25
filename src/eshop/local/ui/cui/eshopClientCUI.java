@@ -504,7 +504,6 @@ public class eshopClientCUI {
                 }
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (KundenNummerExistiertNichtException kne) {
                 System.err.println(kne.getMessage());
@@ -998,7 +997,6 @@ public class eshopClientCUI {
                 }
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (LeereEingabeException le) {
                 System.err.println(le.getMessage());
@@ -1102,7 +1100,6 @@ public class eshopClientCUI {
                         verarbeiteLogin();
 
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 
@@ -1114,7 +1111,6 @@ public class eshopClientCUI {
                         neuenKundenAnlegen();
 
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
 
 
@@ -1126,7 +1122,6 @@ public class eshopClientCUI {
                         neuenMitarbeiterAnlegen();
 
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
 
                     }
@@ -1140,15 +1135,13 @@ public class eshopClientCUI {
                         eShopVerwaltung.schreibeRechung();
 
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
 
                     }
                 }
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+               e.printStackTrace();
             } catch (LeereEingabeException le) {
                 System.err.println(le.getMessage());
             }

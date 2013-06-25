@@ -163,3 +163,6 @@ Die Rechnung mit der Rechnungsnummer 1005 wurde hinzugefügt.
 Di 2013.06.25 um 12:12:03 MESZ:
 Die Rechnung mit der Rechnungsnummer 1006 wurde hinzugefügt.
 
+Di 2013.06.25 um 12:54:47 MESZ:
+Die Rechnung mit der Rechnungsnummer 1005 wurde gelöscht.
+
