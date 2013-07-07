@@ -266,3 +266,5 @@ Mo 2013.06.24 um 10:59:15 MESZ:%Plastiklöffel%1003%2500%
 Di 2013.06.25 um 12:12:03 MESZ:%Verbatim DVD-R 16x Speed %1001%41%
 Di 2013.06.25 um 12:12:03 MESZ:%Logitech R400 Presenter schnurlos%1000%220%
 Di 2013.06.25 um 12:12:03 MESZ:%Plastiklöffel%1003%1500%
+So 2013.07.07 um 16:05:22 MESZ:%Jeans%1004%0%
+So 2013.07.07 um 16:08:14 MESZ:%Jeans%1004%0%

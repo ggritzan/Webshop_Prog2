@@ -682,3 +682,15 @@ Der Bestand des Artikels 'Logitech R400 Presenter schnurlos' mit der Artikelnumm
 Di 2013.06.25 um 12:12:03 MESZ:
 Der Bestand des Artikels 'Plastiklöffel' mit der Artikelnummer 1003 wurde durch den Kunden ssorglos mit der Kundennummer 1002 geändert und hat jetzt die Menge 1500.
 
+So 2013.07.07 um 16:05:22 MESZ:
+Der Artikel 'Jeans' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+So 2013.07.07 um 16:05:44 MESZ:
+Der Artikel 'Jeans' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+
+So 2013.07.07 um 16:06:13 MESZ:
+Der Artikel 'Jeans' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+
+So 2013.07.07 um 16:08:14 MESZ:
+Der Artikel 'Jeans' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 gelöscht.
+

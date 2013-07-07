@@ -360,6 +360,7 @@ public class EShopClientGUI extends JFrame {
                         initWarenkorbListener();
                     } catch (KundenNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), knene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
                     // fuegt das KundenWarenkorbListePanel hinzu
                     switchPanel.add(addKundenWarenkorbListePanel, BorderLayout.CENTER);
@@ -399,7 +400,8 @@ public class EShopClientGUI extends JFrame {
                         switchPanel.add(addKundenRechnungsListePanel, BorderLayout.CENTER);
                         switchPanelRepainter();
                     } catch (RechnungKeineVorhandenException rkve) {
-                             System.err.println(rkve.getMessage());
+                        System.err.println(rkve.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), rkve.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
 
 
@@ -457,6 +459,7 @@ public class EShopClientGUI extends JFrame {
                             aktuellerMitarbeiter = eShopVerwaltung.getMitarbeiterNr(addLoginPanel.getLoginName());
                         } catch (MitarbeiterExistiertNichtException mene) {
                             System.err.println(mene.getMessage());
+                            JOptionPane.showMessageDialog(new JFrame(), mene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                         }
                         addLoginPanel.resetJTextfields();
                         mitarbeiterPanelReloader('a');
@@ -470,6 +473,7 @@ public class EShopClientGUI extends JFrame {
                             aktuellerKunde = eShopVerwaltung.getKnr(addLoginPanel.getLoginName());
                         } catch (BenutzernameExistiertNichtException bene) {
                             System.err.println(bene.getMessage());
+                            JOptionPane.showMessageDialog(new JFrame(), bene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                         }
                         addLoginPanel.resetJTextfields();
                         kundenPanelReloader('a');
@@ -477,7 +481,9 @@ public class EShopClientGUI extends JFrame {
 
                         // Wenn kein Kunde & kein Mitarbeiter mit dem Benutzernamen exestiert dann erfolgt diese Ausgabe
                     } else {
-                        System.err.println("Benutzername oder Passwort leider falsch!");
+                        String text = "Benutzername oder Passwort leider falsch!";
+                        System.err.println(text);
+                        JOptionPane.showMessageDialog(new JFrame(), text, "Fehler", JOptionPane.ERROR_MESSAGE);
                         addLoginPanel.resetJTextfields();
 
 
@@ -577,8 +583,10 @@ public class EShopClientGUI extends JFrame {
                         System.out.println(e);
                     } catch (BenutzernameExistiertBereitsException beb) {
                         System.err.println(beb.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), beb.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), le.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -644,10 +652,12 @@ public class EShopClientGUI extends JFrame {
                         System.out.println(e);
                     } catch (LeereEingabeException le) {
                         System.err.println(le.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), le.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (MitarbeiterExistiertBereitsException mebe) {
                         System.err.println(mebe.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), mebe.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
 
                 } else if (source == addMitarbeiterRegistrierungPanel.getBackToLoginButton()) {
@@ -726,9 +736,11 @@ public class EShopClientGUI extends JFrame {
 
                     } catch (ArtikelExestierBereitsException aeb) {
                         System.err.println(aeb.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), aeb.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
 
                     } catch (MitarbeiterExistiertNichtException me) {
                         System.err.println(me.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), me.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -766,9 +778,11 @@ public class EShopClientGUI extends JFrame {
 
                     } catch (ArtikelExestierBereitsException aeb) {
                         System.err.println(aeb.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), aeb.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
 
                     } catch (MitarbeiterExistiertNichtException me) {
                         System.err.println(me.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), me.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -830,7 +844,7 @@ public class EShopClientGUI extends JFrame {
 
 
                     // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
-                    int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
+                    int result = JOptionPane.showConfirmDialog(null, "Wollen Sie den Artikel wirklich löschen?", "Artikel löschen", JOptionPane.YES_NO_OPTION);
 
                     switch (result) {
 
@@ -847,15 +861,18 @@ public class EShopClientGUI extends JFrame {
                                 e1.printStackTrace();
                             } catch (ArtikelExestiertNichtException aen) {
                                 System.err.println(aen.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), aen.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (MitarbeiterExistiertNichtException men) {
                                 System.err.println(men.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), men.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
 
-
+                        break;
                         case JOptionPane.NO_OPTION:
 
 
                             ausgewaehlterArtikel = -1;
+                        break;
                     }
 
                 }
@@ -915,6 +932,7 @@ public class EShopClientGUI extends JFrame {
                                 e1.printStackTrace();
                             } catch (MitarbeiterExistiertNichtException men) {
                                 System.err.println(men.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), men.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
 
 
@@ -984,17 +1002,21 @@ public class EShopClientGUI extends JFrame {
                                 e1.printStackTrace();
                             } catch (MitarbeiterExistiertNichtException men) {
                                 System.err.println(men.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), men.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (KundenNummerExistiertNichtException knene) {
                                 System.err.println(knene.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), knene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
 
 
                             ausgewaehlterKunde = -1;
+                            break;
 
                         case JOptionPane.NO_OPTION:
 
 
                             ausgewaehlterKunde = -1;
+                            break;
                     }
 
                 }
@@ -1047,6 +1069,7 @@ public class EShopClientGUI extends JFrame {
                     mitarbeiterPanelReloader('r');
                 } catch (RechnungExestiertNichtException rene) {
                     System.err.println(rene.getMessage());
+                    JOptionPane.showMessageDialog(new JFrame(), rene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
 
 
@@ -1063,7 +1086,7 @@ public class EShopClientGUI extends JFrame {
 
 
                 Object source = ae.getSource();
-                // Wenn der loeschen Menueintrag ausgewaehlt wird                               sa
+                // Wenn der loeschen Menueintrag ausgewaehlt wird
                 if (source == addMitarbeiterRechnungsPopup.getLoeschen()) {
 
                     // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
@@ -1079,15 +1102,17 @@ public class EShopClientGUI extends JFrame {
                                 e1.printStackTrace();
                             } catch (RechnungExestiertNichtException rene) {
                                 System.err.println(rene.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), rene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
 
 
                             ausgewaehlteRechnung = -1;
+                            break;
 
                         case JOptionPane.NO_OPTION:
 
-
                             ausgewaehlteRechnung = -1;
+                            break;
                     }
 
                 }
@@ -1117,10 +1142,13 @@ public class EShopClientGUI extends JFrame {
 
                     } catch (MitarbeiterExistiertNichtException me) {
                         System.err.println(me.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), me.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (ArtikelBestandNegativException abn) {
                         System.err.println(abn.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), abn.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), aen.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -1181,20 +1209,20 @@ public class EShopClientGUI extends JFrame {
                             addMitarbeiterBestandsDiagramPanel.artikelBestandGraphenzeichnen(eShopVerwaltung.getArtikelGraph(anzuzeigendeTage,String.valueOf(ausgewaehlterArtikel),eShopVerwaltung.getArtikel(ausgewaehlterArtikel).getName()));
 
 
-                        } catch (FileNotFoundException fnfe) {
-                            System.err.println(fnfe.getMessage());
-                        } catch (ParseException pe) {
-                            System.err.println(pe.getMessage());
-                        } catch (ArtikelExestiertNichtException aene) {
-                            System.err.println(aene.getMessage());
+                    } catch (FileNotFoundException fnfe) {
+                        System.err.println(fnfe.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), fnfe.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+
+                    } catch (ParseException pe) {
+                        System.err.println(pe.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), pe.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                    } catch (ArtikelExestiertNichtException aene) {
+                        System.err.println(aene.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), aene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
                     addMitarbeiterBestandsDiagramWieVieleTageDialog.resetJTextfield();
-                        addMitarbeiterBestandsDiagramWieVieleTageDialog.setVisible(false);
-                        ausgewaehlterArtikel = -1;
-
-
-
-
+                    addMitarbeiterBestandsDiagramWieVieleTageDialog.setVisible(false);
+                    ausgewaehlterArtikel = -1;
                 }
 
             }
@@ -1256,8 +1284,6 @@ public class EShopClientGUI extends JFrame {
 
                     // setzt das Popup Menue an die Position des MouseEvents
                     addKundenArtikelPopup.show(e.getComponent(), e.getX(), e.getY());
-
-
                 }
             }
 
@@ -1280,9 +1306,8 @@ public class EShopClientGUI extends JFrame {
                     kundenPanelReloader('a');
                 } catch (ArtikelExestiertNichtException aene) {
                     System.err.print(aene.getMessage());
+                    JOptionPane.showMessageDialog(new JFrame(), aene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
-
-
             }
 
         });
@@ -1300,11 +1325,7 @@ public class EShopClientGUI extends JFrame {
                 Object source = ae.getSource();
                 if (source == addKundenArtikelPopup.getdemWarenkorbHinzufuegen()) {
 
-
-
                     try {
-
-
 
                         Artikel a = eShopVerwaltung.getArtikel(ausgewaehlterArtikel);
                         if (a instanceof MassengutArtikel) {
@@ -1327,17 +1348,22 @@ public class EShopClientGUI extends JFrame {
 
                     } catch (NumberFormatException e) {
 
+                        e.printStackTrace();
                     } catch (ArtikelExestiertNichtException aen) {
                         System.err.println(aen.getMessage());
-
-                    }  catch (KundenNummerExistiertNichtException knene) {
+                        JOptionPane.showMessageDialog(new JFrame(), aen.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                    } catch (KundenNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), knene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (ArtikelBestellteMengeNegativException abmne) {
                         System.err.println(abmne.getMessage());
-                    } catch (ArtikelBestandZuNiedrigException abzne ) {
+                        JOptionPane.showMessageDialog(new JFrame(), abmne.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                    } catch (ArtikelBestandZuNiedrigException abzne) {
                         System.err.println(abzne.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), abzne.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (BestellteMengeEntsprichtNichtderPackungsgroesseException bmendpe) {
                         System.err.println(bmendpe.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), bmendpe.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
 
 
@@ -1359,25 +1385,16 @@ public class EShopClientGUI extends JFrame {
                 Object source = ae.getSource();
                 // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
                 if (source == addKundenWarenkorbPopup.getBestellteMengeAendern()) {
-
-
                     // setzt das Popup Menue an die Position des MouseEvents
                     addKundenWarenkorbBestellteMengeAendern.setLocation(aktuellePositionX, aktuellePositionY);
-
                     // macht den JDialog sichtbar
                     addKundenWarenkorbBestellteMengeAendern.setVisible(true);
-
-
                     // Löscht den entsprechenden Artikel aus dem Warenkorb wenn im Popupmenue löschen ausgewählt wird
                 } else if (source == addKundenWarenkorbPopup.getLoeschen()) {
-
-
                     // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
                     int result = JOptionPane.showConfirmDialog(null, "Wollen den Artikel wirklich aus ihrem Warenkorb löschen", "Artikel löschen", JOptionPane.YES_NO_OPTION);
 
                     switch (result) {
-
-
                         case JOptionPane.YES_OPTION:
 
                             try {
@@ -1388,24 +1405,22 @@ public class EShopClientGUI extends JFrame {
 
                             } catch (KundenNummerExistiertNichtException knene) {
                                 System.err.println(knene.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), knene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
-
+                        break;
 
                         case JOptionPane.NO_OPTION:
-
-
                             ausgewaehlterArtikel = -1;
+                        break;
                     }
 
                     // bestellt den entsprechenden Warenkorb und erstellt dazu eine Rechnung
                 } else if (source == addKundenWarenkorbPopup.getWarenkorbBestellen()) {
 
-
                     // JOptionPane das nachfragt ob etwas echt gelöscht werden soll
                     int result = JOptionPane.showConfirmDialog(null, "Wollen den Warenkorb wirklich bestellen ?", "Warenkorb bestellen", JOptionPane.YES_NO_OPTION);
 
                     switch (result) {
-
 
                         case JOptionPane.YES_OPTION:
 
@@ -1418,14 +1433,19 @@ public class EShopClientGUI extends JFrame {
                                 e.printStackTrace();
                             } catch (KundenNummerExistiertNichtException knene) {
                                  System.err.println(knene.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), knene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (ArtikelBestandNegativException abne) {
                                 System.err.println(abne.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), abne.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (ArtikelBestandZuNiedrigException abzne) {
                                 System.err.println(abzne.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), abzne.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (ArtikelExestiertNichtException aene) {
                                 System.err.println(aene.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), aene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             } catch (RechnungExestiertNichtException rene) {
                                 System.err.println(rene.getMessage());
+                                JOptionPane.showMessageDialog(new JFrame(), rene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                             }
                             break;
 
@@ -1452,10 +1472,7 @@ public class EShopClientGUI extends JFrame {
                 Object source = ae.getSource();
                 // Ändert die bestellte menge des entsprechenden Artikels im Warenkorb
                 if (source == addKundenWarenkorbBestellteMengeAendern.getBestellteMengeAendern()) {
-
-
                     try {
-
                         //eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel).setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge());
                         eShopVerwaltung.setBestellteMenge(addKundenWarenkorbBestellteMengeAendern.getNeuebetellteMenge(), eShopVerwaltung.getKunde(aktuellerKunde).getWarenkorb().get(ausgewaehlterArtikel));
                         addKundenWarenkorbBestellteMengeAendern.setVisible(false);
@@ -1463,15 +1480,17 @@ public class EShopClientGUI extends JFrame {
                         kundenPanelReloader('w');
                     } catch (KundenNummerExistiertNichtException knene) {
                         System.err.println(knene.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), knene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (BestellteMengeEntsprichtNichtderPackungsgroesseException bmendpe) {
                         System.err.println(bmendpe.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), bmendpe.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (ArtikelBestellteMengeNegativException abmne) {
                         System.err.println(abmne.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), abmne.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     } catch (ArtikelBestandZuNiedrigException abzne) {
                         System.err.println(abzne.getMessage());
+                        JOptionPane.showMessageDialog(new JFrame(), abzne.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
-
-
                 }
 
             }
@@ -1486,19 +1505,14 @@ public class EShopClientGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-
                 // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
                 try {
                     eShopVerwaltung.schreibeKunden();
                     eShopVerwaltung.schreibeArtikel();
                     eShopVerwaltung.schreibeMitarbeiter();
                     eShopVerwaltung.schreibeRechung();
-
-
                 } catch (IOException e) {
-
                     e.printStackTrace();
-
                 }
 
             }
@@ -1516,7 +1530,9 @@ public class EShopClientGUI extends JFrame {
                 switch (result) {
                     case JOptionPane.YES_OPTION:
                         System.exit(0);
+                        break;
                     case JOptionPane.NO_OPTION:
+                        break;
                 }
 
 
@@ -1547,11 +1563,8 @@ public class EShopClientGUI extends JFrame {
 
                     // Artikelnummer des ausgewählten Artikels des Warenkorbs
                     ausgewaehlterArtikel = (Integer) source.getValueAt(row, 0);
-
                     // setzt das Popup Menue an die Position des MouseEvents
                     addKundenWarenkorbPopup.show(e.getComponent(), e.getX(), e.getY());
-
-
                 }
             }
 
@@ -1574,14 +1587,10 @@ public class EShopClientGUI extends JFrame {
                     kundenPanelReloader('w');
                 } catch (ArtikelExestiertNichtException aene) {
                     System.err.print(aene.getMessage());
+                    JOptionPane.showMessageDialog(new JFrame(), aene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
-
-
             }
-
-
         });
-
 
     }
 
@@ -1596,7 +1605,6 @@ public class EShopClientGUI extends JFrame {
         addKundenRechnungsListePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent emc) {
-
 
                 JTable source = (JTable) emc.getSource();
                 aktuellePositionX = emc.getXOnScreen();
@@ -1613,15 +1621,10 @@ public class EShopClientGUI extends JFrame {
                     kundenPanelReloader('r');
                 } catch (RechnungExestiertNichtException rene) {
                     System.err.println(rene.getMessage());
+                    JOptionPane.showMessageDialog(new JFrame(), rene.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
-
-
             }
-
-
         });
-
-
     }
 
 
