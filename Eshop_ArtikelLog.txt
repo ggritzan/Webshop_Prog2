@@ -697,3 +697,6 @@ Der Artikel 'Jeans' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mi
 So 2013.07.07 um 16:36:41 MESZ:
 Der Artikel 'Jeans' mit der Artikelnummer 1004 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
 
+So 2013.07.07 um 17:22:09 MESZ:
+Der Artikel 'Füller' mit der Artikelnummer 1005 wurde vom Mitarbeiter ggritzan mit der Mitarbeiternummer 1000 hinzugefügt.
+

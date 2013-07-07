@@ -695,6 +695,14 @@ public class EShopClientGUI extends JFrame {
                    mitarbeiterPanelReloader('d');
 
                 } else if (source == addMitarbeiterPanel.getLogoutButton()) {
+                    try {
+                        eShopVerwaltung.schreibeKunden();
+                        eShopVerwaltung.schreibeArtikel();
+                        eShopVerwaltung.schreibeMitarbeiter();
+                        eShopVerwaltung.schreibeRechung();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     aktuellerMitarbeiter = 0;
                     switchPanel.removeAll();
                     switchPanelRepainter();
@@ -1246,6 +1254,14 @@ public class EShopClientGUI extends JFrame {
                     kundenPanelReloader('r');
 
                 } else if (source == addKundenPanel.getLogoutButton()) {
+                    try {
+                        eShopVerwaltung.schreibeKunden();
+                        eShopVerwaltung.schreibeArtikel();
+                        eShopVerwaltung.schreibeMitarbeiter();
+                        eShopVerwaltung.schreibeRechung();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     aktuellerKunde = 0;
                     switchPanel.removeAll();
                     addKundenWarenkorbListePanel = null;
