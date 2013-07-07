@@ -134,18 +134,12 @@ public class EShopClientGUI extends JFrame {
         Menu menuDatei = new Menu("Datei");
         // - erstellen
         menuDateiSpeichern = new MenuItem("Speichern");
-        menuDateiQuit = new MenuItem("Beenden");
+        menuDateiQuit = new MenuItem("Speichern und Beenden");
         // - hinzufuegen
         menuDatei.add(menuDateiSpeichern);
         menuDatei.add(menuDateiQuit);
         // fügt den Menuereiter Datei hinzu
         mbar.add(menuDatei);
-
-        // Zweiter Menuereiter "Ansicht"
-        // - erstellen
-        Menu menuAnsicht = new Menu("Ansicht");
-        // - hinzufügen
-        mbar.add(menuAnsicht);
 
         // fügt die MenuBar dem Frame hinzu
         this.setMenuBar(mbar);
@@ -1529,6 +1523,16 @@ public class EShopClientGUI extends JFrame {
                 int result = JOptionPane.showConfirmDialog(null, "Wollen sie das Programm wirklich beenden", "Programm beenden", JOptionPane.YES_NO_OPTION);
                 switch (result) {
                     case JOptionPane.YES_OPTION:
+                        // Sichern des Datenstandy für Kunden, Artikel, Mitarbeiter, Rechnung
+                        try {
+                            eShopVerwaltung.schreibeKunden();
+                            eShopVerwaltung.schreibeArtikel();
+                            eShopVerwaltung.schreibeMitarbeiter();
+                            eShopVerwaltung.schreibeRechung();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                         System.exit(0);
                         break;
                     case JOptionPane.NO_OPTION:

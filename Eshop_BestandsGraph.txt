@@ -268,3 +268,4 @@ Di 2013.06.25 um 12:12:03 MESZ:%Logitech R400 Presenter schnurlos%1000%220%
 Di 2013.06.25 um 12:12:03 MESZ:%Plastiklöffel%1003%1500%
 So 2013.07.07 um 16:05:22 MESZ:%Jeans%1004%0%
 So 2013.07.07 um 16:08:14 MESZ:%Jeans%1004%0%
+So 2013.07.07 um 16:36:41 MESZ:%Jeans%1004%0%
